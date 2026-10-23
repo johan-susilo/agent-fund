@@ -14,7 +14,10 @@ from concurrent.futures import ThreadPoolExecutor
 
 from observations import chunks, frag_add_obs, frag_add_source, new_fragment
 from settings import ROOT
-from util import Counter, iso, now_tw, read_cache, write_cache
+
+from tools.factors import price_factors_from_ohlcv as _price_factors
+from util import Counter, http_get_json, iso, now_tw, read_cache, write_cache, save_raw_bytes
+
 
 CACHE_TTL_MIN = 360
 MAX_FUNDAMENTALS = int(os.environ.get("FUNDAMENTAL_MAX", 90))
@@ -62,18 +65,52 @@ def _factors(universe, as_of, counter):
     return out, stale
 
 
-def _info(sym, counter):
-    import yfinance as yf
-    counter.inc()
+TWSE_VAL_URL = "https://openapi.twse.com.tw/v1/exchangeReport/BWIBBU_ALL"
+TPEX_VAL_URL = "https://www.tpex.org.tw/openapi/v1/tpex_mainboard_peratio_analysis"
+MOPS_REV_URL = "https://openapi.twse.com.tw/v1/opendata/t187ap05_L"
+MOPS_PROF_URL = "https://openapi.twse.com.tw/v1/opendata/t187ap17_L"
+
+def _num_clean(v):
     try:
-        i = yf.Ticker(sym).info
-    except Exception:
+        val = float(str(v).replace(",", "").strip())
+        return val if math.isfinite(val) else None
+    except (ValueError, TypeError):
         return None
-    pe = i.get("forwardPE") or i.get("trailingPE")
-    row = {"roe": i.get("returnOnEquity"), "pe": pe, "rev_g": i.get("revenueGrowth"),
-           "margin": i.get("profitMargins")}
-    row = {k: v for k, v in row.items() if isinstance(v, (int, float)) and math.isfinite(v)}
-    return row or None
+
+def _fetch_official_fundamentals(trade_date: str, universe, counter: Counter) -> dict:
+    infos = {t: {} for t in universe.names}
+    with ThreadPoolExecutor(4) as ex:
+        f_tw_val = ex.submit(http_get_json, TWSE_VAL_URL, None, None, 25, 2, counter)
+        f_tp_val = ex.submit(http_get_json, TPEX_VAL_URL, None, None, 25, 2, counter)
+        f_rev    = ex.submit(http_get_json, MOPS_REV_URL, None, None, 25, 2, counter)
+        f_prof   = ex.submit(http_get_json, MOPS_PROF_URL, None, None, 25, 2, counter)
+
+        for name, fut in (("twse_val", f_tw_val), ("tpex_val", f_tp_val), ("mops_rev", f_rev), ("mops_prof", f_prof)):
+            try:
+                rows = fut.result()
+                save_raw_bytes(trade_date, name, json.dumps(rows, ensure_ascii=False).encode("utf-8"))
+            except Exception:
+                rows = []
+            for r in rows or []:
+                code = str(r.get("Code") or r.get("SecuritiesCompanyCode") or r.get("公司代號") or "").strip()
+                if code not in infos:
+                    continue
+                if name in ("twse_val", "tpex_val"):
+                    pe = _num_clean(r.get("PEratio") or r.get("PriceEarningRatio"))
+                    pb = _num_clean(r.get("PBratio") or r.get("PriceBookRatio"))
+                    if pe and 4.0 <= pe <= 150.0:
+                        infos[code]["pe"] = pe
+                    if pb and 0.2 <= pb <= 50.0:
+                        infos[code]["pb"] = pb
+                elif name == "mops_rev":
+                    yoy = _num_clean(r.get("去年同月增減(%)"))
+                    if yoy is not None:
+                        infos[code]["rev_g"] = max(-0.80, min(2.00, yoy / 100.0))
+                elif name == "mops_prof":
+                    margin = _num_clean(r.get("稅後純益率") or r.get("營業利益率"))
+                    if margin is not None:
+                        infos[code]["margin"] = max(-0.50, min(0.80, margin / 100.0))
+    return {t: d for t, d in infos.items() if d}
 
 
 def collect(trade_date: str, as_of_date: str, universe, holdings, refresh: bool = False) -> dict:
@@ -99,10 +136,6 @@ def collect(trade_date: str, as_of_date: str, universe, holdings, refresh: bool 
     focus = list(dict.fromkeys(list(holdings) + [t for th in universe.core_ids
                                                  for t in universe.themes[th]["tickers"]]))[:MAX_FUNDAMENTALS]
     infos = {}
-    with ThreadPoolExecutor(8) as ex:
-        for t, r in zip(focus, ex.map(lambda t: _info(_symbol(universe, t), counter), focus)):
-            if r:
-                infos[t] = r
 
     px_src = frag_add_source(frag, {"authority": "vendor", "url": YAHOO_URL, "fetched_at": now,
                                     "name": "Yahoo Finance 日線歷史價量（20/60日動能、波動、成交值）",

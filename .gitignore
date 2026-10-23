@@ -1,1 +1,7 @@
 .env
+logs/
+data/
+.venv/
+__pycache__/
+*.pyc
+*.zip

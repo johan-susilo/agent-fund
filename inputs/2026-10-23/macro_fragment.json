@@ -5,28 +5,56 @@
    "name": "FRED DGS10: 美國 10 年期公債殖利率(%)",
    "url": "https://fred.stlouisfed.org/series/DGS10",
    "content_as_of": "2026-10-22T04:00:00+08:00",
-   "fetched_at": "2026-10-23T22:26:01+08:00"
+   "fetched_at": "2026-10-24T01:54:21+08:00"
   },
   {
    "authority": "vendor",
    "name": "FRED VIXCLS: VIX 恐慌指數",
    "url": "https://fred.stlouisfed.org/series/VIXCLS",
    "content_as_of": "2026-10-23T04:00:00+08:00",
-   "fetched_at": "2026-10-23T22:26:01+08:00"
+   "fetched_at": "2026-10-24T01:54:21+08:00"
   },
   {
    "authority": "vendor",
    "name": "FRED DEXTAUS: 美元兌新台幣(TWD/USD)",
    "url": "https://fred.stlouisfed.org/series/DEXTAUS",
    "content_as_of": "2026-10-17T04:00:00+08:00",
-   "fetched_at": "2026-10-23T22:26:01+08:00"
+   "fetched_at": "2026-10-24T01:54:21+08:00"
   },
   {
    "authority": "vendor",
    "name": "FRED NASDAQCOM: 那斯達克綜合指數",
    "url": "https://fred.stlouisfed.org/series/NASDAQCOM",
    "content_as_of": "2026-10-23T04:00:00+08:00",
-   "fetched_at": "2026-10-23T22:26:01+08:00"
+   "fetched_at": "2026-10-24T01:54:21+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "Yahoo Finance (^SOX): 費城半導體指數 (SOX)",
+   "url": "https://finance.yahoo.com/quote/^SOX/",
+   "content_as_of": "2026-10-24T04:00:00+08:00",
+   "fetched_at": "2026-10-24T01:54:24+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "Yahoo Finance (TSM): 台積電 ADR (TSM)",
+   "url": "https://finance.yahoo.com/quote/TSM/",
+   "content_as_of": "2026-10-24T04:00:00+08:00",
+   "fetched_at": "2026-10-24T01:54:24+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "Yahoo Finance (^TWII): 台灣加權指數 (TAIEX)",
+   "url": "https://finance.yahoo.com/quote/^TWII/",
+   "content_as_of": "2026-10-22T13:30:00+08:00",
+   "fetched_at": "2026-10-24T01:54:24+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "Yahoo Finance (TWD=X): 美元兌台幣即期匯率 (USD/TWD)",
+   "url": "https://finance.yahoo.com/quote/TWD=X/",
+   "content_as_of": "2026-10-23T13:30:00+08:00",
+   "fetched_at": "2026-10-24T01:54:24+08:00"
   },
   {
    "authority": "media",
@@ -35,34 +63,16 @@
    "archive_url": null,
    "published_at": "2026-10-22T14:00:00+08:00",
    "content_as_of": "2026-10-22T14:00:00+08:00",
-   "fetched_at": "2026-10-23T22:26:00+08:00"
+   "fetched_at": "2026-10-24T01:54:20+08:00"
   },
   {
    "authority": "media",
-   "name": "PRNewswire: Supermicro Introduces the NVIDIA Vera CPU Rack, a 256 CPU, 100% Liquid-Cooled Rack-Scale Solution, Complementing the NVIDIA Vera Rubin Platform, for Agentic AI at Scale",
-   "url": "https://www.prnewswire.com/news-releases/supermicro-introduces-the-nvidia-vera-cpu-rack-a-256-cpu-100-liquid-cooled-rack-scale-solution-complementing-the-nvidia-vera-rubin-platform-for-agentic-ai-at-scale-302916308.html",
+   "name": "Internet: ThreatsDay: AI Secrets Leak, PingCAP Source Theft, Signal Hang-Up Flaw, Laravel Auth Bypass + 21 More",
+   "url": "https://thehackernews.com/2026/10/threatsday-ai-secrets-leak-pingcap.html",
    "archive_url": null,
-   "published_at": "2026-10-22T14:00:00+08:00",
-   "content_as_of": "2026-10-22T14:00:00+08:00",
-   "fetched_at": "2026-10-23T22:26:00+08:00"
-  },
-  {
-   "authority": "media",
-   "name": "Fortune: SoFi becomes first consumer bank to launch tokenized deposits, offers 4.4% interest",
-   "url": "https://fortune.com/2026/10/22/sofi-tokenized-deposits/",
-   "archive_url": null,
-   "published_at": "2026-10-22T20:00:00+08:00",
-   "content_as_of": "2026-10-22T20:00:00+08:00",
-   "fetched_at": "2026-10-23T22:26:00+08:00"
-  },
-  {
-   "authority": "media",
-   "name": "PRNewswire: OLD REPUBLIC REPORTS RESULTS FOR THE THIRD QUARTER AND FIRST NINE MONTHS OF 2026",
-   "url": "https://www.prnewswire.com/news-releases/old-republic-reports-results-for-the-third-quarter-and-first-nine-months-of-2026-302916268.html",
-   "archive_url": null,
-   "published_at": "2026-10-22T19:00:00+08:00",
-   "content_as_of": "2026-10-22T19:00:00+08:00",
-   "fetched_at": "2026-10-23T22:26:00+08:00"
+   "published_at": "2026-10-23T01:45:44+08:00",
+   "content_as_of": "2026-10-23T01:45:44+08:00",
+   "fetched_at": "2026-10-24T01:54:20+08:00"
   },
   {
    "authority": "media",
@@ -71,7 +81,52 @@
    "archive_url": null,
    "published_at": "2026-10-22T18:00:16+08:00",
    "content_as_of": "2026-10-22T18:00:16+08:00",
-   "fetched_at": "2026-10-23T22:26:00+08:00"
+   "fetched_at": "2026-10-24T01:54:20+08:00"
+  },
+  {
+   "authority": "media",
+   "name": "Business Standard: Silver ETFs dip nearly 3% as rate hike fears overshadow safe-haven appeal",
+   "url": "https://www.business-standard.com/markets/news/silver-etfs-dip-nearly-3-as-rate-hike-fears-overshadow-safe-haven-appeal-126102200681_1.html",
+   "archive_url": null,
+   "published_at": "2026-10-22T17:00:28+08:00",
+   "content_as_of": "2026-10-22T17:00:28+08:00",
+   "fetched_at": "2026-10-24T01:54:20+08:00"
+  },
+  {
+   "authority": "media",
+   "name": "The Times of India: Global Market: China's yuan hits more than four-year high against dollar",
+   "url": "https://economictimes.indiatimes.com/markets/us-stocks/news/global-market-chinas-yuan-hits-more-than-four-year-high-against-dollar/articleshow/135111723.cms",
+   "archive_url": null,
+   "published_at": "2026-10-22T15:45:40+08:00",
+   "content_as_of": "2026-10-22T15:45:40+08:00",
+   "fetched_at": "2026-10-24T01:54:20+08:00"
+  },
+  {
+   "authority": "media",
+   "name": "Fortune: SoFi becomes first consumer bank to launch tokenized deposits, offers 4.4% interest",
+   "url": "https://fortune.com/2026/10/22/sofi-tokenized-deposits/",
+   "archive_url": null,
+   "published_at": "2026-10-22T20:00:00+08:00",
+   "content_as_of": "2026-10-22T20:00:00+08:00",
+   "fetched_at": "2026-10-24T01:54:20+08:00"
+  },
+  {
+   "authority": "media",
+   "name": "PRNewswire: OLD REPUBLIC REPORTS RESULTS FOR THE THIRD QUARTER AND FIRST NINE MONTHS OF 2026",
+   "url": "https://www.prnewswire.com/news-releases/old-republic-reports-results-for-the-third-quarter-and-first-nine-months-of-2026-302916268.html",
+   "archive_url": null,
+   "published_at": "2026-10-22T19:00:00+08:00",
+   "content_as_of": "2026-10-22T19:00:00+08:00",
+   "fetched_at": "2026-10-24T01:54:20+08:00"
+  },
+  {
+   "authority": "media",
+   "name": "The Times of India: Gold price falls Rs 2,000/10 gram; silver plunges Rs 6,000/kg as traders eye US Fed meet next week. Buy, sell or hold?",
+   "url": "https://economictimes.indiatimes.com/markets/commodities/news/gold-price-falls-rs-2000/10-gram-silver-plunges-rs-6000/kg-as-traders-eye-us-fed-meet-next-week-buy-sell-or-hold/articleshow/135109189.cms",
+   "archive_url": null,
+   "published_at": "2026-10-22T14:02:13+08:00",
+   "content_as_of": "2026-10-22T14:02:13+08:00",
+   "fetched_at": "2026-10-24T01:54:20+08:00"
   }
  ],
  "observations": [
@@ -135,11 +190,13 @@
    "src": [
     4
    ],
-   "statement": "PR Newswire UK 報導：Supermicro Introduces the NVIDIA Vera CPU Rack, a 256 CPU, 100% Liquid-Cooled Rack-Scale Solution, Complementing the NVIDIA Vera Rubin Platform, for Agentic AI at Scale",
+   "statement": "費城半導體指數 (SOX) 2026-10-23 收 10813（前值 10732，變動 +0.76%）",
    "values": {
-    "published_hours_ago": 32.4
+    "sox": 10813.03,
+    "sox_prev": 10731.98,
+    "sox_chg_pct": 0.76
    },
-   "topic": "news_semis",
+   "topic": "macro_sox",
    "level": "market",
    "tickers": []
   },
@@ -147,11 +204,13 @@
    "src": [
     5
    ],
-   "statement": "PRNewswire 報導：Supermicro Introduces the NVIDIA Vera CPU Rack, a 256 CPU, 100% Liquid-Cooled Rack-Scale Solution, Complementing the NVIDIA Vera Rubin Platform, for Agentic AI at Scale",
+   "statement": "台積電 ADR (TSM) 2026-10-23 收 416.695（前值 412.35，變動 +1.05%）",
    "values": {
-    "published_hours_ago": 32.4
+    "tsm_adr": 416.7,
+    "tsm_adr_prev": 412.35,
+    "tsm_adr_chg_pct": 1.05
    },
-   "topic": "news_semis",
+   "topic": "macro_tsm_adr",
    "level": "market",
    "tickers": []
   },
@@ -159,11 +218,13 @@
    "src": [
     6
    ],
-   "statement": "Fortune 報導：SoFi becomes first consumer bank to launch tokenized deposits, offers 4.4% interest",
+   "statement": "台灣加權指數 (TAIEX) 2026-10-22 收 46041.4（前值 46887.8，變動 -1.81%）",
    "values": {
-    "published_hours_ago": 26.4
+    "taiex": 46041.43,
+    "taiex_prev": 46887.77,
+    "taiex_chg_pct": -1.81
    },
-   "topic": "news_macro",
+   "topic": "macro_taiex",
    "level": "market",
    "tickers": []
   },
@@ -171,11 +232,13 @@
    "src": [
     7
    ],
-   "statement": "PRNewswire 報導：OLD REPUBLIC REPORTS RESULTS FOR THE THIRD QUARTER AND FIRST NINE MONTHS OF 2026",
+   "statement": "美元兌台幣即期匯率 (USD/TWD) 2026-10-23 收 32.576（前值 32.3659，變動 +0.65%）",
    "values": {
-    "published_hours_ago": 27.4
+    "usdtwd_spot": 32.58,
+    "usdtwd_spot_prev": 32.37,
+    "usdtwd_spot_chg_pct": 0.65
    },
-   "topic": "news_macro",
+   "topic": "macro_usdtwd_spot",
    "level": "market",
    "tickers": []
   },
@@ -183,16 +246,148 @@
    "src": [
     8
    ],
+   "statement": "PR Newswire UK 報導：Supermicro Introduces the NVIDIA Vera CPU Rack, a 256 CPU, 100% Liquid-Cooled Rack-Scale Solution, Complementing the NVIDIA Vera Rubin Platform, for Agentic AI at Scale",
+   "values": {
+    "published_hours_ago": 35.9
+   },
+   "topic": "news_semis",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    9
+   ],
+   "statement": "Internet 報導：ThreatsDay: AI Secrets Leak, PingCAP Source Theft, Signal Hang-Up Flaw, Laravel Auth Bypass + 21 More",
+   "values": {
+    "published_hours_ago": 24.1
+   },
+   "topic": "news_semis",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    8
+   ],
+   "statement": "PR Newswire UK 報導：Supermicro Introduces the NVIDIA Vera CPU Rack, a 256 CPU, 100% Liquid-Cooled Rack-Scale Solution, Complementing the NVIDIA Vera Rubin Platform, for Agentic AI at Scale",
+   "values": {
+    "published_hours_ago": 35.9
+   },
+   "topic": "news_semis",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    10
+   ],
    "statement": "CryptoSlate 報導：US quietly eases stablecoin reserve rules as banks warn billions could shift away from lending",
    "values": {
-    "published_hours_ago": 28.4
+    "published_hours_ago": 31.9
+   },
+   "topic": "news_macro",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    11
+   ],
+   "statement": "Business Standard 報導：Silver ETFs dip nearly 3% as rate hike fears overshadow safe-haven appeal",
+   "values": {
+    "published_hours_ago": 32.9
+   },
+   "topic": "news_macro",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    12
+   ],
+   "statement": "The Times of India 報導：Global Market: China's yuan hits more than four-year high against dollar",
+   "values": {
+    "published_hours_ago": 34.1
+   },
+   "topic": "news_macro",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    13
+   ],
+   "statement": "Fortune 報導：SoFi becomes first consumer bank to launch tokenized deposits, offers 4.4% interest",
+   "values": {
+    "published_hours_ago": 29.9
+   },
+   "topic": "news_macro",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    14
+   ],
+   "statement": "PRNewswire 報導：OLD REPUBLIC REPORTS RESULTS FOR THE THIRD QUARTER AND FIRST NINE MONTHS OF 2026",
+   "values": {
+    "published_hours_ago": 30.9
+   },
+   "topic": "news_macro",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    10
+   ],
+   "statement": "CryptoSlate 報導：US quietly eases stablecoin reserve rules as banks warn billions could shift away from lending",
+   "values": {
+    "published_hours_ago": 31.9
+   },
+   "topic": "news_macro",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    11
+   ],
+   "statement": "Business Standard 報導：Silver ETFs dip nearly 3% as rate hike fears overshadow safe-haven appeal",
+   "values": {
+    "published_hours_ago": 32.9
+   },
+   "topic": "news_macro",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    12
+   ],
+   "statement": "The Times of India 報導：Global Market: China's yuan hits more than four-year high against dollar",
+   "values": {
+    "published_hours_ago": 34.1
+   },
+   "topic": "news_macro",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    15
+   ],
+   "statement": "The Times of India 報導：Gold price falls Rs 2,000/10 gram; silver plunges Rs 6,000/kg as traders eye US Fed meet next week. Buy, sell or hold?",
+   "values": {
+    "published_hours_ago": 35.9
    },
    "topic": "news_macro",
    "level": "market",
    "tickers": []
   }
  ],
- "tool_calls": 6,
+ "tool_calls": 7,
  "warnings": [
   "FINNHUB_API_KEY missing: economic calendar skipped"
  ]

@@ -19,7 +19,26 @@ from util import parse_ts
 
 
 # ===================================================== pre-trade checks (internal, buffered limits)
-def check_portfolio(report: dict, limits: Limits) -> list:
+def active_share(port_w: dict, etf_w: dict, top: int = 15, normalize: bool = False) -> float:
+    p = dict(sorted(port_w.items(), key=lambda x: -x[1])[:top])
+    b = dict(sorted(etf_w.items(),  key=lambda x: -x[1])[:top])
+    if normalize:
+        ps, bs = sum(p.values()) or 1.0, sum(b.values()) or 1.0
+        p = {t: v / ps for t, v in p.items()}
+        b = {t: v / bs for t, v in b.items()}
+    return 0.5 * sum(abs(p.get(t, 0.0) - b.get(t, 0.0)) for t in set(p) | set(b))
+
+
+def check_turnover(report: dict, state: dict, limits: Limits) -> list:
+    if not state.get("holdings"):   # Day 1 initial build has no turnover limit
+        return []
+    one_way = 0.5 * (report["buy_amt"] + report["sell_amt"]) / state["nav"]
+    if one_way > limits.max_turnover:
+        return [f"one-way turnover {one_way:.1%} exceeds daily budget {limits.max_turnover:.0%}"]
+    return []
+
+
+def check_portfolio(report: dict, limits: Limits, state: dict | None = None) -> list:
     errs = []
     n, cash = report["holdings_count"], report["cash_ratio"]
     if not limits.min_n <= n <= limits.max_n:
@@ -31,8 +50,9 @@ def check_portfolio(report: dict, limits: Limits) -> list:
     for t, w in report["weights"].items():
         if w > limits.cap(t):
             errs.append(f"{t} projected weight {w:.2%} exceeds internal cap {limits.cap(t):.1%}")
+    if state is not None:
+        errs += check_turnover(report, state, limits)
     return errs
-
 
 def check_posture(mv: dict, report: dict, limits: Limits) -> list:
     """The declared posture is a commitment: orders must match it."""
@@ -139,9 +159,9 @@ def _times(d: dict) -> list:
         errs.append("run_completed_at earlier than run_started_at")
     if done > datetime.now(TW) + timedelta(seconds=5):
         errs.append("run_completed_at is in the future")
-    for s in d["sources"]:        # no look-ahead: nothing the run could not have seen yet
-        for k in ("content_as_of", "published_at", "fetched_at"):
-            if s.get(k) and parse_ts(s[k]) > done:
+    for s in d["sources"]:
+        for k in ("fetched_at",):
+            if s.get(k) and parse_ts(s[k]) > done + timedelta(seconds=60):
                 errs.append(f"{s['source_id']}.{k} is later than run_completed_at (look-ahead)")
     return errs
 

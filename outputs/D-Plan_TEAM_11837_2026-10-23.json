@@ -10,7 +10,7 @@
       "name": "TWSE 上市個股日收盤價 (OpenAPI STOCK_DAY_ALL)",
       "url": "https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL",
       "content_as_of": "2026-10-22T18:30:00+08:00",
-      "fetched_at": "2026-10-23T22:26:08+08:00"
+      "fetched_at": "2026-10-24T01:54:23+08:00"
     },
     {
       "source_id": "S2",
@@ -18,7 +18,7 @@
       "name": "TPEx 上櫃個股日收盤價 (OpenAPI)",
       "url": "https://www.tpex.org.tw/openapi/v1/tpex_mainboard_daily_close_quotes",
       "content_as_of": "2026-10-22T18:30:00+08:00",
-      "fetched_at": "2026-10-23T22:26:08+08:00"
+      "fetched_at": "2026-10-24T01:54:23+08:00"
     },
     {
       "source_id": "S3",
@@ -26,7 +26,7 @@
       "name": "FRED DGS10: 美國 10 年期公債殖利率(%)",
       "url": "https://fred.stlouisfed.org/series/DGS10",
       "content_as_of": "2026-10-22T04:00:00+08:00",
-      "fetched_at": "2026-10-23T22:26:01+08:00"
+      "fetched_at": "2026-10-24T01:54:21+08:00"
     },
     {
       "source_id": "S4",
@@ -34,7 +34,7 @@
       "name": "FRED VIXCLS: VIX 恐慌指數",
       "url": "https://fred.stlouisfed.org/series/VIXCLS",
       "content_as_of": "2026-10-23T04:00:00+08:00",
-      "fetched_at": "2026-10-23T22:26:01+08:00"
+      "fetched_at": "2026-10-24T01:54:21+08:00"
     },
     {
       "source_id": "S5",
@@ -42,7 +42,7 @@
       "name": "FRED DEXTAUS: 美元兌新台幣(TWD/USD)",
       "url": "https://fred.stlouisfed.org/series/DEXTAUS",
       "content_as_of": "2026-10-17T04:00:00+08:00",
-      "fetched_at": "2026-10-23T22:26:01+08:00"
+      "fetched_at": "2026-10-24T01:54:21+08:00"
     },
     {
       "source_id": "S6",
@@ -50,68 +50,127 @@
       "name": "FRED NASDAQCOM: 那斯達克綜合指數",
       "url": "https://fred.stlouisfed.org/series/NASDAQCOM",
       "content_as_of": "2026-10-23T04:00:00+08:00",
-      "fetched_at": "2026-10-23T22:26:01+08:00"
+      "fetched_at": "2026-10-24T01:54:21+08:00"
     },
     {
       "source_id": "S7",
+      "authority": "vendor",
+      "name": "Yahoo Finance (^SOX): 費城半導體指數 (SOX)",
+      "url": "https://finance.yahoo.com/quote/^SOX/",
+      "content_as_of": "2026-10-24T04:00:00+08:00",
+      "fetched_at": "2026-10-24T01:54:24+08:00"
+    },
+    {
+      "source_id": "S8",
+      "authority": "vendor",
+      "name": "Yahoo Finance (TSM): 台積電 ADR (TSM)",
+      "url": "https://finance.yahoo.com/quote/TSM/",
+      "content_as_of": "2026-10-24T04:00:00+08:00",
+      "fetched_at": "2026-10-24T01:54:24+08:00"
+    },
+    {
+      "source_id": "S9",
+      "authority": "vendor",
+      "name": "Yahoo Finance (^TWII): 台灣加權指數 (TAIEX)",
+      "url": "https://finance.yahoo.com/quote/^TWII/",
+      "content_as_of": "2026-10-22T13:30:00+08:00",
+      "fetched_at": "2026-10-24T01:54:24+08:00"
+    },
+    {
+      "source_id": "S10",
+      "authority": "vendor",
+      "name": "Yahoo Finance (TWD=X): 美元兌台幣即期匯率 (USD/TWD)",
+      "url": "https://finance.yahoo.com/quote/TWD=X/",
+      "content_as_of": "2026-10-23T13:30:00+08:00",
+      "fetched_at": "2026-10-24T01:54:24+08:00"
+    },
+    {
+      "source_id": "S11",
       "authority": "media",
       "name": "PR Newswire UK: Supermicro Introduces the NVIDIA Vera CPU Rack, a 256 CPU, 100% Liquid-Cooled Rack-Scale Solution, Complementing the NVIDIA Vera Rubin Platform, for Agentic AI at Scale",
       "url": "https://www.prnewswire.co.uk/news-releases/supermicro-introduces-the-nvidia-vera-cpu-rack-a-256-cpu-100-liquid-cooled-rack-scale-solution-complementing-the-nvidia-vera-rubin-platform-for-agentic-ai-at-scale-302916342.html",
       "published_at": "2026-10-22T14:00:00+08:00",
       "content_as_of": "2026-10-22T14:00:00+08:00",
-      "fetched_at": "2026-10-23T22:26:00+08:00"
+      "fetched_at": "2026-10-24T01:54:20+08:00"
     },
     {
-      "source_id": "S8",
+      "source_id": "S12",
       "authority": "media",
-      "name": "PRNewswire: Supermicro Introduces the NVIDIA Vera CPU Rack, a 256 CPU, 100% Liquid-Cooled Rack-Scale Solution, Complementing the NVIDIA Vera Rubin Platform, for Agentic AI at Scale",
-      "url": "https://www.prnewswire.com/news-releases/supermicro-introduces-the-nvidia-vera-cpu-rack-a-256-cpu-100-liquid-cooled-rack-scale-solution-complementing-the-nvidia-vera-rubin-platform-for-agentic-ai-at-scale-302916308.html",
-      "published_at": "2026-10-22T14:00:00+08:00",
-      "content_as_of": "2026-10-22T14:00:00+08:00",
-      "fetched_at": "2026-10-23T22:26:00+08:00"
+      "name": "Internet: ThreatsDay: AI Secrets Leak, PingCAP Source Theft, Signal Hang-Up Flaw, Laravel Auth Bypass + 21 More",
+      "url": "https://thehackernews.com/2026/10/threatsday-ai-secrets-leak-pingcap.html",
+      "published_at": "2026-10-23T01:45:44+08:00",
+      "content_as_of": "2026-10-23T01:45:44+08:00",
+      "fetched_at": "2026-10-24T01:54:20+08:00"
     },
     {
-      "source_id": "S9",
-      "authority": "media",
-      "name": "Fortune: SoFi becomes first consumer bank to launch tokenized deposits, offers 4.4% interest",
-      "url": "https://fortune.com/2026/10/22/sofi-tokenized-deposits/",
-      "published_at": "2026-10-22T20:00:00+08:00",
-      "content_as_of": "2026-10-22T20:00:00+08:00",
-      "fetched_at": "2026-10-23T22:26:00+08:00"
-    },
-    {
-      "source_id": "S10",
-      "authority": "media",
-      "name": "PRNewswire: OLD REPUBLIC REPORTS RESULTS FOR THE THIRD QUARTER AND FIRST NINE MONTHS OF 2026",
-      "url": "https://www.prnewswire.com/news-releases/old-republic-reports-results-for-the-third-quarter-and-first-nine-months-of-2026-302916268.html",
-      "published_at": "2026-10-22T19:00:00+08:00",
-      "content_as_of": "2026-10-22T19:00:00+08:00",
-      "fetched_at": "2026-10-23T22:26:00+08:00"
-    },
-    {
-      "source_id": "S11",
+      "source_id": "S13",
       "authority": "media",
       "name": "CryptoSlate: US quietly eases stablecoin reserve rules as banks warn billions could shift away from lending",
       "url": "https://cryptoslate.com/treasury-hails-americas-new-stablecoin-system-as-occ-removes-safeguards-banks-wanted-against-deposit-flight/",
       "published_at": "2026-10-22T18:00:16+08:00",
       "content_as_of": "2026-10-22T18:00:16+08:00",
-      "fetched_at": "2026-10-23T22:26:00+08:00"
+      "fetched_at": "2026-10-24T01:54:20+08:00"
     },
     {
-      "source_id": "S12",
+      "source_id": "S14",
+      "authority": "media",
+      "name": "Business Standard: Silver ETFs dip nearly 3% as rate hike fears overshadow safe-haven appeal",
+      "url": "https://www.business-standard.com/markets/news/silver-etfs-dip-nearly-3-as-rate-hike-fears-overshadow-safe-haven-appeal-126102200681_1.html",
+      "published_at": "2026-10-22T17:00:28+08:00",
+      "content_as_of": "2026-10-22T17:00:28+08:00",
+      "fetched_at": "2026-10-24T01:54:20+08:00"
+    },
+    {
+      "source_id": "S15",
+      "authority": "media",
+      "name": "The Times of India: Global Market: China's yuan hits more than four-year high against dollar",
+      "url": "https://economictimes.indiatimes.com/markets/us-stocks/news/global-market-chinas-yuan-hits-more-than-four-year-high-against-dollar/articleshow/135111723.cms",
+      "published_at": "2026-10-22T15:45:40+08:00",
+      "content_as_of": "2026-10-22T15:45:40+08:00",
+      "fetched_at": "2026-10-24T01:54:20+08:00"
+    },
+    {
+      "source_id": "S16",
+      "authority": "media",
+      "name": "Fortune: SoFi becomes first consumer bank to launch tokenized deposits, offers 4.4% interest",
+      "url": "https://fortune.com/2026/10/22/sofi-tokenized-deposits/",
+      "published_at": "2026-10-22T20:00:00+08:00",
+      "content_as_of": "2026-10-22T20:00:00+08:00",
+      "fetched_at": "2026-10-24T01:54:20+08:00"
+    },
+    {
+      "source_id": "S17",
+      "authority": "media",
+      "name": "PRNewswire: OLD REPUBLIC REPORTS RESULTS FOR THE THIRD QUARTER AND FIRST NINE MONTHS OF 2026",
+      "url": "https://www.prnewswire.com/news-releases/old-republic-reports-results-for-the-third-quarter-and-first-nine-months-of-2026-302916268.html",
+      "published_at": "2026-10-22T19:00:00+08:00",
+      "content_as_of": "2026-10-22T19:00:00+08:00",
+      "fetched_at": "2026-10-24T01:54:20+08:00"
+    },
+    {
+      "source_id": "S18",
+      "authority": "media",
+      "name": "The Times of India: Gold price falls Rs 2,000/10 gram; silver plunges Rs 6,000/kg as traders eye US Fed meet next week. Buy, sell or hold?",
+      "url": "https://economictimes.indiatimes.com/markets/commodities/news/gold-price-falls-rs-2000/10-gram-silver-plunges-rs-6000/kg-as-traders-eye-us-fed-meet-next-week-buy-sell-or-hold/articleshow/135109189.cms",
+      "published_at": "2026-10-22T14:02:13+08:00",
+      "content_as_of": "2026-10-22T14:02:13+08:00",
+      "fetched_at": "2026-10-24T01:54:20+08:00"
+    },
+    {
+      "source_id": "S19",
       "authority": "vendor",
       "name": "Yahoo Finance 日線歷史價量（20/60日動能、波動、成交值）",
       "url": "https://finance.yahoo.com/",
       "content_as_of": "2026-10-22T13:30:00+08:00",
-      "fetched_at": "2026-10-23T22:26:01+08:00"
+      "fetched_at": "2026-10-24T01:54:20+08:00"
     },
     {
-      "source_id": "S13",
+      "source_id": "S20",
       "authority": "vendor",
       "name": "Yahoo Finance 關鍵財務指標（ROE、本益比、營收成長、淨利率）",
       "url": "https://finance.yahoo.com/quote/",
-      "content_as_of": "2026-10-23T22:26:01+08:00",
-      "fetched_at": "2026-10-23T22:26:01+08:00"
+      "content_as_of": "2026-10-24T01:54:20+08:00",
+      "fetched_at": "2026-10-24T01:54:20+08:00"
     }
   ],
   "observations": [
@@ -863,10 +922,12 @@
       "source_ref": [
         "S7"
       ],
-      "topic": "news_semis",
-      "statement": "PR Newswire UK 報導：Supermicro Introduces the NVIDIA Vera CPU Rack, a 256 CPU, 100% Liquid-Cooled Rack-Scale Solution, Complementing the NVIDIA Vera Rubin Platform, for Agentic AI at Scale",
+      "topic": "macro_sox",
+      "statement": "費城半導體指數 (SOX) 2026-10-23 收 10813（前值 10732，變動 +0.76%）",
       "values": {
-        "published_hours_ago": 32.4
+        "sox": 10813.03,
+        "sox_prev": 10731.98,
+        "sox_chg_pct": 0.76
       }
     },
     {
@@ -874,10 +935,12 @@
       "source_ref": [
         "S8"
       ],
-      "topic": "news_semis",
-      "statement": "PRNewswire 報導：Supermicro Introduces the NVIDIA Vera CPU Rack, a 256 CPU, 100% Liquid-Cooled Rack-Scale Solution, Complementing the NVIDIA Vera Rubin Platform, for Agentic AI at Scale",
+      "topic": "macro_tsm_adr",
+      "statement": "台積電 ADR (TSM) 2026-10-23 收 416.695（前值 412.35，變動 +1.05%）",
       "values": {
-        "published_hours_ago": 32.4
+        "tsm_adr": 416.7,
+        "tsm_adr_prev": 412.35,
+        "tsm_adr_chg_pct": 1.05
       }
     },
     {
@@ -885,10 +948,12 @@
       "source_ref": [
         "S9"
       ],
-      "topic": "news_macro",
-      "statement": "Fortune 報導：SoFi becomes first consumer bank to launch tokenized deposits, offers 4.4% interest",
+      "topic": "macro_taiex",
+      "statement": "台灣加權指數 (TAIEX) 2026-10-22 收 46041.4（前值 46887.8，變動 -1.81%）",
       "values": {
-        "published_hours_ago": 26.4
+        "taiex": 46041.43,
+        "taiex_prev": 46887.77,
+        "taiex_chg_pct": -1.81
       }
     },
     {
@@ -896,10 +961,12 @@
       "source_ref": [
         "S10"
       ],
-      "topic": "news_macro",
-      "statement": "PRNewswire 報導：OLD REPUBLIC REPORTS RESULTS FOR THE THIRD QUARTER AND FIRST NINE MONTHS OF 2026",
+      "topic": "macro_usdtwd_spot",
+      "statement": "美元兌台幣即期匯率 (USD/TWD) 2026-10-23 收 32.576（前值 32.3659，變動 +0.65%）",
       "values": {
-        "published_hours_ago": 27.4
+        "usdtwd_spot": 32.58,
+        "usdtwd_spot_prev": 32.37,
+        "usdtwd_spot_chg_pct": 0.65
       }
     },
     {
@@ -907,16 +974,137 @@
       "source_ref": [
         "S11"
       ],
-      "topic": "news_macro",
-      "statement": "CryptoSlate 報導：US quietly eases stablecoin reserve rules as banks warn billions could shift away from lending",
+      "topic": "news_semis",
+      "statement": "PR Newswire UK 報導：Supermicro Introduces the NVIDIA Vera CPU Rack, a 256 CPU, 100% Liquid-Cooled Rack-Scale Solution, Complementing the NVIDIA Vera Rubin Platform, for Agentic AI at Scale",
       "values": {
-        "published_hours_ago": 28.4
+        "published_hours_ago": 35.9
       }
     },
     {
       "obs_id": "O41",
       "source_ref": [
         "S12"
+      ],
+      "topic": "news_semis",
+      "statement": "Internet 報導：ThreatsDay: AI Secrets Leak, PingCAP Source Theft, Signal Hang-Up Flaw, Laravel Auth Bypass + 21 More",
+      "values": {
+        "published_hours_ago": 24.1
+      }
+    },
+    {
+      "obs_id": "O42",
+      "source_ref": [
+        "S11"
+      ],
+      "topic": "news_semis",
+      "statement": "PR Newswire UK 報導：Supermicro Introduces the NVIDIA Vera CPU Rack, a 256 CPU, 100% Liquid-Cooled Rack-Scale Solution, Complementing the NVIDIA Vera Rubin Platform, for Agentic AI at Scale",
+      "values": {
+        "published_hours_ago": 35.9
+      }
+    },
+    {
+      "obs_id": "O43",
+      "source_ref": [
+        "S13"
+      ],
+      "topic": "news_macro",
+      "statement": "CryptoSlate 報導：US quietly eases stablecoin reserve rules as banks warn billions could shift away from lending",
+      "values": {
+        "published_hours_ago": 31.9
+      }
+    },
+    {
+      "obs_id": "O44",
+      "source_ref": [
+        "S14"
+      ],
+      "topic": "news_macro",
+      "statement": "Business Standard 報導：Silver ETFs dip nearly 3% as rate hike fears overshadow safe-haven appeal",
+      "values": {
+        "published_hours_ago": 32.9
+      }
+    },
+    {
+      "obs_id": "O45",
+      "source_ref": [
+        "S15"
+      ],
+      "topic": "news_macro",
+      "statement": "The Times of India 報導：Global Market: China's yuan hits more than four-year high against dollar",
+      "values": {
+        "published_hours_ago": 34.1
+      }
+    },
+    {
+      "obs_id": "O46",
+      "source_ref": [
+        "S16"
+      ],
+      "topic": "news_macro",
+      "statement": "Fortune 報導：SoFi becomes first consumer bank to launch tokenized deposits, offers 4.4% interest",
+      "values": {
+        "published_hours_ago": 29.9
+      }
+    },
+    {
+      "obs_id": "O47",
+      "source_ref": [
+        "S17"
+      ],
+      "topic": "news_macro",
+      "statement": "PRNewswire 報導：OLD REPUBLIC REPORTS RESULTS FOR THE THIRD QUARTER AND FIRST NINE MONTHS OF 2026",
+      "values": {
+        "published_hours_ago": 30.9
+      }
+    },
+    {
+      "obs_id": "O48",
+      "source_ref": [
+        "S13"
+      ],
+      "topic": "news_macro",
+      "statement": "CryptoSlate 報導：US quietly eases stablecoin reserve rules as banks warn billions could shift away from lending",
+      "values": {
+        "published_hours_ago": 31.9
+      }
+    },
+    {
+      "obs_id": "O49",
+      "source_ref": [
+        "S14"
+      ],
+      "topic": "news_macro",
+      "statement": "Business Standard 報導：Silver ETFs dip nearly 3% as rate hike fears overshadow safe-haven appeal",
+      "values": {
+        "published_hours_ago": 32.9
+      }
+    },
+    {
+      "obs_id": "O50",
+      "source_ref": [
+        "S15"
+      ],
+      "topic": "news_macro",
+      "statement": "The Times of India 報導：Global Market: China's yuan hits more than four-year high against dollar",
+      "values": {
+        "published_hours_ago": 34.1
+      }
+    },
+    {
+      "obs_id": "O51",
+      "source_ref": [
+        "S18"
+      ],
+      "topic": "news_macro",
+      "statement": "The Times of India 報導：Gold price falls Rs 2,000/10 gram; silver plunges Rs 6,000/kg as traders eye US Fed meet next week. Buy, sell or hold?",
+      "values": {
+        "published_hours_ago": 35.9
+      }
+    },
+    {
+      "obs_id": "O52",
+      "source_ref": [
+        "S19"
       ],
       "topic": "factor_momentum",
       "statement": "價量因子（截至結算日）：2330 20日-3.8% 60日+1.8% 波動19% 日均值57,448M；2454 20日-20.0% 60日+9.0% 波動48% 日均值33,571M；3711 20日-1.4% 60日+7.6% 波動52% 日均值10,294M；2303 20日-20.1% 60日-0.4% 波動40% 日均值21,067M；2408 20日-19.8% 60日-5.0% 波動55% 日均值21,530M；7769 20日-12.1% 60日-12.6% 波動67% 日均值4,238M；2337 20日-17.1% 60日-20.7% 波動46% 日均值2,894M；6239 20日-15.2% 60日-9.4% 波動58% 日均值4,042M；3443 20日-0.4% 60日+87.3% 波動70% 日均值10,595M；2379 20日+4.3% 60日+4.9% 波動24% 日均值1,893M",
@@ -964,9 +1152,9 @@
       }
     },
     {
-      "obs_id": "O42",
+      "obs_id": "O53",
       "source_ref": [
-        "S12"
+        "S19"
       ],
       "topic": "factor_momentum",
       "statement": "價量因子（截至結算日）：3034 20日+6.4% 60日+12.5% 波動29% 日均值1,819M；2449 20日-12.9% 60日+0.2% 波動59% 日均值8,911M；3661 20日-4.6% 60日+1.8% 波動54% 日均值8,573M；6770 20日-8.7% 60日+7.6% 波動47% 日均值7,334M；6415 20日+10.4% 60日+5.1% 波動59% 日均值1,917M；6789 20日-4.5% 60日-5.1% 波動52% 日均值519M；5274 20日-19.2% 60日+8.9% 波動56% 日均值5,068M；6488 20日-11.3% 60日-22.4% 波動85% 日均值14,943M；8299 20日-12.6% 60日+3.3% 波動42% 日均值5,649M；5347 20日-6.4% 60日+2.5% 波動50% 日均值2,930M",
@@ -1014,9 +1202,9 @@
       }
     },
     {
-      "obs_id": "O43",
+      "obs_id": "O54",
       "source_ref": [
-        "S12"
+        "S19"
       ],
       "topic": "factor_momentum",
       "statement": "價量因子（截至結算日）：3529 20日-12.2% 60日+2.3% 波動61% 日均值3,705M；3260 20日-15.7% 60日-14.5% 波動34% 日均值1,523M；3105 20日-0.9% 60日+36.9% 波動78% 日均值12,746M；5483 20日-0.3% 60日-8.8% 波動67% 日均值4,479M；6147 20日-9.4% 60日+31.0% 波動63% 日均值7,166M；3264 20日-13.2% 60日+19.7% 波動63% 日均值5,091M；3374 20日+4.6% 60日+34.3% 波動79% 日均值4,863M；6548 20日+0.8% 60日+8.4% 波動59% 日均值531M；6182 20日-9.1% 60日-9.9% 波動75% 日均值8,689M；4966 20日-9.7% 60日-15.5% 波動29% 日均值278M",
@@ -1064,9 +1252,9 @@
       }
     },
     {
-      "obs_id": "O44",
+      "obs_id": "O55",
       "source_ref": [
-        "S12"
+        "S19"
       ],
       "topic": "factor_momentum",
       "statement": "價量因子（截至結算日）：4991 20日-16.7% 60日-4.3% 波動77% 日均值2,156M；3227 20日-0.5% 60日-7.8% 波動17% 日均值142M；2344 20日-11.2% 60日-3.4% 波動49% 日均值10,987M；2404 20日-3.5% 60日-2.2% 波動62% 日均值2,065M；6515 20日-17.3% 60日-25.0% 波動72% 日均值3,464M；6139 20日-10.9% 60日-13.4% 波動39% 日均值1,850M；6223 20日-11.0% 60日-14.5% 波動72% 日均值5,307M；7734 20日-14.3% 60日-35.4% 波動68% 日均值538M；6187 20日+2.0% 60日+23.3% 波動85% 日均值4,243M；6510 20日-12.1% 60日+15.2% 波動79% 日均值2,950M",
@@ -1114,9 +1302,9 @@
       }
     },
     {
-      "obs_id": "O45",
+      "obs_id": "O56",
       "source_ref": [
-        "S12"
+        "S19"
       ],
       "topic": "factor_momentum",
       "statement": "價量因子（截至結算日）：3131 20日-19.5% 60日-27.3% 波動58% 日均值818M；4749 20日-3.8% 60日-8.5% 波動38% 日均值538M；1785 20日-6.4% 60日-14.8% 波動51% 日均值839M；3680 20日-8.2% 60日+11.7% 波動35% 日均值618M；7751 20日-10.0% 60日+3.6% 波動59% 日均值267M；4772 20日+4.3% 60日+3.2% 波動53% 日均值305M；2317 20日-2.0% 60日-3.2% 波動26% 日均值9,785M；2382 20日-6.5% 60日+0.0% 波動22% 日均值3,542M；6669 20日-14.4% 60日-4.5% 波動53% 日均值8,099M；2357 20日+0.0% 60日+24.5% 波動27% 日均值1,993M",
@@ -1164,9 +1352,9 @@
       }
     },
     {
-      "obs_id": "O46",
+      "obs_id": "O57",
       "source_ref": [
-        "S12"
+        "S19"
       ],
       "topic": "factor_momentum",
       "statement": "價量因子（截至結算日）：3231 20日+1.9% 60日+7.3% 波動43% 日均值7,734M；2356 20日-2.1% 60日-5.2% 波動21% 日均值776M；4938 20日+14.0% 60日+18.4% 波動44% 日均值1,724M；2376 20日-5.2% 60日+3.5% 波動32% 日均值1,985M；2324 20日-0.8% 60日+0.4% 波動30% 日均值1,260M；8210 20日-15.1% 60日-31.8% 波動37% 日均值1,407M；2451 20日-3.8% 60日+1.1% 波動31% 日均值558M；2377 20日+6.5% 60日+14.5% 波動19% 日均值926M；5289 20日-17.8% 60日-17.4% 波動38% 日均值1,319M；2308 20日-16.8% 60日-11.1% 波動54% 日均值18,460M",
@@ -1214,9 +1402,9 @@
       }
     },
     {
-      "obs_id": "O47",
+      "obs_id": "O58",
       "source_ref": [
-        "S12"
+        "S19"
       ],
       "topic": "factor_momentum",
       "statement": "價量因子（截至結算日）：2327 20日-9.0% 60日-18.9% 波動72% 日均值28,178M；3017 20日-7.9% 60日+31.8% 波動54% 日均值9,949M；2059 20日-23.8% 60日+18.3% 波動67% 日均值6,130M；3533 20日+12.9% 60日-6.6% 波動55% 日均值3,047M；3653 20日+4.8% 60日+72.2% 波動67% 日均值8,278M；2301 20日-11.4% 60日+21.6% 波動39% 日均值4,004M；3665 20日-18.5% 60日-12.8% 波動58% 日均值7,561M；3324 20日-10.5% 60日+46.2% 波動53% 日均值5,503M；6121 20日-2.5% 60日-3.4% 波動16% 日均值179M；3211 20日-17.4% 60日-14.4% 波動33% 日均值1,292M",
@@ -1264,9 +1452,9 @@
       }
     },
     {
-      "obs_id": "O48",
+      "obs_id": "O59",
       "source_ref": [
-        "S12"
+        "S19"
       ],
       "topic": "factor_momentum",
       "statement": "價量因子（截至結算日）：6290 20日-14.2% 60日+3.4% 波動55% 日均值1,048M；6584 20日-21.3% 60日-14.7% 波動35% 日均值180M；2383 20日+3.6% 60日+5.8% 波動67% 日均值13,149M；3037 20日+6.4% 60日+27.9% 波動71% 日均值17,820M；8046 20日+19.3% 60日+17.7% 波動63% 日均值14,272M；2313 20日+1.1% 60日+12.5% 波動67% 日均值7,690M；3044 20日+6.1% 60日+42.4% 波動40% 日均值1,610M；4958 20日+20.6% 60日+20.5% 波動68% 日均值18,521M；2368 20日+6.7% 60日+24.6% 波動78% 日均值13,881M；3189 20日+19.2% 60日+38.9% 波動65% 日均值18,080M",
@@ -1314,9 +1502,9 @@
       }
     },
     {
-      "obs_id": "O49",
+      "obs_id": "O60",
       "source_ref": [
-        "S12"
+        "S19"
       ],
       "topic": "factor_momentum",
       "statement": "價量因子（截至結算日）：6274 20日-1.0% 60日+13.1% 波動63% 日均值16,538M；8358 20日-10.8% 60日+18.2% 波動68% 日均值6,415M；1815 20日+14.9% 60日+94.8% 波動70% 日均值11,718M；2345 20日-3.5% 60日-20.1% 波動60% 日均值8,709M；3081 20日-17.4% 60日+31.6% 波動87% 日均值8,369M；3491 20日-13.2% 60日+14.3% 波動87% 日均值2,099M；3363 20日-23.4% 60日-15.4% 波動71% 日均值1,502M；4979 20日-27.2% 60日+0.3% 波動77% 日均值2,912M；3163 20日-17.2% 60日-12.5% 波動60% 日均值1,413M；3008 20日-3.5% 60日+52.4% 波動63% 日均值16,744M",
@@ -1364,9 +1552,9 @@
       }
     },
     {
-      "obs_id": "O50",
+      "obs_id": "O61",
       "source_ref": [
-        "S12"
+        "S19"
       ],
       "topic": "factor_momentum",
       "statement": "價量因子（截至結算日）：2409 20日+6.1% 60日+50.7% 波動77% 日均值18,931M；3481 20日-7.2% 60日-1.3% 波動53% 日均值9,427M；8069 20日+6.2% 60日-16.8% 波動35% 日均值1,038M；2881 20日+2.6% 60日+21.9% 波動26% 日均值2,478M；2882 20日+0.4% 60日+15.2% 波動27% 日均值2,207M；2891 20日+6.4% 60日+18.9% 波動28% 日均值2,274M；2885 20日+2.8% 60日+16.4% 波動24% 日均值1,561M；2887 20日-3.9% 60日+20.5% 波動32% 日均值1,920M；2886 20日+8.0% 60日+15.9% 波動22% 日均值1,096M；2884 20日+7.7% 60日+36.7% 波動22% 日均值1,244M",
@@ -1414,9 +1602,9 @@
       }
     },
     {
-      "obs_id": "O51",
+      "obs_id": "O62",
       "source_ref": [
-        "S12"
+        "S19"
       ],
       "topic": "factor_momentum",
       "statement": "價量因子（截至結算日）：2880 20日+7.8% 60日+26.7% 波動31% 日均值609M；2890 20日+1.4% 60日+17.0% 波動30% 日均值1,029M；2892 20日+6.5% 60日+26.4% 波動22% 日均值777M；5871 20日-4.1% 60日-5.2% 波動17% 日均值717M；2834 20日-2.5% 60日+7.1% 波動17% 日均值376M；2883 20日-6.7% 60日+23.0% 波動33% 日均值1,701M；5880 20日+3.7% 60日+15.0% 波動21% 日均值475M；2801 20日+5.1% 60日+28.3% 波動17% 日均值536M；5876 20日+10.9% 60日+22.1% 波動20% 日均值358M；2812 20日-3.1% 60日-2.4% 波動11% 日均值229M",
@@ -1464,9 +1652,9 @@
       }
     },
     {
-      "obs_id": "O52",
+      "obs_id": "O63",
       "source_ref": [
-        "S12"
+        "S19"
       ],
       "topic": "factor_momentum",
       "statement": "價量因子（截至結算日）：6023 20日-6.6% 60日-5.6% 波動11% 日均值42M；2412 20日+9.3% 60日+12.5% 波動15% 日均值1,563M；3045 20日+6.8% 60日+17.2% 波動23% 日均值1,016M；4904 20日+8.5% 60日+7.0% 波動23% 日均值601M；2360 20日-16.6% 60日-5.7% 波動62% 日均值5,590M；2395 20日-5.1% 60日+16.1% 波動22% 日均值1,508M；1590 20日-11.3% 60日-23.6% 波動30% 日均值977M；1519 20日-14.3% 60日-5.3% 波動45% 日均值1,000M；1504 20日+0.9% 60日+3.3% 波動28% 日均值444M；7750 20日-7.7% 60日-12.1% 波動56% 日均值250M",
@@ -1514,9 +1702,9 @@
       }
     },
     {
-      "obs_id": "O53",
+      "obs_id": "O64",
       "source_ref": [
-        "S12"
+        "S19"
       ],
       "topic": "factor_momentum",
       "statement": "價量因子（截至結算日）：5536 20日-8.7% 60日-28.5% 波動54% 日均值1,351M；2609 20日+1.3% 60日+21.1% 波動33% 日均值1,683M；2603 20日+7.4% 60日+27.8% 波動43% 日均值3,254M；2615 20日+2.1% 60日+42.3% 波動48% 日均值1,633M；2618 20日+0.6% 60日+0.6% 波動23% 日均值745M；2610 20日+1.2% 60日-3.5% 波動19% 日均值345M；3702 20日+0.4% 60日+2.2% 波動28% 日均值1,045M；3036 20日+3.1% 60日+4.7% 波動26% 日均值1,336M；2347 20日+10.6% 60日+12.1% 波動26% 日均值374M；3293 20日+8.7% 60日+9.5% 波動29% 日均值1,658M",
@@ -1564,9 +1752,9 @@
       }
     },
     {
-      "obs_id": "O54",
+      "obs_id": "O65",
       "source_ref": [
-        "S12"
+        "S19"
       ],
       "topic": "factor_momentum",
       "statement": "價量因子（截至結算日）：7828 20日-32.4% 60日-12.9% 波動39% 日均值292M；8932 20日-6.0% 60日-1.6% 波動33% 日均值126M；1303 20日+25.7% 60日+73.0% 波動84% 日均值27,765M；6505 20日+20.3% 60日+36.7% 波動82% 日均值4,675M；1101 20日+15.7% 60日+14.5% 波動37% 日均值1,439M；1301 20日+13.2% 60日+19.6% 波動75% 日均值6,124M；1326 20日+7.7% 60日+12.3% 波動67% 日均值3,143M；2207 20日+1.3% 60日+6.4% 波動19% 日均值131M；2002 20日+4.8% 60日+1.6% 波動14% 日均值796M；1402 20日+3.8% 60日+5.3% 波動22% 日均值219M",
@@ -1614,9 +1802,9 @@
       }
     },
     {
-      "obs_id": "O55",
+      "obs_id": "O66",
       "source_ref": [
-        "S12"
+        "S19"
       ],
       "topic": "factor_momentum",
       "statement": "價量因子（截至結算日）：1605 20日-0.3% 60日+13.3% 波動48% 日均值1,100M；1802 20日+11.6% 60日+27.8% 波動63% 日均值5,893M；8415 20日+5.3% 60日-3.5% 波動14% 日均值13M；6446 20日+0.9% 60日-2.9% 波動38% 日均值2,090M；6919 20日-11.2% 60日-27.6% 波動24% 日均值263M；4123 20日-2.8% 60日-13.6% 波動17% 日均值33M；1216 20日+6.6% 60日+7.4% 波動18% 日均值955M；2912 20日+5.1% 60日-2.0% 波動15% 日均值538M；5903 20日+0.3% 60日+1.6% 波動5% 日均值4M",
@@ -1658,575 +1846,66 @@
         "5903_vol20_pct": 4.9,
         "5903_adv20_twd_m": 4.0
       }
-    },
-    {
-      "obs_id": "O56",
-      "source_ref": [
-        "S13"
-      ],
-      "topic": "factor_fundamental",
-      "statement": "財務指標：2330 ROE 41.9% PE 16.0 營收年增 50.9% 淨利率 51.1%；2454 ROE 23.9% PE 26.9 營收年增 1.2% 淨利率 16.3%；3711 ROE 17.0% PE 22.3 營收年增 26.7% 淨利率 8.5%；2303 ROE 21.3% PE 17.0 營收年增 17.0% 淨利率 33.3%；2408 PE 3.5 營收年增 611.7% 淨利率 59.2%；7769 ROE 48.4% PE 24.4 營收年增 100.4% 淨利率 41.5%；2337 ROE 16.0% PE 2.6 營收年增 181.3% 淨利率 18.3%；6239 ROE 13.8% PE 13.6 營收年增 28.0% 淨利率 8.7%；3443 ROE 43.1% PE 61.2 營收年增 127.6% 淨利率 11.3%；2379 ROE 30.3% PE 20.2 營收年增 17.7% 淨利率 11.0%",
-      "values": {
-        "2330_roe_pct": 41.85,
-        "2330_pe": 16.02,
-        "2330_rev_growth_pct": 50.9,
-        "2330_net_margin_pct": 51.12,
-        "2454_roe_pct": 23.86,
-        "2454_pe": 26.85,
-        "2454_rev_growth_pct": 1.2,
-        "2454_net_margin_pct": 16.28,
-        "3711_roe_pct": 17.01,
-        "3711_pe": 22.28,
-        "3711_rev_growth_pct": 26.7,
-        "3711_net_margin_pct": 8.55,
-        "2303_roe_pct": 21.33,
-        "2303_pe": 17.02,
-        "2303_rev_growth_pct": 17.0,
-        "2303_net_margin_pct": 33.29,
-        "2408_pe": 3.49,
-        "2408_rev_growth_pct": 611.7,
-        "2408_net_margin_pct": 59.24,
-        "7769_roe_pct": 48.42,
-        "7769_pe": 24.41,
-        "7769_rev_growth_pct": 100.4,
-        "7769_net_margin_pct": 41.5,
-        "2337_roe_pct": 16.01,
-        "2337_pe": 2.61,
-        "2337_rev_growth_pct": 181.3,
-        "2337_net_margin_pct": 18.34,
-        "6239_roe_pct": 13.84,
-        "6239_pe": 13.57,
-        "6239_rev_growth_pct": 28.0,
-        "6239_net_margin_pct": 8.7,
-        "3443_roe_pct": 43.09,
-        "3443_pe": 61.22,
-        "3443_rev_growth_pct": 127.6,
-        "3443_net_margin_pct": 11.28,
-        "2379_roe_pct": 30.34,
-        "2379_pe": 20.21,
-        "2379_rev_growth_pct": 17.7,
-        "2379_net_margin_pct": 10.96
-      }
-    },
-    {
-      "obs_id": "O57",
-      "source_ref": [
-        "S13"
-      ],
-      "topic": "factor_fundamental",
-      "statement": "財務指標：3034 ROE 27.1% PE 16.5 營收年增 9.6% 淨利率 17.6%；2449 ROE 17.5% PE 18.2 營收年增 33.2% 淨利率 23.0%；3661 ROE 12.3% PE 18.5 營收年增 -16.5% 淨利率 25.4%；6770 ROE 13.2% PE 7.5 營收年增 53.3% 淨利率 25.6%；6415 ROE 10.5% PE 28.3 營收年增 31.5% 淨利率 18.2%；6789 ROE 9.2% PE 59.9 營收年增 10.1% 淨利率 17.9%；5274 ROE 87.2% PE 46.8 營收年增 72.3% 淨利率 48.1%；6488 ROE 10.8% PE 24.0 營收年增 -5.0% 淨利率 16.9%；8299 ROE 64.1% PE 6.7 營收年增 279.5% 淨利率 32.2%；5347 ROE 10.7% PE 21.4 營收年增 21.8% 淨利率 16.8%",
-      "values": {
-        "3034_roe_pct": 27.12,
-        "3034_pe": 16.46,
-        "3034_rev_growth_pct": 9.6,
-        "3034_net_margin_pct": 17.58,
-        "2449_roe_pct": 17.5,
-        "2449_pe": 18.15,
-        "2449_rev_growth_pct": 33.2,
-        "2449_net_margin_pct": 22.98,
-        "3661_roe_pct": 12.31,
-        "3661_pe": 18.51,
-        "3661_rev_growth_pct": -16.5,
-        "3661_net_margin_pct": 25.42,
-        "6770_roe_pct": 13.25,
-        "6770_pe": 7.51,
-        "6770_rev_growth_pct": 53.3,
-        "6770_net_margin_pct": 25.62,
-        "6415_roe_pct": 10.47,
-        "6415_pe": 28.34,
-        "6415_rev_growth_pct": 31.5,
-        "6415_net_margin_pct": 18.22,
-        "6789_roe_pct": 9.24,
-        "6789_pe": 59.94,
-        "6789_rev_growth_pct": 10.1,
-        "6789_net_margin_pct": 17.86,
-        "5274_roe_pct": 87.24,
-        "5274_pe": 46.81,
-        "5274_rev_growth_pct": 72.3,
-        "5274_net_margin_pct": 48.06,
-        "6488_roe_pct": 10.85,
-        "6488_pe": 24.0,
-        "6488_rev_growth_pct": -5.0,
-        "6488_net_margin_pct": 16.92,
-        "8299_roe_pct": 64.08,
-        "8299_pe": 6.68,
-        "8299_rev_growth_pct": 279.5,
-        "8299_net_margin_pct": 32.21,
-        "5347_roe_pct": 10.72,
-        "5347_pe": 21.39,
-        "5347_rev_growth_pct": 21.8,
-        "5347_net_margin_pct": 16.77
-      }
-    },
-    {
-      "obs_id": "O58",
-      "source_ref": [
-        "S13"
-      ],
-      "topic": "factor_fundamental",
-      "statement": "財務指標：3529 ROE 71.7% PE 53.8 營收年增 17.1% 淨利率 53.1%；3260 ROE 91.3% PE 7.4 營收年增 197.4% 淨利率 27.3%；3105 ROE 7.3% PE 47.5 營收年增 39.1% 淨利率 18.9%；5483 ROE 11.2% PE 11.1 營收年增 4.4% 淨利率 7.3%；6147 ROE 5.9% PE 24.0 營收年增 23.4% 淨利率 13.2%；3264 ROE 20.7% PE 16.9 營收年增 48.5% 淨利率 24.9%；3374 ROE 18.5% PE 48.2 營收年增 42.2% 淨利率 20.9%；6548 ROE 18.4% PE 34.0 營收年增 32.8% 淨利率 14.1%；6182 ROE 1.6% PE 35.7 營收年增 7.4% 淨利率 1.4%；4966 ROE 11.9% PE 12.2 營收年增 3.3% 淨利率 15.0%",
-      "values": {
-        "3529_roe_pct": 71.73,
-        "3529_pe": 53.83,
-        "3529_rev_growth_pct": 17.1,
-        "3529_net_margin_pct": 53.11,
-        "3260_roe_pct": 91.34,
-        "3260_pe": 7.4,
-        "3260_rev_growth_pct": 197.4,
-        "3260_net_margin_pct": 27.3,
-        "3105_roe_pct": 7.35,
-        "3105_pe": 47.52,
-        "3105_rev_growth_pct": 39.1,
-        "3105_net_margin_pct": 18.87,
-        "5483_roe_pct": 11.16,
-        "5483_pe": 11.06,
-        "5483_rev_growth_pct": 4.4,
-        "5483_net_margin_pct": 7.27,
-        "6147_roe_pct": 5.92,
-        "6147_pe": 23.99,
-        "6147_rev_growth_pct": 23.4,
-        "6147_net_margin_pct": 13.22,
-        "3264_roe_pct": 20.66,
-        "3264_pe": 16.89,
-        "3264_rev_growth_pct": 48.5,
-        "3264_net_margin_pct": 24.94,
-        "3374_roe_pct": 18.49,
-        "3374_pe": 48.16,
-        "3374_rev_growth_pct": 42.2,
-        "3374_net_margin_pct": 20.92,
-        "6548_roe_pct": 18.4,
-        "6548_pe": 34.03,
-        "6548_rev_growth_pct": 32.8,
-        "6548_net_margin_pct": 14.07,
-        "6182_roe_pct": 1.63,
-        "6182_pe": 35.67,
-        "6182_rev_growth_pct": 7.4,
-        "6182_net_margin_pct": 1.36,
-        "4966_roe_pct": 11.85,
-        "4966_pe": 12.2,
-        "4966_rev_growth_pct": 3.3,
-        "4966_net_margin_pct": 15.04
-      }
-    },
-    {
-      "obs_id": "O59",
-      "source_ref": [
-        "S13"
-      ],
-      "topic": "factor_fundamental",
-      "statement": "財務指標：4991 ROE 10.5% PE 31.3 營收年增 57.2% 淨利率 14.3%；3227 ROE 13.8% PE 13.6 營收年增 11.3% 淨利率 19.5%；2344 ROE 30.0% PE 2.9 營收年增 184.7% 淨利率 27.8%；2404 ROE 81.3% PE 9.8 營收年增 76.4% 淨利率 14.5%；6515 ROE 31.5% PE 24.3 營收年增 131.4% 淨利率 21.1%；6139 ROE 64.2% PE 7.0 營收年增 70.5% 淨利率 12.1%；6223 ROE 36.2% PE 35.0 營收年增 58.9% 淨利率 27.9%；7734 ROE 21.2% PE 25.4 營收年增 48.3% 淨利率 44.3%；6187 ROE 25.3% PE 30.3 營收年增 54.5% 淨利率 29.8%；6510 ROE 15.1% PE 26.8 營收年增 34.9% 淨利率 25.7%",
-      "values": {
-        "4991_roe_pct": 10.5,
-        "4991_pe": 31.3,
-        "4991_rev_growth_pct": 57.2,
-        "4991_net_margin_pct": 14.3,
-        "3227_roe_pct": 13.78,
-        "3227_pe": 13.58,
-        "3227_rev_growth_pct": 11.3,
-        "3227_net_margin_pct": 19.47,
-        "2344_roe_pct": 29.95,
-        "2344_pe": 2.94,
-        "2344_rev_growth_pct": 184.7,
-        "2344_net_margin_pct": 27.85,
-        "2404_roe_pct": 81.27,
-        "2404_pe": 9.83,
-        "2404_rev_growth_pct": 76.4,
-        "2404_net_margin_pct": 14.54,
-        "6515_roe_pct": 31.53,
-        "6515_pe": 24.28,
-        "6515_rev_growth_pct": 131.4,
-        "6515_net_margin_pct": 21.12,
-        "6139_roe_pct": 64.2,
-        "6139_pe": 7.05,
-        "6139_rev_growth_pct": 70.5,
-        "6139_net_margin_pct": 12.14,
-        "6223_roe_pct": 36.2,
-        "6223_pe": 35.03,
-        "6223_rev_growth_pct": 58.9,
-        "6223_net_margin_pct": 27.87,
-        "7734_roe_pct": 21.22,
-        "7734_pe": 25.37,
-        "7734_rev_growth_pct": 48.3,
-        "7734_net_margin_pct": 44.35,
-        "6187_roe_pct": 25.3,
-        "6187_pe": 30.28,
-        "6187_rev_growth_pct": 54.5,
-        "6187_net_margin_pct": 29.78,
-        "6510_roe_pct": 15.13,
-        "6510_pe": 26.81,
-        "6510_rev_growth_pct": 34.9,
-        "6510_net_margin_pct": 25.69
-      }
-    },
-    {
-      "obs_id": "O60",
-      "source_ref": [
-        "S13"
-      ],
-      "topic": "factor_fundamental",
-      "statement": "財務指標：3131 ROE 43.7% PE 19.6 營收年增 5.9% 淨利率 23.7%；4749 ROE 12.6% PE 33.4 營收年增 6.9% 淨利率 25.8%；1785 ROE 27.5% PE 32.9 營收年增 64.7% 淨利率 7.7%；3680 ROE 12.5% PE 21.8 營收年增 35.4% 淨利率 17.6%；7751 ROE 39.5% PE 20.6 營收年增 63.4% 淨利率 28.9%；4772 ROE 24.6% PE 29.5 營收年增 240.0% 淨利率 35.3%；2317 ROE 13.2% PE 10.6 營收年增 40.8% 淨利率 2.3%；2382 ROE 39.5% PE 10.0 營收年增 105.6% 淨利率 3.0%；6669 ROE 51.1% PE 9.6 營收年增 26.0% 淨利率 5.2%；2357 ROE 18.6% PE 12.4 營收年增 37.1% 淨利率 5.8%",
-      "values": {
-        "3131_roe_pct": 43.66,
-        "3131_pe": 19.58,
-        "3131_rev_growth_pct": 5.9,
-        "3131_net_margin_pct": 23.72,
-        "4749_roe_pct": 12.61,
-        "4749_pe": 33.41,
-        "4749_rev_growth_pct": 6.9,
-        "4749_net_margin_pct": 25.83,
-        "1785_roe_pct": 27.53,
-        "1785_pe": 32.92,
-        "1785_rev_growth_pct": 64.7,
-        "1785_net_margin_pct": 7.68,
-        "3680_roe_pct": 12.55,
-        "3680_pe": 21.78,
-        "3680_rev_growth_pct": 35.4,
-        "3680_net_margin_pct": 17.62,
-        "7751_roe_pct": 39.53,
-        "7751_pe": 20.62,
-        "7751_rev_growth_pct": 63.4,
-        "7751_net_margin_pct": 28.85,
-        "4772_roe_pct": 24.64,
-        "4772_pe": 29.48,
-        "4772_rev_growth_pct": 240.0,
-        "4772_net_margin_pct": 35.3,
-        "2317_roe_pct": 13.15,
-        "2317_pe": 10.6,
-        "2317_rev_growth_pct": 40.8,
-        "2317_net_margin_pct": 2.29,
-        "2382_roe_pct": 39.48,
-        "2382_pe": 10.01,
-        "2382_rev_growth_pct": 105.6,
-        "2382_net_margin_pct": 2.97,
-        "6669_roe_pct": 51.08,
-        "6669_pe": 9.58,
-        "6669_rev_growth_pct": 26.0,
-        "6669_net_margin_pct": 5.23,
-        "2357_roe_pct": 18.57,
-        "2357_pe": 12.43,
-        "2357_rev_growth_pct": 37.1,
-        "2357_net_margin_pct": 5.84
-      }
-    },
-    {
-      "obs_id": "O61",
-      "source_ref": [
-        "S13"
-      ],
-      "topic": "factor_fundamental",
-      "statement": "財務指標：3231 ROE 30.9% PE 7.7 營收年增 62.4% 淨利率 1.3%；2356 ROE 16.6% PE 13.9 營收年增 44.6% 淨利率 1.4%；4938 ROE 9.0% PE 13.9 營收年增 2.7% 淨利率 1.4%；2376 ROE 32.0% PE 9.3 營收年增 41.0% 淨利率 4.3%；2324 ROE 7.2% PE 12.9 營收年增 32.1% 淨利率 1.0%；8210 ROE 48.5% PE 12.0 營收年增 43.7% 淨利率 17.5%；2451 ROE 87.9% PE 4.1 營收年增 482.4% 淨利率 57.2%；2377 ROE 18.1% PE 13.5 營收年增 -18.6% 淨利率 4.4%；5289 ROE 112.7% PE 5.0 營收年增 641.1% 淨利率 39.2%；2308 ROE 30.0% PE 24.5 營收年增 47.7% 淨利率 12.5%",
-      "values": {
-        "3231_roe_pct": 30.94,
-        "3231_pe": 7.69,
-        "3231_rev_growth_pct": 62.4,
-        "3231_net_margin_pct": 1.32,
-        "2356_roe_pct": 16.57,
-        "2356_pe": 13.86,
-        "2356_rev_growth_pct": 44.6,
-        "2356_net_margin_pct": 1.36,
-        "4938_roe_pct": 9.0,
-        "4938_pe": 13.91,
-        "4938_rev_growth_pct": 2.7,
-        "4938_net_margin_pct": 1.45,
-        "2376_roe_pct": 31.97,
-        "2376_pe": 9.34,
-        "2376_rev_growth_pct": 41.0,
-        "2376_net_margin_pct": 4.28,
-        "2324_roe_pct": 7.16,
-        "2324_pe": 12.88,
-        "2324_rev_growth_pct": 32.1,
-        "2324_net_margin_pct": 1.03,
-        "8210_roe_pct": 48.53,
-        "8210_pe": 12.01,
-        "8210_rev_growth_pct": 43.7,
-        "8210_net_margin_pct": 17.49,
-        "2451_roe_pct": 87.87,
-        "2451_pe": 4.06,
-        "2451_rev_growth_pct": 482.4,
-        "2451_net_margin_pct": 57.18,
-        "2377_roe_pct": 18.08,
-        "2377_pe": 13.47,
-        "2377_rev_growth_pct": -18.6,
-        "2377_net_margin_pct": 4.4,
-        "5289_roe_pct": 112.74,
-        "5289_pe": 4.97,
-        "5289_rev_growth_pct": 641.1,
-        "5289_net_margin_pct": 39.21,
-        "2308_roe_pct": 29.97,
-        "2308_pe": 24.48,
-        "2308_rev_growth_pct": 47.7,
-        "2308_net_margin_pct": 12.47
-      }
-    },
-    {
-      "obs_id": "O62",
-      "source_ref": [
-        "S13"
-      ],
-      "topic": "factor_fundamental",
-      "statement": "財務指標：2327 ROE 18.7% PE 16.1 營收年增 35.7% 淨利率 20.1%；3017 ROE 66.8% PE 19.4 營收年增 66.0% 淨利率 15.9%；2059 ROE 62.8% PE 19.6 營收年增 156.1% 淨利率 67.5%；3533 ROE 24.4% PE 15.7 營收年增 14.8% 淨利率 25.2%；3653 ROE 33.3% PE 38.9 營收年增 40.4% 淨利率 28.4%；2301 ROE 21.9% PE 17.0 營收年增 30.4% 淨利率 10.5%；3665 ROE 24.7% PE 14.6 營收年增 37.5% 淨利率 12.9%；3324 ROE 38.2% PE 17.1 營收年增 64.0% 淨利率 13.1%；6121 ROE 17.3% PE 9.9 營收年增 6.6% 淨利率 7.3%；3211 ROE 12.9% PE 15.5 營收年增 7.5% 淨利率 7.9%",
-      "values": {
-        "2327_roe_pct": 18.72,
-        "2327_pe": 16.06,
-        "2327_rev_growth_pct": 35.7,
-        "2327_net_margin_pct": 20.13,
-        "3017_roe_pct": 66.78,
-        "3017_pe": 19.41,
-        "3017_rev_growth_pct": 66.0,
-        "3017_net_margin_pct": 15.94,
-        "2059_roe_pct": 62.84,
-        "2059_pe": 19.65,
-        "2059_rev_growth_pct": 156.1,
-        "2059_net_margin_pct": 67.53,
-        "3533_roe_pct": 24.44,
-        "3533_pe": 15.68,
-        "3533_rev_growth_pct": 14.8,
-        "3533_net_margin_pct": 25.21,
-        "3653_roe_pct": 33.27,
-        "3653_pe": 38.9,
-        "3653_rev_growth_pct": 40.4,
-        "3653_net_margin_pct": 28.37,
-        "2301_roe_pct": 21.89,
-        "2301_pe": 16.95,
-        "2301_rev_growth_pct": 30.4,
-        "2301_net_margin_pct": 10.46,
-        "3665_roe_pct": 24.66,
-        "3665_pe": 14.58,
-        "3665_rev_growth_pct": 37.5,
-        "3665_net_margin_pct": 12.9,
-        "3324_roe_pct": 38.18,
-        "3324_pe": 17.08,
-        "3324_rev_growth_pct": 64.0,
-        "3324_net_margin_pct": 13.1,
-        "6121_roe_pct": 17.33,
-        "6121_pe": 9.88,
-        "6121_rev_growth_pct": 6.6,
-        "6121_net_margin_pct": 7.33,
-        "3211_roe_pct": 12.9,
-        "3211_pe": 15.5,
-        "3211_rev_growth_pct": 7.5,
-        "3211_net_margin_pct": 7.93
-      }
-    },
-    {
-      "obs_id": "O63",
-      "source_ref": [
-        "S13"
-      ],
-      "topic": "factor_fundamental",
-      "statement": "財務指標：6290 ROE 22.2% PE 20.3 營收年增 3.2% 淨利率 15.2%；6584 ROE 25.5% PE 18.5 營收年增 40.8% 淨利率 24.6%；2383 ROE 48.4% PE 21.5 營收年增 110.0% 淨利率 17.6%；3037 ROE 22.6% PE 27.4 營收年增 32.1% 淨利率 16.0%；8046 ROE 11.9% PE 23.9 營收年增 41.7% 淨利率 11.7%；2313 ROE 16.5% PE 16.7 營收年增 9.8% 淨利率 9.2%；3044 ROE 24.4% PE 13.9 營收年增 38.8% 淨利率 14.6%；4958 ROE 8.1% PE 21.6 營收年增 26.8% 淨利率 4.8%；2368 ROE 46.0% PE 16.9 營收年增 75.3% 淨利率 18.6%；3189 ROE 8.9% PE 31.5 營收年增 30.7% 淨利率 6.3%",
-      "values": {
-        "6290_roe_pct": 22.25,
-        "6290_pe": 20.32,
-        "6290_rev_growth_pct": 3.2,
-        "6290_net_margin_pct": 15.16,
-        "6584_roe_pct": 25.47,
-        "6584_pe": 18.54,
-        "6584_rev_growth_pct": 40.8,
-        "6584_net_margin_pct": 24.65,
-        "2383_roe_pct": 48.38,
-        "2383_pe": 21.46,
-        "2383_rev_growth_pct": 110.0,
-        "2383_net_margin_pct": 17.57,
-        "3037_roe_pct": 22.65,
-        "3037_pe": 27.37,
-        "3037_rev_growth_pct": 32.1,
-        "3037_net_margin_pct": 16.03,
-        "8046_roe_pct": 11.88,
-        "8046_pe": 23.91,
-        "8046_rev_growth_pct": 41.7,
-        "8046_net_margin_pct": 11.72,
-        "2313_roe_pct": 16.54,
-        "2313_pe": 16.69,
-        "2313_rev_growth_pct": 9.8,
-        "2313_net_margin_pct": 9.19,
-        "3044_roe_pct": 24.43,
-        "3044_pe": 13.89,
-        "3044_rev_growth_pct": 38.8,
-        "3044_net_margin_pct": 14.57,
-        "4958_roe_pct": 8.12,
-        "4958_pe": 21.63,
-        "4958_rev_growth_pct": 26.8,
-        "4958_net_margin_pct": 4.84,
-        "2368_roe_pct": 45.95,
-        "2368_pe": 16.94,
-        "2368_rev_growth_pct": 75.3,
-        "2368_net_margin_pct": 18.57,
-        "3189_roe_pct": 8.88,
-        "3189_pe": 31.51,
-        "3189_rev_growth_pct": 30.7,
-        "3189_net_margin_pct": 6.35
-      }
-    },
-    {
-      "obs_id": "O64",
-      "source_ref": [
-        "S13"
-      ],
-      "topic": "factor_fundamental",
-      "statement": "財務指標：6274 ROE 30.7% PE 17.8 營收年增 110.9% 淨利率 13.7%；8358 ROE 21.4% PE 20.0 營收年增 40.1% 淨利率 17.9%；1815 ROE 18.9% PE 19.1 營收年增 49.8% 淨利率 28.1%；2345 ROE 65.6% PE 15.5 營收年增 57.6% 淨利率 11.5%；3081 ROE 25.0% PE 60.3 營收年增 120.8% 淨利率 32.4%；3491 ROE 24.6% PE 37.0 營收年增 75.6% 淨利率 26.7%；3363 ROE -3.2% PE 46.2 營收年增 -26.3% 淨利率 -7.8%；4979 ROE 22.0% PE 31.8 營收年增 18.5% 淨利率 18.5%；3163 ROE 27.0% PE 66.3 營收年增 9.9% 淨利率 32.7%",
-      "values": {
-        "6274_roe_pct": 30.74,
-        "6274_pe": 17.84,
-        "6274_rev_growth_pct": 110.9,
-        "6274_net_margin_pct": 13.69,
-        "8358_roe_pct": 21.38,
-        "8358_pe": 19.99,
-        "8358_rev_growth_pct": 40.1,
-        "8358_net_margin_pct": 17.87,
-        "1815_roe_pct": 18.92,
-        "1815_pe": 19.08,
-        "1815_rev_growth_pct": 49.8,
-        "1815_net_margin_pct": 28.11,
-        "2345_roe_pct": 65.58,
-        "2345_pe": 15.48,
-        "2345_rev_growth_pct": 57.6,
-        "2345_net_margin_pct": 11.45,
-        "3081_roe_pct": 25.01,
-        "3081_pe": 60.29,
-        "3081_rev_growth_pct": 120.8,
-        "3081_net_margin_pct": 32.38,
-        "3491_roe_pct": 24.64,
-        "3491_pe": 36.95,
-        "3491_rev_growth_pct": 75.6,
-        "3491_net_margin_pct": 26.7,
-        "3363_roe_pct": -3.24,
-        "3363_pe": 46.2,
-        "3363_rev_growth_pct": -26.3,
-        "3363_net_margin_pct": -7.82,
-        "4979_roe_pct": 22.03,
-        "4979_pe": 31.85,
-        "4979_rev_growth_pct": 18.5,
-        "4979_net_margin_pct": 18.46,
-        "3163_roe_pct": 26.97,
-        "3163_pe": 66.27,
-        "3163_rev_growth_pct": 9.9,
-        "3163_net_margin_pct": 32.74
-      }
     }
   ],
   "market_view": {
     "basis_refs": [
       "O1",
-      "O2",
-      "O9",
-      "O10",
-      "O32",
       "O33",
-      "O35"
+      "O35",
+      "O38"
     ],
-    "logic": "美股那斯達克重挫2.60%，VIX恐慌指數飆升14.09%至19.03，美債殖利率維持5.13%高檔，引發台股全面回檔。台股漲跌家數比疲弱（僅31家上漲、115家下跌），半導體與電子零組件等科技主題重挫逾3.7%，資金明顯避險流向通信網路（+2.40%）與金融股（+0.63%）。因初始帳戶全數為現金，需建構投資組合，策略採防禦型配置，聚焦核心具高ROE與動能韌性標的，並搭配防禦型高股息與低波動資產降低回撤風險。",
+    "logic": "台股加權指數重挫1.81%，市場漲跌家數結構極度疲弱（僅31檔上漲、115檔下跌），搭配美股科技股拉回與VIX恐慌指數急遽升溫14.09%，確認宏觀處於 risk_off 避險體制。因本帳戶處於初始現金建倉階段，採取防禦性建倉節奏（stance: defensive，intent: increase），將投資比重設定於84%，預留16%現金以因應後續市場波動。",
     "regime": "risk_off",
     "stance": "defensive",
     "posture": {
       "net_exposure_intent": "increase",
       "target_cash_pct_range": [
-        0.05,
-        0.09
+        0.12,
+        0.2
       ]
     },
-    "counter_evidence": "總經與AI資本支出長期數據本期未全面揭露，主要依據美股行情與台股盤面價量數據判斷。",
+    "counter_evidence": "費城半導體指數小幅收漲0.76%且台積電ADR上揚1.05%，顯示半導體龍頭仍有特定買盤支撐。",
     "confidence": 0.75
   },
   "inferences": [
     {
       "inf_id": "I1",
       "premise_refs": [
-        "O17",
-        "O41",
-        "O56"
+        "O1",
+        "O33",
+        "O35",
+        "O38"
       ],
-      "logic": "台積電（2330）為AI與半導體產業核心，ROE高達41.9%、淨利率51.1%，營收年增50.9%，近60日動能維持正值且波動度僅19%，在科技股大跌中具極佳防禦力與流動性，適合作為投資組合核心基石。",
-      "conclusion": "配置台積電作為核心持股第一大部位。",
-      "counter_evidence": "近20日動能微幅拉回-3.8%，受外資調節壓力影響。",
-      "confidence": 0.85
+      "logic": "市場整體走弱，廣度指標偏向空方，VIX波動率上升，整體風險偏好受到壓抑，應嚴格執行曝險控管並將現金比率維持於16%。",
+      "conclusion": "總體環境進入 risk_off 體制，應採取防禦性配置策略，限制單一產業過度集中，並保持審慎建倉規模。",
+      "counter_evidence": "美股費半指數與台積電ADR逆勢收紅。",
+      "confidence": 0.75
     },
     {
       "inf_id": "I2",
       "premise_refs": [
-        "O18",
-        "O19",
-        "O42",
-        "O43",
-        "O57",
-        "O58"
+        "O2",
+        "O4",
+        "O6",
+        "O40"
       ],
-      "logic": "半導體次產業中，聯詠（3034）與瑞昱（2379）近20日及60日價格動能均為正，且波動度維持在30%以下低檔，ROE分別達27.1%與30.3%，評價適中；精材（3374）60日動能強勁（+34.3%），營收年增42.2%，具備先進封裝成長潛力。",
-      "conclusion": "配置穩健型IC設計與封測成長股。",
-      "counter_evidence": "聯詠單月營收年增僅9.6%，成長速度較部分高速運算晶片放緩。",
-      "confidence": 0.75
+      "logic": "雖然半導體與PCB族群單日回檔明顯，但次世代AI伺服器與液冷機架平台等長期產業趨勢確立，且策略必須符合核心主題配置至少62%之硬性規定，應以評分優異之半導體、PCB及伺服器零組件龍頭為核心主軸。",
+      "conclusion": "以台積電為核心定錨，搭配景碩、健策、欣興、和碩、華碩等優質硬體供應鏈個股，建構佔投組67%之核心主題部位。",
+      "counter_evidence": "半導體設備與光通訊族群短線跌幅逾4%至6%，顯示硬體供應鏈短期波動仍高。",
+      "confidence": 0.72
     },
     {
       "inf_id": "I3",
       "premise_refs": [
-        "O21",
-        "O22",
-        "O45",
-        "O46",
-        "O60",
-        "O61"
+        "O9",
+        "O10",
+        "O16"
       ],
-      "logic": "伺服器與組裝主題中，緯創（3231）、華碩（2357）、微星（2377）與和碩（4938）20日與60日動能均維持正向成長。緯創ROE達30.9%、營收年增62.4%、PE僅7.7倍；華碩與微星具品牌與伺服器雙引擎，動能穩健且波動度偏低。",
-      "conclusion": "挑選具獲利成長與估值優勢之伺服器組裝與品牌廠。",
-      "counter_evidence": "代工廠淨利率普遍較低（1.3%~5.8%），對供應鏈成本變動敏感。",
-      "confidence": 0.75
-    },
-    {
-      "inf_id": "I4",
-      "premise_refs": [
-        "O23",
-        "O47",
-        "O62"
-      ],
-      "logic": "散熱與電子零組件為AI運算關鍵，奇鋐（3017）、健策（3653）及雙鴻（3324）60日價格動能極為強勁（+31.8%~+72.2%），且ROE皆達33%~66%，營收年增40%~66%，顯示基本面強烈受惠AI液冷升級需求。",
-      "conclusion": "配置高成長之AI散熱與連接機構領導廠商。",
-      "counter_evidence": "健策近期單日跌幅較大（-7.12%），波動度偏高（67%）。",
-      "confidence": 0.7
-    },
-    {
-      "inf_id": "I5",
-      "premise_refs": [
-        "O24",
-        "O25",
-        "O48",
-        "O49",
-        "O63",
-        "O64"
-      ],
-      "logic": "PCB與載板材料族群展現高度強勢動能，台光電（2383）、欣興（3037）、健鼎（3044）、金像電（2368）、臻鼎-KY（4958）、景碩（3189）及富喬（1815）在20日與60日動能均維持正成長，其中台光電單日逆勢上漲1.60%，ROE達48.4%，營收年增110%。",
-      "conclusion": "重點配置具強勁動能與產業升級優勢之PCB/CCL族群。",
-      "counter_evidence": "部分個股波動度較高（60%~78%），需分散配置以控制風險。",
-      "confidence": 0.8
-    },
-    {
-      "inf_id": "I6",
-      "premise_refs": [
-        "O20",
-        "O21",
-        "O44",
-        "O45",
-        "O59",
-        "O60"
-      ],
-      "logic": "半導體設備與特化材料中，萬潤（6187）與台特化（4772）20日與60日動能維持正值，萬潤ROE達25.3%、營收年增54.5%，台特化營收年增240%、ROE達24.6%，受惠先進製程擴產需求。",
-      "conclusion": "配置具動能支撐之設備與化學材料龍頭。",
-      "counter_evidence": "萬潤波動度達85%，短線震盪劇烈。",
-      "confidence": 0.65
-    },
-    {
-      "inf_id": "I7",
-      "premise_refs": [
-        "O26",
-        "O27",
-        "O28",
-        "O50",
-        "O51",
-        "O52"
-      ],
-      "logic": "通信網路與金融類股在大盤下挫中發揮強大防禦屬性。中華電（2412）與台灣大（3045）單日漲幅約2%，20日與60日動能均呈正向，波動度低；兆豐金（2886）、玉山金（2884）及華南金（2880）單日逆勢走揚且中長期動能穩定，適合作為防禦配置。",
-      "conclusion": "建立防禦袖組合（電信與優質金融），以平抑整體投組波動度。",
-      "counter_evidence": "防禦型類股非科技核心主題，配置比重不宜超過上限限制。",
-      "confidence": 0.85
+      "logic": "金融保險、通信網路與民生消費類股逆勢上揚，在市場回檔期展現顯著防禦抗跌屬性，具備低波動與穩定現金流優勢。",
+      "conclusion": "配置玉山金、中信金、第一金、富邦金、中華電與統一等防禦型非核心標的合計17%，以增強投組下檔防禦與平衡波動。",
+      "counter_evidence": null,
+      "confidence": 0.78
     }
   ],
   "decisions": [
@@ -2234,249 +1913,263 @@
       "decision_id": "D1",
       "ticker": "2330",
       "action": "BUY",
-      "target_weight": 0.12,
+      "target_weight": 0.08,
       "inference_refs": [
-        "I1"
+        "I1",
+        "I2"
       ],
-      "risk_check": "目標權重 12.00% ≤ 內部上限 20.0%（官方 25%）"
+      "risk_check": "目標權重 8.00% ≤ 內部上限 20.0%（官方 25%）"
     },
     {
       "decision_id": "D2",
-      "ticker": "3034",
+      "ticker": "3189",
       "action": "BUY",
       "target_weight": 0.04,
       "inference_refs": [
+        "I1",
         "I2"
       ],
       "risk_check": "目標權重 4.00% ≤ 內部上限 8.0%（官方 10%）"
     },
     {
       "decision_id": "D3",
-      "ticker": "2379",
-      "action": "BUY",
-      "target_weight": 0.04,
-      "inference_refs": [
-        "I2"
-      ],
-      "risk_check": "目標權重 4.00% ≤ 內部上限 8.0%（官方 10%）"
-    },
-    {
-      "decision_id": "D4",
-      "ticker": "3374",
+      "ticker": "1815",
       "action": "BUY",
       "target_weight": 0.035,
       "inference_refs": [
+        "I1",
         "I2"
       ],
       "risk_check": "目標權重 3.50% ≤ 內部上限 8.0%（官方 10%）"
     },
     {
-      "decision_id": "D5",
-      "ticker": "2357",
+      "decision_id": "D4",
+      "ticker": "4958",
       "action": "BUY",
       "target_weight": 0.04,
       "inference_refs": [
-        "I3"
+        "I1",
+        "I2"
+      ],
+      "risk_check": "目標權重 4.00% ≤ 內部上限 8.0%（官方 10%）"
+    },
+    {
+      "decision_id": "D5",
+      "ticker": "3653",
+      "action": "BUY",
+      "target_weight": 0.04,
+      "inference_refs": [
+        "I1",
+        "I2"
       ],
       "risk_check": "目標權重 4.00% ≤ 內部上限 8.0%（官方 10%）"
     },
     {
       "decision_id": "D6",
-      "ticker": "3231",
-      "action": "BUY",
-      "target_weight": 0.04,
-      "inference_refs": [
-        "I3"
-      ],
-      "risk_check": "目標權重 4.00% ≤ 內部上限 8.0%（官方 10%）"
-    },
-    {
-      "decision_id": "D7",
-      "ticker": "4938",
-      "action": "BUY",
-      "target_weight": 0.03,
-      "inference_refs": [
-        "I3"
-      ],
-      "risk_check": "目標權重 3.00% ≤ 內部上限 8.0%（官方 10%）"
-    },
-    {
-      "decision_id": "D8",
-      "ticker": "2377",
+      "ticker": "8046",
       "action": "BUY",
       "target_weight": 0.035,
       "inference_refs": [
-        "I3"
+        "I1",
+        "I2"
+      ],
+      "risk_check": "目標權重 3.50% ≤ 內部上限 8.0%（官方 10%）"
+    },
+    {
+      "decision_id": "D7",
+      "ticker": "3044",
+      "action": "BUY",
+      "target_weight": 0.035,
+      "inference_refs": [
+        "I1",
+        "I2"
+      ],
+      "risk_check": "目標權重 3.50% ≤ 內部上限 8.0%（官方 10%）"
+    },
+    {
+      "decision_id": "D8",
+      "ticker": "3037",
+      "action": "BUY",
+      "target_weight": 0.035,
+      "inference_refs": [
+        "I1",
+        "I2"
       ],
       "risk_check": "目標權重 3.50% ≤ 內部上限 8.0%（官方 10%）"
     },
     {
       "decision_id": "D9",
-      "ticker": "3653",
-      "action": "BUY",
-      "target_weight": 0.04,
-      "inference_refs": [
-        "I4"
-      ],
-      "risk_check": "目標權重 4.00% ≤ 內部上限 8.0%（官方 10%）"
-    },
-    {
-      "decision_id": "D10",
-      "ticker": "3017",
+      "ticker": "2368",
       "action": "BUY",
       "target_weight": 0.035,
       "inference_refs": [
-        "I4"
+        "I1",
+        "I2"
+      ],
+      "risk_check": "目標權重 3.50% ≤ 內部上限 8.0%（官方 10%）"
+    },
+    {
+      "decision_id": "D10",
+      "ticker": "4938",
+      "action": "BUY",
+      "target_weight": 0.035,
+      "inference_refs": [
+        "I1",
+        "I2"
       ],
       "risk_check": "目標權重 3.50% ≤ 內部上限 8.0%（官方 10%）"
     },
     {
       "decision_id": "D11",
-      "ticker": "3324",
+      "ticker": "2357",
+      "action": "BUY",
+      "target_weight": 0.035,
+      "inference_refs": [
+        "I1",
+        "I2"
+      ],
+      "risk_check": "目標權重 3.50% ≤ 內部上限 8.0%（官方 10%）"
+    },
+    {
+      "decision_id": "D12",
+      "ticker": "3443",
+      "action": "BUY",
+      "target_weight": 0.035,
+      "inference_refs": [
+        "I1",
+        "I2"
+      ],
+      "risk_check": "目標權重 3.50% ≤ 內部上限 8.0%（官方 10%）"
+    },
+    {
+      "decision_id": "D13",
+      "ticker": "2377",
+      "action": "BUY",
+      "target_weight": 0.035,
+      "inference_refs": [
+        "I1",
+        "I2"
+      ],
+      "risk_check": "目標權重 3.50% ≤ 內部上限 8.0%（官方 10%）"
+    },
+    {
+      "decision_id": "D14",
+      "ticker": "3034",
+      "action": "BUY",
+      "target_weight": 0.035,
+      "inference_refs": [
+        "I1",
+        "I2"
+      ],
+      "risk_check": "目標權重 3.50% ≤ 內部上限 8.0%（官方 10%）"
+    },
+    {
+      "decision_id": "D15",
+      "ticker": "3017",
       "action": "BUY",
       "target_weight": 0.03,
       "inference_refs": [
-        "I4"
+        "I1",
+        "I2"
       ],
       "risk_check": "目標權重 3.00% ≤ 內部上限 8.0%（官方 10%）"
     },
     {
-      "decision_id": "D12",
-      "ticker": "2383",
-      "action": "BUY",
-      "target_weight": 0.04,
-      "inference_refs": [
-        "I5"
-      ],
-      "risk_check": "目標權重 4.00% ≤ 內部上限 8.0%（官方 10%）"
-    },
-    {
-      "decision_id": "D13",
-      "ticker": "3037",
-      "action": "BUY",
-      "target_weight": 0.04,
-      "inference_refs": [
-        "I5"
-      ],
-      "risk_check": "目標權重 4.00% ≤ 內部上限 8.0%（官方 10%）"
-    },
-    {
-      "decision_id": "D14",
-      "ticker": "3044",
-      "action": "BUY",
-      "target_weight": 0.04,
-      "inference_refs": [
-        "I5"
-      ],
-      "risk_check": "目標權重 4.00% ≤ 內部上限 8.0%（官方 10%）"
-    },
-    {
-      "decision_id": "D15",
-      "ticker": "2368",
-      "action": "BUY",
-      "target_weight": 0.04,
-      "inference_refs": [
-        "I5"
-      ],
-      "risk_check": "目標權重 4.00% ≤ 內部上限 8.0%（官方 10%）"
-    },
-    {
       "decision_id": "D16",
-      "ticker": "4958",
+      "ticker": "3374",
       "action": "BUY",
       "target_weight": 0.03,
       "inference_refs": [
-        "I5"
+        "I1",
+        "I2"
       ],
       "risk_check": "目標權重 3.00% ≤ 內部上限 8.0%（官方 10%）"
     },
     {
       "decision_id": "D17",
-      "ticker": "3189",
+      "ticker": "2379",
       "action": "BUY",
       "target_weight": 0.03,
       "inference_refs": [
-        "I5"
+        "I1",
+        "I2"
       ],
       "risk_check": "目標權重 3.00% ≤ 內部上限 8.0%（官方 10%）"
     },
     {
       "decision_id": "D18",
-      "ticker": "1815",
+      "ticker": "3711",
       "action": "BUY",
       "target_weight": 0.03,
       "inference_refs": [
-        "I5"
+        "I1",
+        "I2"
       ],
       "risk_check": "目標權重 3.00% ≤ 內部上限 8.0%（官方 10%）"
     },
     {
       "decision_id": "D19",
-      "ticker": "6187",
+      "ticker": "2884",
       "action": "BUY",
       "target_weight": 0.03,
       "inference_refs": [
-        "I6"
+        "I1",
+        "I3"
       ],
       "risk_check": "目標權重 3.00% ≤ 內部上限 8.0%（官方 10%）"
     },
     {
       "decision_id": "D20",
-      "ticker": "4772",
+      "ticker": "2891",
       "action": "BUY",
       "target_weight": 0.03,
       "inference_refs": [
-        "I6"
+        "I1",
+        "I3"
       ],
       "risk_check": "目標權重 3.00% ≤ 內部上限 8.0%（官方 10%）"
     },
     {
       "decision_id": "D21",
-      "ticker": "2412",
+      "ticker": "2892",
       "action": "BUY",
       "target_weight": 0.03,
       "inference_refs": [
-        "I7"
+        "I1",
+        "I3"
       ],
       "risk_check": "目標權重 3.00% ≤ 內部上限 8.0%（官方 10%）"
     },
     {
       "decision_id": "D22",
-      "ticker": "3045",
-      "action": "BUY",
-      "target_weight": 0.025,
-      "inference_refs": [
-        "I7"
-      ],
-      "risk_check": "目標權重 2.50% ≤ 內部上限 8.0%（官方 10%）"
-    },
-    {
-      "decision_id": "D23",
-      "ticker": "2886",
+      "ticker": "2412",
       "action": "BUY",
       "target_weight": 0.03,
       "inference_refs": [
-        "I7"
+        "I1",
+        "I3"
       ],
       "risk_check": "目標權重 3.00% ≤ 內部上限 8.0%（官方 10%）"
     },
     {
-      "decision_id": "D24",
-      "ticker": "2884",
+      "decision_id": "D23",
+      "ticker": "2881",
       "action": "BUY",
       "target_weight": 0.025,
       "inference_refs": [
-        "I7"
+        "I1",
+        "I3"
       ],
       "risk_check": "目標權重 2.50% ≤ 內部上限 8.0%（官方 10%）"
     },
     {
-      "decision_id": "D25",
-      "ticker": "2880",
+      "decision_id": "D24",
+      "ticker": "1216",
       "action": "BUY",
       "target_weight": 0.025,
       "inference_refs": [
-        "I7"
+        "I1",
+        "I3"
       ],
       "risk_check": "目標權重 2.50% ≤ 內部上限 8.0%（官方 10%）"
     }
@@ -2486,187 +2179,180 @@
     {
       "ticker": "2330",
       "side": "BUY",
-      "shares": 50000,
+      "shares": 33000,
       "decision_ref": "D1",
-      "derivation_detail": "target_shares = floor(0.12×1,000,000,000 / 2385.0 / 1000)×1000 = 50,000；現持 0 → BUY 50,000"
+      "derivation_detail": "target_shares = floor(0.08×1,000,000,000 / 2385.0 / 1000)×1000 = 33,000；現持 0 → BUY 33,000"
     },
     {
-      "ticker": "3034",
+      "ticker": "3189",
       "side": "BUY",
-      "shares": 68000,
+      "shares": 40000,
       "decision_ref": "D2",
-      "derivation_detail": "target_shares = floor(0.04×1,000,000,000 / 583.0 / 1000)×1000 = 68,000；現持 0 → BUY 68,000"
+      "derivation_detail": "target_shares = floor(0.04×1,000,000,000 / 986.0 / 1000)×1000 = 40,000；現持 0 → BUY 40,000"
     },
     {
-      "ticker": "2379",
+      "ticker": "1815",
       "side": "BUY",
-      "shares": 51000,
+      "shares": 251000,
       "decision_ref": "D3",
-      "derivation_detail": "target_shares = floor(0.04×1,000,000,000 / 772.0 / 1000)×1000 = 51,000；現持 0 → BUY 51,000"
+      "derivation_detail": "target_shares = floor(0.035×1,000,000,000 / 139.0 / 1000)×1000 = 251,000；現持 0 → BUY 251,000"
     },
     {
-      "ticker": "3374",
+      "ticker": "4958",
       "side": "BUY",
-      "shares": 75000,
+      "shares": 70000,
       "decision_ref": "D4",
-      "derivation_detail": "target_shares = floor(0.035×1,000,000,000 / 463.5 / 1000)×1000 = 75,000；現持 0 → BUY 75,000"
-    },
-    {
-      "ticker": "2357",
-      "side": "BUY",
-      "shares": 42000,
-      "decision_ref": "D5",
-      "derivation_detail": "target_shares = floor(0.04×1,000,000,000 / 946.0 / 1000)×1000 = 42,000；現持 0 → BUY 42,000"
-    },
-    {
-      "ticker": "3231",
-      "side": "BUY",
-      "shares": 210000,
-      "decision_ref": "D6",
-      "derivation_detail": "target_shares = floor(0.04×1,000,000,000 / 190.0 / 1000)×1000 = 210,000；現持 0 → BUY 210,000"
-    },
-    {
-      "ticker": "4938",
-      "side": "BUY",
-      "shares": 289000,
-      "decision_ref": "D7",
-      "derivation_detail": "target_shares = floor(0.03×1,000,000,000 / 103.5 / 1000)×1000 = 289,000；現持 0 → BUY 289,000"
-    },
-    {
-      "ticker": "2377",
-      "side": "BUY",
-      "shares": 214000,
-      "decision_ref": "D8",
-      "derivation_detail": "target_shares = floor(0.035×1,000,000,000 / 163.0 / 1000)×1000 = 214,000；現持 0 → BUY 214,000"
+      "derivation_detail": "target_shares = floor(0.04×1,000,000,000 / 567.0 / 1000)×1000 = 70,000；現持 0 → BUY 70,000"
     },
     {
       "ticker": "3653",
       "side": "BUY",
       "shares": 6000,
-      "decision_ref": "D9",
+      "decision_ref": "D5",
       "derivation_detail": "target_shares = floor(0.04×1,000,000,000 / 6070.0 / 1000)×1000 = 6,000；現持 0 → BUY 6,000"
     },
     {
-      "ticker": "3017",
+      "ticker": "8046",
       "side": "BUY",
-      "shares": 11000,
-      "decision_ref": "D10",
-      "derivation_detail": "target_shares = floor(0.035×1,000,000,000 / 3145.0 / 1000)×1000 = 11,000；現持 0 → BUY 11,000"
-    },
-    {
-      "ticker": "3324",
-      "side": "BUY",
-      "shares": 22000,
-      "decision_ref": "D11",
-      "derivation_detail": "target_shares = floor(0.03×1,000,000,000 / 1360.0 / 1000)×1000 = 22,000；現持 0 → BUY 22,000"
-    },
-    {
-      "ticker": "2383",
-      "side": "BUY",
-      "shares": 7000,
-      "decision_ref": "D12",
-      "derivation_detail": "target_shares = floor(0.04×1,000,000,000 / 5070.0 / 1000)×1000 = 7,000；現持 0 → BUY 7,000"
-    },
-    {
-      "ticker": "3037",
-      "side": "BUY",
-      "shares": 36000,
-      "decision_ref": "D13",
-      "derivation_detail": "target_shares = floor(0.04×1,000,000,000 / 1085.0 / 1000)×1000 = 36,000；現持 0 → BUY 36,000"
+      "shares": 27000,
+      "decision_ref": "D6",
+      "derivation_detail": "target_shares = floor(0.035×1,000,000,000 / 1265.0 / 1000)×1000 = 27,000；現持 0 → BUY 27,000"
     },
     {
       "ticker": "3044",
       "side": "BUY",
-      "shares": 71000,
-      "decision_ref": "D14",
-      "derivation_detail": "target_shares = floor(0.04×1,000,000,000 / 556.0 / 1000)×1000 = 71,000；現持 0 → BUY 71,000"
+      "shares": 62000,
+      "decision_ref": "D7",
+      "derivation_detail": "target_shares = floor(0.035×1,000,000,000 / 556.0 / 1000)×1000 = 62,000；現持 0 → BUY 62,000"
+    },
+    {
+      "ticker": "3037",
+      "side": "BUY",
+      "shares": 32000,
+      "decision_ref": "D8",
+      "derivation_detail": "target_shares = floor(0.035×1,000,000,000 / 1085.0 / 1000)×1000 = 32,000；現持 0 → BUY 32,000"
     },
     {
       "ticker": "2368",
       "side": "BUY",
-      "shares": 35000,
+      "shares": 31000,
+      "decision_ref": "D9",
+      "derivation_detail": "target_shares = floor(0.035×1,000,000,000 / 1115.0 / 1000)×1000 = 31,000；現持 0 → BUY 31,000"
+    },
+    {
+      "ticker": "4938",
+      "side": "BUY",
+      "shares": 338000,
+      "decision_ref": "D10",
+      "derivation_detail": "target_shares = floor(0.035×1,000,000,000 / 103.5 / 1000)×1000 = 338,000；現持 0 → BUY 338,000"
+    },
+    {
+      "ticker": "2357",
+      "side": "BUY",
+      "shares": 36000,
+      "decision_ref": "D11",
+      "derivation_detail": "target_shares = floor(0.035×1,000,000,000 / 946.0 / 1000)×1000 = 36,000；現持 0 → BUY 36,000"
+    },
+    {
+      "ticker": "3443",
+      "side": "BUY",
+      "shares": 4000,
+      "decision_ref": "D12",
+      "derivation_detail": "target_shares = floor(0.035×1,000,000,000 / 7585.0 / 1000)×1000 = 4,000；現持 0 → BUY 4,000"
+    },
+    {
+      "ticker": "2377",
+      "side": "BUY",
+      "shares": 214000,
+      "decision_ref": "D13",
+      "derivation_detail": "target_shares = floor(0.035×1,000,000,000 / 163.0 / 1000)×1000 = 214,000；現持 0 → BUY 214,000"
+    },
+    {
+      "ticker": "3034",
+      "side": "BUY",
+      "shares": 60000,
+      "decision_ref": "D14",
+      "derivation_detail": "target_shares = floor(0.035×1,000,000,000 / 583.0 / 1000)×1000 = 60,000；現持 0 → BUY 60,000"
+    },
+    {
+      "ticker": "3017",
+      "side": "BUY",
+      "shares": 9000,
       "decision_ref": "D15",
-      "derivation_detail": "target_shares = floor(0.04×1,000,000,000 / 1115.0 / 1000)×1000 = 35,000；現持 0 → BUY 35,000"
+      "derivation_detail": "target_shares = floor(0.03×1,000,000,000 / 3145.0 / 1000)×1000 = 9,000；現持 0 → BUY 9,000"
     },
     {
-      "ticker": "4958",
+      "ticker": "3374",
       "side": "BUY",
-      "shares": 52000,
+      "shares": 64000,
       "decision_ref": "D16",
-      "derivation_detail": "target_shares = floor(0.03×1,000,000,000 / 567.0 / 1000)×1000 = 52,000；現持 0 → BUY 52,000"
+      "derivation_detail": "target_shares = floor(0.03×1,000,000,000 / 463.5 / 1000)×1000 = 64,000；現持 0 → BUY 64,000"
     },
     {
-      "ticker": "3189",
+      "ticker": "2379",
       "side": "BUY",
-      "shares": 30000,
+      "shares": 38000,
       "decision_ref": "D17",
-      "derivation_detail": "target_shares = floor(0.03×1,000,000,000 / 986.0 / 1000)×1000 = 30,000；現持 0 → BUY 30,000"
+      "derivation_detail": "target_shares = floor(0.03×1,000,000,000 / 772.0 / 1000)×1000 = 38,000；現持 0 → BUY 38,000"
     },
     {
-      "ticker": "1815",
+      "ticker": "3711",
       "side": "BUY",
-      "shares": 215000,
+      "shares": 45000,
       "decision_ref": "D18",
-      "derivation_detail": "target_shares = floor(0.03×1,000,000,000 / 139.0 / 1000)×1000 = 215,000；現持 0 → BUY 215,000"
+      "derivation_detail": "target_shares = floor(0.03×1,000,000,000 / 654.0 / 1000)×1000 = 45,000；現持 0 → BUY 45,000"
     },
     {
-      "ticker": "6187",
+      "ticker": "2884",
       "side": "BUY",
-      "shares": 23000,
+      "shares": 603000,
       "decision_ref": "D19",
-      "derivation_detail": "target_shares = floor(0.03×1,000,000,000 / 1260.0 / 1000)×1000 = 23,000；現持 0 → BUY 23,000"
+      "derivation_detail": "target_shares = floor(0.03×1,000,000,000 / 49.75 / 1000)×1000 = 603,000；現持 0 → BUY 603,000"
     },
     {
-      "ticker": "4772",
+      "ticker": "2891",
       "side": "BUY",
-      "shares": 117000,
+      "shares": 400000,
       "decision_ref": "D20",
-      "derivation_detail": "target_shares = floor(0.03×1,000,000,000 / 255.0 / 1000)×1000 = 117,000；現持 0 → BUY 117,000"
+      "derivation_detail": "target_shares = floor(0.03×1,000,000,000 / 74.9 / 1000)×1000 = 400,000；現持 0 → BUY 400,000"
+    },
+    {
+      "ticker": "2892",
+      "side": "BUY",
+      "shares": 708000,
+      "decision_ref": "D21",
+      "derivation_detail": "target_shares = floor(0.03×1,000,000,000 / 42.35 / 1000)×1000 = 708,000；現持 0 → BUY 708,000"
     },
     {
       "ticker": "2412",
       "side": "BUY",
       "shares": 189000,
-      "decision_ref": "D21",
+      "decision_ref": "D22",
       "derivation_detail": "target_shares = floor(0.03×1,000,000,000 / 158.0 / 1000)×1000 = 189,000；現持 0 → BUY 189,000"
     },
     {
-      "ticker": "3045",
+      "ticker": "2881",
       "side": "BUY",
-      "shares": 187000,
-      "decision_ref": "D22",
-      "derivation_detail": "target_shares = floor(0.025×1,000,000,000 / 133.0 / 1000)×1000 = 187,000；現持 0 → BUY 187,000"
-    },
-    {
-      "ticker": "2886",
-      "side": "BUY",
-      "shares": 543000,
+      "shares": 157000,
       "decision_ref": "D23",
-      "derivation_detail": "target_shares = floor(0.03×1,000,000,000 / 55.2 / 1000)×1000 = 543,000；現持 0 → BUY 543,000"
+      "derivation_detail": "target_shares = floor(0.025×1,000,000,000 / 158.5 / 1000)×1000 = 157,000；現持 0 → BUY 157,000"
     },
     {
-      "ticker": "2884",
+      "ticker": "1216",
       "side": "BUY",
-      "shares": 502000,
+      "shares": 314000,
       "decision_ref": "D24",
-      "derivation_detail": "target_shares = floor(0.025×1,000,000,000 / 49.75 / 1000)×1000 = 502,000；現持 0 → BUY 502,000"
-    },
-    {
-      "ticker": "2880",
-      "side": "BUY",
-      "shares": 497000,
-      "decision_ref": "D25",
-      "derivation_detail": "target_shares = floor(0.025×1,000,000,000 / 50.3 / 1000)×1000 = 497,000；現持 0 → BUY 497,000"
+      "derivation_detail": "target_shares = floor(0.025×1,000,000,000 / 79.6 / 1000)×1000 = 314,000；現持 0 → BUY 314,000"
     }
   ],
   "agent_metadata": {
     "model_provider": "google",
     "model_version": "gemini-3.8-flash",
-    "run_started_at": "2026-10-23T22:26:00+08:00",
-    "run_completed_at": "2026-10-23T22:27:05+08:00",
-    "input_tokens": 22331,
-    "output_tokens": 7466,
-    "tool_use_count": 98,
-    "code_version": "sha256:1408711b62b4"
+    "run_started_at": "2026-10-24T01:54:20+08:00",
+    "run_completed_at": "2026-10-24T01:55:51+08:00",
+    "input_tokens": 34866,
+    "output_tokens": 7606,
+    "tool_use_count": 10,
+    "code_version": "sha256:967bd9d0d232"
   }
 }

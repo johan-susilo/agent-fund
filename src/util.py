@@ -6,6 +6,8 @@ import threading
 import time
 from datetime import date, datetime, timedelta
 from pathlib import Path
+import hashlib
+
 
 import requests
 
@@ -86,3 +88,13 @@ def read_cache(path: Path, ttl_minutes: float):
 def write_cache(path: Path, obj) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(obj, ensure_ascii=False, indent=1), encoding="utf-8")
+
+
+def save_raw_bytes(trade_date: str | None, label: str, content: bytes) -> str:
+    from settings import ROOT
+    sha = hashlib.sha256(content).hexdigest()
+    folder = (ROOT / "inputs" / trade_date / "raw") if trade_date else (ROOT / "inputs" / "raw")
+    folder.mkdir(parents=True, exist_ok=True)
+    safe_label = "".join(c if c.isalnum() or c in "-_" else "_" for c in label)[:40]
+    (folder / f"{safe_label}_{sha[:12]}.json").write_bytes(content)
+    return sha

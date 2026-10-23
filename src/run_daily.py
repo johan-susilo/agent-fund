@@ -52,6 +52,7 @@ def main():
     ap.add_argument("--refresh", action="store_true")
     ap.add_argument("--no-external", action="store_true")
     ap.add_argument("--replay")
+    ap.add_argument("--force", action="store_true", help="Bypass submission window hard stop")
     a = ap.parse_args()
     d, started = a.trade_date, iso(now_tw())
 
@@ -70,8 +71,14 @@ def main():
         print(f"=== [1/5] DataPack === team {state['team_id']} | NAV {state['nav']:,.0f} | "
               f"holdings {len(state['holdings'])} | violations {state['violations']} "
               f"| limits: {'STRICT' if limits.cap_other < 0.085 else 'normal'}")
-        for w in state["warnings"] + check_agent.check_submission_window(now_tw(), d, state["as_of_date"]):
+        for w in state["warnings"]:
             print("  !!", w)
+        win_errs = check_agent.check_submission_window(now_tw(), d, state["as_of_date"])
+        if win_errs:
+            for w in win_errs:
+                print("  !! [WINDOW]", w)
+            if not a.force and not a.replay:
+                sys.exit("Submission window check failed. Pass --force to run outside the window.")
 
         print("\n=== [2/5] Collect evidence (parallel) ===")
         with ThreadPoolExecutor(3) as ex:
@@ -110,46 +117,28 @@ def main():
         print(f"  evidence book: {len(book.sources)} sources, {len(book.observations)} observations")
 
 
-        # --- NEW: JOURNAL (PERFORMANCE REVIEW) ---
-        from tools import journal
-        from observations import new_fragment, frag_add
-        
-        # as_of is already calculated as yesterday's date in your script
-        j_data = journal.review(as_of, state, market) 
+        from tools import journal, factors
+        j_data = journal.review(as_of, state, market)
         if j_data:
-            j_frag = new_fragment()
-            src = {
-                "authority": "other", 
-                "name": "Trading Journal (Yesterday's Performance)", 
-                "url": "local://journal", 
-                "content_as_of": iso(now_tw()), 
-                "fetched_at": iso(now_tw())
-            }
-            # Format the summary for the LLM to read
-            stmt = (
-                f"昨日績效回顧: 投組報酬率 {j_data['port_ret_pct']:.2f}%，大盤基準 {j_data['bench_ret_pct']:.2f}%。"
-                f"前三大貢獻: {j_data['top_contrib']}。最大拖累: {j_data['bottom_contrib']}。"
-            )
-            vals = {
-                "port_ret_pct": round(j_data["port_ret_pct"], 2), 
-                "bench_ret_pct": round(j_data["bench_ret_pct"], 2)
-            }
-            
-            # Add it to the EvidenceBook as a "market" level observation
-            frag_add(j_frag, src, stmt, vals, "portfolio_performance", level="market")
-            book.absorb(j_frag)
-            print(f"  journal: Added performance review (Return: {j_data['port_ret_pct']:.2f}%)")
+            print(f"  journal: Realised return {j_data['port_ret_pct']:+.2f}% vs bench {j_data['bench_ret_pct']:+.2f}% (non-citable context)")
         else:
             print("  journal: No previous day record found (Day 1).")
-        # -----------------------------------------
+
+        # --- DETERMINISTIC FACTOR SCORING & REGIME DETECTION ---
+        factor_df = factors.build_factor_table(universe, market, frags.get("factor"))
+        regime = factors.detect_regime(market, frags.get("macro"), factor_df, universe)
+        limits = limits_for(state["violations"], regime=regime)
+        print(f"  regime: {regime} -> cash window [{limits.cash_lo:.0%}, {limits.cash_hi:.0%}]")
 
         print("\n=== [3/5] Portfolio agent ===")
         ask = None
         if a.replay:
             raw = Path(a.replay).read_text(encoding="utf-8")
             ask = lambda _s, _u: (json.loads(raw), {"model": "replay", "input_tokens": 0, "output_tokens": 0}, raw)
-        result = portfolio_agent.run_agent(d, state, market, universe, book, strategy, limits, started, ask)
-        portfolio_agent.print_result(result, universe)
+        result = portfolio_agent.run_agent(
+            d, state, market, universe, book, strategy, limits, started,
+            ask=ask, factor_df=factor_df, regime=regime, journal_ctx=j_data,
+        )
 
         print("\n=== [4/5] Build D-Plan ===")
         dplan = build_dplan.build(result, state, tool_calls)

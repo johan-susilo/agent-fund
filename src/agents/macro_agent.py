@@ -15,6 +15,7 @@ from datetime import datetime, timedelta, timezone
 
 import requests
 from dotenv import load_dotenv
+import yfinance as yf
 
 from observations import frag_add, new_fragment
 from settings import ROOT, TW
@@ -33,6 +34,48 @@ FRED_SERIES = {
 NEWS_QUERIES = {"news_semis": "Taiwan semiconductor OR TSMC OR AI server",
                 "news_macro": "Federal Reserve interest rate OR Taiwan dollar"}
 
+
+# Add to src/agents/macro_agent.py
+YF_MACRO = {
+    "^SOX":  ("sox", "費城半導體指數 (SOX)"),
+    "TSM":   ("tsm_adr", "台積電 ADR (TSM)"),
+    "^TWII": ("taiex", "台灣加權指數 (TAIEX)"),
+    "TWD=X": ("usdtwd_spot", "美元兌台幣即期匯率 (USD/TWD)"),
+}
+
+NEWS_KEYWORDS = (
+    "tsmc", "taiwan", "nvidia", "semiconductor", "chip", "wafer", "cowos",
+    "ai server", "supermicro", "broadcom", "asml", "fed", "powell", "treasury",
+    "tariff", "export", "rate", "inflation",
+)
+
+def _yf_macro(trade_date: str, counter: Counter):
+    counter.inc()
+    df = yf.download(list(YF_MACRO.keys()), period="7d", interval="1d", auto_adjust=True,
+                     group_by="ticker", progress=False, threads=True)
+    now = iso(now_tw())
+    out, warns = [], []
+    for sym, (k, label) in YF_MACRO.items():
+        try:
+            sub = df[sym].dropna(subset=["Close"])
+            if len(sub) < 2:
+                continue
+            v0, v1 = float(sub["Close"].iloc[-1]), float(sub["Close"].iloc[-2])
+            d0 = str(sub.index[-1].date())
+            chg = (v0 / v1 - 1.0) * 100.0 if v1 else 0.0
+            src = {
+                "authority": "vendor",
+                "name": f"Yahoo Finance ({sym}): {label}",
+                "url": f"https://finance.yahoo.com/quote/{sym}/",
+                "content_as_of": _us_close_to_tw(d0) if sym in ("^SOX", "TSM") else f"{d0}T13:30:00+08:00",
+                "fetched_at": now,
+            }
+            stmt = f"{label} {d0} 收 {v0:g}（前值 {v1:g}，變動 {chg:+.2f}%）"
+            vals = {k: round(v0, 2), f"{k}_prev": round(v1, 2), f"{k}_chg_pct": round(chg, 2)}
+            out.append((src, stmt, vals, f"macro_{k}"))
+        except Exception as e:
+            warns.append(f"yfinance {sym} failed: {e}")
+    return out, warns
 
 def _us_close_to_tw(date_str: str) -> str:
     """US market date -> the moment of its 16:00 New York close, expressed in Taipei time."""
@@ -87,7 +130,26 @@ def _news(topic, query, counter):
                        {"q": query, "language": "en", "sortBy": "publishedAt", "pageSize": 6,
                         "from": (now - timedelta(hours=36)).astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S"),
                         "apiKey": key}, counter=counter)
+    seen_titles = set()
     items = []
+    for a in js.get("articles", []):
+        title = (a.get("title") or "").strip()
+        if not title or not a.get("url") or not a.get("publishedAt"):
+            continue
+        norm_title = "".join(c for c in title.lower() if c.isalnum())[:50]
+        if norm_title in seen_titles:
+            continue
+        blob = f"{title} {a.get('description') or ''}".lower()
+        if not any(kw in blob for kw in NEWS_KEYWORDS):
+            continue
+        pub = parse_ts(a["publishedAt"])
+        if pub > now:
+            continue
+        seen_titles.add(norm_title)
+        items.append((a, pub))
+        if len(items) == 3:
+            break
+        
     for a in js.get("articles", []):
         if not a.get("title") or not a.get("url") or not a.get("publishedAt"):
             continue
@@ -144,6 +206,7 @@ def collect(trade_date: str, refresh: bool = False) -> dict:
     counter, frag = Counter(), new_fragment()
     with ThreadPoolExecutor(8) as ex:
         futs = [ex.submit(_fred, s, trade_date, counter) for s in FRED_SERIES]
+        futs.append(ex.submit(_yf_macro, trade_date, counter))
         futs += [ex.submit(_news, t, q, counter) for t, q in NEWS_QUERIES.items()]
         futs.append(ex.submit(_calendar, counter))
         for f in futs:                       # fixed order -> deterministic observation ids

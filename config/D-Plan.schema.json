@@ -546,7 +546,11 @@
             "description": "選填，自報用量紀錄"
           },
           "code_version": {
-            "description": "V1.0.0"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^([vV]\\d+\\.\\d+\\.\\d+|git:[0-9a-f]{7,40}|sha256:[0-9a-f]{12,64})$",
+            "description": "V1.0.0 or git:<hash> or sha256:<hash>"
           }
         }
       }

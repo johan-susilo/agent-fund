@@ -38,9 +38,32 @@ DEFAULT_KEYWORDS = [
 
 def _clean(value, limit=700):
     text = html.unescape(str(value or ""))
-    text = re.sub(r"(?is)<(script|style).*?>.*?</\\1>", " ", text)
+    text = re.sub(r"(?is)<(script|style).*?>.*?</\1>", " ", text)
     text = re.sub(r"(?s)<[^>]+>", " ", text)
-    return re.sub(r"\\s+", " ", text).strip()[:limit]
+    return re.sub(r"\s+", " ", text).strip()[:limit]
+
+
+def _fetch_rss(feed, counter, fetched_at):
+    try:
+        import feedparser
+    except ImportError:
+        return [], "feedparser missing; install with: python -m pip install feedparser"
+    counter.inc()
+    parsed = feedparser.parse(feed["url"])
+    out = []
+    for entry in getattr(parsed, "entries", [])[:MAX_ARTICLES]:
+        title = _clean(getattr(entry, "title", ""), 200)
+        link = str(getattr(entry, "link", "")).strip()
+        pub = _parse_dt(getattr(entry, "published", None) or getattr(entry, "updated", None))
+        if not title or not link:
+            continue
+        out.append({
+            "title": title,
+            "url": link,
+            "published_at": _iso(pub) or fetched_at,
+            "feed_name": feed["name"],
+        })
+    return out, None
 
 
 def _parse_dt(value):

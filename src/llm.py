@@ -47,17 +47,76 @@ def candidates() -> list:
     return names
 
 
+LLM_RESPONSE_SCHEMA = {
+    "type": "OBJECT",
+    "required": ["market_view", "inferences", "portfolio", "exits"],
+    "properties": {
+        "market_view": {
+            "type": "OBJECT",
+            "required": ["basis_refs", "logic", "regime", "stance", "net_exposure_intent", "target_cash_pct_range", "confidence"],
+            "properties": {
+                "basis_refs": {"type": "ARRAY", "items": {"type": "STRING"}},
+                "logic": {"type": "STRING"},
+                "regime": {"type": "STRING", "enum": ["risk_on", "neutral", "risk_off"]},
+                "stance": {"type": "STRING", "enum": ["aggressive", "neutral", "defensive"]},
+                "net_exposure_intent": {"type": "STRING", "enum": ["increase", "hold", "reduce"]},
+                "target_cash_pct_range": {"type": "ARRAY", "items": {"type": "NUMBER"}},
+                "counter_evidence": {"type": "STRING", "nullable": True},
+                "confidence": {"type": "NUMBER"},
+            },
+        },
+        "inferences": {
+            "type": "ARRAY",
+            "items": {
+                "type": "OBJECT",
+                "required": ["inf_id", "premise_refs", "logic", "conclusion", "confidence"],
+                "properties": {
+                    "inf_id": {"type": "STRING"},
+                    "premise_refs": {"type": "ARRAY", "items": {"type": "STRING"}},
+                    "logic": {"type": "STRING"},
+                    "conclusion": {"type": "STRING"},
+                    "counter_evidence": {"type": "STRING", "nullable": True},
+                    "confidence": {"type": "NUMBER"},
+                },
+            },
+        },
+        "portfolio": {
+            "type": "ARRAY",
+            "items": {
+                "type": "OBJECT",
+                "required": ["ticker", "target_weight", "inference_refs"],
+                "properties": {
+                    "ticker": {"type": "STRING"},
+                    "target_weight": {"type": "NUMBER"},
+                    "inference_refs": {"type": "ARRAY", "items": {"type": "STRING"}},
+                },
+            },
+        },
+        "exits": {
+            "type": "ARRAY",
+            "items": {
+                "type": "OBJECT",
+                "required": ["ticker", "inference_refs"],
+                "properties": {
+                    "ticker": {"type": "STRING"},
+                    "inference_refs": {"type": "ARRAY", "items": {"type": "STRING"}},
+                },
+            },
+        },
+    },
+}
+
 def _config(system_prompt, model, temperature):
     from google.genai import types
-    kw = dict(system_instruction=system_prompt, response_mime_type="application/json")
     env_t = os.environ.get("LLM_TEMPERATURE")
-    if temperature is None:
-        if not model.startswith("gemini-3"):
-            temperature = float(env_t or 0.2)
-        elif env_t:
-            temperature = float(env_t)
-    if temperature is not None:
-        kw["temperature"] = temperature
+    temp = float(env_t) if env_t else (0.1 if temperature is None else float(temperature))
+    kw = dict(
+        system_instruction=system_prompt,
+        response_mime_type="application/json",
+        response_schema=LLM_RESPONSE_SCHEMA,
+        temperature=temp,
+        seed=int(os.environ.get("LLM_SEED", "42")),
+    )
     return types.GenerateContentConfig(**kw)
 
 
