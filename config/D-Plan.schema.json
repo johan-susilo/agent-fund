@@ -546,11 +546,7 @@
             "description": "選填，自報用量紀錄"
           },
           "code_version": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z0-9_.:/\\-]{1,64}$",
-            "description": "當日程式碼版本識別，格式不限——git commit（git:a1b2c3d）、版本號（v1.4.2）、或當日程式碼打包檔之 sha256 前綴皆可。"
+            "description": "V1.0.0"
           }
         }
       }

@@ -1,1 +1,49 @@
-{"market_view": {"basis_refs": ["O1", "O2", "O3", "O4", "O5", "O6"], "logic": "市場整體寬度顯著偏弱，全市場150檔中僅31檔上漲、115檔下跌，中位數跌幅達-2.34%。AI半導體與PCB材料族群回檔較深，資金明顯輪動至金融與電信防禦板塊。因初次建倉且逢市場回檔，配置採取穩健防禦策略，在滿足核心AI主題曝險門檻下，同步配置防禦部位並維持7.5%現金緩衝。", "regime": "risk_off", "stance": "defensive", "net_exposure_intent": "increase", "target_cash_pct_range": [0.04, 0.1], "counter_evidence": "目前僅具單日價格與廣度數據，缺乏策略所需之20日與60日動能、EPS預期及總經指標數據。", "confidence": 0.7}, "inferences": [{"inf_id": "I1", "premise_refs": ["O2", "O7", "O8", "O9", "O10", "O11", "O18", "O26", "O29"], "logic": "AI半導體族群單日平均下跌-3.91%，但台積電跌幅僅-1.45%展現權值抗跌韌性，聯詠、精材、聯電跌幅亦相對受控。依核心主題要求，以台積電為核心重倉，搭配主要IC設計與封測次產業標的建立底倉。", "conclusion": "配置AI半導體核心權值與相對抗跌標的，合計權重0.39。", "counter_evidence": "族群內全數下跌，短線面臨板塊回檔壓力。", "confidence": 0.65}, {"inf_id": "I2", "premise_refs": ["O3", "O30", "O31", "O32", "O35", "O36", "O37", "O38", "O41"], "logic": "AI伺服器族群平均跌幅-2.26%，抗跌性優於半導體，其中仁寶、雙鴻、微星、英業達、和碩跌幅均在-1.5%以內，龍頭鴻海與廣達跌幅約-2.0%。建倉聚焦ODM龍頭與關鍵散熱零組件。", "conclusion": "分散配置AI伺服器代工與零組件標的，合計權重0.22。", "counter_evidence": "族群內0檔上漲，整體仍受大盤下行氣氛壓抑。", "confidence": 0.65}, {"inf_id": "I3", "premise_refs": ["O4", "O46", "O49", "O51"], "logic": "PCB材料族群中台光電逆勢上漲+1.60%表現強勁，欣興與臻鼎-KY跌幅亦較溫和。依主題要求配置抗跌與領先指標標的。", "conclusion": "配置台光電、欣興與臻鼎-KY，合計權重0.08。", "counter_evidence": "PCB載板多數個股跌幅偏深，族群內部走勢分化。", "confidence": 0.6}, {"inf_id": "I4", "premise_refs": ["O5", "O55", "O57", "O58", "O59", "O60", "O62"], "logic": "金融防禦族群平均上漲+0.97%，6/8檔上漲，其中兆豐金、永豐金、元大金漲幅逾1.5%，展現防禦避風港特質，配置優質金控股以平衡組合波動。", "conclusion": "配置表現強勢之金融股作為防禦袖，合計權重0.19。", "counter_evidence": "金融股非本ETF核心主題，配置比例受主題集中度限制。", "confidence": 0.7}, {"inf_id": "I5", "premise_refs": ["O6", "O63", "O65"], "logic": "電信防禦族群3檔全數上漲，平均漲幅+2.40%，防禦抗跌屬性顯著，配置中華電與遠傳以提供下檔保護。", "conclusion": "配置電信防禦部位，合計權重0.045。", "counter_evidence": "電信股波動低且成長性有限。", "confidence": 0.75}], "portfolio": [{"ticker": "2330", "target_weight": 0.18, "inference_refs": ["I1"]}, {"ticker": "2454", "target_weight": 0.045, "inference_refs": ["I1"]}, {"ticker": "3034", "target_weight": 0.03, "inference_refs": ["I1"]}, {"ticker": "2303", "target_weight": 0.03, "inference_refs": ["I1"]}, {"ticker": "3711", "target_weight": 0.03, "inference_refs": ["I1"]}, {"ticker": "5274", "target_weight": 0.03, "inference_refs": ["I1"]}, {"ticker": "3374", "target_weight": 0.025, "inference_refs": ["I1"]}, {"ticker": "6223", "target_weight": 0.025, "inference_refs": ["I1"]}, {"ticker": "2317", "target_weight": 0.045, "inference_refs": ["I2"]}, {"ticker": "2382", "target_weight": 0.04, "inference_refs": ["I2"]}, {"ticker": "6669", "target_weight": 0.035, "inference_refs": ["I2"]}, {"ticker": "3324", "target_weight": 0.025, "inference_refs": ["I2"]}, {"ticker": "2324", "target_weight": 0.02, "inference_refs": ["I2"]}, {"ticker": "2356", "target_weight": 0.02, "inference_refs": ["I2"]}, {"ticker": "2377", "target_weight": 0.02, "inference_refs": ["I2"]}, {"ticker": "4938", "target_weight": 0.02, "inference_refs": ["I2"]}, {"ticker": "2383", "target_weight": 0.035, "inference_refs": ["I3"]}, {"ticker": "3037", "target_weight": 0.025, "inference_refs": ["I3"]}, {"ticker": "4958", "target_weight": 0.02, "inference_refs": ["I3"]}, {"ticker": "2886", "target_weight": 0.04, "inference_refs": ["I4"]}, {"ticker": "2885", "target_weight": 0.035, "inference_refs": ["I4"]}, {"ticker": "2890", "target_weight": 0.035, "inference_refs": ["I4"]}, {"ticker": "2884", "target_weight": 0.03, "inference_refs": ["I4"]}, {"ticker": "2891", "target_weight": 0.03, "inference_refs": ["I4"]}, {"ticker": "2881", "target_weight": 0.02, "inference_refs": ["I4"]}, {"ticker": "2412", "target_weight": 0.025, "inference_refs": ["I5"]}, {"ticker": "4904", "target_weight": 0.02, "inference_refs": ["I5"]}], "exits": []}
+{
+  "market_view": {
+    "basis_refs": ["O1", "O2", "O9", "O10", "O32", "O33", "O35"],
+    "logic": "美股那斯達克重挫2.60%，VIX恐慌指數飆升14.09%至19.03，美債殖利率維持5.13%高檔，引發台股全面回檔。台股漲跌家數比疲弱（僅31家上漲、115家下跌），半導體與電子零組件等科技主題重挫逾3.7%，資金明顯避險流向通信網路（+2.40%）與金融股（+0.63%）。因初始帳戶全數為現金，需建構投資組合，策略採防禦型配置，聚焦核心具高ROE與動能韌性標的，並搭配防禦型高股息與低波動資產降低回撤風險。",
+    "regime": "risk_off",
+    "stance": "defensive",
+    "net_exposure_intent": "increase",
+    "target_cash_pct_range": [0.05, 0.09],
+    "counter_evidence": "總經與AI資本支出長期數據本期未全面揭露，主要依據美股行情與台股盤面價量數據判斷。",
+    "confidence": 0.75
+  },
+  "inferences": [
+    {"inf_id": "I1", "premise_refs": ["O17", "O41", "O56"], "logic": "台積電（2330）為AI與半導體產業核心，ROE高達41.9%、淨利率51.1%，營收年增50.9%，近60日動能維持正值且波動度僅19%，在科技股大跌中具極佳防禦力與流動性，適合作為投資組合核心基石。", "conclusion": "配置台積電作為核心持股第一大部位。", "counter_evidence": "近20日動能微幅拉回-3.8%，受外資調節壓力影響。", "confidence": 0.85},
+    {"inf_id": "I2", "premise_refs": ["O18", "O19", "O42", "O43", "O57", "O58"], "logic": "半導體次產業中，聯詠（3034）與瑞昱（2379）近20日及60日價格動能均為正，且波動度維持在30%以下低檔，ROE分別達27.1%與30.3%，評價適中；精材（3374）60日動能強勁（+34.3%），營收年增42.2%，具備先進封裝成長潛力。", "conclusion": "配置穩健型IC設計與封測成長股。", "counter_evidence": "聯詠單月營收年增僅9.6%，成長速度較部分高速運算晶片放緩。", "confidence": 0.75},
+    {"inf_id": "I3", "premise_refs": ["O21", "O22", "O45", "O46", "O60", "O61"], "logic": "伺服器與組裝主題中，緯創（3231）、華碩（2357）、微星（2377）與和碩（4938）20日與60日動能均維持正向成長。緯創ROE達30.9%、營收年增62.4%、PE僅7.7倍；華碩與微星具品牌與伺服器雙引擎，動能穩健且波動度偏低。", "conclusion": "挑選具獲利成長與估值優勢之伺服器組裝與品牌廠。", "counter_evidence": "代工廠淨利率普遍較低（1.3%~5.8%），對供應鏈成本變動敏感。", "confidence": 0.75},
+    {"inf_id": "I4", "premise_refs": ["O23", "O47", "O62"], "logic": "散熱與電子零組件為AI運算關鍵，奇鋐（3017）、健策（3653）及雙鴻（3324）60日價格動能極為強勁（+31.8%~+72.2%），且ROE皆達33%~66%，營收年增40%~66%，顯示基本面強烈受惠AI液冷升級需求。", "conclusion": "配置高成長之AI散熱與連接機構領導廠商。", "counter_evidence": "健策近期單日跌幅較大（-7.12%），波動度偏高（67%）。", "confidence": 0.7},
+    {"inf_id": "I5", "premise_refs": ["O24", "O25", "O48", "O49", "O63", "O64"], "logic": "PCB與載板材料族群展現高度強勢動能，台光電（2383）、欣興（3037）、健鼎（3044）、金像電（2368）、臻鼎-KY（4958）、景碩（3189）及富喬（1815）在20日與60日動能均維持正成長，其中台光電單日逆勢上漲1.60%，ROE達48.4%，營收年增110%。", "conclusion": "重點配置具強勁動能與產業升級優勢之PCB/CCL族群。", "counter_evidence": "部分個股波動度較高（60%~78%），需分散配置以控制風險。", "confidence": 0.8},
+    {"inf_id": "I6", "premise_refs": ["O20", "O21", "O44", "O45", "O59", "O60"], "logic": "半導體設備與特化材料中，萬潤（6187）與台特化（4772）20日與60日動能維持正值，萬潤ROE達25.3%、營收年增54.5%，台特化營收年增240%、ROE達24.6%，受惠先進製程擴產需求。", "conclusion": "配置具動能支撐之設備與化學材料龍頭。", "counter_evidence": "萬潤波動度達85%，短線震盪劇烈。", "confidence": 0.65},
+    {"inf_id": "I7", "premise_refs": ["O26", "O27", "O28", "O50", "O51", "O52"], "logic": "通信網路與金融類股在大盤下挫中發揮強大防禦屬性。中華電（2412）與台灣大（3045）單日漲幅約2%，20日與60日動能均呈正向，波動度低；兆豐金（2886）、玉山金（2884）及華南金（2880）單日逆勢走揚且中長期動能穩定，適合作為防禦配置。", "conclusion": "建立防禦袖組合（電信與優質金融），以平抑整體投組波動度。", "counter_evidence": "防禦型類股非科技核心主題，配置比重不宜超過上限限制。", "confidence": 0.85}
+  ],
+  "portfolio": [
+    {"ticker": "2330", "target_weight": 0.12, "inference_refs": ["I1"]},
+    {"ticker": "3034", "target_weight": 0.04, "inference_refs": ["I2"]},
+    {"ticker": "2379", "target_weight": 0.04, "inference_refs": ["I2"]},
+    {"ticker": "3374", "target_weight": 0.035, "inference_refs": ["I2"]},
+    {"ticker": "2357", "target_weight": 0.04, "inference_refs": ["I3"]},
+    {"ticker": "3231", "target_weight": 0.04, "inference_refs": ["I3"]},
+    {"ticker": "4938", "target_weight": 0.03, "inference_refs": ["I3"]},
+    {"ticker": "2377", "target_weight": 0.035, "inference_refs": ["I3"]},
+    {"ticker": "3653", "target_weight": 0.04, "inference_refs": ["I4"]},
+    {"ticker": "3017", "target_weight": 0.035, "inference_refs": ["I4"]},
+    {"ticker": "3324", "target_weight": 0.03, "inference_refs": ["I4"]},
+    {"ticker": "2383", "target_weight": 0.04, "inference_refs": ["I5"]},
+    {"ticker": "3037", "target_weight": 0.04, "inference_refs": ["I5"]},
+    {"ticker": "3044", "target_weight": 0.04, "inference_refs": ["I5"]},
+    {"ticker": "2368", "target_weight": 0.04, "inference_refs": ["I5"]},
+    {"ticker": "4958", "target_weight": 0.03, "inference_refs": ["I5"]},
+    {"ticker": "3189", "target_weight": 0.03, "inference_refs": ["I5"]},
+    {"ticker": "1815", "target_weight": 0.03, "inference_refs": ["I5"]},
+    {"ticker": "6187", "target_weight": 0.03, "inference_refs": ["I6"]},
+    {"ticker": "4772", "target_weight": 0.03, "inference_refs": ["I6"]},
+    {"ticker": "2412", "target_weight": 0.03, "inference_refs": ["I7"]},
+    {"ticker": "3045", "target_weight": 0.025, "inference_refs": ["I7"]},
+    {"ticker": "2886", "target_weight": 0.03, "inference_refs": ["I7"]},
+    {"ticker": "2884", "target_weight": 0.025, "inference_refs": ["I7"]},
+    {"ticker": "2880", "target_weight": 0.025, "inference_refs": ["I7"]}
+  ],
+  "exits": []
+}

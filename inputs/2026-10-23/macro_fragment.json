@@ -1,0 +1,199 @@
+{
+ "sources": [
+  {
+   "authority": "vendor",
+   "name": "FRED DGS10: 美國 10 年期公債殖利率(%)",
+   "url": "https://fred.stlouisfed.org/series/DGS10",
+   "content_as_of": "2026-10-22T04:00:00+08:00",
+   "fetched_at": "2026-10-23T22:26:01+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "FRED VIXCLS: VIX 恐慌指數",
+   "url": "https://fred.stlouisfed.org/series/VIXCLS",
+   "content_as_of": "2026-10-23T04:00:00+08:00",
+   "fetched_at": "2026-10-23T22:26:01+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "FRED DEXTAUS: 美元兌新台幣(TWD/USD)",
+   "url": "https://fred.stlouisfed.org/series/DEXTAUS",
+   "content_as_of": "2026-10-17T04:00:00+08:00",
+   "fetched_at": "2026-10-23T22:26:01+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "FRED NASDAQCOM: 那斯達克綜合指數",
+   "url": "https://fred.stlouisfed.org/series/NASDAQCOM",
+   "content_as_of": "2026-10-23T04:00:00+08:00",
+   "fetched_at": "2026-10-23T22:26:01+08:00"
+  },
+  {
+   "authority": "media",
+   "name": "PR Newswire UK: Supermicro Introduces the NVIDIA Vera CPU Rack, a 256 CPU, 100% Liquid-Cooled Rack-Scale Solution, Complementing the NVIDIA Vera Rubin Platform, for Agentic AI at Scale",
+   "url": "https://www.prnewswire.co.uk/news-releases/supermicro-introduces-the-nvidia-vera-cpu-rack-a-256-cpu-100-liquid-cooled-rack-scale-solution-complementing-the-nvidia-vera-rubin-platform-for-agentic-ai-at-scale-302916342.html",
+   "archive_url": null,
+   "published_at": "2026-10-22T14:00:00+08:00",
+   "content_as_of": "2026-10-22T14:00:00+08:00",
+   "fetched_at": "2026-10-23T22:26:00+08:00"
+  },
+  {
+   "authority": "media",
+   "name": "PRNewswire: Supermicro Introduces the NVIDIA Vera CPU Rack, a 256 CPU, 100% Liquid-Cooled Rack-Scale Solution, Complementing the NVIDIA Vera Rubin Platform, for Agentic AI at Scale",
+   "url": "https://www.prnewswire.com/news-releases/supermicro-introduces-the-nvidia-vera-cpu-rack-a-256-cpu-100-liquid-cooled-rack-scale-solution-complementing-the-nvidia-vera-rubin-platform-for-agentic-ai-at-scale-302916308.html",
+   "archive_url": null,
+   "published_at": "2026-10-22T14:00:00+08:00",
+   "content_as_of": "2026-10-22T14:00:00+08:00",
+   "fetched_at": "2026-10-23T22:26:00+08:00"
+  },
+  {
+   "authority": "media",
+   "name": "Fortune: SoFi becomes first consumer bank to launch tokenized deposits, offers 4.4% interest",
+   "url": "https://fortune.com/2026/10/22/sofi-tokenized-deposits/",
+   "archive_url": null,
+   "published_at": "2026-10-22T20:00:00+08:00",
+   "content_as_of": "2026-10-22T20:00:00+08:00",
+   "fetched_at": "2026-10-23T22:26:00+08:00"
+  },
+  {
+   "authority": "media",
+   "name": "PRNewswire: OLD REPUBLIC REPORTS RESULTS FOR THE THIRD QUARTER AND FIRST NINE MONTHS OF 2026",
+   "url": "https://www.prnewswire.com/news-releases/old-republic-reports-results-for-the-third-quarter-and-first-nine-months-of-2026-302916268.html",
+   "archive_url": null,
+   "published_at": "2026-10-22T19:00:00+08:00",
+   "content_as_of": "2026-10-22T19:00:00+08:00",
+   "fetched_at": "2026-10-23T22:26:00+08:00"
+  },
+  {
+   "authority": "media",
+   "name": "CryptoSlate: US quietly eases stablecoin reserve rules as banks warn billions could shift away from lending",
+   "url": "https://cryptoslate.com/treasury-hails-americas-new-stablecoin-system-as-occ-removes-safeguards-banks-wanted-against-deposit-flight/",
+   "archive_url": null,
+   "published_at": "2026-10-22T18:00:16+08:00",
+   "content_as_of": "2026-10-22T18:00:16+08:00",
+   "fetched_at": "2026-10-23T22:26:00+08:00"
+  }
+ ],
+ "observations": [
+  {
+   "src": [
+    0
+   ],
+   "statement": "美國 10 年期公債殖利率(%) 2026-10-21 收 5.13（前一筆 5.12，變動 +1.00bp）",
+   "values": {
+    "us10y": 5.13,
+    "us10y_prev": 5.12,
+    "us10y_chg_bp": 1.0
+   },
+   "topic": "macro_us10y",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    1
+   ],
+   "statement": "VIX 恐慌指數 2026-10-22 收 19.03（前一筆 16.68，變動 +14.09%）",
+   "values": {
+    "vix": 19.03,
+    "vix_prev": 16.68,
+    "vix_chg_pct": 14.09
+   },
+   "topic": "macro_vix",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    2
+   ],
+   "statement": "美元兌新台幣(TWD/USD) 2026-10-16 收 32.4（前一筆 32.4，變動 +0.00%）",
+   "values": {
+    "usdtwd": 32.4,
+    "usdtwd_prev": 32.4,
+    "usdtwd_chg_pct": 0.0
+   },
+   "topic": "macro_usdtwd",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    3
+   ],
+   "statement": "那斯達克綜合指數 2026-10-22 收 26008.9（前一筆 26702.9，變動 -2.60%）",
+   "values": {
+    "nasdaq": 26008.86,
+    "nasdaq_prev": 26702.86,
+    "nasdaq_chg_pct": -2.6
+   },
+   "topic": "macro_nasdaq",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    4
+   ],
+   "statement": "PR Newswire UK 報導：Supermicro Introduces the NVIDIA Vera CPU Rack, a 256 CPU, 100% Liquid-Cooled Rack-Scale Solution, Complementing the NVIDIA Vera Rubin Platform, for Agentic AI at Scale",
+   "values": {
+    "published_hours_ago": 32.4
+   },
+   "topic": "news_semis",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    5
+   ],
+   "statement": "PRNewswire 報導：Supermicro Introduces the NVIDIA Vera CPU Rack, a 256 CPU, 100% Liquid-Cooled Rack-Scale Solution, Complementing the NVIDIA Vera Rubin Platform, for Agentic AI at Scale",
+   "values": {
+    "published_hours_ago": 32.4
+   },
+   "topic": "news_semis",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    6
+   ],
+   "statement": "Fortune 報導：SoFi becomes first consumer bank to launch tokenized deposits, offers 4.4% interest",
+   "values": {
+    "published_hours_ago": 26.4
+   },
+   "topic": "news_macro",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    7
+   ],
+   "statement": "PRNewswire 報導：OLD REPUBLIC REPORTS RESULTS FOR THE THIRD QUARTER AND FIRST NINE MONTHS OF 2026",
+   "values": {
+    "published_hours_ago": 27.4
+   },
+   "topic": "news_macro",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    8
+   ],
+   "statement": "CryptoSlate 報導：US quietly eases stablecoin reserve rules as banks warn billions could shift away from lending",
+   "values": {
+    "published_hours_ago": 28.4
+   },
+   "topic": "news_macro",
+   "level": "market",
+   "tickers": []
+  }
+ ],
+ "tool_calls": 6,
+ "warnings": [
+  "FINNHUB_API_KEY missing: economic calendar skipped"
+ ]
+}

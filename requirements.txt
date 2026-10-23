@@ -1,0 +1,6 @@
+requests
+python-dotenv
+google-genai
+yfinance
+pandas
+jsonschema

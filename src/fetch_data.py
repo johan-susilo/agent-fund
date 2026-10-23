@@ -1,28 +1,29 @@
-"""Step 2: 抓「前一交易日收盤價」（150 檔）並存成 market_data.json。
+"""Step 2: fetch the previous trading day's closing prices for the 150-stock universe.
 
-資料來源（官方 OpenAPI，免金鑰）：
-  上市 twse : https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL
-  上櫃 tpex : https://www.tpex.org.tw/openapi/v1/tpex_mainboard_daily_close_quotes
+Official OpenAPI sources (no key needed):
+  TWSE (listed) : https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL
+  TPEx (OTC)    : https://www.tpex.org.tw/openapi/v1/tpex_mainboard_daily_close_quotes
 
-用法:
+Usage:
     python src/fetch_data.py 2026-10-23 2026-10-22
-                             ^trade_date ^as_of_date（資料包上的結算日）
+                             ^trade_date ^as_of_date (settlement date on the DataPack)
 """
+from __future__ import annotations
+
 import json
 import sys
-from datetime import datetime, timedelta, timezone
-from pathlib import Path
+from concurrent.futures import ThreadPoolExecutor
 
-import requests
+from settings import ROOT, UNIVERSE_SIZE
+from universe import load_universe
+from util import Counter, http_get_json, iso, now_tw
 
-TW = timezone(timedelta(hours=8))
-ROOT = Path(__file__).resolve().parent.parent
 TWSE_URL = "https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL"
 TPEX_URL = "https://www.tpex.org.tw/openapi/v1/tpex_mainboard_daily_close_quotes"
 
 
 def _num(x):
-    """'2,585.00' -> 2585.0；空白、'--'、'---' -> None"""
+    """'2,585.00' -> 2585.0; blanks, '--' and '---' -> None."""
     try:
         return float(str(x).replace(",", "").strip())
     except ValueError:
@@ -36,85 +37,92 @@ def _pick(row, names):
     return None
 
 
-def parse_rows(rows, code_keys, close_keys, change_keys):
-    out = {}
+def _roc_date(s):
+    """'1151022' (ROC) or '20261022' -> '2026-10-22'; anything else -> None."""
+    s = str(s or "").strip()
+    try:
+        if len(s) == 7:
+            return f"{int(s[:3]) + 1911}-{s[3:5]}-{s[5:7]}"
+        if len(s) == 8:
+            return f"{s[:4]}-{s[4:6]}-{s[6:8]}"
+    except ValueError:
+        pass
+    return None
+
+
+def parse_rows(rows, code_keys, close_keys, change_keys, date_keys=("Date",)):
+    out, dates = {}, set()
     for r in rows:
-        code = _pick(r, code_keys)
-        close = _num(_pick(r, close_keys))
-        if not code or not close:      # 沒成交 / 沒收盤價就跳過
+        d = _roc_date(_pick(r, date_keys))
+        if d:
+            dates.add(d)
+        code, close = _pick(r, code_keys), _num(_pick(r, close_keys))
+        if not code or not close:            # no trade / no close -> skip
             continue
         chg = _num(_pick(r, change_keys))
         prev = close - chg if chg is not None else None
-        out[str(code).strip()] = {
-            "close": close,
-            "change_pct": round(chg / prev * 100, 2) if prev else None,
-        }
-    return out
+        out[str(code).strip()] = {"close": close,
+                                  "change_pct": round(chg / prev * 100, 2) if prev and prev > 0 else None}
+    return out, dates
 
 
-def get_json(url):
-    r = requests.get(url, timeout=30, headers={"User-Agent": "Mozilla/5.0", "Accept": "application/json"})
-    r.raise_for_status()
-    return r.json()
+def fetch_prices(counter: Counter):
+    """Fetch both exchanges in parallel."""
+    with ThreadPoolExecutor(2) as ex:
+        f1 = ex.submit(http_get_json, TWSE_URL, None, None, 30, 2, counter)
+        f2 = ex.submit(http_get_json, TPEX_URL, None, None, 30, 2, counter)
+        rows_twse, rows_tpex = f1.result(), f2.result()
+    twse, d1 = parse_rows(rows_twse, ["Code"], ["ClosingPrice"], ["Change"])
+    tpex, d2 = parse_rows(rows_tpex, ["SecuritiesCompanyCode"], ["Close"], ["Change"])
+    return twse, tpex, d1 | d2
 
 
-def fetch_prices():
-    twse = parse_rows(get_json(TWSE_URL), ["Code"], ["ClosingPrice"], ["Change"])
-    tpex = parse_rows(get_json(TPEX_URL), ["SecuritiesCompanyCode"], ["Close"], ["Change"])
-    return twse, tpex
+def main(trade_date: str, as_of_date: str) -> dict:
+    universe = load_universe()
+    counter = Counter()
+    twse, tpex, dates = fetch_prices(counter)
 
+    # Stale-data guard: if the API reports a date it must be the settlement date.
+    if dates and dates != {as_of_date}:
+        raise RuntimeError(f"exchange data is dated {sorted(dates)}, expected {as_of_date}; "
+                           "prices are stale or already roll-forwarded")
 
-def main(trade_date, as_of_date):
-    # Updated to read the AI agent config format
-    agent_config = json.loads((ROOT / "config/ticker_list.json").read_text(encoding="utf-8"))
-    ticker_list = agent_config.get("tickers", [])
-    
-    twse, tpex = fetch_prices()
-    now = datetime.now(TW).isoformat(timespec="seconds")
-
+    now = iso(now_tw())
     prices, missing = {}, []
-    
-    # Loop through the new array structure
-    for item in ticker_list:
-        code = str(item.get("Ticker")).strip()
-        name = str(item.get("Name")).strip()
-        
-        if code == "證券代號":  # Skip accidental headers from excel
-            continue
-            
-        # Dynamically determine the market since it's no longer in the JSON
-        if code in twse:
-            prices[code] = {"name": name, "market": "twse", **twse[code]}
-        elif code in tpex:
-            prices[code] = {"name": name, "market": "tpex", **tpex[code]}
+    for code, name in universe.names.items():
+        src = twse if universe.markets[code] == "twse" else tpex
+        other = tpex if src is twse else twse
+        row = src.get(code) or other.get(code)   # tolerate a wrong market tag
+        if row:
+            prices[code] = {"name": name, "market": universe.markets[code], **row}
         else:
             missing.append(code)
 
-    content_as_of = f"{as_of_date}T18:30:00+08:00"   # 這份資料「描述的時點」
+    content_as_of = f"{as_of_date}T18:30:00+08:00"   # the moment the content describes
     data = {
-        "trade_date": trade_date,
-        "as_of_date": as_of_date,
-        "fetched_at": now,
+        "trade_date": trade_date, "as_of_date": as_of_date, "fetched_at": now,
+        "tool_calls": counter.n,
         "sources": [
-            {"authority": "twse", "name": "TWSE 上市個股日收盤價 (OpenAPI STOCK_DAY_ALL)",
-             "url": TWSE_URL, "content_as_of": content_as_of, "fetched_at": now},
-            {"authority": "tpex", "name": "TPEx 上櫃個股日收盤價 (OpenAPI)",
-             "url": TPEX_URL, "content_as_of": content_as_of, "fetched_at": now},
+            {"authority": "twse", "name": "TWSE 上市個股日收盤價 (OpenAPI STOCK_DAY_ALL)", "url": TWSE_URL,
+             "content_as_of": content_as_of, "fetched_at": now},
+            {"authority": "tpex", "name": "TPEx 上櫃個股日收盤價 (OpenAPI)", "url": TPEX_URL,
+             "content_as_of": content_as_of, "fetched_at": now},
         ],
-        "prices": prices,
-        "missing": missing,
+        "prices": prices, "missing": missing,
     }
     out_dir = ROOT / "inputs" / trade_date
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / "market_data.json").write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
 
-    print(f"抓到 {len(prices)}/150 檔收盤價；缺 {len(missing)} 檔: {missing}")
+    print(f"Fetched {len(prices)}/{UNIVERSE_SIZE} closes; missing {len(missing)}: {missing}")
+    if not dates:
+        print("  note: API returned no date field, so date freshness was not verified (check 2330 manually)")
     for c in ("2330", "2454", "2891"):
         if c in prices:
-            print(f"  抽查 {c} {prices[c]['name']}: 收盤 {prices[c]['close']}  ({prices[c]['change_pct']}%)")
-    print("請拿 2330 的收盤價跟 Yahoo/證交所網站對一下，確認是 as_of_date 當天。")
+            print(f"  spot check {c} {prices[c]['name']}: close {prices[c]['close']} ({prices[c]['change_pct']}%)")
     if missing:
-        print("!!! 缺價的股票今天不要買 !!!")
+        print("!!! Do NOT buy stocks without a price today !!!")
+    return data
 
 
 if __name__ == "__main__":
