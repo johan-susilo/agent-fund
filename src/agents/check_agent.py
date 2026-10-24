@@ -17,6 +17,35 @@ from derive_orders import derive_orders, project_portfolio
 from settings import CONFIG_DIR, OFFICIAL, SUBMIT_CLOSE, SUBMIT_OPEN, TW, Limits
 from util import parse_ts
 
+REDUCE_CAP = 0.04   # weight cap for tickers the risk manager marks REDUCE (2330 is exempt: it is the anchor)
+
+
+# ===================================================== risk-manager overrides (shared helpers)
+def risk_maps(risk_ctx) -> dict:
+    """Normalise the risk manager output into ticker sets: VETO / REDUCE / WARN / EXDIV."""
+    out = {"VETO": set(), "REDUCE": set(), "WARN": set(), "EXDIV": set()}
+    if not risk_ctx:
+        return out
+    for o in (risk_ctx.get("structured_risk") or {}).get("overrides", []) or []:
+        t, a = str(o.get("ticker", "")).strip(), o.get("action")
+        if a in ("VETO", "REDUCE", "WARN") and re.fullmatch(r"\d{4}", t):
+            out[a].add(t)
+    flags = risk_ctx.get("event_flags") or {}
+    out["VETO"] |= set(flags.get("disposition_tickers", []))      # 處置股 are always vetoed
+    out["EXDIV"] = set(flags.get("ex_dividend_tickers", []))
+    out["REDUCE"].discard("2330")
+    return out
+
+
+def check_risk_overrides(weights: dict, held: dict, rm: dict) -> list:
+    """weights: {ticker: target_weight} of the proposed portfolio."""
+    errs = []
+    for t in sorted(weights):
+        if t in rm["VETO"]:
+            errs.append(f"{t} is VETO'd by the risk manager (disposition / severe risk): "
+                        + ("exit it" if t in held else "do not buy it"))
+    return errs
+
 
 # ===================================================== pre-trade checks (internal, buffered limits)
 def active_share(port_w: dict, etf_w: dict, top: int = 15, normalize: bool = False) -> float:
@@ -53,6 +82,7 @@ def check_portfolio(report: dict, limits: Limits, state: dict | None = None) -> 
     if state is not None:
         errs += check_turnover(report, state, limits)
     return errs
+
 
 def check_posture(mv: dict, report: dict, limits: Limits) -> list:
     """The declared posture is a commitment: orders must match it."""
@@ -232,4 +262,3 @@ def final_gate(d: dict, state: dict, closes: dict, universe, limits: Limits, fil
     if any(not math.isfinite(v) for v in rep["weights"].values()):
         errs.append("non-finite weight in projection")
     return errs, warns
-

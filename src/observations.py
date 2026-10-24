@@ -5,6 +5,9 @@ Agents never talk to the D-Plan directly. Each returns a *fragment*
 (observations point to sources by index) and the EvidenceBook assigns the final S1.. / O1..
 ids in a fixed order. This keeps ids consecutive (required by the guide), deduplicates
 sources, and enforces the schema's size limits in one place.
+
+Robustness: when the observation budget (schema maxItems) is full, extra observations are
+DROPPED and counted in `book.dropped` instead of aborting the whole daily run.
 """
 from __future__ import annotations
 
@@ -16,6 +19,8 @@ from settings import MAX_OBS, MAX_SOURCES
 from util import cut
 
 SOURCE_KEYS = ("authority", "name", "url", "archive_url", "published_at", "content_as_of", "fetched_at")
+BIG_MOVE_PCT = 3.0              # |1-day move| worth surfacing for non-held stocks
+MAX_MOVERS = 12
 
 
 class EvidenceLimitError(RuntimeError):
@@ -62,6 +67,7 @@ class EvidenceBook:
         self.observations: list = []
         self.meta: dict = {}                 # obs_id -> {"level", "tickers"}
         self._src_key: dict = {}
+        self.dropped: int = 0                # observations refused because the budget was full
 
     # ---- registration -------------------------------------------------
     def add_source(self, s: dict) -> str:
@@ -83,7 +89,8 @@ class EvidenceBook:
         if not values:                       # schema requires at least one numeric value
             return None
         if len(self.observations) >= MAX_OBS:
-            raise EvidenceLimitError(f"more than {MAX_OBS} observations; reduce chunk count")
+            self.dropped += 1                # never abort the run for a full budget
+            return None
         oid = f"O{len(self.observations) + 1}"
         topic = re.sub(r"[^a-z0-9_]", "_", topic.lower())[:40]
         if not re.match(r"^[a-z]", topic):
@@ -121,7 +128,9 @@ def chunks(seq, n):
 
 
 def market_fragment(market: dict, state: dict, universe) -> dict:
-    """Facts from the official TWSE/TPEx close data: breadth, theme averages, per-stock closes."""
+    """Facts from the official TWSE/TPEx close data: breadth, theme averages, and the closes
+    that matter today (current holdings + unusually large movers). The full 150-stock table is
+    NOT emitted as evidence: it would burn the observation budget without helping decisions."""
     frag = new_fragment()
     idx = {s["authority"]: frag_add_source(frag, dict(s)) for s in market["sources"]}
     all_src = list(idx.values())
@@ -149,9 +158,12 @@ def market_fragment(market: dict, state: dict, universe) -> dict:
                 "values": {"avg_chg_pct": round(statistics.mean(cs), 2), "n": len(cs),
                            "up_count": sum(c > 0 for c in cs)}})
 
-    tickers = [t for t in universe.ordered() if t in prices] + \
-              [t for t in state["holdings"] if t not in universe.names and t in prices]
-    for group in chunks(tickers, 10):
+    held = [t for t in state["holdings"] if t in prices]
+    movers = sorted((t for t in universe.ordered()
+                     if t in prices and t not in held and prices[t].get("change_pct") is not None
+                     and abs(prices[t]["change_pct"]) >= BIG_MOVE_PCT),
+                    key=lambda t: -abs(prices[t]["change_pct"]))[:MAX_MOVERS]
+    for group in chunks(held + movers, 10):
         parts, vals = [], {}
         for t in group:
             p = prices[t]
@@ -162,5 +174,5 @@ def market_fragment(market: dict, state: dict, universe) -> dict:
                 vals[f"{t}_chg_pct"] = c
         frag["observations"].append({"src": all_src, "topic": "stock_close", "level": "stock",
                                      "tickers": list(group), "values": vals,
-                                     "statement": "前一交易日收盤與單日漲跌：" + "；".join(parts)})
+                                     "statement": "持股與大幅波動個股前一交易日收盤與漲跌：" + "；".join(parts)})
     return frag

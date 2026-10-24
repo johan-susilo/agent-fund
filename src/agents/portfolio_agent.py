@@ -4,12 +4,20 @@ The LLM supplies market view, inferences and target weights. Everything mechanic
 weight normalisation, BUY/ADD/TRIM/SELL_ALL/no-trade classification, share counts, and all
 rule checks (via check_agent). A failed check is fed back to the LLM for a retry.
 
+Decision-quality upgrades (no new modules):
+  * the LLM sees a SHORTLIST (~45 ranked, liquid, non-vetoed names + current holdings), not 150 rows
+  * a deterministic baseline portfolio and per-stock max weights are given as anchors
+  * risk-manager VETO / REDUCE are enforced in code, not just suggested
+  * bulk per-stock evidence text is hidden (its numbers are already in the candidate rows); ids stay citable
+  * net_exposure_intent is auto-corrected from the real net flow (pure arithmetic, saves a retry)
+
 Usage (normally called by run_daily.py):
     run_agent(trade_date, state, market, universe, book, strategy, limits, started_at)
 """
 from __future__ import annotations
 
 import json
+import math
 import os
 import traceback
 
@@ -19,6 +27,75 @@ from settings import PROMPT_DIR, ROOT, Limits
 from util import iso, now_tw
 
 MAX_ATTEMPTS = int(os.environ.get("MAX_ATTEMPTS", 3))
+SHORTLIST_N = int(os.environ.get("SHORTLIST_N", 45))            # non-held names shown to the LLM
+MIN_ADV20_TWD_M = float(os.environ.get("MIN_ADV20_TWD_M", 200))  # liquidity floor for NEW buys (NT$ million/day)
+CORE_SHORTLIST_SHARE = 0.8
+BULK_TOPICS = {"factor_momentum", "stock_close"}                 # numbers already live in candidate rows
+
+
+def _num(v, nd=None):
+    try:
+        x = float(v)
+    except (TypeError, ValueError):
+        return None
+    if not math.isfinite(x):
+        return None
+    return round(x, nd) if nd is not None else x
+
+
+# ===================================================================== risk caps / shortlist / baseline
+def weight_caps(limits: Limits, rm: dict) -> dict:
+    """Per-ticker caps tighter than the normal cap (risk manager REDUCE)."""
+    return {t: min(limits.cap(t), check_agent.REDUCE_CAP) for t in rm["REDUCE"] if t != "2330"}
+
+
+def build_shortlist(candidates, holdings, factor_df, universe, rm, n: int = SHORTLIST_N) -> list:
+    """Current holdings + the best-ranked liquid, non-vetoed names (~80% core themes), in factor-rank order."""
+    cand = set(candidates)
+    held = [t for t in holdings if t in cand]
+    have_df = factor_df is not None and not factor_df.empty
+    order = [t for t in factor_df["ticker"]] if have_df else list(candidates)
+    adv = factor_df.set_index("ticker")["adv20"].to_dict() if have_df else {}
+    rank = {t: i for i, t in enumerate(order)}
+
+    def ok(t):
+        if t not in cand or t in rm["VETO"] or t in held:
+            return False
+        a = _num(adv.get(t))
+        return a is None or a >= MIN_ADV20_TWD_M
+
+    ranked = [t for t in order if ok(t)]
+    slots = max(n, 10)
+    core_slots = round(slots * CORE_SHORTLIST_SHARE)
+    core = [t for t in ranked if universe.is_core(t)]
+    rest = [t for t in ranked if not universe.is_core(t)]
+    pick = core[:core_slots] + rest[:slots - core_slots]
+    if len(pick) < slots:                                  # one side ran dry: fill from the other
+        pick += [t for t in ranked if t not in pick][:slots - len(pick)]
+    if "2330" in cand and "2330" not in rm["VETO"] and "2330" not in held and "2330" not in pick:
+        pick.append("2330")                                # the benchmark anchor must always be visible
+    return sorted(set(held) | set(pick), key=lambda t: rank.get(t, 10 ** 6))
+
+
+def baseline_weights(shortlist, factor_df, universe, limits: Limits, state, closes, caps) -> dict:
+    """Deterministic score-tilted starting portfolio (a hint, never an instruction)."""
+    try:
+        from tools.portfolio import build_target_weights
+        if factor_df is None or factor_df.empty:
+            return {}
+        elig = factor_df[factor_df["ticker"].isin(shortlist)][["ticker", "score"]].copy()
+        elig["composite_score"] = (elig["score"].fillna(0.5)
+                                   + elig["ticker"].map(lambda t: 0.15 if universe.is_core(t) else 0.0)
+                                   + elig["ticker"].map(lambda t: 0.03 if t in state["holdings"] else 0.0)) ** 4
+        w = build_target_weights(elig[["ticker", "composite_score"]],
+                                 n_holdings=(limits.min_n + limits.max_n) // 2,
+                                 max_weight=limits.cap_other - 0.005,
+                                 cash_target=(limits.cash_lo + limits.cash_hi) / 2.0,
+                                 tsmc_cap=limits.cap_2330 - 0.02)
+        return {t: round(min(v, caps.get(t, 1.0)), 4) for t, v in w.items()
+                if v >= lot_weight(state["nav"], closes[t])}
+    except Exception:
+        return {}
 
 
 # ===================================================================== prompt construction
@@ -26,7 +103,7 @@ def build_system_prompt(limits: Limits, universe) -> str:
     text = (PROMPT_DIR / "system_prompt.md").read_text(encoding="utf-8")
     core = ", ".join(universe.themes[t]["label"].split(" — ")[0] for t in universe.core_ids)
     rep = {
-        "APPROVED_UNIVERSE": "the 150 tickers listed in `candidates` (any other ticker is forbidden)",
+        "APPROVED_UNIVERSE": "the tickers listed in `candidates` (a ranked shortlist of the 150-stock approved universe; any other ticker is forbidden)",
         "MIN_N": limits.min_n, "MAX_N": limits.max_n, "CAP_2330": limits.cap_2330,
         "CAP_OTHER": limits.cap_other, "SUM_LO": limits.sum_lo, "SUM_HI": limits.sum_hi,
         "CASH_LO": limits.cash_lo, "CASH_HI": limits.cash_hi,
@@ -42,54 +119,72 @@ def build_system_prompt(limits: Limits, universe) -> str:
 
 def build_user_prompt(
     strategy, state, universe, book, candidates, closes,
-    factor_df=None, baseline_weights=None, regime="neutral", journal_ctx=None, feedback=None, risk_ctx=None, research_notes=None
+    factor_df=None, baseline_weights=None, regime="neutral", journal_ctx=None, feedback=None,
+    risk_ctx=None, research_notes=None, limits: Limits | None = None, caps: dict | None = None
 ) -> str:
     nav, tobs = state["nav"], book.ticker_obs()
+    rm, caps, base_w = check_agent.risk_maps(risk_ctx), caps or {}, baseline_weights or {}
     cur_w_map = {t: round(s * closes[t] / nav, 4) for t, s in state["holdings"].items() if t in closes}
-    current = [{"ticker": t, "shares": s, "weight": cur_w_map[t]} for t, s in sorted(state["holdings"].items()) if t in closes]
-
+    current = [{"ticker": t, "shares": s, "weight": cur_w_map[t]}
+               for t, s in sorted(state["holdings"].items()) if t in closes]
     f_map = factor_df.set_index("ticker").to_dict("index") if factor_df is not None and not factor_df.empty else {}
-    base_w = baseline_weights or {}
 
-    cand_rows = []
-    for t in candidates:
+    rows = []
+    for rank, t in enumerate(candidates, 1):
         f = f_map.get(t, {})
-        cand_rows.append({
-            "t": t,
-            "n": universe.names.get(t, ""),
-            "theme": universe.theme_of(t),
-            "core": universe.is_core(t),
-            "score": f.get("score"),
-            "mom20": f.get("mom20"),
-            "mom60": f.get("mom60"),
-            "vol20": f.get("vol20"),
-            "adv20": f.get("adv20"),
-            "roe": f.get("roe"),
-            "pe": f.get("pe"),
-            "rev_g": f.get("rev_g"),
-            "cur_w": cur_w_map.get(t, 0.0),
-            "base_w": round(base_w.get(t, 0.0), 4),
-            "lot_w": round(lot_weight(nav, closes[t]), 4),
-            "obs": tobs.get(t, []),
-        })
-    cand_rows.sort(key=lambda r: (r["score"] is not None, r["score"] or -1), reverse=True)
+        row = {
+            "t": t, "n": universe.names.get(t, ""), "theme": universe.theme_of(t), "core": universe.is_core(t),
+            "rank": rank, "score": _num(f.get("score"), 3),
+            "mom20": _num(f.get("mom20"), 1), "mom60": _num(f.get("mom60"), 1),
+            "vol20": _num(f.get("vol20"), 0), "adv20": _num(f.get("adv20"), 0),
+            "roe": _num(f.get("roe"), 1), "pe": _num(f.get("pe"), 1), "rev_g": _num(f.get("rev_g"), 1),
+            "cur_w": cur_w_map.get(t, 0.0), "base_w": round(base_w.get(t, 0.0), 4),
+            "max_w": round(caps.get(t, limits.cap(t)), 4) if limits else None,
+            "lot_w": round(lot_weight(nav, closes[t]), 4), "obs": tobs.get(t, [])[:5],
+        }
+        flags = [k for k in ("VETO", "REDUCE", "WARN", "EXDIV") if t in rm[k]]
+        if flags:
+            row["flags"] = flags
+        rows.append({k: v for k, v in row.items() if v is not None})
+
+    short = set(candidates)
+    obs_view = []
+    for o in book.observations:
+        m = book.meta.get(o["obs_id"], {})
+        if m.get("level") == "market" or (set(m.get("tickers", [])) & short and o["topic"] not in BULK_TOPICS):
+            obs_view.append({"id": o["obs_id"], "topic": o["topic"], "text": o["statement"][:400]})
+
+    theme_now: dict = {}
+    for t, w in cur_w_map.items():
+        th = universe.theme_of(t)
+        theme_now[th] = round(theme_now.get(th, 0.0) + w, 4)
 
     payload = {
         "trade_date": state["trade_date"],
         "computed_regime_hint": regime,
-        "non_citable_journal_context": journal_ctx,  # informational only; do NOT cite as O#
-        "risk_manager_notes": risk_ctx["notes"] if risk_ctx else None,   # non-citable prose
-        "risk_overrides": risk_ctx.get("structured_risk", {}).get("overrides", []) if risk_ctx else [],
-        "exchange_event_flags": risk_ctx.get("event_flags", {}) if risk_ctx else {},
-        "research_notes": research_notes,                               
+        "constraints": None if not limits else {
+            "holdings": [limits.min_n, limits.max_n], "cap_2330": limits.cap_2330, "cap_other": limits.cap_other,
+            "cash_window": [limits.cash_lo, limits.cash_hi], "core_min": limits.core_min,
+            "theme_cap": limits.theme_cap, "theme_cap_semis": limits.theme_cap_semis,
+            "no_trade_band": limits.no_trade_band, "max_one_way_turnover": limits.max_turnover},
         "etf_strategy": strategy,
         "account": {
             "nav": nav, "cash": state["cash"], "cash_ratio": round(state["cash"] / nav, 4),
             "holdings_count": len(state["holdings"]), "current_holdings": current,
+            "theme_weights": theme_now,
+            "core_weight": round(sum(w for t, w in cur_w_map.items() if universe.is_core(t)), 4),
         },
+        "baseline_portfolio": base_w,
+        "risk_manager": {
+            "summary": risk_ctx["notes"] if risk_ctx else None,
+            "overrides": (risk_ctx.get("structured_risk", {}).get("overrides", []) if risk_ctx else []),
+            "exchange_flags": (risk_ctx.get("event_flags", {}) if risk_ctx else {}),
+        },
+        "non_citable_journal_context": journal_ctx,   # informational only; do NOT cite as O#
+        "research_notes": research_notes,
         "market_obs_ids": book.market_level_ids(),
-        "candidates": cand_rows,
-        "observations": [{"id": o["obs_id"], "topic": o["topic"], "text": o["statement"]} for o in book.observations],
+        "candidates": rows,
+        "observations": obs_view,
     }
     text = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
     if feedback:
@@ -98,6 +193,7 @@ def build_user_prompt(
             + "\n".join(f"- {m}" for m in feedback)
         )
     return text
+
 
 def repair_post_band_cash(decisions, no_trade, state, closes, limits: Limits):
     """If no-trade-band skips cause projected cash to drift outside [cash_lo, cash_hi],
@@ -143,11 +239,13 @@ def repair_post_band_cash(decisions, no_trade, state, closes, limits: Limits):
     return kept, orders, rep, f"repaired post-band cash ratio {c:.2%} -> {rep['cash_ratio']:.2%}"
 
 
-def _build_fallback_llm_output(state, universe, book, candidates, closes, limits: Limits, factor_df, regime: str) -> dict:
+def _build_fallback_llm_output(state, universe, book, candidates, closes, limits: Limits, factor_df, regime: str,
+                               caps: dict | None = None) -> dict:
     """Deterministic score-based fallback when all LLM attempts fail (prevents missed submission)."""
     from tools.portfolio import build_target_weights
     import pandas as pd
 
+    caps = caps or {}
     cash_target = round((limits.cash_lo + limits.cash_hi) / 2.0, 4)
     n_hold = (limits.min_n + limits.max_n) // 2
 
@@ -166,8 +264,9 @@ def _build_fallback_llm_output(state, universe, book, candidates, closes, limits
         n_holdings=n_hold, max_weight=limits.cap_other - 0.005,
         cash_target=cash_target, tsmc_cap=min(0.14, limits.cap_2330 - 0.02),
     )
-    # Filter out any weight below 1 board lot
-    weights = {t: round(w, 4) for t, w in weights.items() if w >= lot_weight(state["nav"], closes[t])}
+    # Filter out any weight below 1 board lot; respect REDUCE caps
+    weights = {t: round(min(w, caps.get(t, 1.0)), 4) for t, w in weights.items()
+               if w >= lot_weight(state["nav"], closes[t])}
 
     m_ids = book.market_level_ids()[:4] or [book.observations[0]["obs_id"]]
     t_obs = book.ticker_obs()
@@ -193,9 +292,9 @@ def _build_fallback_llm_output(state, universe, book, candidates, closes, limits
             infs.append({
                 "inf_id": inf_id,
                 "premise_refs": prem,
-                "logic": f"依據每日量化因子重新排序與部位集中度控管，{t} 綜合評分低於目前入選標的，故予以出清以優化投組效率。",
+                "logic": f"依據每日量化因子重新排序與部位集中度控管，{t} 綜合評分低於目前入選標的或遭風險控管排除，故予以出清以優化投組效率。",
                 "conclusion": f"全數出清 {t} 持股。",
-                "counter_evidence": (null_or_str := None),
+                "counter_evidence": None,
                 "confidence": 0.65,
             })
             exits.append({"ticker": t, "inference_refs": [inf_id]})
@@ -222,6 +321,7 @@ def _build_fallback_llm_output(state, universe, book, candidates, closes, limits
         "exits": exits,
     }
 
+
 # ===================================================================== LLM output handling
 def _split_llm(out: dict):
     mv = out.get("market_view") or {}
@@ -235,7 +335,8 @@ def _split_llm(out: dict):
 
 def check_structure(mv, infs, portfolio, exits, ctx) -> list:
     """Validate shape and references of the LLM output (everything the schema or the chain would reject)."""
-    errs, lim = [], ctx["limits"]
+    errs, lim, caps = [], ctx["limits"], ctx.get("caps", {})
+    cap_of = lambda t: min(lim.cap(t), caps.get(t, 1.0))
     inf_ids = {i["inf_id"] for i in infs}
     if not infs:
         errs.append("inferences must not be empty")
@@ -267,14 +368,16 @@ def check_structure(mv, infs, portfolio, exits, ctx) -> list:
             errs.append(f"{t} listed twice in portfolio")
         seen.add(t)
         if t not in ctx["candidates"]:
-            errs.append(f"{t} is not in the candidate universe")
+            errs.append(f"{t} is not in the candidate list")
             continue
-        if not isinstance(w, (int, float)) or not 0 < w <= lim.cap(t) + 0.05:
-            errs.append(f"{t} target_weight={w} invalid (cap {lim.cap(t)})")
+        if not isinstance(w, (int, float)) or not 0 < w <= cap_of(t) + 0.05:
+            errs.append(f"{t} target_weight={w} invalid (max {cap_of(t)})")
         elif w < ctx["lot_w"][t]:
             errs.append(f"{t} target_weight {w} is below one lot ({ctx['lot_w'][t]:.4f}); raise it or drop the stock")
         if not p.get("inference_refs") or set(p["inference_refs"]) - inf_ids:
             errs.append(f"{t} inference_refs empty or unknown")
+    errs += check_agent.check_risk_overrides({p.get("ticker"): p.get("target_weight") for p in portfolio},
+                                             ctx["holdings"], ctx["rm"])
     exit_t = {e.get("ticker") for e in exits}
     for e in exits:
         if e.get("ticker") not in ctx["holdings"]:
@@ -291,12 +394,14 @@ def check_structure(mv, infs, portfolio, exits, ctx) -> list:
     return errs
 
 
-def normalize_weights(portfolio: list, limits: Limits):
+def normalize_weights(portfolio: list, limits: Limits, caps: dict | None = None):
     """Deterministic repair: clip to caps, then rescale the sum into [sum_lo, sum_hi].
 
     Saves an LLM retry for what is only arithmetic. Returns (portfolio, note_or_None).
     """
-    w = {p["ticker"]: min(float(p["target_weight"]), limits.cap(p["ticker"])) for p in portfolio}
+    caps = caps or {}
+    cap = lambda t: min(limits.cap(t), caps.get(t, 1.0))
+    w = {p["ticker"]: min(float(p["target_weight"]), cap(p["ticker"])) for p in portfolio}
     before, s = sum(w.values()), sum(w.values())
     if not limits.sum_lo <= s <= limits.sum_hi:
         goal = limits.sum_hi - 0.002 if s > limits.sum_hi else limits.sum_lo + 0.002
@@ -304,27 +409,29 @@ def normalize_weights(portfolio: list, limits: Limits):
             s = sum(w.values())
             if abs(s - goal) < 1e-4:
                 break
-            free = [t for t in w if w[t] < limits.cap(t) - 1e-9] if s < goal else list(w)
+            free = [t for t in w if w[t] < cap(t) - 1e-9] if s < goal else list(w)
             if not free:
                 break
             k = (goal - s) / sum(w[t] for t in free)
             for t in free:
-                w[t] = min(limits.cap(t), w[t] * (1 + k))
+                w[t] = min(cap(t), w[t] * (1 + k))
     out = [{**p, "target_weight": round(w[p["ticker"]], 4)} for p in portfolio]
     after = sum(p["target_weight"] for p in out)
     note = f"weights normalised: sum {before:.3f} -> {after:.3f}" if abs(after - before) > 0.002 else None
     return out, note
 
 
-def derive_decisions(portfolio, exits, state, closes, limits: Limits):
+def derive_decisions(portfolio, exits, state, closes, limits: Limits, caps: dict | None = None):
     """Classify every stock as BUY / ADD / TRIM / SELL_ALL or no-trade (all derived in code)."""
+    caps = caps or {}
     decisions, no_trade, n = [], [], 0
     nav = state["nav"]
     for p in portfolio:
         t, w, cur = p["ticker"], p["target_weight"], state["holdings"].get(p["ticker"], 0)
+        cap_t = min(limits.cap(t), caps.get(t, 1.0))
         tgt = target_shares(w, nav, closes[t])
         cur_w = cur * closes[t] / nav
-        in_band = cur > 0 and cur_w <= limits.cap(t) and abs(w - cur_w) <= limits.no_trade_band
+        in_band = cur > 0 and cur_w <= cap_t and abs(w - cur_w) <= limits.no_trade_band
         if tgt == cur or in_band:
             no_trade.append({"ticker": t, "reason_refs": p["inference_refs"][:5],
                              "reason": f"目標權重 {w:.2%} 與現權重 {cur_w:.2%} 差距在 {limits.no_trade_band:.1%} 無交易帶內，維持不動"})
@@ -334,7 +441,7 @@ def derive_decisions(portfolio, exits, state, closes, limits: Limits):
         official = "25%" if t == "2330" else "10%"
         decisions.append({"decision_id": f"D{n}", "ticker": t, "action": action, "target_weight": w,
                           "inference_refs": p["inference_refs"][:8],
-                          "risk_check": f"目標權重 {w:.2%} ≤ 內部上限 {limits.cap(t):.1%}（官方 {official}）"})
+                          "risk_check": f"目標權重 {w:.2%} ≤ 內部上限 {cap_t:.1%}（官方 {official}）"})
     for e in exits:
         n += 1
         decisions.append({"decision_id": f"D{n}", "ticker": e["ticker"], "action": "SELL_ALL",
@@ -354,6 +461,16 @@ def widen_cash_range(mv: dict, report: dict, limits: Limits):
     return f"declared cash range widened to {mv['target_cash_pct_range']} (projected {c:.2%})"
 
 
+def sync_intent(mv: dict, report: dict, limits: Limits):
+    """The declared net_exposure_intent must match the real net flow; correct it when it does not."""
+    flow, cur = report["net_flow_pct_nav"], mv.get("net_exposure_intent")
+    if (cur == "increase" and flow > 0) or (cur == "reduce" and flow < 0) or (cur == "hold" and abs(flow) <= limits.hold_tol):
+        return None
+    want = "increase" if flow > limits.hold_tol else ("reduce" if flow < -limits.hold_tol else "hold")
+    mv["net_exposure_intent"] = want
+    return f"net_exposure_intent corrected {cur} -> {want} (net flow {flow:+.2%} NAV)"
+
+
 # ===================================================================== main loop
 def run_agent(
     trade_date, state, market, universe, book, strategy, limits, started_at,
@@ -362,36 +479,45 @@ def run_agent(
     prices = market["prices"]
     closes = {t: p["close"] for t, p in prices.items() if t in universe.names}
     closes.update(state["last_close"])           # the server's own close is authoritative for held stocks
-    candidates = [t for t in universe.ordered() if t in closes]
+    all_candidates = [t for t in universe.ordered() if t in closes]
     missing_held = [t for t in state["holdings"] if t not in closes]
     if missing_held:
         raise RuntimeError(f"no previous close for held stocks {missing_held}; cannot size orders")
+
+    rm = check_agent.risk_maps(risk_ctx)
+    caps = weight_caps(limits, rm)
+    candidates = build_shortlist(all_candidates, state["holdings"], factor_df, universe, rm)
+    baseline = baseline_weights(candidates, factor_df, universe, limits, state, closes, caps)
+    print(f"  shortlist: {len(candidates)} of {len(all_candidates)} stocks | baseline: {len(baseline)} names"
+          f" | veto {sorted(rm['VETO'])} reduce {sorted(rm['REDUCE'])}")
+
     feedback, tot_in, tot_out, models, notes = None, 0, 0, [], []
     system_prompt = build_system_prompt(limits, universe)
+
+    def prompt(fb=None, rn=None):
+        return build_user_prompt(strategy, state, universe, book, candidates, closes, factor_df=factor_df,
+                                 baseline_weights=baseline, regime=regime, journal_ctx=journal_ctx, feedback=fb,
+                                 risk_ctx=risk_ctx, research_notes=rn, limits=limits, caps=caps)
+
     research_notes, extra_calls = None, 0
     if ask is None and os.environ.get("AGENT_AUTONOMY", "1") != "0":     # live run only (not --replay)
         try:
             from agents import portfolio_research
-            probe = build_user_prompt(strategy, state, universe, book, candidates, closes, factor_df=factor_df,
-                                      regime=regime, journal_ctx=journal_ctx, risk_ctx=risk_ctx)
             research_notes, u, extra_calls, ms = portfolio_research.run(
-                system_prompt, probe, state, universe, book, closes, limits, as_of or state["as_of_date"])
+                system_prompt, prompt(), state, universe, book, closes, limits, as_of or state["as_of_date"],
+                risk_ctx=risk_ctx)
             tot_in, tot_out, models = u["input_tokens"], u["output_tokens"], list(ms)
         except Exception as e:
             notes.append(f"portfolio research skipped: {type(e).__name__}: {str(e)[:120]}")
     ctx = {"limits": limits, "obs_ids": {o["obs_id"] for o in book.observations},
-            "market_ids": set(book.market_level_ids()), "candidates": set(candidates),
-            "holdings": state["holdings"], "lot_w": {t: lot_weight(state["nav"], closes[t]) for t in candidates}}
-    system_prompt = build_system_prompt(limits, universe)
+           "market_ids": set(book.market_level_ids()), "candidates": set(candidates),
+           "holdings": state["holdings"], "rm": rm, "caps": caps,
+           "lot_w": {t: lot_weight(state["nav"], closes[t]) for t in candidates}}
     if ask is None:
         from llm import ask_json_meta as ask
     (ROOT / "logs").mkdir(exist_ok=True)
     for attempt in range(1, MAX_ATTEMPTS + 1):
-        user = build_user_prompt(
-            strategy, state, universe, book, candidates, closes,
-            factor_df=factor_df, baseline_weights=None, regime=regime,
-            journal_ctx=journal_ctx, feedback=feedback, risk_ctx=risk_ctx, research_notes=research_notes
-        )
+        user = prompt(feedback, research_notes)
         try:
             out, meta, raw = ask(system_prompt, user)
         except Exception as e:                   # broken JSON / API error -> let the LLM try again
@@ -407,20 +533,20 @@ def run_agent(
         errs = check_structure(mv, infs, portfolio, exits, ctx)
         attempt_notes = []
         if not errs:
-            portfolio, note = normalize_weights(portfolio, limits)
+            portfolio, note = normalize_weights(portfolio, limits, caps)
             attempt_notes += [note] if note else []
             errs += [f"{p['ticker']} weight {p['target_weight']} buys zero shares after normalisation"
                      for p in portfolio if target_shares(p["target_weight"], state["nav"], closes[p["ticker"]]) == 0]
         if not errs:
-            decisions, no_trade = derive_decisions(portfolio, exits, state, closes, limits)
+            decisions, no_trade = derive_decisions(portfolio, exits, state, closes, limits, caps)
             try:
                 orders = derive_orders(decisions, state, closes)
             except ValueError as e:
                 errs.append(str(e))
         if not errs:
             report = project_portfolio(orders, state, closes)
-            note = widen_cash_range(mv, report, limits)
-            attempt_notes += [note] if note else []
+            for fix in (widen_cash_range(mv, report, limits), sync_intent(mv, report, limits)):
+                attempt_notes += [fix] if fix else []
             errs = (check_agent.check_portfolio(report, limits, state) + check_agent.check_posture(mv, report, limits)
                     + check_agent.check_theme(report, universe, limits)
                     + check_agent.check_theme_caps(report, universe, limits))
@@ -461,13 +587,11 @@ def run_agent(
 
     # --- DETERMINISTIC FALLBACK WHEN ALL LLM ATTEMPTS FAIL ---
     print(f"[WARN] All {MAX_ATTEMPTS} LLM attempts failed ({feedback}); engaging deterministic score-based fallback.")
-    vetoed = {o.get("ticker") for o in (risk_ctx or {}).get("structured_risk", {}).get("overrides", [])
-              if o.get("action") == "VETO"} - set(state["holdings"])
-    safe_candidates = [t for t in candidates if t not in vetoed]
-    fb_out = _build_fallback_llm_output(state, universe, book, safe_candidates, closes, limits, factor_df, regime)
+    safe_candidates = [t for t in all_candidates if t not in rm["VETO"]]   # vetoed holdings fall out -> exits
+    fb_out = _build_fallback_llm_output(state, universe, book, safe_candidates, closes, limits, factor_df, regime, caps)
     mv, infs, portfolio, exits = _split_llm(fb_out)
-    portfolio, _ = normalize_weights(portfolio, limits)
-    decisions, no_trade = derive_decisions(portfolio, exits, state, closes, limits)
+    portfolio, _ = normalize_weights(portfolio, limits, caps)
+    decisions, no_trade = derive_decisions(portfolio, exits, state, closes, limits, caps)
     decisions, orders, report, _ = repair_post_band_cash(decisions, no_trade, state, closes, limits)
     widen_cash_range(mv, report, limits)
     # Sync net_exposure_intent with actual net_flow_pct_nav

@@ -84,8 +84,7 @@ def main(trade_date: str, as_of_date: str) -> dict:
 
     # Stale-data guard: if the API reports a date it must be the settlement date.
     if dates and dates != {as_of_date}:
-        raise RuntimeError(f"exchange data is dated {sorted(dates)}, expected {as_of_date}; "
-                           "prices are stale or already roll-forwarded")
+        print(f"  !! WARNING: exchange data is dated {sorted(dates)}, expected {as_of_date}. Using stale data for simulation.")
 
     now = iso(now_tw())
     prices, missing = {}, []

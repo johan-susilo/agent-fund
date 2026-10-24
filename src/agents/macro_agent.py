@@ -244,6 +244,20 @@ def collect(trade_date: str, refresh: bool = False) -> dict:
         write_cache(cache, frag)
     return frag
 
+def _taifex_noi(trade_date, counter):
+    # 使用期交所 OpenAPI 或第三方 API 取得外資淨未平倉口數
+    # 這裡以概念性 API 為例，你需要換成實際可用的 Endpoint
+    counter.inc()
+    try:
+        js = http_get_json("https://openapi.taifex.com.tw/v1/ForeignInstNOI", counter=counter)
+        # 假設解析後得到外資淨未平倉口數為 -32000
+        noi_value = float(js[0].get("net_oi", 0))
+    except Exception:
+        return [], ["TAIFEX NOI fetch failed"]
+
+    src = {"authority": "vendor", "name": "TAIFEX 外資期貨未平倉", "url": "https://www.taifex.com.tw", "content_as_of": iso(now_tw()), "fetched_at": iso(now_tw())}
+    stmt = f"外資台股期貨淨未平倉量為 {noi_value:g} 口"
+    return [(src, stmt, {"foreign_noi": noi_value}, "macro_foreign_noi")], []
 
 if __name__ == "__main__":
     import json

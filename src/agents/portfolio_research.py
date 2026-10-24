@@ -12,12 +12,15 @@ ADDENDUM = """
 RESEARCH MODE (this turn only): do NOT output the final JSON. You may call tools to verify evidence,
 check events (ex-dividend, halts, earnings, export controls), pull price data for any ticker, and call
 validate_plan with a draft [{ticker, target_weight}] to test it against the rules (holding count, caps,
-cash window, core-theme minimum, per-theme caps, turnover). Fact tools return an obs_id you may cite later.
-End with a short plain-text note: draft idea, key evidence, open risks."""
+cash window, core-theme minimum, per-theme caps, turnover, risk-manager vetoes). Start from
+`baseline_portfolio`. Fact tools return an obs_id you may cite later.
+End with a short plain-text note (<=120 words): draft idea, key evidence, open risks."""
 
 
-def _validate_tool(state, universe, closes, limits):
+def _validate_tool(state, universe, closes, limits, risk_ctx=None):
     from agents import check_agent, portfolio_agent as pa
+    rm = check_agent.risk_maps(risk_ctx)
+    caps = pa.weight_caps(limits, rm)
 
     def fn(portfolio: list):
         p = [{"ticker": str(x["ticker"]), "target_weight": float(x["target_weight"]), "inference_refs": ["I1"]}
@@ -25,13 +28,15 @@ def _validate_tool(state, universe, closes, limits):
         bad = [x["ticker"] for x in p if x["ticker"] not in closes or x["ticker"] not in universe.names]
         if bad:
             return {"errors": [f"not in universe / no price: {bad}"]}
-        p, _ = pa.normalize_weights(p, limits)
+        p, _ = pa.normalize_weights(p, limits, caps)
         keep = {x["ticker"] for x in p}
         exits = [{"ticker": t, "inference_refs": ["I1"]} for t in state["holdings"] if t not in keep]
-        decisions, _ = pa.derive_decisions(p, exits, state, closes, limits)
+        decisions, _ = pa.derive_decisions(p, exits, state, closes, limits, caps)
         rep = project_portfolio(derive_orders(decisions, state, closes), state, closes)
         errs = (check_agent.check_portfolio(rep, limits, state) + check_agent.check_theme(rep, universe, limits)
-                + check_agent.check_theme_caps(rep, universe, limits))
+                + check_agent.check_theme_caps(rep, universe, limits)
+                + check_agent.check_risk_overrides({x["ticker"]: x["target_weight"] for x in p},
+                                                   state["holdings"], rm))
         return {"errors": errs, "holdings_count": rep["holdings_count"], "cash_ratio": round(rep["cash_ratio"], 4),
                 "net_flow_pct_nav": round(rep["net_flow_pct_nav"], 4),
                 "core_weight": round(sum(w for t, w in rep["weights"].items() if universe.is_core(t)), 4),
@@ -42,10 +47,10 @@ def _validate_tool(state, universe, closes, limits):
                     "ticker": {"type": "STRING"}, "target_weight": {"type": "NUMBER"}}}}}, fn, ["portfolio"])
 
 
-def run(system_prompt, user_prompt, state, universe, book, closes, limits, as_of):
+def run(system_prompt, user_prompt, state, universe, book, closes, limits, as_of, risk_ctx=None):
     counter = Counter()
     tools = web_tools.build_tools(web_tools.book_emit(book), trade_date=state["trade_date"], as_of=as_of,
                                   universe=universe, counter=counter, obs_cap=3)
-    tools.append(_validate_tool(state, universe, closes, limits))
+    tools.append(_validate_tool(state, universe, closes, limits, risk_ctx))
     text, usage, _, models = run_agent_loop(system_prompt + ADDENDUM, user_prompt, tools, max_steps=8, max_calls=12)
     return text[:2000], usage, counter.n, models

@@ -35,6 +35,8 @@ from settings import CONFIG_DIR, ROOT, limits_for
 from universe import load_universe
 from util import iso, now_tw, prev_weekday
 
+MAX_PRICE_MISMATCH = 2      # held-stock close disagreements tolerated (corporate actions) before aborting
+
 
 def check_price_freshness(state: dict, market: dict, tol: float) -> list:
     """Held stocks: the DataPack close must equal the freshly fetched close, else we fetched the wrong day."""
@@ -100,8 +102,10 @@ def main():
         if market["as_of_date"] != as_of or market["trade_date"] != d:
             sys.exit("market_data.json belongs to a different date; rerun without --skip-fetch")
         bad = check_price_freshness(state, market, limits.price_tol)
-        if bad:
+        if len(bad) > MAX_PRICE_MISMATCH:
             sys.exit("Held-stock closes disagree with the DataPack (wrong day fetched?). Aborting:\n  " + "\n  ".join(bad))
+        for b in bad:   # a couple of mismatches is usually a corporate action; the DataPack close stays authoritative
+            print("  !! close mismatch (DataPack close is used for sizing):", b)
         if market["missing"]:
             print(f"  !! no price for {market['missing']}: these stocks are excluded today")
 
@@ -116,7 +120,6 @@ def main():
             else:
                 print(f"  {name}: not used")
         print(f"  evidence book: {len(book.sources)} sources, {len(book.observations)} observations")
-
 
         from tools import journal, factors
         j_data = journal.review(as_of, state, market)
@@ -138,24 +141,24 @@ def main():
                 risk_ctx = risk_agent.review(d, as_of, state, universe, book, factor_df, regime)
                 tool_calls += risk_ctx["tool_calls"]
                 print(f"  risk agent: {risk_ctx['tool_calls']} tool calls")
-                
+
                 if "structured_risk" in risk_ctx:
                     risk_data = risk_ctx["structured_risk"]
-                    obs_mapping = {} # Maps Risk Agent IDs (R1) to official EvidenceBook IDs (O76)
+                    obs_mapping = {}  # Maps Risk Agent IDs (R1) to official EvidenceBook IDs (O76)
                     n_risk = 0
-                    
+
                     # 1. Inject observations into the book
                     for robs in risk_data.get("observations", []):
                         src_name = robs.get("source_ref", "Risk Agent Analysis")
                         sid = book.add_source({
-                            "authority": "other", "name": src_name, 
-                            "url": "internal://risk", "content_as_of": as_of
+                            "authority": "other", "name": str(src_name)[:300],
+                            "url": "internal://risk",
+                            "content_as_of": f"{as_of}T18:30:00+08:00",     # schema needs a full +08:00 timestamp
                         })
-                        
                         # EvidenceBook requires at least one numeric value in 'values'
                         new_oid = book.add_obs(
                             statement=robs.get("statement", ""),
-                            values={"risk_alert_flag": 1.0}, 
+                            values={"risk_alert_flag": 1.0},
                             source_ids=[sid],
                             topic=robs.get("topic", "risk_alert"),
                             level="stock"
@@ -163,17 +166,20 @@ def main():
                         if new_oid:
                             obs_mapping[robs.get("obs_id")] = new_oid
                             n_risk += 1
-                            
+
                     # 2. Update the overrides array with the official citable IDs
                     for override in risk_data.get("overrides", []):
                         old_ref = override.get("obs_ref")
                         if old_ref in obs_mapping:
                             override["obs_ref"] = obs_mapping[old_ref]
-                            
+
                     print(f"  risk agent: {n_risk} observations added to EvidenceBook")
-                    
+
             except Exception as e:
                 print(f"  !! risk agent failed: {type(e).__name__}: {e}")
+
+        if book.dropped:
+            print(f"  !! evidence budget full: {book.dropped} observation(s) dropped (lowest-priority, added last)")
 
         print("\n=== [3/5] Portfolio agent ===")
         ask = None

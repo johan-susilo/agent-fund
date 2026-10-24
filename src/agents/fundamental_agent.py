@@ -2,8 +2,10 @@
 
 Deterministic part (no LLM):
   * price factors for the 150 stocks (20d/60d momentum, 20d volatility, 20d traded value)
-  * official TWSE/TPEx/MOPS P/E, P/B, monthly-revenue YoY, net margin (previously never filled in)
+  * official TWSE/TPEx/MOPS P/E, P/B, monthly-revenue YoY, net margin
   * market-level observation: median monthly-revenue YoY of the core AI/semiconductor themes
+  * the FULL-universe fundamentals are stashed in frag["fundamentals"] so the factor table ranks every
+    stock on the same data; only the best-ranked stocks (plus holdings) get citable observations.
 LLM part: `research()` lets the model call tools to fill gaps (events, estimate revisions, outliers).
 """
 from __future__ import annotations
@@ -83,10 +85,15 @@ def _code(r):
             return str(r[k]).strip()
     return ""
 
+
 def _fetch_official_fundamentals(trade_date, universe, counter) -> dict:
     infos = {t: {} for t in universe.names}
+    TWSE_MARGIN_URL = "https://openapi.twse.com.tw/v1/exchangeReport/MI_MARGN"
+    TPEX_MARGIN_URL = "https://www.tpex.org.tw/openapi/v1/tpex_mainboard_margin_trading"
+    
     jobs = [("twse_val", TWSE_VAL_URL), ("tpex_val", TPEX_VAL_URL),
-            ("twse_inst", TWSE_INST_URL), ("tpex_inst", TPEX_INST_URL)] \
+            ("twse_inst", TWSE_INST_URL), ("tpex_inst", TPEX_INST_URL),
+            ("twse_margin", TWSE_MARGIN_URL), ("tpex_margin", TPEX_MARGIN_URL)] \
         + [(f"mops_rev{i}", u) for i, u in enumerate(MOPS_REV_URLS)] \
         + [(f"mops_prof{i}", u) for i, u in enumerate(MOPS_PROF_URLS)]
     with ThreadPoolExecutor(8) as ex:
@@ -115,9 +122,12 @@ def _fetch_official_fundamentals(trade_date, universe, counter) -> dict:
                     if infos[code].get("pe") and infos[code].get("pb"):
                         infos[code].setdefault("roe", round((infos[code]["pb"] / infos[code]["pe"]) * 100.0, 2))
                 elif name.startswith("mops_rev"):
-                    yoy = _num_clean(_find(r, "去年同月增減", "YoY"))
+                    yoy = _num_clean(_find(r, "去年同月增減(%)", "YoY"))
+                    mom = _num_clean(_find(r, "上月比較增減(%)", "MoM"))
                     if yoy is not None:
                         infos[code]["rev_g"] = max(-0.80, min(2.00, yoy / 100.0))
+                    if mom is not None:
+                        infos[code]["rev_mom"] = max(-0.50, min(1.00, mom / 100.0))
                 elif name.startswith("mops_prof"):
                     m = _num_clean(_find(r, "稅後純益率", "NetIncome"))
                     gm = _num_clean(_find(r, "毛利率", "Gross"))
@@ -140,6 +150,7 @@ def _fetch_official_fundamentals(trade_date, universe, counter) -> dict:
                     if net_sh != 0.0:
                         infos[code]["inst_lots"] = round(net_sh / 1000.0, 0)
     return {t: d for t, d in infos.items() if d}
+
 
 def official_fundamentals(trade_date, universe, counter):
     if trade_date not in _OFFICIAL:
@@ -182,6 +193,21 @@ def research(trade_date, as_of_date, universe, holdings, frag, counter):
     frag["llm_usage"] = {**usage, "models": models}
 
 
+def _focus(holdings, universe, factors, infos) -> list:
+    """Which stocks get citable fundamental observations: holdings first, then the best-looking core
+    names (quick momentum + growth + ROE pre-score), plus a few non-core names for diversification."""
+    def quick(t):
+        f, r = factors.get(t, {}), infos.get(t, {})
+        return (0.4 * f.get("mom60", 0.0) + 0.2 * f.get("mom20", 0.0)
+                + 0.2 * r.get("rev_g", 0.0) * 100.0 + 0.2 * min(r.get("roe", 0.0), 40.0))
+    ranked = sorted((t for t in universe.names if t in infos), key=quick, reverse=True)
+    core = [t for t in ranked if universe.is_core(t)]
+    rest = [t for t in ranked if not universe.is_core(t)]
+    keep_rest = min(12, MAX_FUNDAMENTALS // 5)
+    order = list(holdings) + rest[:keep_rest] + core
+    return [t for t in dict.fromkeys(order) if t in infos][:MAX_FUNDAMENTALS]
+
+
 def collect(trade_date: str, as_of_date: str, universe, holdings, refresh: bool = False) -> dict:
     cache = ROOT / "inputs" / trade_date / "fundamental_fragment.json"
     if not refresh and (hit := read_cache(cache, CACHE_TTL_MIN)):
@@ -206,6 +232,7 @@ def collect(trade_date: str, as_of_date: str, universe, holdings, refresh: bool 
     except Exception as e:
         infos = {}
         frag["warnings"].append(f"official fundamentals failed: {type(e).__name__}: {str(e)[:120]}")
+    frag["fundamentals"] = infos          # full-universe stash for the factor table (not an observation)
 
     px_src = frag_add_source(frag, {"authority": "vendor", "url": YAHOO_URL, "fetched_at": now,
                                     "name": "Yahoo Finance 日線歷史價量（20/60日動能、波動、成交值）",
@@ -232,8 +259,7 @@ def collect(trade_date: str, as_of_date: str, universe, holdings, refresh: bool 
                      {"core_rev_yoy_median_pct": round(statistics.median(revs), 2), "n": len(revs),
                       "positive_count": sum(r > 0 for r in revs)}, "macro_semi_revenue", "market")
 
-    focus = list(dict.fromkeys(list(holdings) + core))[:MAX_FUNDAMENTALS]
-    for g in chunks([t for t in focus if t in infos], 10):
+    for g in chunks(_focus(holdings, universe, factors, infos), 10):
         stmt, vals = fmt_fundamentals(infos, g)
         frag_add_obs(frag, fd_src, stmt, vals, "factor_fundamental", "stock", g)
 

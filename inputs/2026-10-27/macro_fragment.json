@@ -1,0 +1,333 @@
+{
+ "sources": [
+  {
+   "authority": "vendor",
+   "name": "FRED DGS10: 美國 10 年期公債殖利率(%)",
+   "url": "https://fred.stlouisfed.org/series/DGS10",
+   "content_as_of": "2026-10-23T04:00:00+08:00",
+   "fetched_at": "2026-10-24T18:22:00+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "FRED VIXCLS: VIX 恐慌指數",
+   "url": "https://fred.stlouisfed.org/series/VIXCLS",
+   "content_as_of": "2026-10-23T04:00:00+08:00",
+   "fetched_at": "2026-10-24T18:22:00+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "FRED DEXTAUS: 美元兌新台幣(TWD/USD)",
+   "url": "https://fred.stlouisfed.org/series/DEXTAUS",
+   "content_as_of": "2026-10-17T04:00:00+08:00",
+   "fetched_at": "2026-10-24T18:22:00+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "FRED NASDAQCOM: 那斯達克綜合指數",
+   "url": "https://fred.stlouisfed.org/series/NASDAQCOM",
+   "content_as_of": "2026-10-24T04:00:00+08:00",
+   "fetched_at": "2026-10-24T18:22:00+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "Yahoo Finance (^SOX): 費城半導體指數 (SOX)",
+   "url": "https://finance.yahoo.com/quote/^SOX/",
+   "content_as_of": "2026-10-24T04:00:00+08:00",
+   "fetched_at": "2026-10-24T18:22:03+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "Yahoo Finance (TSM): 台積電 ADR (TSM)",
+   "url": "https://finance.yahoo.com/quote/TSM/",
+   "content_as_of": "2026-10-24T04:00:00+08:00",
+   "fetched_at": "2026-10-24T18:22:03+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "Yahoo Finance (NVDA): NVIDIA (NVDA) AI伺服器指標",
+   "url": "https://finance.yahoo.com/quote/NVDA/",
+   "content_as_of": "2026-10-24T04:00:00+08:00",
+   "fetched_at": "2026-10-24T18:22:03+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "Yahoo Finance (MU): Micron (MU) HBM與記憶體指標",
+   "url": "https://finance.yahoo.com/quote/MU/",
+   "content_as_of": "2026-10-24T04:00:00+08:00",
+   "fetched_at": "2026-10-24T18:22:03+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "Yahoo Finance (^VIX): VIX 波動率指數 (含20日均線比)",
+   "url": "https://finance.yahoo.com/quote/^VIX/",
+   "content_as_of": "2026-10-24T04:00:00+08:00",
+   "fetched_at": "2026-10-24T18:22:03+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "Yahoo Finance (^TWII): 台灣加權指數 (TAIEX)",
+   "url": "https://finance.yahoo.com/quote/^TWII/",
+   "content_as_of": "2026-10-22T13:30:00+08:00",
+   "fetched_at": "2026-10-24T18:22:03+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "Yahoo Finance (TWD=X): 美元兌台幣即期匯率 (USD/TWD)",
+   "url": "https://finance.yahoo.com/quote/TWD=X/",
+   "content_as_of": "2026-10-23T13:30:00+08:00",
+   "fetched_at": "2026-10-24T18:22:03+08:00"
+  },
+  {
+   "authority": "media",
+   "name": "Digitimes: PSMC eyes Taiwan, Japan, Singapore for 3D AI foundry expansion",
+   "url": "https://www.digitimes.com/news/a20261022PD249/psmc-3d-taiwan-production-revenue.html",
+   "archive_url": null,
+   "published_at": "2026-10-23T08:32:18+08:00",
+   "content_as_of": "2026-10-23T08:32:18+08:00",
+   "fetched_at": "2026-10-24T18:21:59+08:00"
+  },
+  {
+   "authority": "media",
+   "name": "The Times of India: Silver prices slide below Rs 2 lakh/kg, down nearly 55% from Jan peak. What’s behind the rapid selloff?",
+   "url": "https://economictimes.indiatimes.com/markets/commodities/news/silver-prices-slide-below-rs-2-lakh/kg-down-nearly-55-from-jan-peak-whats-behind-the-rapid-selloff/articleshow/135139949.cms",
+   "archive_url": null,
+   "published_at": "2026-10-23T16:20:53+08:00",
+   "content_as_of": "2026-10-23T16:20:53+08:00",
+   "fetched_at": "2026-10-24T18:21:59+08:00"
+  },
+  {
+   "authority": "media",
+   "name": "The Times of India: Nippon Silver ETF, other silver ETFs slide up to 4% as silver prices tumble. Here’s why",
+   "url": "https://economictimes.indiatimes.com/markets/stocks/news/nippon-silver-etf-other-silver-etfs-slide-up-to-4-as-silver-prices-tumble-heres-why/articleshow/135137769.cms",
+   "archive_url": null,
+   "published_at": "2026-10-23T14:41:17+08:00",
+   "content_as_of": "2026-10-23T14:41:17+08:00",
+   "fetched_at": "2026-10-24T18:21:59+08:00"
+  },
+  {
+   "authority": "media",
+   "name": "The Times of India: Gold price falls Rs 1,500/10g; silver plunges Rs 7,000/kg as soaring oil fuels rate hike bets. Time to sell?",
+   "url": "https://economictimes.indiatimes.com/markets/commodities/news/gold-price-falls-rs-1500/10g-silver-plunges-rs-7000/kg-as-soaring-oil-fuels-rate-hike-bets-time-to-sell/articleshow/135135987.cms",
+   "archive_url": null,
+   "published_at": "2026-10-23T13:39:32+08:00",
+   "content_as_of": "2026-10-23T13:39:32+08:00",
+   "fetched_at": "2026-10-24T18:21:59+08:00"
+  }
+ ],
+ "observations": [
+  {
+   "src": [
+    0
+   ],
+   "statement": "美國 10 年期公債殖利率(%) 2026-10-22 收 4.96（前一筆 5.13，變動 -17.00bp）",
+   "values": {
+    "us10y": 4.96,
+    "us10y_prev": 5.13,
+    "us10y_chg_bp": -17.0
+   },
+   "topic": "macro_us10y",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    1
+   ],
+   "statement": "VIX 恐慌指數 2026-10-22 收 19.03（前一筆 16.68，變動 +14.09%）",
+   "values": {
+    "vix": 19.03,
+    "vix_prev": 16.68,
+    "vix_chg_pct": 14.09
+   },
+   "topic": "macro_vix",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    2
+   ],
+   "statement": "美元兌新台幣(TWD/USD) 2026-10-16 收 32.4（前一筆 32.4，變動 +0.00%）",
+   "values": {
+    "usdtwd": 32.4,
+    "usdtwd_prev": 32.4,
+    "usdtwd_chg_pct": 0.0
+   },
+   "topic": "macro_usdtwd",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    3
+   ],
+   "statement": "那斯達克綜合指數 2026-10-23 收 25955.3（前一筆 26008.9，變動 -0.21%）",
+   "values": {
+    "nasdaq": 25955.34,
+    "nasdaq_prev": 26008.86,
+    "nasdaq_chg_pct": -0.21
+   },
+   "topic": "macro_nasdaq",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    4
+   ],
+   "statement": "費城半導體指數 (SOX) 2026-10-23 收 10779.5（前值 10732，單日 +0.44%，較20日均線 -11.2%）",
+   "values": {
+    "sox": 10779.46,
+    "sox_prev": 10731.98,
+    "sox_chg_pct": 0.44,
+    "sox_vs_ma20_pct": -11.21
+   },
+   "topic": "macro_sox",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    5
+   ],
+   "statement": "台積電 ADR (TSM) 2026-10-23 收 418.51（前值 412.35，單日 +1.49%，較20日均線 -6.1%）",
+   "values": {
+    "tsm_adr": 418.51,
+    "tsm_adr_prev": 412.35,
+    "tsm_adr_chg_pct": 1.49,
+    "tsm_adr_vs_ma20_pct": -6.08
+   },
+   "topic": "macro_tsm_adr",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    6
+   ],
+   "statement": "NVIDIA (NVDA) AI伺服器指標 2026-10-23 收 210.96（前值 212.21，單日 -0.59%，較20日均線 -6.5%）",
+   "values": {
+    "nvda": 210.96,
+    "nvda_prev": 212.21,
+    "nvda_chg_pct": -0.59,
+    "nvda_vs_ma20_pct": -6.47
+   },
+   "topic": "macro_nvda",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    7
+   ],
+   "statement": "Micron (MU) HBM與記憶體指標 2026-10-23 收 877.55（前值 856.49，單日 +2.46%，較20日均線 -11.1%）",
+   "values": {
+    "mu": 877.55,
+    "mu_prev": 856.49,
+    "mu_chg_pct": 2.46,
+    "mu_vs_ma20_pct": -11.05
+   },
+   "topic": "macro_mu",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    8
+   ],
+   "statement": "VIX 波動率指數 (含20日均線比) 2026-10-23 收 19.45（前值 19.03，單日 +2.21%，較20日均線 +17.6%）",
+   "values": {
+    "vix_yf": 19.45,
+    "vix_yf_prev": 19.03,
+    "vix_yf_chg_pct": 2.21,
+    "vix_yf_vs_ma20_pct": 17.62
+   },
+   "topic": "macro_vix_yf",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    9
+   ],
+   "statement": "台灣加權指數 (TAIEX) 2026-10-22 收 46041.4（前值 46887.8，單日 -1.81%，較20日均線 -4.2%）",
+   "values": {
+    "taiex": 46041.43,
+    "taiex_prev": 46887.77,
+    "taiex_chg_pct": -1.81,
+    "taiex_vs_ma20_pct": -4.22
+   },
+   "topic": "macro_taiex",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    10
+   ],
+   "statement": "美元兌台幣即期匯率 (USD/TWD) 2026-10-23 收 32.57（前值 32.3659，單日 +0.63%，較20日均線 +1.6%）",
+   "values": {
+    "usdtwd_spot": 32.57,
+    "usdtwd_spot_prev": 32.37,
+    "usdtwd_spot_chg_pct": 0.63,
+    "usdtwd_spot_vs_ma20_pct": 1.6
+   },
+   "topic": "macro_usdtwd_spot",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    11
+   ],
+   "statement": "Digitimes 報導：PSMC eyes Taiwan, Japan, Singapore for 3D AI foundry expansion",
+   "values": {
+    "published_hours_ago": 33.8
+   },
+   "topic": "news_semis",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    12
+   ],
+   "statement": "The Times of India 報導：Silver prices slide below Rs 2 lakh/kg, down nearly 55% from Jan peak. What’s behind the rapid selloff?",
+   "values": {
+    "published_hours_ago": 26.0
+   },
+   "topic": "news_macro",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    13
+   ],
+   "statement": "The Times of India 報導：Nippon Silver ETF, other silver ETFs slide up to 4% as silver prices tumble. Here’s why",
+   "values": {
+    "published_hours_ago": 27.7
+   },
+   "topic": "news_macro",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    14
+   ],
+   "statement": "The Times of India 報導：Gold price falls Rs 1,500/10g; silver plunges Rs 7,000/kg as soaring oil fuels rate hike bets. Time to sell?",
+   "values": {
+    "published_hours_ago": 28.7
+   },
+   "topic": "news_macro",
+   "level": "market",
+   "tickers": []
+  }
+ ],
+ "tool_calls": 7,
+ "warnings": [
+  "FINNHUB_API_KEY missing: economic calendar skipped",
+  "macro research agent failed: ReadError: [SSL: DECRYPTION_FAILED_OR_BAD_RECORD_MAC] decryption failed or bad record mac (_ssl.c:2590)"
+ ]
+}
