@@ -33,6 +33,7 @@ def build_system_prompt(limits: Limits, universe) -> str:
         "CASH_LO_PCT": f"{limits.cash_lo:.0%}", "CASH_HI_PCT": f"{limits.cash_hi:.0%}",
         "HOLD_TOL_PCT": f"{limits.hold_tol:.1%}", "CORE_MIN": f"{limits.core_min:.0%}",
         "BAND_PCT": f"{limits.no_trade_band:.1%}", "CORE_THEMES": core,
+        "THEME_CAP": f"{limits.theme_cap:.0%}", "THEME_CAP_SEMIS": f"{limits.theme_cap_semis:.0%}",
     }
     for k, v in rep.items():
         text = text.replace("{{" + k + "}}", str(v))
@@ -41,7 +42,7 @@ def build_system_prompt(limits: Limits, universe) -> str:
 
 def build_user_prompt(
     strategy, state, universe, book, candidates, closes,
-    factor_df=None, baseline_weights=None, regime="neutral", journal_ctx=None, feedback=None
+    factor_df=None, baseline_weights=None, regime="neutral", journal_ctx=None, feedback=None, risk_ctx=None, research_notes=None
 ) -> str:
     nav, tobs = state["nav"], book.ticker_obs()
     cur_w_map = {t: round(s * closes[t] / nav, 4) for t, s in state["holdings"].items() if t in closes}
@@ -77,6 +78,10 @@ def build_user_prompt(
         "trade_date": state["trade_date"],
         "computed_regime_hint": regime,
         "non_citable_journal_context": journal_ctx,  # informational only; do NOT cite as O#
+        "risk_manager_notes": risk_ctx["notes"] if risk_ctx else None,   # non-citable prose
+        "risk_overrides": risk_ctx.get("structured_risk", {}).get("overrides", []) if risk_ctx else [],
+        "exchange_event_flags": risk_ctx.get("event_flags", {}) if risk_ctx else {},
+        "research_notes": research_notes,                               
         "etf_strategy": strategy,
         "account": {
             "nav": nav, "cash": state["cash"], "cash_ratio": round(state["cash"] / nav, 4),
@@ -352,7 +357,7 @@ def widen_cash_range(mv: dict, report: dict, limits: Limits):
 # ===================================================================== main loop
 def run_agent(
     trade_date, state, market, universe, book, strategy, limits, started_at,
-    ask=None, factor_df=None, regime="neutral", journal_ctx=None
+    ask=None, factor_df=None, regime="neutral", journal_ctx=None, as_of=None, risk_ctx=None
 ):
     prices = market["prices"]
     closes = {t: p["close"] for t, p in prices.items() if t in universe.names}
@@ -361,6 +366,19 @@ def run_agent(
     missing_held = [t for t in state["holdings"] if t not in closes]
     if missing_held:
         raise RuntimeError(f"no previous close for held stocks {missing_held}; cannot size orders")
+    feedback, tot_in, tot_out, models, notes = None, 0, 0, [], []
+    system_prompt = build_system_prompt(limits, universe)
+    research_notes, extra_calls = None, 0
+    if ask is None and os.environ.get("AGENT_AUTONOMY", "1") != "0":     # live run only (not --replay)
+        try:
+            from agents import portfolio_research
+            probe = build_user_prompt(strategy, state, universe, book, candidates, closes, factor_df=factor_df,
+                                      regime=regime, journal_ctx=journal_ctx, risk_ctx=risk_ctx)
+            research_notes, u, extra_calls, ms = portfolio_research.run(
+                system_prompt, probe, state, universe, book, closes, limits, as_of or state["as_of_date"])
+            tot_in, tot_out, models = u["input_tokens"], u["output_tokens"], list(ms)
+        except Exception as e:
+            notes.append(f"portfolio research skipped: {type(e).__name__}: {str(e)[:120]}")
     ctx = {"limits": limits, "obs_ids": {o["obs_id"] for o in book.observations},
             "market_ids": set(book.market_level_ids()), "candidates": set(candidates),
             "holdings": state["holdings"], "lot_w": {t: lot_weight(state["nav"], closes[t]) for t in candidates}}
@@ -368,12 +386,11 @@ def run_agent(
     if ask is None:
         from llm import ask_json_meta as ask
     (ROOT / "logs").mkdir(exist_ok=True)
-    feedback, tot_in, tot_out, models, notes = None, 0, 0, [], []
     for attempt in range(1, MAX_ATTEMPTS + 1):
         user = build_user_prompt(
             strategy, state, universe, book, candidates, closes,
             factor_df=factor_df, baseline_weights=None, regime=regime,
-            journal_ctx=journal_ctx, feedback=feedback
+            journal_ctx=journal_ctx, feedback=feedback, risk_ctx=risk_ctx, research_notes=research_notes
         )
         try:
             out, meta, raw = ask(system_prompt, user)
@@ -404,8 +421,9 @@ def run_agent(
             report = project_portfolio(orders, state, closes)
             note = widen_cash_range(mv, report, limits)
             attempt_notes += [note] if note else []
-            errs = (check_agent.check_portfolio(report, limits) + check_agent.check_posture(mv, report, limits)
-                    + check_agent.check_theme(report, universe, limits))
+            errs = (check_agent.check_portfolio(report, limits, state) + check_agent.check_posture(mv, report, limits)
+                    + check_agent.check_theme(report, universe, limits)
+                    + check_agent.check_theme_caps(report, universe, limits))
         if errs:
             feedback = errs
             print(f"[attempt {attempt}] {len(errs)} check(s) failed:")
@@ -428,7 +446,8 @@ def run_agent(
             "decisions": decisions, "no_trade_decisions": no_trade, "orders": orders,
             "preview": report, "notes": notes,
             "llm_meta": {"models": models, "model": models[-1], "input_tokens": tot_in,
-                         "output_tokens": tot_out, "attempts": attempt},
+                         "output_tokens": tot_out, "attempts": attempt,
+                         "tool_calls": extra_calls},
             "run_started_at": started_at, "generated_at": iso(now_tw()),
         }
         out_dir = ROOT / "outputs"
@@ -442,7 +461,10 @@ def run_agent(
 
     # --- DETERMINISTIC FALLBACK WHEN ALL LLM ATTEMPTS FAIL ---
     print(f"[WARN] All {MAX_ATTEMPTS} LLM attempts failed ({feedback}); engaging deterministic score-based fallback.")
-    fb_out = _build_fallback_llm_output(state, universe, book, candidates, closes, limits, factor_df, regime)
+    vetoed = {o.get("ticker") for o in (risk_ctx or {}).get("structured_risk", {}).get("overrides", [])
+              if o.get("action") == "VETO"} - set(state["holdings"])
+    safe_candidates = [t for t in candidates if t not in vetoed]
+    fb_out = _build_fallback_llm_output(state, universe, book, safe_candidates, closes, limits, factor_df, regime)
     mv, infs, portfolio, exits = _split_llm(fb_out)
     portfolio, _ = normalize_weights(portfolio, limits)
     decisions, no_trade = derive_decisions(portfolio, exits, state, closes, limits)
@@ -463,7 +485,8 @@ def run_agent(
         "inferences": infs, "decisions": decisions, "no_trade_decisions": no_trade,
         "orders": orders, "preview": report, "notes": notes + ["deterministic fallback used"],
         "llm_meta": {"models": models or ["fallback"], "model": (models or ["fallback"])[-1],
-                     "input_tokens": tot_in, "output_tokens": tot_out, "attempts": MAX_ATTEMPTS},
+                     "input_tokens": tot_in, "output_tokens": tot_out, "attempts": MAX_ATTEMPTS,
+                     "tool_calls": extra_calls},
         "run_started_at": started_at, "generated_at": iso(now_tw()),
     }
     out_dir = ROOT / "outputs"

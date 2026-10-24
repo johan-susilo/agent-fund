@@ -78,6 +78,16 @@ def check_theme(report: dict, universe, limits: Limits) -> list:
     return []
 
 
+def check_theme_caps(report: dict, universe, limits: Limits) -> list:
+    """Per-theme concentration cap (strategy: 單一個股與主題集中度上限)."""
+    agg: dict = {}
+    for t, w in report["weights"].items():
+        th = universe.theme_of(t)
+        agg[th] = agg.get(th, 0.0) + w
+    return [f"theme '{k}' weight {v:.1%} exceeds theme cap {limits.theme_limit(k):.0%}"
+            for k, v in sorted(agg.items()) if v > limits.theme_limit(k) + 1e-9]
+
+
 def check_submission_window(now: datetime, trade_date: str, as_of_date) -> list:
     """Warn (not fail) when outside 19:30 on the previous trading day .. 08:55 on the trade date."""
     close = datetime.fromisoformat(trade_date).replace(hour=SUBMIT_CLOSE[0], minute=SUBMIT_CLOSE[1], tzinfo=TW)
@@ -213,6 +223,7 @@ def final_gate(d: dict, state: dict, closes: dict, universe, limits: Limits, fil
     errs += check_posture({"net_exposure_intent": mv["posture"]["net_exposure_intent"],
                            "target_cash_pct_range": mv["posture"]["target_cash_pct_range"]}, rep, limits)
     errs += check_theme(rep, universe, limits)
+    warns += check_theme_caps(rep, universe, limits)   # warning only: the fallback must stay submittable
     if not OFFICIAL["min_n"] <= rep["holdings_count"] <= OFFICIAL["max_n"] or rep["cash_ratio"] > OFFICIAL["max_cash"]:
         errs.append("OFFICIAL limit breached (holdings count or cash ratio)")
     for t, w in rep["weights"].items():

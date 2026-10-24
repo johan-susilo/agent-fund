@@ -54,6 +54,11 @@ class Limits:
     price_tol: float = 0.001     # datapack close vs fetched close tolerance
     active_share_floor: float = ACTIVE_SHARE_FLOOR
     max_turnover: float = MAX_DAILY_TURNOVER
+    theme_cap: float = 0.30       # max NAV share of any single theme (strategy: 主題集中度上限)
+    theme_cap_semis: float = 0.50 # the broad semiconductor theme gets a wider cap
+
+    def theme_limit(self, theme_id: str) -> float:
+        return self.theme_cap_semis if theme_id == "semis" else self.theme_cap
 
     def cap(self, ticker: str) -> float:
         return self.cap_2330 if ticker == "2330" else self.cap_other

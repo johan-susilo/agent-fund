@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 import traceback
 from concurrent.futures import ThreadPoolExecutor
@@ -130,6 +131,50 @@ def main():
         limits = limits_for(state["violations"], regime=regime)
         print(f"  regime: {regime} -> cash window [{limits.cash_lo:.0%}, {limits.cash_hi:.0%}]")
 
+        risk_ctx = None
+        if os.environ.get("AGENT_AUTONOMY", "1") != "0":
+            try:
+                from agents import risk_agent
+                risk_ctx = risk_agent.review(d, as_of, state, universe, book, factor_df, regime)
+                tool_calls += risk_ctx["tool_calls"]
+                print(f"  risk agent: {risk_ctx['tool_calls']} tool calls")
+                
+                if "structured_risk" in risk_ctx:
+                    risk_data = risk_ctx["structured_risk"]
+                    obs_mapping = {} # Maps Risk Agent IDs (R1) to official EvidenceBook IDs (O76)
+                    n_risk = 0
+                    
+                    # 1. Inject observations into the book
+                    for robs in risk_data.get("observations", []):
+                        src_name = robs.get("source_ref", "Risk Agent Analysis")
+                        sid = book.add_source({
+                            "authority": "other", "name": src_name, 
+                            "url": "internal://risk", "content_as_of": as_of
+                        })
+                        
+                        # EvidenceBook requires at least one numeric value in 'values'
+                        new_oid = book.add_obs(
+                            statement=robs.get("statement", ""),
+                            values={"risk_alert_flag": 1.0}, 
+                            source_ids=[sid],
+                            topic=robs.get("topic", "risk_alert"),
+                            level="stock"
+                        )
+                        if new_oid:
+                            obs_mapping[robs.get("obs_id")] = new_oid
+                            n_risk += 1
+                            
+                    # 2. Update the overrides array with the official citable IDs
+                    for override in risk_data.get("overrides", []):
+                        old_ref = override.get("obs_ref")
+                        if old_ref in obs_mapping:
+                            override["obs_ref"] = obs_mapping[old_ref]
+                            
+                    print(f"  risk agent: {n_risk} observations added to EvidenceBook")
+                    
+            except Exception as e:
+                print(f"  !! risk agent failed: {type(e).__name__}: {e}")
+
         print("\n=== [3/5] Portfolio agent ===")
         ask = None
         if a.replay:
@@ -137,8 +182,16 @@ def main():
             ask = lambda _s, _u: (json.loads(raw), {"model": "replay", "input_tokens": 0, "output_tokens": 0}, raw)
         result = portfolio_agent.run_agent(
             d, state, market, universe, book, strategy, limits, started,
-            ask=ask, factor_df=factor_df, regime=regime, journal_ctx=j_data,
+            ask=ask, factor_df=factor_df, regime=regime, journal_ctx=j_data, as_of=as_of, risk_ctx=risk_ctx,
         )
+        for fr in (frags.get("macro"), frags.get("factor")):
+            if fr and fr.get("llm_usage"):
+                result["llm_meta"]["input_tokens"] += fr["llm_usage"]["input_tokens"]
+                result["llm_meta"]["output_tokens"] += fr["llm_usage"]["output_tokens"]
+        if risk_ctx:
+            result["llm_meta"]["input_tokens"] += risk_ctx["usage"]["input_tokens"]
+            result["llm_meta"]["output_tokens"] += risk_ctx["usage"]["output_tokens"]
+        tool_calls += result["llm_meta"].get("tool_calls", 0)
 
         print("\n=== [4/5] Build D-Plan ===")
         dplan = build_dplan.build(result, state, tool_calls)

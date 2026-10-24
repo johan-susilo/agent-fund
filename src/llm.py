@@ -167,5 +167,26 @@ def ask_json_meta(system_prompt: str, user_content: str, temperature=None):
     raise RuntimeError(f"no usable model among {tried}; check GOOGLE_CLOUD_LOCATION (Gemini 3.x needs 'global')")
 
 
+def generate_raw(contents, config):
+    """One generate_content call with retry/model fallback, for multi-turn tool loops."""
+    global _working_model
+    from google.genai import errors
+    for model in candidates():
+        for attempt in range(MAX_RETRIES):
+            try:
+                resp = get_client().models.generate_content(model=model, contents=contents, config=config)
+                _working_model = model
+                return resp, model
+            except errors.APIError as e:
+                code = getattr(e, "code", None)
+                if code == 404:
+                    break
+                if code in RETRY_CODES and attempt < MAX_RETRIES - 1:
+                    time.sleep(2 ** attempt + random.random())
+                    continue
+                raise
+    raise RuntimeError("no usable model for tool loop; check GOOGLE_CLOUD_LOCATION / GEMINI_MODEL")
+
+
 if __name__ == "__main__":       # connectivity test
     print(ask_json_meta("Reply only with JSON.", 'Return {"ok": true}')[0])

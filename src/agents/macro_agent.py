@@ -39,6 +39,9 @@ NEWS_QUERIES = {"news_semis": "Taiwan semiconductor OR TSMC OR AI server",
 YF_MACRO = {
     "^SOX":  ("sox", "費城半導體指數 (SOX)"),
     "TSM":   ("tsm_adr", "台積電 ADR (TSM)"),
+    "NVDA":  ("nvda", "NVIDIA (NVDA) AI伺服器指標"),
+    "MU":    ("mu", "Micron (MU) HBM與記憶體指標"),
+    "^VIX":  ("vix_yf", "VIX 波動率指數 (含20日均線比)"),
     "^TWII": ("taiex", "台灣加權指數 (TAIEX)"),
     "TWD=X": ("usdtwd_spot", "美元兌台幣即期匯率 (USD/TWD)"),
 }
@@ -51,27 +54,32 @@ NEWS_KEYWORDS = (
 
 def _yf_macro(trade_date: str, counter: Counter):
     counter.inc()
-    df = yf.download(list(YF_MACRO.keys()), period="7d", interval="1d", auto_adjust=True,
+    df = yf.download(list(YF_MACRO.keys()), period="2mo", interval="1d", auto_adjust=True,
                      group_by="ticker", progress=False, threads=True)
     now = iso(now_tw())
     out, warns = [], []
+    us_syms = {"^SOX", "TSM", "NVDA", "MU", "^VIX"}
     for sym, (k, label) in YF_MACRO.items():
         try:
             sub = df[sym].dropna(subset=["Close"])
             if len(sub) < 2:
                 continue
-            v0, v1 = float(sub["Close"].iloc[-1]), float(sub["Close"].iloc[-2])
+            closes = sub["Close"].astype(float)
+            v0, v1 = float(closes.iloc[-1]), float(closes.iloc[-2])
             d0 = str(sub.index[-1].date())
             chg = (v0 / v1 - 1.0) * 100.0 if v1 else 0.0
+            ma20 = float(closes.iloc[-20:].mean()) if len(closes) >= 20 else v0
+            vs_ma20_pct = (v0 / ma20 - 1.0) * 100.0 if ma20 else 0.0
             src = {
                 "authority": "vendor",
                 "name": f"Yahoo Finance ({sym}): {label}",
                 "url": f"https://finance.yahoo.com/quote/{sym}/",
-                "content_as_of": _us_close_to_tw(d0) if sym in ("^SOX", "TSM") else f"{d0}T13:30:00+08:00",
+                "content_as_of": _us_close_to_tw(d0) if sym in us_syms else f"{d0}T13:30:00+08:00",
                 "fetched_at": now,
             }
-            stmt = f"{label} {d0} 收 {v0:g}（前值 {v1:g}，變動 {chg:+.2f}%）"
-            vals = {k: round(v0, 2), f"{k}_prev": round(v1, 2), f"{k}_chg_pct": round(chg, 2)}
+            stmt = f"{label} {d0} 收 {v0:g}（前值 {v1:g}，單日 {chg:+.2f}%，較20日均線 {vs_ma20_pct:+.1f}%）"
+            vals = {k: round(v0, 2), f"{k}_prev": round(v1, 2),
+                    f"{k}_chg_pct": round(chg, 2), f"{k}_vs_ma20_pct": round(vs_ma20_pct, 2)}
             out.append((src, stmt, vals, f"macro_{k}"))
         except Exception as e:
             warns.append(f"yfinance {sym} failed: {e}")
@@ -149,16 +157,6 @@ def _news(topic, query, counter):
         items.append((a, pub))
         if len(items) == 3:
             break
-        
-    for a in js.get("articles", []):
-        if not a.get("title") or not a.get("url") or not a.get("publishedAt"):
-            continue
-        pub = parse_ts(a["publishedAt"])
-        if pub > now:                        # never cite anything published after the run
-            continue
-        items.append((a, pub))
-        if len(items) == 3:
-            break
     snaps = [None] * len(items)
     if items and os.environ.get("ARCHIVE_NEWS", "1") != "0":
         with ThreadPoolExecutor(3) as ex:
@@ -196,6 +194,24 @@ def _calendar(counter):
     return out, []
 
 
+def research(trade_date: str, frag: dict, counter: Counter) -> None:
+    """LLM decides which extra tools to call; every result is registered as an observation."""
+    import json
+    from agent_loop import run_agent_loop
+    from settings import PROMPT_DIR
+    from tools import web_tools
+    tools = web_tools.build_tools(web_tools.fragment_emit(frag), trade_date=trade_date,
+                                  as_of=prev_weekday(trade_date), counter=counter, obs_cap=5,
+                                  include=("search", "fetch", "price"))
+    user = json.dumps({"trade_date": trade_date, "now": iso(now_tw()),
+                       "already_collected": [o["statement"][:90] for o in frag["observations"]]},
+                      ensure_ascii=False)
+    text, usage, _, models = run_agent_loop((PROMPT_DIR / "macro_agent.md").read_text(encoding="utf-8"),
+                                            user, tools, max_steps=8, max_calls=10)
+    frag["agent_notes"] = text[:1500]
+    frag["llm_usage"] = {**usage, "models": models}
+
+
 # ------------------------------------------------------------------ public entry
 def collect(trade_date: str, refresh: bool = False) -> dict:
     cache = ROOT / "inputs" / trade_date / "macro_fragment.json"
@@ -217,6 +233,11 @@ def collect(trade_date: str, refresh: bool = False) -> dict:
             frag["warnings"] += warns
             for src, stmt, values, topic in items:
                 frag_add(frag, src, stmt, values, topic, level="market")
+    if os.environ.get("AGENT_AUTONOMY", "1") != "0":
+        try:
+            research(trade_date, frag, counter)
+        except Exception as e:                       # baseline evidence is still valid
+            frag["warnings"].append(f"macro research agent failed: {type(e).__name__}: {str(e)[:120]}")
     frag["warnings"] = list(dict.fromkeys(frag["warnings"]))
     frag["tool_calls"] = counter.n
     if frag["observations"]:

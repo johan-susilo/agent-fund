@@ -48,26 +48,25 @@ def build_factor_table(universe, market: dict, factor_frag: dict | None) -> pd.D
                     rows[t]["rev_g"] = v
                 elif metric == "net_margin_pct":
                     rows[t]["margin"] = v
-
+                elif metric == "inst_lots":
+                    rows[t]["inst_lots"] = v
     df = pd.DataFrame(list(rows.values()))
-    for col in ("roe", "rev_g", "margin", "mom20", "mom60", "vol20", "adv20", "pe"):
+    for col in ("roe", "rev_g", "margin", "mom20", "mom60", "vol20", "adv20", "pe", "inst_lots"):
         if col not in df.columns:
             df[col] = np.nan
         df[col] = pd.to_numeric(df[col], errors="coerce")
-
-    # Sanity-filter extreme outliers before ranking (e.g., 2408 611%, 5289 641%, 2337 PE 2.6)
+    # Sanity-filter extreme outliers before ranking
     df["rev_g"]  = df["rev_g"].clip(lower=-80.0, upper=200.0)
     df["roe"]    = df["roe"].clip(lower=-50.0, upper=80.0)
     df["margin"] = df["margin"].clip(lower=-50.0, upper=70.0)
     df["pe"]     = df["pe"].where((df["pe"] >= 5.0) & (df["pe"] <= 120.0), np.nan)
-
     r = lambda s, asc=True: s.rank(pct=True, ascending=asc).fillna(0.5)
     df["fund"]  = (r(df["roe"]) + r(df["rev_g"]) + r(df["margin"])) / 3.0
-    df["mom"]   = 0.4 * r(df["mom20"]) + 0.6 * r(df["mom60"])
+    # Blend 20d/60d momentum with institutional net buying rank
+    df["mom"]   = 0.35 * r(df["mom20"]) + 0.50 * r(df["mom60"]) + 0.15 * r(df["inst_lots"])
     df["risk"]  = 0.5 * r(df["vol20"], False) + 0.5 * r(df["adv20"], True)
     df["val"]   = r(df["pe"].where(df["pe"] > 0), False)
     df["score"] = (0.4 * df["fund"] + 0.3 * df["mom"] + 0.2 * df["risk"] + 0.1 * df["val"]).round(4)
-
     return df.sort_values("score", ascending=False).reset_index(drop=True)
 
 
@@ -90,14 +89,19 @@ def detect_regime(market: dict, macro_frag: dict | None, factor_df: pd.DataFrame
     core_df = factor_df[factor_df["core"] == True]
     core_neg_mom20 = float((core_df["mom20"] < 0).mean()) if not core_df.empty else 0.5
 
+    tsm_adr_chg = mvals.get("tsm_adr_chg_pct", 0.0)
+    vix_spot = mvals.get("vix_yf", vix)
     bear_points = 0
-    if vix >= 22.0 or vix_chg >= 10.0:
+    # Require VIX level >= 20.5 even on a % spike, so a bounce from 16->19 doesn't false-trigger panic
+    if vix_spot >= 23.0 or (vix_spot >= 20.5 and vix_chg >= 12.0):
         bear_points += 1
-    if nasdaq_chg <= -1.5 or sox_chg <= -2.0:
+    if sox_chg <= -2.0 or (nasdaq_chg <= -1.8 and sox_chg < 0):
         bear_points += 1
-    if adv_ratio < 0.30 or core_neg_mom20 > 0.65:
+    if adv_ratio < 0.25 and core_neg_mom20 > 0.65:
         bear_points += 1
-
+    # Overnight US semiconductor lead override: if both SOX and TSM ADR closed green overnight, cap at 'neutral'
+    if sox_chg > 0.0 and tsm_adr_chg >= 0.5 and bear_points >= 2:
+        bear_points = 1
     if bear_points >= 2:
         return "risk_off"
     if bear_points == 1 or adv_ratio < 0.45 or core_neg_mom20 > 0.50:

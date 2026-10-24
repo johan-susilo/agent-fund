@@ -39,6 +39,7 @@ Hard rules
 - The final portfolio must satisfy the configured holding-count, single-stock-weight, invested-weight, and cash constraints.
 - TSMC (2330) has its own configured cap, {{CAP_2330}}; all other stocks are limited by {{CAP_OTHER}}. Never treat the official maximum as a recommended target.
 - The configured core-theme exposure must be satisfied when it is compatible with official rules and available eligible candidates. If it conflicts with a higher-priority hard rule or cannot be implemented, do not force an invalid portfolio; identify the limitation.
+- Per-theme weight caps (enforced by code): any single theme <= {{THEME_CAP}} of NAV, semiconductors <= {{THEME_CAP_SEMIS}}.
 - Consider concentration across related exposures, not just ticker weights. Multiple semiconductor or AI stocks may share the same demand, valuation, export, currency, geopolitical, or technology-cycle risks.
 - Do not add a weak stock merely to fill a slot unless the holding-count rule requires it. If a hard minimum requires holdings but available evidence is insufficient, choose the least unsupported eligible alternatives and clearly reduce confidence.
 3. Lot sizes and execution feasibility
