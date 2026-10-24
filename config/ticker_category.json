@@ -133,7 +133,7 @@
   },
   {
    "id": "optoelectronics",
-   "core": false,
+   "core": true,
    "name": "光電與顯示 (Optoelectronics & Displays)",
    "tickers": [
     "3008",
