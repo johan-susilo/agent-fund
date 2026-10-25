@@ -233,7 +233,7 @@ def collect(trade_date: str, refresh: bool = False) -> dict:
             frag["warnings"] += warns
             for src, stmt, values, topic in items:
                 frag_add(frag, src, stmt, values, topic, level="market")
-    if os.environ.get("AGENT_AUTONOMY", "1") != "0":
+    if os.environ.get("AGENT_AUTONOMY", "1") != "0" and os.environ.get("EVIDENCE_MODE", "merged") == "legacy":  # [upgrade-2026-10]
         try:
             research(trade_date, frag, counter)
         except Exception as e:                       # baseline evidence is still valid

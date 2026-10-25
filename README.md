@@ -5,11 +5,9 @@ Every trading day it turns the competition portal's DataPack into a validated **
 
 **Strategy:** 主動AI半導體動能優選 (Active AI-Semiconductor Momentum Select). It invests in the Taiwan AI and
 semiconductor supply chain and ranks stocks with a deterministic multi-factor model
-(40% fundamentals / 30% momentum / 20% volatility and liquidity / 10% valuation). A set of LLM agents
+(35% momentum / 25% risk and liquidity / 20% earnings and catalysts / 10% macro and regime / 10% valuation guardrail). A set of LLM agents
 adds macro, news and risk research, and a Portfolio Manager agent chooses the final weights. Code enforces
 every rule. The full text fed to the LLM is in `config/strategy.json`.
-
-> The program never submits anything. Uploading the file and pressing **Submit** in the portal stays manual.
 
 ---
 
@@ -62,19 +60,31 @@ DataPack (portal download, manual)
 All LLM calls go through `llm.py` (Vertex AI, `google-genai`, retry with model fallback) and tool loops through `agent_loop.py`.
 `AGENT_AUTONOMY=0` switches off every LLM research step, the risk agent and the portfolio research phase.
 
-### Factor model (`src/tools/factors.py`)
+### Factor model (`src/tools/scoring.py`, weights in `config/scoring.json`)
 
 ```
-score = 0.4 * fundamentals + 0.3 * momentum + 0.2 * risk + 0.1 * valuation     (all percentile ranks)
-
-fundamentals = mean( rank(ROE), 0.5*rank(monthly revenue YoY) + 0.5*rank(monthly revenue MoM), rank(net margin) )
-momentum     = 0.35*rank(20d return) + 0.50*rank(60d return) + 0.15*rank(institutional net buy lots)
-risk         = 0.5*rank(low 20d volatility) + 0.5*rank(20d traded value)
-valuation    = rank(low P/E)
+score = 0.35 momentum/trend + 0.25 risk/liquidity + 0.20 earnings/catalysts + 0.10 macro/regime + 0.10 valuation guardrail
 ```
 
-Outliers are clipped first (revenue YoY -80..200%, ROE -50..80%, P/E kept only inside 5..120).
-A stock with missing price history has its score shrunk by `0.5 + 0.5 * coverage`.
+Every metric is a cross-sectional rank mapped to 0..1 (ties averaged). Missing is NaN, never 0: a metric that fewer than
+30% of the universe has today is dropped for everyone, a stock missing part of a component is shrunk toward neutral by the
+lost weight, and a component with under 50% coverage is neutral and flagged in `data_flags`.
+
+| Component | Metrics (weights inside the component) |
+|---|---|
+| Momentum & trend 35% | 20d return .20, 60d return .20, MA trend (price vs MA20/MA60, MA20 vs MA60) .20, relative strength vs theme .15, up/down-day volume confirmation .15, institutional net buying .10 |
+| Risk & liquidity 25% | 20d volatility .25, downside deviation .20, 60d max drawdown .20, 20d traded value .20, daily-range spread proxy .15; margin-trap penalty |
+| Earnings & catalysts 20% | revenue YoY .30, revenue MoM .15, ROE .15, net margin .10, earnings revision .15 (when a feed exists), supply-chain check (revenue vs theme peers) .15 |
+| Macro & regime 10% | market score from VIX level/trend, SOX trend, TSM ADR, US10Y move, USD/TWD move, breadth, TAIEX trend, institutional flow breadth; clamped by the regime; applied per stock through a beta proxy, so risk-on favours high-beta core names and risk-off favours defensives |
+| Valuation guardrail 10% | P/E percentile .35, P/E relative to theme .35, extension above MA60 (downside potential) .30; score x0.90 if P/E > 2x theme median and price > 20% above MA60 |
+
+No look-ahead: price bars must end on the as-of date, macro observations dated after the submission cut-off (trade date 08:55) or
+older than 96 h are ignored, fundamentals carrying a future `as_of` are ignored.
+
+**Hard risk gate (`src/tools/risk_gate.py`) is independent of the score.** Quantitative VETO (traded value < NT$30M), REDUCE
+(vol > 70%, 60d drawdown > 30%, daily range > 6%, traded value < NT$200M, no price data), volatility-scaled per-name caps
+(floor 4%), a portfolio weighted-volatility limit by regime and a top-5 concentration limit. They flow through `risk_ctx`, so the
+existing normalisation, shortlist, retry loop and `validate_plan` enforce them even when the LLM risk agent is off or fails.
 
 ### Regime (`detect_regime`)
 

@@ -57,7 +57,7 @@ def _factors(universe, as_of, counter):
         if sub.empty or str(sub.index[-1].date()) != as_of:
             stale += 1
             continue
-        f = _price_factors(sub)
+        f = _price_factors(sub, as_of)  # [upgrade-2026-10]
         if f:
             out[code] = f
     return out, stale
@@ -232,7 +232,8 @@ def collect(trade_date: str, as_of_date: str, universe, holdings, refresh: bool 
     except Exception as e:
         infos = {}
         frag["warnings"].append(f"official fundamentals failed: {type(e).__name__}: {str(e)[:120]}")
-    frag["fundamentals"] = infos          # full-universe stash for the factor table (not an observation)
+    frag["fundamentals"] = infos
+    frag["price_factors"] = factors   # [upgrade-2026-10] full feature stash for tools/scoring.py
 
     px_src = frag_add_source(frag, {"authority": "vendor", "url": YAHOO_URL, "fetched_at": now,
                                     "name": "Yahoo Finance 日線歷史價量（20/60日動能、波動、成交值）",
@@ -269,7 +270,7 @@ def collect(trade_date: str, as_of_date: str, universe, holdings, refresh: bool 
         frag["warnings"].append("no momentum factors available")
     if not infos:
         frag["warnings"].append("no official fundamentals returned: check endpoint names on the OpenAPI swagger")
-    if os.environ.get("AGENT_AUTONOMY", "1") != "0":
+    if os.environ.get("AGENT_AUTONOMY", "1") != "0" and os.environ.get("EVIDENCE_MODE", "merged") == "legacy":  # [upgrade-2026-10]
         try:
             research(trade_date, as_of_date, universe, holdings, frag, counter)
         except Exception as e:

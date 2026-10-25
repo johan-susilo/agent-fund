@@ -45,8 +45,12 @@ def _num(v, nd=None):
 
 # ===================================================================== risk caps / shortlist / baseline
 def weight_caps(limits: Limits, rm: dict) -> dict:
-    """Per-ticker caps tighter than the normal cap (risk manager REDUCE)."""
-    return {t: min(limits.cap(t), check_agent.REDUCE_CAP) for t in rm["REDUCE"] if t != "2330"}
+    """Per-ticker caps tighter than the normal cap: risk manager REDUCE and the quantitative volatility caps.  # [upgrade-2026-10]"""
+    caps = {t: min(limits.cap(t), check_agent.REDUCE_CAP) for t in rm["REDUCE"] if t != "2330"}
+    for t, c in (rm.get("CAPS") or {}).items():
+        if t != "2330":
+            caps[t] = min(caps.get(t, limits.cap(t)), c)
+    return caps
 
 
 def build_shortlist(candidates, holdings, factor_df, universe, rm, n: int = SHORTLIST_N) -> list:
@@ -135,6 +139,7 @@ def build_user_prompt(
         row = {
             "t": t, "n": universe.names.get(t, ""), "theme": universe.theme_of(t), "core": universe.is_core(t),
             "rank": rank, "score": _num(f.get("score"), 3),
+            "comp": [_num(f.get(k), 2) for k in ("s_momentum", "s_risk", "s_earnings", "s_macro", "s_valuation")],  # [upgrade-2026-10]
             "mom20": _num(f.get("mom20"), 1), "mom60": _num(f.get("mom60"), 1),
             "vol20": _num(f.get("vol20"), 0), "adv20": _num(f.get("adv20"), 0),
             "roe": _num(f.get("roe"), 1), "pe": _num(f.get("pe"), 1), "rev_g": _num(f.get("rev_g"), 1),
@@ -277,7 +282,7 @@ def _build_fallback_llm_output(state, universe, book, candidates, closes, limits
         infs.append({
             "inf_id": inf_id,
             "premise_refs": prem,
-            "logic": f"依據量化多因子模型（40%基本面、30%動能、20%波動與流動性、10%估值）與台股收盤數據，{t} ({universe.names.get(t, '')}) 綜合評分位居候選池前列且符合單一持股上限。",
+            "logic": f"依據量化多因子模型（35%動能與趨勢、25%風險與流動性、20%獲利與催化、10%總經與市場情勢、10%估值）與台股收盤數據，{t} ({universe.names.get(t, '')}) 綜合評分位居候選池前列且符合單一持股上限。",
             "conclusion": f"配置 {t} 目標權重 {w:.2%}，納入核心投資組合。",
             "counter_evidence": "短期市場波動可能影響個股表現，已透過部位上限控制風險。",
             "confidence": 0.65,

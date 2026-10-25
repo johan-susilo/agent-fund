@@ -3,14 +3,14 @@
   {
    "authority": "vendor",
    "url": "https://finance.yahoo.com/",
-   "fetched_at": "2026-10-24T18:21:59+08:00",
+   "fetched_at": "2026-10-25T02:02:18+08:00",
    "name": "Yahoo Finance 日線歷史價量（20/60日動能、波動、成交值）",
    "content_as_of": "2026-10-26T13:30:00+08:00"
   },
   {
    "authority": "twse",
    "url": "https://openapi.twse.com.tw/v1/exchangeReport/BWIBBU_ALL",
-   "fetched_at": "2026-10-24T18:22:12+08:00",
+   "fetched_at": "2026-10-25T02:02:30+08:00",
    "name": "TWSE/TPEx/MOPS 公開資料：本益比、月營收年增、淨利率",
    "content_as_of": "2026-10-26T18:30:00+08:00"
   }
@@ -20,11 +20,11 @@
    "src": [
     1
    ],
-   "statement": "核心 AI/半導體主題 49 檔最新月營收年增：中位數 +50.7%、49/49 檔為正成長",
+   "statement": "核心 AI/半導體主題 52 檔最新月營收年增：中位數 +45.8%、50/52 檔為正成長",
    "values": {
-    "core_rev_yoy_median_pct": 50.7,
-    "n": 49,
-    "positive_count": 49
+    "core_rev_yoy_median_pct": 45.82,
+    "n": 52,
+    "positive_count": 50
    },
    "topic": "macro_semi_revenue",
    "level": "market",
@@ -447,138 +447,12 @@
     "2449",
     "3533"
    ]
-  },
-  {
-   "src": [
-    1
-   ],
-   "statement": "財務與籌碼指標：2454 ROE 22.8% PE 66.2 PB 15.1 營收年增 2.0% 淨利率 16.2%；3711 ROE 15.6% PE 47.3 PB 7.4 營收年增 45.5% 淨利率 9.9%；2317 ROE 11.2% PE 16.1 PB 1.8 營收年增 38.4% 淨利率 2.7%；2382 ROE 36.3% PE 14.0 PB 5.1 營收年增 76.7% 淨利率 2.7%；3017 ROE 53.4% PE 41.9 PB 22.4 營收年增 44.9% 淨利率 19.3%；3661 ROE 9.7% PE 51.3 PB 5.0 營收年增 200.0% 淨利率 25.9%；3443 營收年增 97.8% 淨利率 12.6%；2308 ROE 27.8% PE 49.6 PB 13.8 營收年增 14.6% 淨利率 14.9%；3037 ROE 19.3% PE 72.2 PB 13.9 營收年增 64.7% 淨利率 23.3%；3653 ROE 27.6% PE 137.0 PB 37.8 營收年增 80.0% 淨利率 29.7%",
-   "values": {
-    "2454_roe_pct": 22.78,
-    "2454_pe": 66.23,
-    "2454_pb": 15.09,
-    "2454_rev_growth_pct": 1.97,
-    "2454_net_margin_pct": 16.25,
-    "3711_roe_pct": 15.62,
-    "3711_pe": 47.32,
-    "3711_pb": 7.39,
-    "3711_rev_growth_pct": 45.52,
-    "3711_net_margin_pct": 9.89,
-    "2317_roe_pct": 11.15,
-    "2317_pe": 16.15,
-    "2317_pb": 1.8,
-    "2317_rev_growth_pct": 38.42,
-    "2317_net_margin_pct": 2.73,
-    "2382_roe_pct": 36.28,
-    "2382_pe": 14.03,
-    "2382_pb": 5.09,
-    "2382_rev_growth_pct": 76.69,
-    "2382_net_margin_pct": 2.71,
-    "3017_roe_pct": 53.36,
-    "3017_pe": 41.92,
-    "3017_pb": 22.37,
-    "3017_rev_growth_pct": 44.92,
-    "3017_net_margin_pct": 19.31,
-    "3661_roe_pct": 9.73,
-    "3661_pe": 51.26,
-    "3661_pb": 4.99,
-    "3661_rev_growth_pct": 200.0,
-    "3661_net_margin_pct": 25.92,
-    "3443_rev_growth_pct": 97.78,
-    "3443_net_margin_pct": 12.63,
-    "2308_roe_pct": 27.79,
-    "2308_pe": 49.65,
-    "2308_pb": 13.8,
-    "2308_rev_growth_pct": 14.61,
-    "2308_net_margin_pct": 14.89,
-    "3037_roe_pct": 19.28,
-    "3037_pe": 72.24,
-    "3037_pb": 13.93,
-    "3037_rev_growth_pct": 64.67,
-    "3037_net_margin_pct": 23.31,
-    "3653_roe_pct": 27.57,
-    "3653_pe": 136.99,
-    "3653_pb": 37.77,
-    "3653_rev_growth_pct": 79.97,
-    "3653_net_margin_pct": 29.68
-   },
-   "topic": "factor_fundamental",
-   "level": "stock",
-   "tickers": [
-    "2454",
-    "3711",
-    "2317",
-    "2382",
-    "3017",
-    "3661",
-    "3443",
-    "2308",
-    "3037",
-    "3653"
-   ]
-  },
-  {
-   "src": [
-    1
-   ],
-   "statement": "財務與籌碼指標：3324 ROE 30.4% PE 31.4 PB 9.5；6274 ROE 24.4% PE 72.1 PB 17.6；8210 ROE 38.3% PE 20.0 PB 7.7 營收年增 13.8% 淨利率 18.6%；2357 ROE 16.9% PE 13.8 PB 2.3 營收年增 17.7% 淨利率 6.8%；2376 ROE 26.9% PE 13.1 PB 3.5 營收年增 125.4% 淨利率 5.3%；6669 ROE 42.4% PE 5.9 PB 2.5 營收年增 100.0% 淨利率 5.2%；7769 ROE 30.7% PE 54.5 PB 16.7 營收年增 100.2% 淨利率 41.2%；2330 ROE 34.8% PE 27.6 PB 9.6 營收年增 54.6% 淨利率 53.2%",
-   "values": {
-    "3324_roe_pct": 30.41,
-    "3324_pe": 31.37,
-    "3324_pb": 9.54,
-    "6274_roe_pct": 24.4,
-    "6274_pe": 72.12,
-    "6274_pb": 17.6,
-    "8210_roe_pct": 38.34,
-    "8210_pe": 20.03,
-    "8210_pb": 7.68,
-    "8210_rev_growth_pct": 13.75,
-    "8210_net_margin_pct": 18.55,
-    "2357_roe_pct": 16.85,
-    "2357_pe": 13.83,
-    "2357_pb": 2.33,
-    "2357_rev_growth_pct": 17.73,
-    "2357_net_margin_pct": 6.76,
-    "2376_roe_pct": 26.88,
-    "2376_pe": 13.06,
-    "2376_pb": 3.51,
-    "2376_rev_growth_pct": 125.45,
-    "2376_net_margin_pct": 5.26,
-    "6669_roe_pct": 42.37,
-    "6669_pe": 5.9,
-    "6669_pb": 2.5,
-    "6669_rev_growth_pct": 99.99,
-    "6669_net_margin_pct": 5.24,
-    "7769_roe_pct": 30.68,
-    "7769_pe": 54.46,
-    "7769_pb": 16.71,
-    "7769_rev_growth_pct": 100.22,
-    "7769_net_margin_pct": 41.19,
-    "2330_roe_pct": 34.76,
-    "2330_pe": 27.65,
-    "2330_pb": 9.61,
-    "2330_rev_growth_pct": 54.65,
-    "2330_net_margin_pct": 53.22
-   },
-   "topic": "factor_fundamental",
-   "level": "stock",
-   "tickers": [
-    "3324",
-    "6274",
-    "8210",
-    "2357",
-    "2376",
-    "6669",
-    "7769",
-    "2330"
-   ]
   }
  ],
  "tool_calls": 19,
  "warnings": [
   "150 stocks had no usable price history for 2026-10-26 (halted or stale)",
-  "no momentum factors available",
-  "fundamental research agent failed: ReadError: [SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:2590)"
+  "no momentum factors available"
  ],
  "fundamentals": {
   "2330": {
@@ -1848,5 +1722,6 @@
    "pb": 1.31,
    "roe": 5.83
   }
- }
+ },
+ "price_factors": {}
 }

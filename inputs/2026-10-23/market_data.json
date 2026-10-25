@@ -1,7 +1,7 @@
 {
  "trade_date": "2026-10-23",
  "as_of_date": "2026-10-22",
- "fetched_at": "2026-10-24T17:37:08+08:00",
+ "fetched_at": "2026-10-25T02:16:37+08:00",
  "tool_calls": 2,
  "sources": [
   {
@@ -9,14 +9,14 @@
    "name": "TWSE 上市個股日收盤價 (OpenAPI STOCK_DAY_ALL)",
    "url": "https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL",
    "content_as_of": "2026-10-22T18:30:00+08:00",
-   "fetched_at": "2026-10-24T17:37:08+08:00"
+   "fetched_at": "2026-10-25T02:16:37+08:00"
   },
   {
    "authority": "tpex",
    "name": "TPEx 上櫃個股日收盤價 (OpenAPI)",
    "url": "https://www.tpex.org.tw/openapi/v1/tpex_mainboard_daily_close_quotes",
    "content_as_of": "2026-10-22T18:30:00+08:00",
-   "fetched_at": "2026-10-24T17:37:08+08:00"
+   "fetched_at": "2026-10-25T02:16:37+08:00"
   }
  ],
  "prices": {

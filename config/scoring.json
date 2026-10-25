@@ -1,0 +1,72 @@
+{
+  "version": "2026-10-25",
+  "note": "Single source of truth for the factor model and the hard risk gate. strategy.json stays authoritative for ETF identity; this file only sets HOW the five themes in its philosophy are weighted.",
+  "component_weights": {
+    "momentum": 0.35,
+    "risk": 0.25,
+    "earnings": 0.20,
+    "macro": 0.10,
+    "valuation": 0.10
+  },
+  "normalization": {
+    "method": "cross_sectional_rank_0_1",
+    "neutral": 0.5,
+    "min_metric_universe_coverage": 0.30,
+    "min_component_coverage": 0.50,
+    "missing_price_penalty": 0.85,
+    "price_max_age_days": 4,
+    "macro_max_age_hours": 96,
+    "min_theme_peers": 3
+  },
+  "validity": {
+    "mom20": [-60, 150], "mom60": [-80, 300], "vol20": [3, 250], "adv20": [0, 1e7],
+    "roe": [-50, 80], "rev_g": [-80, 200], "rev_mom": [-50, 100], "margin": [-50, 70],
+    "pe": [5, 120], "mdd60": [0, 90], "hl20": [0, 30], "dd_dev20": [0, 250],
+    "ma20_gap": [-50, 100], "ma60_gap": [-60, 200], "ma20_vs_ma60": [-50, 100], "ud_vol20": [-5, 5]
+  },
+  "momentum": {
+    "mom20": 0.20, "mom60": 0.20, "ma_trend": 0.20,
+    "rel_strength": 0.15, "volume_confirm": 0.15, "inst_flow": 0.10
+  },
+  "risk": {
+    "vol20": 0.25, "dd_dev20": 0.20, "mdd60": 0.20, "adv20": 0.20, "spread_proxy": 0.15,
+    "margin_trap_penalty": 0.15
+  },
+  "earnings": {
+    "rev_yoy": 0.30, "rev_mom": 0.15, "roe": 0.15, "margin": 0.10,
+    "earnings_revision": 0.15, "supply_chain": 0.15
+  },
+  "valuation": {
+    "pe_percentile": 0.35, "rel_pe": 0.35, "downside_potential": 0.30,
+    "guard_rel_pe": 2.0, "guard_extension_pct": 20.0, "guard_multiplier": 0.90
+  },
+  "macro": {
+    "signal_weights": {
+      "vix_level": 0.15, "vix_trend": 0.10, "sox_trend": 0.20, "tsm_adr": 0.05,
+      "us10y_move": 0.10, "twd_move": 0.05, "breadth": 0.15, "taiex_trend": 0.10, "fund_flow": 0.10
+    },
+    "min_signal_weight_coverage": 0.40,
+    "beta_core_share": 0.5,
+    "gain": 1.5,
+    "regime_clamp": {"risk_off": [0.0, 0.35], "neutral": [0.0, 1.0], "risk_on": [0.5, 1.0]}
+  },
+  "hard_risk": {
+    "note": "Applied independently of any score. Output feeds risk_ctx (VETO / REDUCE / per-name caps) which check_agent and portfolio_agent already enforce.",
+    "veto_adv20_twd_m_below": 30,
+    "reduce_vol20_above": 70,
+    "reduce_mdd60_above": 30,
+    "reduce_hl20_above": 6.0,
+    "reduce_adv20_twd_m_below": 200,
+    "reduce_on_missing_price_data": true,
+    "vol_target": 45,
+    "cap_floor": 0.04,
+    "mdd_extra_haircut_above": 25,
+    "mdd_extra_haircut": 0.75,
+    "exempt_from_caps": ["2330"],
+    "portfolio": {
+      "max_weighted_vol20": {"risk_on": 62, "neutral": 58, "risk_off": 52},
+      "unknown_vol_assumption": 60,
+      "max_top5_weight": 0.62
+    }
+  }
+}

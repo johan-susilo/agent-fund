@@ -131,8 +131,26 @@ def main():
         # --- DETERMINISTIC FACTOR SCORING & REGIME DETECTION ---
         factor_df = factors.build_factor_table(universe, market, frags.get("factor"))
         regime = factors.detect_regime(market, frags.get("macro"), factor_df, universe)
+        # [upgrade-2026-10] second pass: macro/regime component needs the regime label (first pass = neutral macro)
+        factor_df = factors.build_factor_table(universe, market, frags.get("factor"), frags.get("macro"),
+                                               regime=regime, as_of=as_of, trade_date=d)
+        _mc = factor_df.attrs.get("macro", {})
+        print(f"  score weights {factor_df.attrs.get('weights')}; macro score {_mc.get('score')} "
+              f"(coverage {_mc.get('coverage')}, missing {_mc.get('missing')})")
+        for _w in factor_df.attrs.get("warnings", []):
+            print("  warn:", _w)
         limits = limits_for(state["violations"], regime=regime)
         print(f"  regime: {regime} -> cash window [{limits.cash_lo:.0%}, {limits.cash_hi:.0%}]")
+        # [upgrade-2026-10] one merged evidence-research loop (replaces the macro + fundamental research loops)
+        ev = None
+        try:
+            from agents import evidence_agent
+            if evidence_agent.enabled():
+                ev = evidence_agent.research(d, as_of, state, universe, book, factor_df, regime)
+                tool_calls += ev["tool_calls"]
+                print(f"  evidence agent: {ev['tool_calls']} tool calls, {len(book.observations)} observations in book")
+        except Exception as e:
+            print(f"  !! evidence agent failed: {type(e).__name__}: {e}")
 
         risk_ctx = None
         if os.environ.get("AGENT_AUTONOMY", "1") != "0":
@@ -178,6 +196,12 @@ def main():
             except Exception as e:
                 print(f"  !! risk agent failed: {type(e).__name__}: {e}")
 
+        # [upgrade-2026-10] hard risk gate: always runs, independent of the LLM and of aggregate scores
+        from tools import risk_gate
+        risk_ctx = risk_gate.ensure_risk_ctx(risk_ctx, factor_df, limits, regime, universe=universe, as_of=as_of, book=book)
+        _ov = [o for o in risk_ctx["structured_risk"]["overrides"] if o.get("source") == "quant_gate"]
+        print(f"  risk gate: {len(_ov)} quantitative override(s), {len(risk_ctx['quant_gate']['caps'])} volatility cap(s)")
+
         if book.dropped:
             print(f"  !! evidence budget full: {book.dropped} observation(s) dropped (lowest-priority, added last)")
 
@@ -194,6 +218,9 @@ def main():
             if fr and fr.get("llm_usage"):
                 result["llm_meta"]["input_tokens"] += fr["llm_usage"]["input_tokens"]
                 result["llm_meta"]["output_tokens"] += fr["llm_usage"]["output_tokens"]
+        if ev:  # [upgrade-2026-10]
+            result["llm_meta"]["input_tokens"] += ev["usage"]["input_tokens"]
+            result["llm_meta"]["output_tokens"] += ev["usage"]["output_tokens"]
         if risk_ctx:
             result["llm_meta"]["input_tokens"] += risk_ctx["usage"]["input_tokens"]
             result["llm_meta"]["output_tokens"] += risk_ctx["usage"]["output_tokens"]

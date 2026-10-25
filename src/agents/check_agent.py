@@ -22,8 +22,9 @@ REDUCE_CAP = 0.04   # weight cap for tickers the risk manager marks REDUCE (2330
 
 # ===================================================== risk-manager overrides (shared helpers)
 def risk_maps(risk_ctx) -> dict:
-    """Normalise the risk manager output into ticker sets: VETO / REDUCE / WARN / EXDIV."""
-    out = {"VETO": set(), "REDUCE": set(), "WARN": set(), "EXDIV": set()}
+    """Normalise the risk manager output into ticker sets: VETO / REDUCE / WARN / EXDIV, plus the quantitative
+    gate's per-name CAPS, VOL and portfolio limits PORT.  # [upgrade-2026-10]"""
+    out = {"VETO": set(), "REDUCE": set(), "WARN": set(), "EXDIV": set(), "CAPS": {}, "VOL": {}, "PORT": None}
     if not risk_ctx:
         return out
     for o in (risk_ctx.get("structured_risk") or {}).get("overrides", []) or []:
@@ -33,17 +34,33 @@ def risk_maps(risk_ctx) -> dict:
     flags = risk_ctx.get("event_flags") or {}
     out["VETO"] |= set(flags.get("disposition_tickers", []))      # 處置股 are always vetoed
     out["EXDIV"] = set(flags.get("ex_dividend_tickers", []))
+    q = risk_ctx.get("quant_gate") or {}
+    out["CAPS"] = {str(t): float(c) for t, c in (q.get("caps") or {}).items()}
+    out["VOL"] = {str(t): float(v) for t, v in (q.get("vol") or {}).items()}
+    out["PORT"] = q.get("portfolio")
     out["REDUCE"].discard("2330")
+    out["CAPS"].pop("2330", None)
     return out
 
 
 def check_risk_overrides(weights: dict, held: dict, rm: dict) -> list:
-    """weights: {ticker: target_weight} of the proposed portfolio."""
+    """weights: {ticker: target_weight} of the proposed portfolio.  # [upgrade-2026-10]
+    Enforced independently of any score: VETO, REDUCE / volatility caps, portfolio volatility and concentration."""
     errs = []
     for t in sorted(weights):
         if t in rm["VETO"]:
             errs.append(f"{t} is VETO'd by the risk manager (disposition / severe risk): "
                         + ("exit it" if t in held else "do not buy it"))
+    for t, w in sorted(weights.items()):
+        if t == "2330":
+            continue
+        cap = rm.get("CAPS", {}).get(t)
+        if t in rm["REDUCE"]:
+            cap = REDUCE_CAP if cap is None else min(cap, REDUCE_CAP)
+        if cap is not None and w > cap + 5e-5:
+            errs.append(f"{t} weight {w:.2%} exceeds its risk cap {cap:.2%} (volatility / drawdown / liquidity gate)")
+    from tools import risk_gate
+    errs += risk_gate.check_portfolio_risk(weights, rm.get("PORT"), rm.get("VOL"))
     return errs
 
 
