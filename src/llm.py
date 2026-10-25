@@ -55,7 +55,7 @@ LLM_RESPONSE_SCHEMA = {
             "type": "OBJECT",
             "required": ["basis_refs", "logic", "regime", "stance", "net_exposure_intent", "target_cash_pct_range", "confidence"],
             "properties": {
-                "basis_refs": {"type": "ARRAY", "items": {"type": "STRING"}},
+                "basis_refs": {"type": "ARRAY", "items": {"type": "STRING"}, "maxItems": 10, "description": "Max 10 IDs. Select only the top primary drivers. Internalize routine background data without citing it."},
                 "logic": {"type": "STRING"},
                 "regime": {"type": "STRING", "enum": ["risk_on", "neutral", "risk_off"]},
                 "stance": {"type": "STRING", "enum": ["aggressive", "neutral", "defensive"]},
@@ -186,6 +186,23 @@ def generate_raw(contents, config):
                     continue
                 raise
     raise RuntimeError("no usable model for tool loop; check GOOGLE_CLOUD_LOCATION / GEMINI_MODEL")
+
+
+# ---- thread-safe client (added by the technical_agent update) ----------------------------------
+# One shared genai client used from several worker threads produced "client has been closed" and SSL
+# decryption errors in the macro / fundamental research agents. One client per thread avoids it.
+import threading as _threading
+_tls = _threading.local()
+
+
+def get_client():
+    c = getattr(_tls, "client", None)
+    if c is None:
+        from google import genai
+        c = genai.Client(vertexai=True, project=os.environ.get("GOOGLE_CLOUD_PROJECT"),
+                         location=os.environ.get("GOOGLE_CLOUD_LOCATION", "global"))
+        _tls.client = c
+    return c
 
 
 if __name__ == "__main__":       # connectivity test

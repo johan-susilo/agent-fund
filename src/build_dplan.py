@@ -21,20 +21,24 @@ def code_files() -> list:
 
 
 def code_version() -> str:
-    """`git:<hash>` when src/ and config/ are clean, otherwise a content hash (sha256 first 12 hex)."""
+    """Always use the Git commit hash for GitHub traceability (schema compliant)."""
     try:
         def run(*a):
             return subprocess.run(a, cwd=ROOT, capture_output=True, text=True, check=True).stdout.strip()
-        if not run("git", "status", "--porcelain", "--", "src", "config"):   # ignore inputs/outputs/logs
-            return "git:" + run("git", "rev-parse", "--short", "HEAD")
+    
+        git_hash = run("git", "rev-parse", "--short=8", "HEAD")
+        if git_hash:
+            return f"git:{git_hash}"
+            
     except Exception:
         pass
+    
+    # Fallback ONLY if the environment has no .git folder at all
     h = hashlib.sha256()
     for f in code_files():
         h.update(str(f.relative_to(ROOT)).encode())
         h.update(f.read_bytes())
     return "sha256:" + h.hexdigest()[:12]
-
 
 def snapshot_code(trade_date: str, version: str):
     out = ROOT / "logs" / f"code_{trade_date}_{version.split(':')[-1]}.zip"
@@ -52,6 +56,7 @@ def build(result: dict, state: dict, tool_calls: int) -> dict:
 
     mv = dict(result["market_view"])
     mv["logic"], mv["counter_evidence"] = cut(mv["logic"], 1000), cut(mv.get("counter_evidence"), 500)
+    mv["basis_refs"] = mv.get("basis_refs", [])[:10]
 
     inferences = []
     for i in result["inferences"]:

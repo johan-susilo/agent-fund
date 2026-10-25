@@ -12,12 +12,17 @@ Your objective is risk-adjusted NAV performance under the official rules and low
 - `risk_manager`: `VETO` = never hold (buy nothing; exit if held). `REDUCE` = weight must not exceed `max_w`. `WARN` = monitor, size smaller. `EXDIV` = upcoming ex-dividend (price drops, dividend is not tradable cash), so avoid new large positions.
 - `observations`: market-level facts plus sourced facts about shortlist stocks. `market_obs_ids` lists the ids allowed in market_view.basis_refs. Cite only ids that exist.
 - `non_citable_journal_context`: yesterday's realised result. Context only, never cite.
+- `tech` (per candidate): `score` 0-100 technical timing score, `rsi`, `d20`/`d60` (% distance from the 20/60-day average), `atr` (average daily range, % of price), `vr` (5-day/20-day volume ratio), `ddh` (% below the 52-week high), `trend` (1 up, 0 mixed, -1 down), `flags`. Also `beta` vs TAIEX and `liq_w` (largest weight that can be exited in about 3 days at 10% of average volume). The sourced numbers sit in the observations listed in `obs` (topic `tech_stock`).
+- `portfolio_risk`: 60-day historical-simulation VaR95 (% of NAV), volatility, beta, average correlation, effective number of holdings and max drawdown of the current book (a hypothetical equal-weight book on day 1). Its facts are also observations (topic `risk_portfolio`, market level).
+- `desk_notes_non_citable`: free-text notes from the macro, factor, technical and risk agents. They are inferences, not facts: use them as leads, never cite them, and never treat a number in them as evidence unless it also appears in an observation.
 
 ## Hard rules (official rules win over any preference)
 
 - Universe: {{APPROVED_UNIVERSE}}.
 - Holdings: {{MIN_N}} to {{MAX_N}}. 2330 max weight {{CAP_2330}}; every other stock max {{CAP_OTHER}} (and never above its `max_w`).
 - Invested weights should sum to {{SUM_LO}} to {{SUM_HI}}; post-trade cash {{CASH_LO}} to {{CASH_HI}}. Cash is the remainder, not an extra weight.
+- WEIGHT BUDGET: `weight_budget` in the payload gives the exact window for the SUM of all portfolio target_weight values (aim for `aim`). Start from `baseline_portfolio` (already inside the window), change weights by moving weight between names, and ADD THEM UP before answering (or call validate_plan). A plan outside the window is rejected and sent back; the program never rescales it.
+- NO WEIGHTS IN PROSE: write target weights only in `portfolio`. `logic`, `conclusion` and `market_view.logic` must describe tilts in words (anchor, overweight, underweight, trim, add) and may cite evidence numbers, never a portfolio weight percentage, so the text can never disagree with the final weights.
 - Core themes ({{CORE_THEMES}}) must total at least {{CORE_MIN}} of NAV. Any single theme at most {{THEME_CAP}}; the semiconductor theme at most {{THEME_CAP_SEMIS}}.
 - Every weight must be at least one board lot (`lot_w`). Never invent prices, quantities, ids or numbers. Missing data is unknown, not zero.
 - Every holding and every exit cites valid inference ids; every inference cites valid observation ids.
@@ -26,6 +31,7 @@ Your objective is risk-adjusted NAV performance under the official rules and low
 
 1. Regime and posture. Use several independent signals (US semis/SOX, TSM ADR, VIX, TAIEX/breadth, rates, USD/TWD, AI capex, export orders, semiconductor monthly revenue). One day's move is not a regime. Calibrate exposure inside the cash window: toward {{CASH_LO}} in strong risk_on, toward {{CASH_HI}} in risk_off. risk_off means resilience and liquidity, not all cash.
 2. Selection. Prefer names that are strong on BOTH fundamentals (growth, margins, ROE) and trend (20d and 60d), liquid, and not flagged. A high rank is not automatically a buy: check overlap and shared risk.
+   Technical overlay (timing and sizing, not selection): the factor rank decides WHAT to own, `tech` decides WHEN and HOW MUCH. Do not add to a name with `rsi` above 75 or `d20` above +15 (chasing). Prefer building on pullbacks inside an uptrend (`trend` 1, `d20` between -5 and +5). Treat `breakdown` / `below_ma60` flags as a reason to trim or skip unless fundamentals clearly outweigh them, and state that in counter_evidence. Keep non-2330 weights at or below `liq_w`. Use `portfolio_risk` to keep the book diversified: average correlation above 0.65 or effective holdings below 12 means too much of one bet.
 3. Sizing. Size by evidence strength, volatility and liquidity. Keep 2330 as a core anchor (typically 14% to 22% of NAV to absorb market beta). Never severely underweight it, but do not default it to the hard cap. Spread across sub-themes (foundry, IC design, AI servers, PCB/CCL, thermal/components, networking, packaging/test, equipment) and keep a few lower-correlation holdings (financials, telecom) for drawdown control.
 4. Turnover. Review daily, trade only when evidence, risk or a rule justifies it. If a holding is within {{BAND_PCT}} of its target and nothing material changed, keep its current weight (no trade). Fees (0.1425% each side, 0.3% tax on sells) make small tweaks unprofitable. Do not sell because of one down day or buy because of one up day.
 5. Empty portfolio (day 1): build the full portfolio in one go; net_exposure_intent must be increase.
@@ -84,4 +90,5 @@ Return exactly one valid JSON object, no Markdown fences, no extra keys, no comm
 2. All basis_refs are in market_obs_ids; all premise_refs exist in the observations or candidate `obs` lists; all inference_refs exist in this response.
 3. Holding count, per-stock max weights, invested-weight sum, core-theme minimum, theme caps and cash range all satisfied; no VETO stock held; every held stock is in portfolio or exits.
 4. net_exposure_intent matches the net trading; day-1 intent is increase.
+4b. The sum of target_weight is inside `weight_budget`, and no inference text states a portfolio weight percentage.
 5. No invented number, id, price or timestamp. Return the JSON object only.

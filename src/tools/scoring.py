@@ -135,7 +135,7 @@ def _obs_values(macro_frag, trade_date, max_age_h, warnings):
     for o in macro_frag.get("observations", []) or []:
         ts = _parse_ts(o.get("content_as_of"))
         if ts is None:
-            for sid in (o.get("source_ids") or o.get("sources") or []):
+            for sid in (o.get("src") or o.get("source_ids") or o.get("sources") or []):
                 src = sources.get(str(sid))
                 ts = _parse_ts(src.get("content_as_of")) if src else None
                 if ts:

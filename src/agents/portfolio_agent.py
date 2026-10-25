@@ -30,7 +30,7 @@ MAX_ATTEMPTS = int(os.environ.get("MAX_ATTEMPTS", 3))
 SHORTLIST_N = int(os.environ.get("SHORTLIST_N", 45))            # non-held names shown to the LLM
 MIN_ADV20_TWD_M = float(os.environ.get("MIN_ADV20_TWD_M", 200))  # liquidity floor for NEW buys (NT$ million/day)
 CORE_SHORTLIST_SHARE = 0.8
-BULK_TOPICS = {"factor_momentum", "stock_close"}                 # numbers already live in candidate rows
+BULK_TOPICS = {"factor_momentum", "stock_close", "tech_stock"}                 # numbers already live in candidate rows
 
 
 def _num(v, nd=None):
@@ -124,7 +124,8 @@ def build_system_prompt(limits: Limits, universe) -> str:
 def build_user_prompt(
     strategy, state, universe, book, candidates, closes,
     factor_df=None, baseline_weights=None, regime="neutral", journal_ctx=None, feedback=None,
-    risk_ctx=None, research_notes=None, limits: Limits | None = None, caps: dict | None = None
+    risk_ctx=None, research_notes=None, limits: Limits | None = None, caps: dict | None = None,
+    tech_ctx=None, desk_notes=None
 ) -> str:
     nav, tobs = state["nav"], book.ticker_obs()
     rm, caps, base_w = check_agent.risk_maps(risk_ctx), caps or {}, baseline_weights or {}
@@ -132,6 +133,7 @@ def build_user_prompt(
     current = [{"ticker": t, "shares": s, "weight": cur_w_map[t]}
                for t, s in sorted(state["holdings"].items()) if t in closes]
     f_map = factor_df.set_index("ticker").to_dict("index") if factor_df is not None and not factor_df.empty else {}
+    tech_map = (tech_ctx or {}).get("technicals") or {}
 
     rows = []
     for rank, t in enumerate(candidates, 1):
@@ -145,8 +147,19 @@ def build_user_prompt(
             "roe": _num(f.get("roe"), 1), "pe": _num(f.get("pe"), 1), "rev_g": _num(f.get("rev_g"), 1),
             "cur_w": cur_w_map.get(t, 0.0), "base_w": round(base_w.get(t, 0.0), 4),
             "max_w": round(caps.get(t, limits.cap(t)), 4) if limits else None,
-            "lot_w": round(lot_weight(nav, closes[t]), 4), "obs": tobs.get(t, [])[:5],
+            "lot_w": round(lot_weight(nav, closes[t]), 4), "obs": tobs.get(t, [])[:7],
         }
+        tk = tech_map.get(t)
+        if tk:
+            row["tech"] = {k: tk[s] for k, s in (("score", "tech_score"), ("rsi", "rsi14"), ("d20", "dist_ma20_pct"),
+                                                 ("d60", "dist_ma60_pct"), ("atr", "atr14_pct"), ("vr", "vol_ratio"),
+                                                 ("ddh", "dd_high_pct"), ("trend", "trend"), ("flags", "flags"))
+                           if tk.get(s) not in (None, [])}
+        sr = ((risk_ctx or {}).get("stock_risk") or {}).get(t) or {}
+        if sr.get("beta") is not None:
+            row["beta"] = sr["beta"]
+        if sr.get("liq_w") is not None:
+            row["liq_w"] = sr["liq_w"]
         flags = [k for k in ("VETO", "REDUCE", "WARN", "EXDIV") if t in rm[k]]
         if flags:
             row["flags"] = flags
@@ -188,6 +201,11 @@ def build_user_prompt(
         "non_citable_journal_context": journal_ctx,   # informational only; do NOT cite as O#
         "research_notes": research_notes,
         "market_obs_ids": book.market_level_ids(),
+        "portfolio_risk": (risk_ctx or {}).get("portfolio_risk"),
+        "desk_notes_non_citable": desk_notes,
+        "weight_budget": None if not limits else {"sum_min": limits.sum_lo, "sum_max": limits.sum_hi,
+                                                "aim": round((limits.sum_lo + limits.sum_hi) / 2, 3),
+                                                "rule": "sum of portfolio target_weight must land in [sum_min, sum_max]; it is validated, not rescaled"},
         "candidates": rows,
         "observations": obs_view,
     }
@@ -283,7 +301,7 @@ def _build_fallback_llm_output(state, universe, book, candidates, closes, limits
             "inf_id": inf_id,
             "premise_refs": prem,
             "logic": f"依據量化多因子模型（35%動能與趨勢、25%風險與流動性、20%獲利與催化、10%總經與市場情勢、10%估值）與台股收盤數據，{t} ({universe.names.get(t, '')}) 綜合評分位居候選池前列且符合單一持股上限。",
-            "conclusion": f"配置 {t} 目標權重 {w:.2%}，納入核心投資組合。",
+            "conclusion": f"納入 {t} 為核心投資組合持股（權重見 portfolio 與委託）。",
             "counter_evidence": "短期市場波動可能影響個股表現，已透過部位上限控制風險。",
             "confidence": 0.65,
         })
@@ -394,6 +412,19 @@ def check_structure(mv, infs, portfolio, exits, ctx) -> list:
     lost = [t for t in ctx["holdings"] if t not in seen and t not in exit_t]
     if lost:
         errs.append(f"held stocks {lost} are in neither portfolio nor exits")
+    # --- weight budget + narrative consistency (the LLM must do its own arithmetic; code does not rescale it) ---
+    import re as _re
+    raw_sum = sum(float(p["target_weight"]) for p in portfolio if isinstance(p.get("target_weight"), (int, float)))
+    aim = (lim.sum_lo + lim.sum_hi) / 2
+    if not lim.sum_lo - 0.01 <= raw_sum <= lim.sum_hi + 0.01:
+        errs.append(f"sum of portfolio target_weight is {raw_sum:.1%}; it must be between {lim.sum_lo:.1%} and {lim.sum_hi:.1%} "
+                    f"(aim {aim:.1%}). Re-allocate the weights yourself and add them up before answering; "
+                    "the program will NOT scale them for you.")
+    _w = _re.compile(r"(權重|配置|目標|比重|佔|占)[^。；;，,]{0,12}?\d+(?:\.\d+)?\s*%")
+    for i in infs:
+        if _w.search(i["logic"] or "") or _w.search(i["conclusion"] or ""):
+            errs.append(f"{i['inf_id']} states a weight percentage in its text; put weights ONLY in `portfolio` "
+                        "(describe tilts with words such as overweight / underweight / anchor)")
     if not lim.min_n <= len(portfolio) <= lim.max_n:
         errs.append(f"portfolio has {len(portfolio)} stocks, must be {lim.min_n}-{lim.max_n}")
     return errs
@@ -479,7 +510,8 @@ def sync_intent(mv: dict, report: dict, limits: Limits):
 # ===================================================================== main loop
 def run_agent(
     trade_date, state, market, universe, book, strategy, limits, started_at,
-    ask=None, factor_df=None, regime="neutral", journal_ctx=None, as_of=None, risk_ctx=None
+    ask=None, factor_df=None, regime="neutral", journal_ctx=None, as_of=None, risk_ctx=None,
+    tech_ctx=None, desk_notes=None
 ):
     prices = market["prices"]
     closes = {t: p["close"] for t, p in prices.items() if t in universe.names}
@@ -502,7 +534,8 @@ def run_agent(
     def prompt(fb=None, rn=None):
         return build_user_prompt(strategy, state, universe, book, candidates, closes, factor_df=factor_df,
                                  baseline_weights=baseline, regime=regime, journal_ctx=journal_ctx, feedback=fb,
-                                 risk_ctx=risk_ctx, research_notes=rn, limits=limits, caps=caps)
+                                 risk_ctx=risk_ctx, research_notes=rn, limits=limits, caps=caps,
+                                 tech_ctx=tech_ctx, desk_notes=desk_notes)
 
     research_notes, extra_calls = None, 0
     if ask is None and os.environ.get("AGENT_AUTONOMY", "1") != "0":     # live run only (not --replay)

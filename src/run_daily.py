@@ -28,7 +28,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))    # make `agents.*` im
 
 import build_dplan
 import fetch_data
-from agents import fundamental_agent, macro_agent, portfolio_agent, check_agent
+from agents import fundamental_agent, macro_agent, portfolio_agent, check_agent, technical_agent
 from datapack import DataPackError, load_datapack
 from observations import EvidenceBook, EvidenceLimitError, market_fragment
 from settings import CONFIG_DIR, ROOT, limits_for
@@ -36,6 +36,22 @@ from universe import load_universe
 from util import iso, now_tw, prev_weekday
 
 MAX_PRICE_MISMATCH = 2      # held-stock close disagreements tolerated (corporate actions) before aborting
+
+
+def _merge_obs(*frags) -> dict:
+    """detect_regime only reads .observations: let it see macro + technical facts (e.g. foreign futures OI)."""
+    obs = []
+    for f in frags:
+        obs += (f or {}).get("observations", [])
+    return {"observations": obs}
+
+
+def _desk_notes(frags: dict, risk_ctx) -> dict:
+    """Free-text notes from the research agents: context for the portfolio manager, never citable."""
+    notes = {k: (frags.get(k) or {}).get("agent_notes") for k in ("macro", "factor", "tech")}
+    if risk_ctx:
+        notes["risk"] = risk_ctx.get("notes")
+    return {k: v for k, v in notes.items() if v}
 
 
 def check_price_freshness(state: dict, market: dict, tol: float) -> list:
@@ -84,16 +100,18 @@ def main():
                 sys.exit("Submission window check failed. Pass --force to run outside the window.")
 
         print("\n=== [2/5] Collect evidence (parallel) ===")
-        with ThreadPoolExecutor(3) as ex:
+        with ThreadPoolExecutor(4) as ex:
             f_mkt = None if a.skip_fetch else ex.submit(fetch_data.main, d, as_of)
             f_mac = None if a.no_external else ex.submit(macro_agent.collect, d, a.refresh)
             f_fun = None if a.no_external else ex.submit(fundamental_agent.collect, d, as_of, universe,
+                                                         list(state["holdings"]), a.refresh)
+            f_tec = None if a.no_external else ex.submit(technical_agent.collect, d, as_of, universe,
                                                          list(state["holdings"]), a.refresh)
             if f_mkt:
                 f_mkt.result()                                    # a price failure must stop the run
             market = json.loads((ROOT / "inputs" / d / "market_data.json").read_text(encoding="utf-8"))
             frags = {}
-            for name, f in (("macro", f_mac), ("factor", f_fun)):
+            for name, f in (("macro", f_mac), ("factor", f_fun), ("tech", f_tec)):
                 try:
                     frags[name] = f.result() if f else None
                 except Exception as e:                            # external evidence is optional
@@ -111,7 +129,7 @@ def main():
 
         book, tool_calls = EvidenceBook(), market.get("tool_calls", 0)
         book.absorb(market_fragment(market, state, universe))
-        for name in ("macro", "factor"):
+        for name in ("macro", "factor", "tech"):
             fr = frags[name]
             if fr:
                 n = book.absorb(fr)
@@ -129,8 +147,12 @@ def main():
             print("  journal: No previous day record found (Day 1).")
 
         # --- DETERMINISTIC FACTOR SCORING & REGIME DETECTION ---
+        tech_frag = frags.get("tech")
+        if frags.get("factor") and tech_frag:      # margin-balance growth >= 5% in 5 days feeds the margin-trap penalty
+            for _t, _m in (tech_frag.get("margin_inc") or {}).items():
+                frags["factor"].setdefault("fundamentals", {}).setdefault(_t, {})["margin_inc"] = _m if _m >= 0.05 else 0.0
         factor_df = factors.build_factor_table(universe, market, frags.get("factor"))
-        regime = factors.detect_regime(market, frags.get("macro"), factor_df, universe)
+        regime = factors.detect_regime(market, _merge_obs(frags.get("macro"), frags.get("tech")), factor_df, universe)
         # [upgrade-2026-10] second pass: macro/regime component needs the regime label (first pass = neutral macro)
         factor_df = factors.build_factor_table(universe, market, frags.get("factor"), frags.get("macro"),
                                                regime=regime, as_of=as_of, trade_date=d)
@@ -153,10 +175,12 @@ def main():
             print(f"  !! evidence agent failed: {type(e).__name__}: {e}")
 
         risk_ctx = None
-        if os.environ.get("AGENT_AUTONOMY", "1") != "0":
+        if True:  # exchange scan + rule-based risk always run; only the LLM part obeys AGENT_AUTONOMY
             try:
                 from agents import risk_agent
-                risk_ctx = risk_agent.review(d, as_of, state, universe, book, factor_df, regime)
+                risk_ctx = risk_agent.review(d, as_of, state, universe, book, factor_df, regime,
+                                             tech=frags.get("tech"),
+                                             use_llm=os.environ.get("AGENT_AUTONOMY", "1") != "0")
                 tool_calls += risk_ctx["tool_calls"]
                 print(f"  risk agent: {risk_ctx['tool_calls']} tool calls")
 
@@ -213,8 +237,9 @@ def main():
         result = portfolio_agent.run_agent(
             d, state, market, universe, book, strategy, limits, started,
             ask=ask, factor_df=factor_df, regime=regime, journal_ctx=j_data, as_of=as_of, risk_ctx=risk_ctx,
+            tech_ctx=frags.get("tech"), desk_notes=_desk_notes(frags, risk_ctx),
         )
-        for fr in (frags.get("macro"), frags.get("factor")):
+        for fr in (frags.get("macro"), frags.get("factor"), frags.get("tech")):
             if fr and fr.get("llm_usage"):
                 result["llm_meta"]["input_tokens"] += fr["llm_usage"]["input_tokens"]
                 result["llm_meta"]["output_tokens"] += fr["llm_usage"]["output_tokens"]
