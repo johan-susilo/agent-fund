@@ -3,37 +3,37 @@
   {
    "authority": "vendor",
    "url": "https://finance.yahoo.com/",
-   "fetched_at": "2026-10-26T01:25:08+08:00",
+   "fetched_at": "2026-10-26T01:56:29+08:00",
    "name": "Yahoo Finance 日線歷史價量（技術指標）",
    "content_as_of": "2026-10-22T13:30:00+08:00"
   },
   {
    "authority": "vendor",
    "url": "https://finmindtrade.com/",
-   "fetched_at": "2026-10-26T01:25:08+08:00",
+   "fetched_at": "2026-10-26T01:56:29+08:00",
    "name": "FinMind 開放資料：台指期外資未平倉、個股融資餘額",
    "content_as_of": "2026-10-22T18:30:00+08:00"
   },
   {
    "authority": "vendor",
-   "name": "Yahoo Finance (2330.TW) 日線",
-   "fetched_at": "2026-10-26T01:25:40+08:00",
-   "url": "https://finance.yahoo.com/quote/2330.TW/",
-   "content_as_of": "2026-10-22T13:30:00+08:00"
-  },
-  {
-   "authority": "vendor",
    "name": "Yahoo Finance (^TWII) 日線",
-   "fetched_at": "2026-10-26T01:25:40+08:00",
+   "fetched_at": "2026-10-26T01:57:02+08:00",
    "url": "https://finance.yahoo.com/quote/^TWII/",
    "content_as_of": "2026-10-22T13:30:00+08:00"
   },
   {
    "authority": "vendor",
    "name": "Yahoo Finance (^SOX) 日線",
-   "fetched_at": "2026-10-26T01:25:40+08:00",
+   "fetched_at": "2026-10-26T01:57:03+08:00",
    "url": "https://finance.yahoo.com/quote/^SOX/",
    "content_as_of": "2026-10-24T04:00:00+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "Yahoo Finance (2330.TW) 日線",
+   "fetched_at": "2026-10-26T01:57:03+08:00",
+   "url": "https://finance.yahoo.com/quote/2330.TW/",
+   "content_as_of": "2026-10-22T13:30:00+08:00"
   }
  ],
  "observations": [
@@ -459,25 +459,6 @@
    "src": [
     2
    ],
-   "statement": "2330.TW 2026-10-22 收 2385（1日-1.45%、5日-2.2%、20日-3.8%、60日+1.8%）",
-   "values": {
-    "2330_close": 2385.0,
-    "2330_chg_pct": -1.45,
-    "2330_mom20_pct": -3.83,
-    "2330_mom60_pct": 1.79,
-    "2330_vol20_pct": 19.2,
-    "2330_adv20_twd_m": 57448.0
-   },
-   "topic": "agent_price",
-   "level": "stock",
-   "tickers": [
-    "2330"
-   ]
-  },
-  {
-   "src": [
-    3
-   ],
    "statement": "^TWII 2026-10-22 收 46041.4（1日-1.81%、5日-2.0%、20日-3.5%、60日+5.5%）",
    "values": {
     "twii_close": 46041.4297,
@@ -492,7 +473,7 @@
   },
   {
    "src": [
-    4
+    3
    ],
    "statement": "^SOX 2026-10-23 收 10779.5（1日+0.44%、5日-3.2%、20日-14.9%、60日-4.6%）",
    "values": {
@@ -505,9 +486,28 @@
    "topic": "agent_price",
    "level": "market",
    "tickers": []
+  },
+  {
+   "src": [
+    4
+   ],
+   "statement": "2330.TW 2026-10-22 收 2385（1日-1.45%、5日-2.2%、20日-3.8%、60日+1.8%）",
+   "values": {
+    "2330_close": 2385.0,
+    "2330_chg_pct": -1.45,
+    "2330_mom20_pct": -3.83,
+    "2330_mom60_pct": 1.79,
+    "2330_vol20_pct": 19.2,
+    "2330_adv20_twd_m": 57448.0
+   },
+   "topic": "agent_price",
+   "level": "stock",
+   "tickers": [
+    "2330"
+   ]
   }
  ],
- "tool_calls": 46,
+ "tool_calls": 50,
  "warnings": [],
  "breadth": {
   "n": 149,
@@ -13413,12 +13413,12 @@
   "3374": -0.0184,
   "2609": -0.126
  },
- "agent_notes": "市場廣度顯著弱化（僅31%站上MA20、32檔破底對比5檔創高，SOX 20日跌14.9%，外資期貨淨空單達-8.7萬口），顯示半導體族群處於全面拉回。\n\n謹慎標的：\n1. 2330（台積電）：破20日低且跌破MA60（MA20 -4%、RSI 38），權值受壓。\n2. 2454（聯發科）、2308（台達電）：同步破底並失守季線。\n3. 3661（世芯-KY）：高波動下破底，動能轉弱。\n\n強勢抗跌標的：\n1. 2412（中華電）：資金避險推升創高（技術分84）。\n2. 2891（中信金）：站穩雙均線（MA20 +7%、MA60 +11%），結構健康。\n\n未明事項：外資期貨重空壓制下現貨何時止跌，以及美股半導體鏈落底信號。",
+ "agent_notes": "**Breadth Read:**\nMarket breadth is weak and deteriorating. Only 31% of tracked stocks are above MA20, with 32 breakdowns dwarfing 5 breakouts. The median tech score sits at a bearish 40.0. Foreign futures net short positioning is at an extreme -87,297 contracts. The local market is heavily weighed down by global semiconductor weakness, mirroring the SOX index's steep 14.9% drop over the past 20 days. Broad participation is lacking, signaling a risk-off environment.\n\n**Caution:**\n- **2330 (TSMC), 2454 (MediaTek), 3661 (Alchip):** All are flagging breakdowns and have fallen below their MA60. This aligns with the broader SOX selloff rather than isolated noise. Avoid catching falling knives until a base forms.\n\n**Clean Uptrends:**\n- **2412 (Chunghwa Telecom):** Breaking out and overbought; acting as a classic defensive safe haven.\n- **2891 (CTBC Financial) & 2880 (Hua Nan):** Both boast high tech scores (89) and are trading comfortably above their MA20/MA60, showing strong relative strength.\n\n**Unknowns:**\nThe specific fundamental catalysts driving the severe SOX and Taiwan semi selloff (e.g., new export controls, customer order cuts, or macro fears) remain unclear without deeper news analysis.",
  "llm_usage": {
-  "input_tokens": 4935,
-  "output_tokens": 1580,
+  "input_tokens": 5265,
+  "output_tokens": 1573,
   "models": [
-   "gemini-3.8-flash"
+   "gemini-3.1-pro-preview"
   ]
  }
 }

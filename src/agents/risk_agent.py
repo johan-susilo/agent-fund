@@ -37,7 +37,7 @@ EVENT_URLS = (
     ("twse_notice", "twse", "TWSE 公布注意累計次數異常資訊", "https://openapi.twse.com.tw/v1/announcement/notice", "notice"),
     ("tpex_notice", "tpex", "TPEx 公布注意交易資訊", "https://www.tpex.org.tw/openapi/v1/tpex_trading_warning_information", "notice"),
     ("twse_exdiv", "twse", "TWSE 除權除息預告表", "https://openapi.twse.com.tw/v1/exchangeReport/TWT48U_ALL", "exdiv"),
-    ("tpex_exdiv", "tpex", "TPEx 除權除息預告表", "https://www.tpex.org.tw/openapi/v1/tpex_mainboard_exright_preannounce", "exdiv"),
+    ("tpex_exdiv", "tpex", "TPEx 除權除息預告表", "https://www.tpex.org.tw/openapi/v1/tpex_exright_prepost", "exdiv"),
 )
 FRED_STRESS = {"BAMLH0A0HYM2": ("hy_oas", "美國高收益債信用利差 OAS(%)"),
                "T10Y2Y": ("t10y2y", "美國 10Y-2Y 殖利率差(%)")}
