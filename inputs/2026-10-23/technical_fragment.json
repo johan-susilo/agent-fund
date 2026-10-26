@@ -3,35 +3,35 @@
   {
    "authority": "vendor",
    "url": "https://finance.yahoo.com/",
-   "fetched_at": "2026-10-26T14:58:08+08:00",
+   "fetched_at": "2026-10-26T16:11:06+08:00",
    "name": "Yahoo Finance 日線歷史價量（技術指標）",
    "content_as_of": "2026-10-22T13:30:00+08:00"
   },
   {
    "authority": "vendor",
    "url": "https://finmindtrade.com/",
-   "fetched_at": "2026-10-26T14:58:08+08:00",
+   "fetched_at": "2026-10-26T16:11:06+08:00",
    "name": "FinMind 開放資料：台指期外資未平倉、個股融資餘額",
    "content_as_of": "2026-10-22T18:30:00+08:00"
   },
   {
    "authority": "vendor",
    "name": "Yahoo Finance (2330.TW) 日線",
-   "fetched_at": "2026-10-26T14:58:38+08:00",
+   "fetched_at": "2026-10-26T16:11:36+08:00",
    "url": "https://finance.yahoo.com/quote/2330.TW/",
    "content_as_of": "2026-10-22T13:30:00+08:00"
   },
   {
    "authority": "vendor",
    "name": "Yahoo Finance (^SOX) 日線",
-   "fetched_at": "2026-10-26T14:58:38+08:00",
+   "fetched_at": "2026-10-26T16:11:36+08:00",
    "url": "https://finance.yahoo.com/quote/^SOX/",
    "content_as_of": "2026-10-24T04:00:00+08:00"
   },
   {
    "authority": "vendor",
    "name": "Yahoo Finance (2454.TW) 日線",
-   "fetched_at": "2026-10-26T14:58:40+08:00",
+   "fetched_at": "2026-10-26T16:11:36+08:00",
    "url": "https://finance.yahoo.com/quote/2454.TW/",
    "content_as_of": "2026-10-22T13:30:00+08:00"
   }
@@ -510,7 +510,7 @@
    ]
   }
  ],
- "tool_calls": 48,
+ "tool_calls": 46,
  "warnings": [],
  "breadth": {
   "n": 149,
@@ -13416,10 +13416,10 @@
   "3374": -0.0184,
   "2609": -0.126
  },
- "agent_notes": "市場廣度顯著惡化：僅 30.9% 站上 MA20、破 20 日低多達 32 檔（創高僅 5 檔），外資期貨空單維持 -8.7 萬口高檔，^SOX 20 日跌 14.9%，半導體面臨系統性修正，不宜躁進加倉。\n\n警惕標的：\n1. 2330 台積電：跌破 MA60 與 20 日支撐，短線動能潰散。\n2. 2454 聯發科：20 日重挫近 20% 且破季線，賣壓沉重。\n3. 3661 世芯-KY / 2308 台達電：高 ATR 且同步出現 breakdown 與破季線。\n\n相對強勢可留意：\n1. 6415 矽力*-KY：站穩 MA20(+6%)/MA60(+8%)，多頭排列相對抗跌。\n2. 2412 中華電：防禦資金流入創高，惟 RSI>80 偏熱宜待拉回。\n\n未知：台積電、聯發科集體破線是否由地緣政策或終端砍單引發，缺乏即時新聞佐證。",
+ "agent_notes": "**Market Breadth**: Severely deteriorated. Only 30.9% of names sit above MA20 and 24.8% have positive MACD, with 32 breakdowns versus 5 breakouts. Foreign index futures hold an extreme net short (-87k contracts), while ^SOX is down 14.9% over 20 days, confirming broad-based semi derisking.\n\n**Caution Tickers**:\n- **2330 (TSMC)**: Broke below MA60 (RSI 38, score 42), losing key short-term structural support.\n- **2454 (MediaTek)**: Severe momentum breakdown (-20.0% 20-day return, high ATR, below MA60).\n- **3661 (Alchip) / 2308 (Delta)**: Both triggered breakdown and below MA60 flags under heavy volatility.\n\n**Worth Considering**:\n- **6415**: Resilient tech uptrend maintaining MA20 (+6%) and MA60 (+8%) support with score 77.\n- **2412 / 2891**: Defensive non-semi relative strength holding solid MA60 buffers.\n\n**Unknown**: Specific fundamental catalysts driving individual semi selloffs (earnings cuts vs. macro/export-control noise) remain unverified due to evidence budget constraints.",
  "llm_usage": {
-  "input_tokens": 8342,
-  "output_tokens": 2009,
+  "input_tokens": 5019,
+  "output_tokens": 1745,
   "models": [
    "gemini-3.8-flash"
   ]

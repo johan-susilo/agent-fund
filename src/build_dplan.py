@@ -64,6 +64,7 @@ def build(result: dict, state: dict, tool_calls: int) -> dict:
         i["logic"], i["counter_evidence"] = cut(i["logic"], 1000), cut(i.get("counter_evidence"), 500)
         if "conclusion" in i:
             i["conclusion"] = cut(i["conclusion"], 300)
+        i["premise_refs"] = i.get("premise_refs", [])[:10]
         inferences.append(i)
 
     meta = result["llm_meta"]

@@ -27,16 +27,6 @@ _client = None
 _working_model = None            # model verified earlier in this process
 
 
-def get_client():
-    """Create the client on first use so offline tests and --replay never need credentials."""
-    global _client
-    if _client is None:
-        from google import genai
-        _client = genai.Client(vertexai=True, project=os.environ.get("GOOGLE_CLOUD_PROJECT"),
-                               location=os.environ.get("GOOGLE_CLOUD_LOCATION", "global"))
-    return _client
-
-
 def candidates() -> list:
     names = [os.environ.get("GEMINI_MODEL", "").strip()]
     names += [m.strip() for m in os.environ.get("GEMINI_FALLBACK_MODELS", DEFAULT_FALLBACKS).split(",")]
@@ -136,20 +126,11 @@ def _generate(model, system_prompt, user_content, temperature):
             raise
 
 
-
 def _parse(text):
     if not text:
         raise ValueError("empty model response (possibly blocked by safety filters)")
-    
-    # Safely extract ONLY the JSON object, ignoring any <scratchpad> text before it
-    match = re.search(r"\{.*\}", text, re.DOTALL)
-    if not match:
-        raise ValueError("No JSON object found in response")
-        
-    try:
-        return json.loads(match.group(0))
-    except json.JSONDecodeError as e:
-        raise ValueError(f"JSON Parsing Error: {e}")
+    return json.loads(re.sub(r"^```(?:json)?\s*|\s*```$", "", text.strip()))
+
 
 def ask_json_meta(system_prompt: str, user_content: str, temperature=None):
     """Return (dict, meta, raw_text). meta['model'] is the model actually used (written to the D-Plan)."""

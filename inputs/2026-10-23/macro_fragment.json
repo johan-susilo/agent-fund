@@ -5,77 +5,86 @@
    "name": "FRED DGS10: 美國 10 年期公債殖利率(%)",
    "url": "https://fred.stlouisfed.org/series/DGS10",
    "content_as_of": "2026-10-23T04:00:00+08:00",
-   "fetched_at": "2026-10-26T14:58:09+08:00"
+   "fetched_at": "2026-10-26T16:11:08+08:00"
   },
   {
    "authority": "vendor",
    "name": "FRED VIXCLS: VIX 恐慌指數",
    "url": "https://fred.stlouisfed.org/series/VIXCLS",
    "content_as_of": "2026-10-23T04:00:00+08:00",
-   "fetched_at": "2026-10-26T14:58:09+08:00"
+   "fetched_at": "2026-10-26T16:11:08+08:00"
   },
   {
    "authority": "vendor",
    "name": "FRED DEXTAUS: 美元兌新台幣(TWD/USD)",
    "url": "https://fred.stlouisfed.org/series/DEXTAUS",
    "content_as_of": "2026-10-17T04:00:00+08:00",
-   "fetched_at": "2026-10-26T14:58:09+08:00"
+   "fetched_at": "2026-10-26T16:11:08+08:00"
   },
   {
    "authority": "vendor",
    "name": "FRED NASDAQCOM: 那斯達克綜合指數",
    "url": "https://fred.stlouisfed.org/series/NASDAQCOM",
    "content_as_of": "2026-10-23T04:00:00+08:00",
-   "fetched_at": "2026-10-26T14:58:09+08:00"
+   "fetched_at": "2026-10-26T16:11:08+08:00"
   },
   {
    "authority": "vendor",
    "name": "Yahoo Finance (^SOX): 費城半導體指數 (SOX)",
    "url": "https://finance.yahoo.com/quote/^SOX/",
    "content_as_of": "2026-10-24T04:00:00+08:00",
-   "fetched_at": "2026-10-26T14:58:11+08:00"
+   "fetched_at": "2026-10-26T16:11:10+08:00"
   },
   {
    "authority": "vendor",
    "name": "Yahoo Finance (TSM): 台積電 ADR (TSM)",
    "url": "https://finance.yahoo.com/quote/TSM/",
    "content_as_of": "2026-10-24T04:00:00+08:00",
-   "fetched_at": "2026-10-26T14:58:11+08:00"
+   "fetched_at": "2026-10-26T16:11:10+08:00"
   },
   {
    "authority": "vendor",
    "name": "Yahoo Finance (NVDA): NVIDIA (NVDA) AI伺服器指標",
    "url": "https://finance.yahoo.com/quote/NVDA/",
    "content_as_of": "2026-10-24T04:00:00+08:00",
-   "fetched_at": "2026-10-26T14:58:11+08:00"
+   "fetched_at": "2026-10-26T16:11:10+08:00"
   },
   {
    "authority": "vendor",
    "name": "Yahoo Finance (MU): Micron (MU) HBM與記憶體指標",
    "url": "https://finance.yahoo.com/quote/MU/",
    "content_as_of": "2026-10-24T04:00:00+08:00",
-   "fetched_at": "2026-10-26T14:58:11+08:00"
+   "fetched_at": "2026-10-26T16:11:10+08:00"
   },
   {
    "authority": "vendor",
    "name": "Yahoo Finance (^VIX): VIX 波動率指數 (含20日均線比)",
    "url": "https://finance.yahoo.com/quote/^VIX/",
-   "content_as_of": "2026-10-24T04:00:00+08:00",
-   "fetched_at": "2026-10-26T14:58:11+08:00"
+   "content_as_of": "2026-10-27T04:00:00+08:00",
+   "fetched_at": "2026-10-26T16:11:10+08:00"
   },
   {
    "authority": "vendor",
    "name": "Yahoo Finance (^TWII): 台灣加權指數 (TAIEX)",
    "url": "https://finance.yahoo.com/quote/^TWII/",
    "content_as_of": "2026-10-22T13:30:00+08:00",
-   "fetched_at": "2026-10-26T14:58:11+08:00"
+   "fetched_at": "2026-10-26T16:11:10+08:00"
   },
   {
    "authority": "vendor",
    "name": "Yahoo Finance (TWD=X): 美元兌台幣即期匯率 (USD/TWD)",
    "url": "https://finance.yahoo.com/quote/TWD=X/",
    "content_as_of": "2026-10-26T13:30:00+08:00",
-   "fetched_at": "2026-10-26T14:58:11+08:00"
+   "fetched_at": "2026-10-26T16:11:10+08:00"
+  },
+  {
+   "authority": "media",
+   "name": "newsBTC: Bitcoin’s Fed Week Starts With A Fresh Rise In US Inflation Expectations",
+   "url": "https://www.newsbtc.com/bitcoin-news/bitcoin-fed-week-us-inflation-expectations-october-2026/",
+   "archive_url": null,
+   "published_at": "2026-10-25T15:00:00+08:00",
+   "content_as_of": "2026-10-25T15:00:00+08:00",
+   "fetched_at": "2026-10-26T16:11:06+08:00"
   },
   {
    "authority": "media",
@@ -84,7 +93,7 @@
    "archive_url": null,
    "published_at": "2026-10-25T11:48:39+08:00",
    "content_as_of": "2026-10-25T11:48:39+08:00",
-   "fetched_at": "2026-10-26T14:58:08+08:00"
+   "fetched_at": "2026-10-26T16:11:06+08:00"
   }
  ],
  "observations": [
@@ -208,12 +217,12 @@
    "src": [
     8
    ],
-   "statement": "VIX 波動率指數 (含20日均線比) 2026-10-23 收 19.45（前值 19.03，單日 +2.21%，較20日均線 +17.6%）",
+   "statement": "VIX 波動率指數 (含20日均線比) 2026-10-26 收 19.65（前值 19.45，單日 +1.03%，較20日均線 +17.6%）",
    "values": {
-    "vix_yf": 19.45,
-    "vix_yf_prev": 19.03,
-    "vix_yf_chg_pct": 2.21,
-    "vix_yf_vs_ma20_pct": 17.62
+    "vix_yf": 19.65,
+    "vix_yf_prev": 19.45,
+    "vix_yf_chg_pct": 1.03,
+    "vix_yf_vs_ma20_pct": 17.56
    },
    "topic": "macro_vix_yf",
    "level": "market",
@@ -238,12 +247,12 @@
    "src": [
     10
    ],
-   "statement": "美元兌台幣即期匯率 (USD/TWD) 2026-10-26 收 32.562（前值 32.597，單日 -0.11%，較20日均線 +1.4%）",
+   "statement": "美元兌台幣即期匯率 (USD/TWD) 2026-10-26 收 32.577（前值 32.597，單日 -0.06%，較20日均線 +1.5%）",
    "values": {
-    "usdtwd_spot": 32.56,
+    "usdtwd_spot": 32.58,
     "usdtwd_spot_prev": 32.6,
-    "usdtwd_spot_chg_pct": -0.11,
-    "usdtwd_spot_vs_ma20_pct": 1.45
+    "usdtwd_spot_chg_pct": -0.06,
+    "usdtwd_spot_vs_ma20_pct": 1.49
    },
    "topic": "macro_usdtwd_spot",
    "level": "market",
@@ -253,9 +262,21 @@
    "src": [
     11
    ],
+   "statement": "newsBTC 報導：Bitcoin’s Fed Week Starts With A Fresh Rise In US Inflation Expectations",
+   "values": {
+    "published_hours_ago": 25.2
+   },
+   "topic": "news_macro",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    12
+   ],
    "statement": "The Times of India 報導：Nifty bears tighten grip as crude, geopolitical risks, FII outflows mount: 5 factors to decide D-Street’s fate next week",
    "values": {
-    "published_hours_ago": 27.2
+    "published_hours_ago": 28.4
    },
    "topic": "news_macro",
    "level": "market",

@@ -314,12 +314,6 @@ Used to sanity-check the pipeline; numbers will differ in the competition.
 | `technicals.py`, `finmind.py` | **Integrated.** Indicator maths; FinMind helper (needs `FINMIND_TOKEN`). |
 | `web_tools.py`, `macro_tools.py` (GDELT) | **Integrated.** LLM tools and the news search behind `web_search`. |
 | `portfolio.py`, `journal.py` | **Integrated.** `build_target_weights` builds the baseline and fallback; the journal adds yesterday's realised result vs an equal-weight benchmark as **non-citable** context. |
-| `config.py` | Bridge from `settings.py` to the standalone toolkit. |
-| `backtest.py`, `indicators.py`, `data_collector.py`, `data_validator.py`, `costs.py`, `reporting.py`, `fundamentals.py`, `risk.py` | **Standalone**, not imported by the pipeline. `indicators.py` is an older cousin of `technicals.py`. Several expect `config/universe.csv`, and their function defaults differ from `settings.py`. |
-| `macro_news_collector.py` | **Unfinished** (truncated, `_fetch_rss` defined twice). Unused. |
-| `financial_data_collector.py` | **Empty placeholder.** |
-| `macro_agent._taifex_noi` | **Dead code**, superseded by `finmind.foreign_futures_noi`. Safe to delete. |
-
 ---
 
 ## Known gaps and risks
