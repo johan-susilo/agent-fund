@@ -5,28 +5,77 @@
    "name": "FRED DGS10: 美國 10 年期公債殖利率(%)",
    "url": "https://fred.stlouisfed.org/series/DGS10",
    "content_as_of": "2026-10-23T04:00:00+08:00",
-   "fetched_at": "2026-10-27T00:05:37+08:00"
+   "fetched_at": "2026-10-27T00:52:34+08:00"
   },
   {
    "authority": "vendor",
    "name": "FRED VIXCLS: VIX 恐慌指數",
    "url": "https://fred.stlouisfed.org/series/VIXCLS",
    "content_as_of": "2026-10-24T04:00:00+08:00",
-   "fetched_at": "2026-10-27T00:05:37+08:00"
+   "fetched_at": "2026-10-27T00:52:35+08:00"
   },
   {
    "authority": "vendor",
    "name": "FRED DEXTAUS: 美元兌新台幣(TWD/USD)",
    "url": "https://fred.stlouisfed.org/series/DEXTAUS",
    "content_as_of": "2026-10-17T04:00:00+08:00",
-   "fetched_at": "2026-10-27T00:05:37+08:00"
+   "fetched_at": "2026-10-27T00:52:34+08:00"
   },
   {
    "authority": "vendor",
    "name": "FRED NASDAQCOM: 那斯達克綜合指數",
    "url": "https://fred.stlouisfed.org/series/NASDAQCOM",
    "content_as_of": "2026-10-24T04:00:00+08:00",
-   "fetched_at": "2026-10-27T00:05:37+08:00"
+   "fetched_at": "2026-10-27T00:52:34+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "Yahoo Finance (^SOX): 費城半導體指數 (SOX) (未定時盤中快照)",
+   "url": "https://finance.yahoo.com/quote/%5ESOX/",
+   "content_as_of": "2026-10-27T00:52:36+08:00",
+   "fetched_at": "2026-10-27T00:52:36+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "Yahoo Finance (TSM): 台積電 ADR (TSM) (未定時盤中快照)",
+   "url": "https://finance.yahoo.com/quote/TSM/",
+   "content_as_of": "2026-10-27T00:52:36+08:00",
+   "fetched_at": "2026-10-27T00:52:36+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "Yahoo Finance (NVDA): NVIDIA (NVDA) AI伺服器指標 (未定時盤中快照)",
+   "url": "https://finance.yahoo.com/quote/NVDA/",
+   "content_as_of": "2026-10-27T00:52:36+08:00",
+   "fetched_at": "2026-10-27T00:52:36+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "Yahoo Finance (MU): Micron (MU) HBM與記憶體指標 (未定時盤中快照)",
+   "url": "https://finance.yahoo.com/quote/MU/",
+   "content_as_of": "2026-10-27T00:52:36+08:00",
+   "fetched_at": "2026-10-27T00:52:36+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "Yahoo Finance (^VIX): VIX 波動率指數 (含20日均線比) (未定時盤中快照)",
+   "url": "https://finance.yahoo.com/quote/%5EVIX/",
+   "content_as_of": "2026-10-27T00:52:36+08:00",
+   "fetched_at": "2026-10-27T00:52:36+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "Yahoo Finance (^TWII): 台灣加權指數 (TAIEX)",
+   "url": "https://finance.yahoo.com/quote/%5ETWII/",
+   "content_as_of": "2026-10-22T13:30:00+08:00",
+   "fetched_at": "2026-10-27T00:52:36+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "Yahoo Finance (TWD=X): 美元兌台幣即期匯率 (USD/TWD)",
+   "url": "https://finance.yahoo.com/quote/TWD=X/",
+   "content_as_of": "2026-10-26T13:30:00+08:00",
+   "fetched_at": "2026-10-27T00:52:36+08:00"
   },
   {
    "authority": "media",
@@ -35,7 +84,7 @@
    "archive_url": null,
    "published_at": "2026-10-25T17:43:17+08:00",
    "content_as_of": "2026-10-25T17:43:17+08:00",
-   "fetched_at": "2026-10-27T00:05:36+08:00"
+   "fetched_at": "2026-10-27T00:52:32+08:00"
   },
   {
    "authority": "media",
@@ -44,7 +93,7 @@
    "archive_url": null,
    "published_at": "2026-10-25T15:00:00+08:00",
    "content_as_of": "2026-10-25T15:00:00+08:00",
-   "fetched_at": "2026-10-27T00:05:36+08:00"
+   "fetched_at": "2026-10-27T00:52:32+08:00"
   }
  ],
  "observations": [
@@ -108,11 +157,14 @@
    "src": [
     4
    ],
-   "statement": "Freerepublic.com 報導：Did the United States and Russia Just Agree to Collaborate on Data Centers?",
+   "statement": "費城半導體指數 (SOX) 2026-10-26 盤中(報價時間未知) 11078.3（前值 10779.5，單日 +2.77%，較20日均線 -8.2%）",
    "values": {
-    "published_hours_ago": 30.4
+    "sox": 11078.27,
+    "sox_prev": 10779.46,
+    "sox_chg_pct": 2.77,
+    "sox_vs_ma20_pct": -8.22
    },
-   "topic": "news_semis",
+   "topic": "macro_sox",
    "level": "market",
    "tickers": []
   },
@@ -120,9 +172,111 @@
    "src": [
     5
    ],
+   "statement": "台積電 ADR (TSM) 2026-10-26 盤中(報價時間未知) 425.69（前值 418.51，單日 +1.72%，較20日均線 -4.2%）",
+   "values": {
+    "tsm_adr": 425.69,
+    "tsm_adr_prev": 418.51,
+    "tsm_adr_chg_pct": 1.72,
+    "tsm_adr_vs_ma20_pct": -4.18
+   },
+   "topic": "macro_tsm_adr",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    6
+   ],
+   "statement": "NVIDIA (NVDA) AI伺服器指標 2026-10-26 盤中(報價時間未知) 215.327（前值 210.96，單日 +2.07%，較20日均線 -4.2%）",
+   "values": {
+    "nvda": 215.33,
+    "nvda_prev": 210.96,
+    "nvda_chg_pct": 2.07,
+    "nvda_vs_ma20_pct": -4.24
+   },
+   "topic": "macro_nvda",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    7
+   ],
+   "statement": "Micron (MU) HBM與記憶體指標 2026-10-26 盤中(報價時間未知) 904.75（前值 877.55，單日 +3.10%，較20日均線 -7.6%）",
+   "values": {
+    "mu": 904.75,
+    "mu_prev": 877.55,
+    "mu_chg_pct": 3.1,
+    "mu_vs_ma20_pct": -7.6
+   },
+   "topic": "macro_mu",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    8
+   ],
+   "statement": "VIX 波動率指數 (含20日均線比) 2026-10-26 盤中(報價時間未知) 18.43（前值 19.45，單日 -5.24%，較20日均線 +10.7%）",
+   "values": {
+    "vix_yf": 18.43,
+    "vix_yf_prev": 19.45,
+    "vix_yf_chg_pct": -5.24,
+    "vix_yf_vs_ma20_pct": 10.66
+   },
+   "topic": "macro_vix_yf",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    9
+   ],
+   "statement": "台灣加權指數 (TAIEX) 2026-10-22 收 46041.4（前值 46887.8，單日 -1.81%，較20日均線 -4.2%）",
+   "values": {
+    "taiex": 46041.43,
+    "taiex_prev": 46887.77,
+    "taiex_chg_pct": -1.81,
+    "taiex_vs_ma20_pct": -4.22
+   },
+   "topic": "macro_taiex",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    10
+   ],
+   "statement": "美元兌台幣即期匯率 (USD/TWD) 2026-10-26 收 32.559（前值 32.597，單日 -0.12%，較20日均線 +1.4%）",
+   "values": {
+    "usdtwd_spot": 32.56,
+    "usdtwd_spot_prev": 32.6,
+    "usdtwd_spot_chg_pct": -0.12,
+    "usdtwd_spot_vs_ma20_pct": 1.44
+   },
+   "topic": "macro_usdtwd_spot",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    11
+   ],
+   "statement": "Freerepublic.com 報導：Did the United States and Russia Just Agree to Collaborate on Data Centers?",
+   "values": {
+    "published_hours_ago": 31.2
+   },
+   "topic": "news_semis",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    12
+   ],
    "statement": "newsBTC 報導：Bitcoin’s Fed Week Starts With A Fresh Rise In US Inflation Expectations",
    "values": {
-    "published_hours_ago": 33.1
+    "published_hours_ago": 33.9
    },
    "topic": "news_macro",
    "level": "market",
@@ -131,13 +285,6 @@
  ],
  "tool_calls": 7,
  "warnings": [
-  "yfinance ^SOX failed: name 'is_intraday' is not defined",
-  "yfinance TSM failed: name 'is_intraday' is not defined",
-  "yfinance NVDA failed: name 'is_intraday' is not defined",
-  "yfinance MU failed: name 'is_intraday' is not defined",
-  "yfinance ^VIX failed: name 'is_intraday' is not defined",
-  "yfinance ^TWII failed: name 'is_intraday' is not defined",
-  "yfinance TWD=X failed: name 'is_intraday' is not defined",
   "FINNHUB_API_KEY missing: economic calendar skipped"
  ]
 }

@@ -10,7 +10,7 @@
       "name": "TWSE 上市個股日收盤價 (OpenAPI STOCK_DAY_ALL)",
       "url": "https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL",
       "content_as_of": "2026-10-23T18:30:00+08:00",
-      "fetched_at": "2026-10-27T00:05:42+08:00"
+      "fetched_at": "2026-10-27T00:52:36+08:00"
     },
     {
       "source_id": "S2",
@@ -18,7 +18,7 @@
       "name": "TPEx 上櫃個股日收盤價 (OpenAPI)",
       "url": "https://www.tpex.org.tw/openapi/v1/tpex_mainboard_daily_close_quotes",
       "content_as_of": "2026-10-23T18:30:00+08:00",
-      "fetched_at": "2026-10-27T00:05:42+08:00"
+      "fetched_at": "2026-10-27T00:52:36+08:00"
     },
     {
       "source_id": "S3",
@@ -26,7 +26,7 @@
       "name": "FRED DGS10: 美國 10 年期公債殖利率(%)",
       "url": "https://fred.stlouisfed.org/series/DGS10",
       "content_as_of": "2026-10-23T04:00:00+08:00",
-      "fetched_at": "2026-10-27T00:05:37+08:00"
+      "fetched_at": "2026-10-27T00:52:34+08:00"
     },
     {
       "source_id": "S4",
@@ -34,7 +34,7 @@
       "name": "FRED VIXCLS: VIX 恐慌指數",
       "url": "https://fred.stlouisfed.org/series/VIXCLS",
       "content_as_of": "2026-10-24T04:00:00+08:00",
-      "fetched_at": "2026-10-27T00:05:37+08:00"
+      "fetched_at": "2026-10-27T00:52:35+08:00"
     },
     {
       "source_id": "S5",
@@ -42,7 +42,7 @@
       "name": "FRED DEXTAUS: 美元兌新台幣(TWD/USD)",
       "url": "https://fred.stlouisfed.org/series/DEXTAUS",
       "content_as_of": "2026-10-17T04:00:00+08:00",
-      "fetched_at": "2026-10-27T00:05:37+08:00"
+      "fetched_at": "2026-10-27T00:52:34+08:00"
     },
     {
       "source_id": "S6",
@@ -50,185 +50,217 @@
       "name": "FRED NASDAQCOM: 那斯達克綜合指數",
       "url": "https://fred.stlouisfed.org/series/NASDAQCOM",
       "content_as_of": "2026-10-24T04:00:00+08:00",
-      "fetched_at": "2026-10-27T00:05:37+08:00"
+      "fetched_at": "2026-10-27T00:52:34+08:00"
     },
     {
       "source_id": "S7",
+      "authority": "vendor",
+      "name": "Yahoo Finance (^SOX): 費城半導體指數 (SOX) (未定時盤中快照)",
+      "url": "https://finance.yahoo.com/quote/%5ESOX/",
+      "content_as_of": "2026-10-27T00:52:36+08:00",
+      "fetched_at": "2026-10-27T00:52:36+08:00"
+    },
+    {
+      "source_id": "S8",
+      "authority": "vendor",
+      "name": "Yahoo Finance (TSM): 台積電 ADR (TSM) (未定時盤中快照)",
+      "url": "https://finance.yahoo.com/quote/TSM/",
+      "content_as_of": "2026-10-27T00:52:36+08:00",
+      "fetched_at": "2026-10-27T00:52:36+08:00"
+    },
+    {
+      "source_id": "S9",
+      "authority": "vendor",
+      "name": "Yahoo Finance (NVDA): NVIDIA (NVDA) AI伺服器指標 (未定時盤中快照)",
+      "url": "https://finance.yahoo.com/quote/NVDA/",
+      "content_as_of": "2026-10-27T00:52:36+08:00",
+      "fetched_at": "2026-10-27T00:52:36+08:00"
+    },
+    {
+      "source_id": "S10",
+      "authority": "vendor",
+      "name": "Yahoo Finance (MU): Micron (MU) HBM與記憶體指標 (未定時盤中快照)",
+      "url": "https://finance.yahoo.com/quote/MU/",
+      "content_as_of": "2026-10-27T00:52:36+08:00",
+      "fetched_at": "2026-10-27T00:52:36+08:00"
+    },
+    {
+      "source_id": "S11",
+      "authority": "vendor",
+      "name": "Yahoo Finance (^VIX): VIX 波動率指數 (含20日均線比) (未定時盤中快照)",
+      "url": "https://finance.yahoo.com/quote/%5EVIX/",
+      "content_as_of": "2026-10-27T00:52:36+08:00",
+      "fetched_at": "2026-10-27T00:52:36+08:00"
+    },
+    {
+      "source_id": "S12",
+      "authority": "vendor",
+      "name": "Yahoo Finance (^TWII): 台灣加權指數 (TAIEX)",
+      "url": "https://finance.yahoo.com/quote/%5ETWII/",
+      "content_as_of": "2026-10-22T13:30:00+08:00",
+      "fetched_at": "2026-10-27T00:52:36+08:00"
+    },
+    {
+      "source_id": "S13",
+      "authority": "vendor",
+      "name": "Yahoo Finance (TWD=X): 美元兌台幣即期匯率 (USD/TWD)",
+      "url": "https://finance.yahoo.com/quote/TWD=X/",
+      "content_as_of": "2026-10-26T13:30:00+08:00",
+      "fetched_at": "2026-10-27T00:52:36+08:00"
+    },
+    {
+      "source_id": "S14",
       "authority": "media",
       "name": "Freerepublic.com: Did the United States and Russia Just Agree to Collaborate on Data Centers?",
       "url": "https://freerepublic.com/focus/f-news/4400514/posts",
       "published_at": "2026-10-25T17:43:17+08:00",
       "content_as_of": "2026-10-25T17:43:17+08:00",
-      "fetched_at": "2026-10-27T00:05:36+08:00"
+      "fetched_at": "2026-10-27T00:52:32+08:00"
     },
     {
-      "source_id": "S8",
+      "source_id": "S15",
       "authority": "media",
       "name": "newsBTC: Bitcoin’s Fed Week Starts With A Fresh Rise In US Inflation Expectations",
       "url": "https://www.newsbtc.com/bitcoin-news/bitcoin-fed-week-us-inflation-expectations-october-2026/",
       "published_at": "2026-10-25T15:00:00+08:00",
       "content_as_of": "2026-10-25T15:00:00+08:00",
-      "fetched_at": "2026-10-27T00:05:36+08:00"
-    },
-    {
-      "source_id": "S9",
-      "authority": "vendor",
-      "name": "Yahoo Finance 日線歷史價量（20/60日動能、波動、成交值）",
-      "url": "https://finance.yahoo.com/",
-      "content_as_of": "2026-10-23T13:30:00+08:00",
-      "fetched_at": "2026-10-27T00:05:36+08:00"
-    },
-    {
-      "source_id": "S10",
-      "authority": "twse",
-      "name": "TWSE/TPEx/MOPS 公開資料：本益比、月營收年增、淨利率",
-      "url": "https://openapi.twse.com.tw/v1/exchangeReport/BWIBBU_ALL",
-      "content_as_of": "2026-10-23T18:30:00+08:00",
-      "fetched_at": "2026-10-27T00:06:00+08:00"
-    },
-    {
-      "source_id": "S11",
-      "authority": "vendor",
-      "name": "FinMind 開放資料：台指期外資未平倉、個股融資餘額",
-      "url": "https://finmindtrade.com/",
-      "content_as_of": "2026-10-22T18:30:00+08:00",
-      "fetched_at": "2026-10-27T00:05:36+08:00"
-    },
-    {
-      "source_id": "S12",
-      "authority": "vendor",
-      "name": "Yahoo Finance (2330.TW) 日線",
-      "url": "https://finance.yahoo.com/quote/2330.TW/",
-      "content_as_of": "2026-10-23T13:30:00+08:00",
-      "fetched_at": "2026-10-27T00:06:09+08:00"
-    },
-    {
-      "source_id": "S13",
-      "authority": "vendor",
-      "name": "Yahoo Finance (^SOX) 日線 (未定時盤中快照)",
-      "url": "https://finance.yahoo.com/quote/^SOX/",
-      "content_as_of": "2026-10-27T00:06:09+08:00",
-      "fetched_at": "2026-10-27T00:06:09+08:00"
-    },
-    {
-      "source_id": "S14",
-      "authority": "vendor",
-      "name": "Yahoo Finance (3231.TW) 日線",
-      "url": "https://finance.yahoo.com/quote/3231.TW/",
-      "content_as_of": "2026-10-23T13:30:00+08:00",
-      "fetched_at": "2026-10-27T00:06:15+08:00"
-    },
-    {
-      "source_id": "S15",
-      "authority": "vendor",
-      "name": "Yahoo Finance (TSM) 日線 (未定時盤中快照)",
-      "url": "https://finance.yahoo.com/quote/TSM/",
-      "content_as_of": "2026-10-27T00:06:35+08:00",
-      "fetched_at": "2026-10-27T00:06:35+08:00"
+      "fetched_at": "2026-10-27T00:52:32+08:00"
     },
     {
       "source_id": "S16",
       "authority": "vendor",
-      "name": "Yahoo Finance (^TWII) 日線",
-      "url": "https://finance.yahoo.com/quote/^TWII/",
-      "content_as_of": "2026-10-22T13:30:00+08:00",
-      "fetched_at": "2026-10-27T00:06:36+08:00"
+      "name": "Yahoo Finance 日線歷史價量（20/60日動能、波動、成交值）",
+      "url": "https://finance.yahoo.com/",
+      "content_as_of": "2026-10-23T13:30:00+08:00",
+      "fetched_at": "2026-10-27T00:52:31+08:00"
     },
     {
       "source_id": "S17",
-      "authority": "vendor",
-      "name": "Yahoo Finance (2347.TW) 日線",
-      "url": "https://finance.yahoo.com/quote/2347.TW/",
-      "content_as_of": "2026-10-23T13:30:00+08:00",
-      "fetched_at": "2026-10-27T00:06:36+08:00"
+      "authority": "twse",
+      "name": "TWSE/TPEx/MOPS 公開資料：本益比、月營收年增、淨利率",
+      "url": "https://openapi.twse.com.tw/v1/exchangeReport/BWIBBU_ALL",
+      "content_as_of": "2026-10-23T18:30:00+08:00",
+      "fetched_at": "2026-10-27T00:52:53+08:00"
     },
     {
       "source_id": "S18",
       "authority": "vendor",
-      "name": "Yahoo Finance (4938.TW) 日線",
-      "url": "https://finance.yahoo.com/quote/4938.TW/",
-      "content_as_of": "2026-10-23T13:30:00+08:00",
-      "fetched_at": "2026-10-27T00:06:36+08:00"
+      "name": "FinMind 開放資料：台指期外資未平倉、個股融資餘額",
+      "url": "https://finmindtrade.com/",
+      "content_as_of": "2026-10-22T18:30:00+08:00",
+      "fetched_at": "2026-10-27T00:52:31+08:00"
     },
     {
       "source_id": "S19",
       "authority": "vendor",
-      "name": "Yahoo Finance (2615.TW) 日線",
-      "url": "https://finance.yahoo.com/quote/2615.TW/",
+      "name": "Yahoo Finance (2330.TW) 日線",
+      "url": "https://finance.yahoo.com/quote/2330.TW/",
       "content_as_of": "2026-10-23T13:30:00+08:00",
-      "fetched_at": "2026-10-27T00:07:10+08:00"
+      "fetched_at": "2026-10-27T00:53:02+08:00"
     },
     {
       "source_id": "S20",
-      "authority": "tpex",
-      "name": "TPEx 公布處置有價證券",
-      "url": "https://www.tpex.org.tw/openapi/v1/tpex_disposal_information",
-      "content_as_of": "2026-10-23T18:30:00+08:00",
-      "fetched_at": "2026-10-27T00:07:20+08:00"
+      "authority": "vendor",
+      "name": "Yahoo Finance (^SOX) 日線 (未定時盤中快照)",
+      "url": "https://finance.yahoo.com/quote/^SOX/",
+      "content_as_of": "2026-10-27T00:53:02+08:00",
+      "fetched_at": "2026-10-27T00:53:02+08:00"
     },
     {
       "source_id": "S21",
-      "authority": "tpex",
-      "name": "TPEx 公布注意交易資訊",
-      "url": "https://www.tpex.org.tw/openapi/v1/tpex_trading_warning_information",
-      "content_as_of": "2026-10-23T18:30:00+08:00",
-      "fetched_at": "2026-10-27T00:07:20+08:00"
+      "authority": "vendor",
+      "name": "Yahoo Finance (3231.TW) 日線",
+      "url": "https://finance.yahoo.com/quote/3231.TW/",
+      "content_as_of": "2026-10-23T13:30:00+08:00",
+      "fetched_at": "2026-10-27T00:53:02+08:00"
     },
     {
       "source_id": "S22",
-      "authority": "tpex",
-      "name": "TPEx 除權除息預告表",
-      "url": "https://www.tpex.org.tw/openapi/v1/tpex_exright_prepost",
-      "content_as_of": "2026-10-23T18:30:00+08:00",
-      "fetched_at": "2026-10-27T00:07:20+08:00"
+      "authority": "vendor",
+      "name": "Yahoo Finance (3189.TW) 日線",
+      "url": "https://finance.yahoo.com/quote/3189.TW/",
+      "content_as_of": "2026-10-23T13:30:00+08:00",
+      "fetched_at": "2026-10-27T00:53:25+08:00"
     },
     {
       "source_id": "S23",
       "authority": "vendor",
-      "name": "Yahoo Finance：原油、美元指數、美債殖利率",
-      "url": "https://finance.yahoo.com/",
-      "content_as_of": "2026-10-27T04:00:00+08:00",
-      "fetched_at": "2026-10-27T00:07:20+08:00"
+      "name": "Yahoo Finance (4938.TW) 日線",
+      "url": "https://finance.yahoo.com/quote/4938.TW/",
+      "content_as_of": "2026-10-23T13:30:00+08:00",
+      "fetched_at": "2026-10-27T00:53:25+08:00"
     },
     {
       "source_id": "S24",
       "authority": "vendor",
-      "name": "FRED：高收益債利差與殖利率曲線",
-      "url": "https://fred.stlouisfed.org/series/BAMLH0A0HYM2",
-      "content_as_of": "2026-10-24T04:00:00+08:00",
-      "fetched_at": "2026-10-27T00:07:20+08:00"
+      "name": "Yahoo Finance (3044.TW) 日線",
+      "url": "https://finance.yahoo.com/quote/3044.TW/",
+      "content_as_of": "2026-10-23T13:30:00+08:00",
+      "fetched_at": "2026-10-27T00:53:25+08:00"
     },
     {
       "source_id": "S25",
       "authority": "vendor",
-      "name": "Yahoo Finance (^SOX) 日線 (未定時盤中快照)",
-      "url": "https://finance.yahoo.com/quote/^SOX/",
-      "content_as_of": "2026-10-27T00:07:29+08:00",
-      "fetched_at": "2026-10-27T00:07:29+08:00"
+      "name": "Yahoo Finance (TSM) 日線 (未定時盤中快照)",
+      "url": "https://finance.yahoo.com/quote/TSM/",
+      "content_as_of": "2026-10-27T00:53:30+08:00",
+      "fetched_at": "2026-10-27T00:53:30+08:00"
     },
     {
       "source_id": "S26",
       "authority": "vendor",
-      "name": "Yahoo Finance (^VIX) 日線 (未定時盤中快照)",
-      "url": "https://finance.yahoo.com/quote/^VIX/",
-      "content_as_of": "2026-10-27T00:07:35+08:00",
-      "fetched_at": "2026-10-27T00:07:35+08:00"
+      "name": "Yahoo Finance (TWD=X) 日線 (未定時盤中快照)",
+      "url": "https://finance.yahoo.com/quote/TWD=X/",
+      "content_as_of": "2026-10-27T00:53:30+08:00",
+      "fetched_at": "2026-10-27T00:53:30+08:00"
     },
     {
       "source_id": "S27",
-      "authority": "vendor",
-      "name": "Yahoo Finance (2412.TW) 日線",
-      "url": "https://finance.yahoo.com/quote/2412.TW/",
-      "content_as_of": "2026-10-23T13:30:00+08:00",
-      "fetched_at": "2026-10-27T00:08:52+08:00"
+      "authority": "tpex",
+      "name": "TPEx 公布處置有價證券",
+      "url": "https://www.tpex.org.tw/openapi/v1/tpex_disposal_information",
+      "content_as_of": "2026-10-23T18:30:00+08:00",
+      "fetched_at": "2026-10-27T00:53:59+08:00"
     },
     {
       "source_id": "S28",
+      "authority": "tpex",
+      "name": "TPEx 公布注意交易資訊",
+      "url": "https://www.tpex.org.tw/openapi/v1/tpex_trading_warning_information",
+      "content_as_of": "2026-10-23T18:30:00+08:00",
+      "fetched_at": "2026-10-27T00:53:59+08:00"
+    },
+    {
+      "source_id": "S29",
+      "authority": "tpex",
+      "name": "TPEx 除權除息預告表",
+      "url": "https://www.tpex.org.tw/openapi/v1/tpex_exright_prepost",
+      "content_as_of": "2026-10-23T18:30:00+08:00",
+      "fetched_at": "2026-10-27T00:53:59+08:00"
+    },
+    {
+      "source_id": "S30",
       "authority": "vendor",
-      "name": "Yahoo Finance (2884.TW) 日線",
-      "url": "https://finance.yahoo.com/quote/2884.TW/",
-      "content_as_of": "2026-10-23T13:30:00+08:00",
-      "fetched_at": "2026-10-27T00:08:56+08:00"
+      "name": "Yahoo Finance：原油、美元指數、美債殖利率",
+      "url": "https://finance.yahoo.com/",
+      "content_as_of": "2026-10-27T04:00:00+08:00",
+      "fetched_at": "2026-10-27T00:53:59+08:00"
+    },
+    {
+      "source_id": "S31",
+      "authority": "vendor",
+      "name": "FRED：高收益債利差與殖利率曲線",
+      "url": "https://fred.stlouisfed.org/series/BAMLH0A0HYM2",
+      "content_as_of": "2026-10-24T04:00:00+08:00",
+      "fetched_at": "2026-10-27T00:53:59+08:00"
+    },
+    {
+      "source_id": "S32",
+      "authority": "vendor",
+      "name": "Yahoo Finance (^SOX) 日線 (未定時盤中快照)",
+      "url": "https://finance.yahoo.com/quote/^SOX/",
+      "content_as_of": "2026-10-27T00:54:08+08:00",
+      "fetched_at": "2026-10-27T00:54:08+08:00"
     }
   ],
   "observations": [
@@ -561,10 +593,13 @@
       "source_ref": [
         "S7"
       ],
-      "topic": "news_semis",
-      "statement": "Freerepublic.com 報導：Did the United States and Russia Just Agree to Collaborate on Data Centers?",
+      "topic": "macro_sox",
+      "statement": "費城半導體指數 (SOX) 2026-10-26 盤中(報價時間未知) 11078.3（前值 10779.5，單日 +2.77%，較20日均線 -8.2%）",
       "values": {
-        "published_hours_ago": 30.4
+        "sox": 11078.27,
+        "sox_prev": 10779.46,
+        "sox_chg_pct": 2.77,
+        "sox_vs_ma20_pct": -8.22
       }
     },
     {
@@ -572,16 +607,111 @@
       "source_ref": [
         "S8"
       ],
-      "topic": "news_macro",
-      "statement": "newsBTC 報導：Bitcoin’s Fed Week Starts With A Fresh Rise In US Inflation Expectations",
+      "topic": "macro_tsm_adr",
+      "statement": "台積電 ADR (TSM) 2026-10-26 盤中(報價時間未知) 425.69（前值 418.51，單日 +1.72%，較20日均線 -4.2%）",
       "values": {
-        "published_hours_ago": 33.1
+        "tsm_adr": 425.69,
+        "tsm_adr_prev": 418.51,
+        "tsm_adr_chg_pct": 1.72,
+        "tsm_adr_vs_ma20_pct": -4.18
       }
     },
     {
       "obs_id": "O25",
       "source_ref": [
         "S9"
+      ],
+      "topic": "macro_nvda",
+      "statement": "NVIDIA (NVDA) AI伺服器指標 2026-10-26 盤中(報價時間未知) 215.327（前值 210.96，單日 +2.07%，較20日均線 -4.2%）",
+      "values": {
+        "nvda": 215.33,
+        "nvda_prev": 210.96,
+        "nvda_chg_pct": 2.07,
+        "nvda_vs_ma20_pct": -4.24
+      }
+    },
+    {
+      "obs_id": "O26",
+      "source_ref": [
+        "S10"
+      ],
+      "topic": "macro_mu",
+      "statement": "Micron (MU) HBM與記憶體指標 2026-10-26 盤中(報價時間未知) 904.75（前值 877.55，單日 +3.10%，較20日均線 -7.6%）",
+      "values": {
+        "mu": 904.75,
+        "mu_prev": 877.55,
+        "mu_chg_pct": 3.1,
+        "mu_vs_ma20_pct": -7.6
+      }
+    },
+    {
+      "obs_id": "O27",
+      "source_ref": [
+        "S11"
+      ],
+      "topic": "macro_vix_yf",
+      "statement": "VIX 波動率指數 (含20日均線比) 2026-10-26 盤中(報價時間未知) 18.43（前值 19.45，單日 -5.24%，較20日均線 +10.7%）",
+      "values": {
+        "vix_yf": 18.43,
+        "vix_yf_prev": 19.45,
+        "vix_yf_chg_pct": -5.24,
+        "vix_yf_vs_ma20_pct": 10.66
+      }
+    },
+    {
+      "obs_id": "O28",
+      "source_ref": [
+        "S12"
+      ],
+      "topic": "macro_taiex",
+      "statement": "台灣加權指數 (TAIEX) 2026-10-22 收 46041.4（前值 46887.8，單日 -1.81%，較20日均線 -4.2%）",
+      "values": {
+        "taiex": 46041.43,
+        "taiex_prev": 46887.77,
+        "taiex_chg_pct": -1.81,
+        "taiex_vs_ma20_pct": -4.22
+      }
+    },
+    {
+      "obs_id": "O29",
+      "source_ref": [
+        "S13"
+      ],
+      "topic": "macro_usdtwd_spot",
+      "statement": "美元兌台幣即期匯率 (USD/TWD) 2026-10-26 收 32.559（前值 32.597，單日 -0.12%，較20日均線 +1.4%）",
+      "values": {
+        "usdtwd_spot": 32.56,
+        "usdtwd_spot_prev": 32.6,
+        "usdtwd_spot_chg_pct": -0.12,
+        "usdtwd_spot_vs_ma20_pct": 1.44
+      }
+    },
+    {
+      "obs_id": "O30",
+      "source_ref": [
+        "S14"
+      ],
+      "topic": "news_semis",
+      "statement": "Freerepublic.com 報導：Did the United States and Russia Just Agree to Collaborate on Data Centers?",
+      "values": {
+        "published_hours_ago": 31.2
+      }
+    },
+    {
+      "obs_id": "O31",
+      "source_ref": [
+        "S15"
+      ],
+      "topic": "news_macro",
+      "statement": "newsBTC 報導：Bitcoin’s Fed Week Starts With A Fresh Rise In US Inflation Expectations",
+      "values": {
+        "published_hours_ago": 33.9
+      }
+    },
+    {
+      "obs_id": "O32",
+      "source_ref": [
+        "S16"
       ],
       "topic": "factor_momentum",
       "statement": "價量因子（截至結算日）：2330 20日-3.0% 60日+4.9% 波動19% 日均值55,119M；2454 20日-22.6% 60日+21.0% 波動45% 日均值30,838M；3711 20日-5.6% 60日+18.1% 波動49% 日均值9,515M；2303 20日-21.6% 60日+10.6% 波動39% 日均值18,813M；2408 20日-16.7% 60日+5.5% 波動54% 日均值20,026M；7769 20日-14.3% 60日-7.1% 波動66% 日均值3,886M；2337 20日-15.7% 60日-11.9% 波動46% 日均值2,754M；6239 20日-15.1% 60日+0.6% 波動58% 日均值3,765M；3443 20日-9.4% 60日+107.2% 波動60% 日均值10,325M；2379 20日+2.3% 60日+9.4% 波動23% 日均值1,758M",
@@ -629,9 +759,9 @@
       }
     },
     {
-      "obs_id": "O26",
+      "obs_id": "O33",
       "source_ref": [
-        "S9"
+        "S16"
       ],
       "topic": "factor_momentum",
       "statement": "價量因子（截至結算日）：3034 20日+4.7% 60日+18.4% 波動29% 日均值1,716M；2449 20日-17.2% 60日+11.2% 波動55% 日均值7,808M；3661 20日-5.9% 60日+13.1% 波動54% 日均值7,959M；6770 20日-7.5% 60日+19.4% 波動47% 日均值6,992M；6415 20日+9.8% 60日+16.7% 波動59% 日均值1,884M；6789 20日-6.5% 60日+3.3% 波動51% 日均值468M；5274 20日-23.4% 60日+21.0% 波動51% 日均值4,724M；6488 20日-14.9% 60日-13.9% 波動83% 日均值14,083M；8299 20日-14.0% 60日+13.9% 波動41% 日均值5,116M；5347 20日-6.9% 60日+9.2% 波動50% 日均值2,654M",
@@ -679,9 +809,9 @@
       }
     },
     {
-      "obs_id": "O27",
+      "obs_id": "O34",
       "source_ref": [
-        "S9"
+        "S16"
       ],
       "topic": "factor_momentum",
       "statement": "價量因子（截至結算日）：3529 20日-20.1% 60日+13.0% 波動48% 日均值3,470M；3260 20日-14.6% 60日-6.9% 波動34% 日均值1,434M；3105 20日-3.0% 60日+50.5% 波動77% 日均值11,917M；5483 20日-4.6% 60日+0.5% 波動65% 日均值4,161M；6147 20日-7.3% 60日+45.5% 波動63% 日均值6,583M；3264 20日-10.8% 60日+32.9% 波動63% 日均值4,788M；3374 20日-4.8% 60日+49.3% 波動71% 日均值4,454M；6548 20日+0.4% 60日+19.2% 波動59% 日均值525M；6182 20日-12.2% 60日+0.0% 波動73% 日均值8,088M；4966 20日-12.0% 60日-10.0% 波動26% 日均值246M",
@@ -729,9 +859,9 @@
       }
     },
     {
-      "obs_id": "O28",
+      "obs_id": "O35",
       "source_ref": [
-        "S9"
+        "S16"
       ],
       "topic": "factor_momentum",
       "statement": "價量因子（截至結算日）：4991 20日-12.3% 60日+4.8% 波動75% 日均值2,027M；3227 20日-0.5% 60日-3.7% 波動17% 日均值134M；2344 20日-9.6% 60日+7.3% 波動49% 日均值10,170M；2404 20日-4.4% 60日+7.9% 波動62% 日均值1,977M；6515 20日-16.8% 60日-19.2% 波動72% 日均值3,115M；6139 20日-10.5% 60日-6.3% 波動39% 日均值1,796M；6223 20日-8.5% 60日-5.3% 波動71% 日均值4,761M；7734 20日-13.5% 60日-28.7% 波動68% 日均值517M；6187 20日+3.7% 60日+32.6% 波動85% 日均值4,164M；6510 20日-17.2% 60日+23.6% 波動75% 日均值2,680M",
@@ -779,9 +909,9 @@
       }
     },
     {
-      "obs_id": "O29",
+      "obs_id": "O36",
       "source_ref": [
-        "S9"
+        "S16"
       ],
       "topic": "factor_momentum",
       "statement": "價量因子（截至結算日）：3131 20日-17.6% 60日-20.7% 波動58% 日均值786M；4749 20日-2.9% 60日-1.5% 波動38% 日均值519M；1785 20日-5.0% 60日-9.7% 波動50% 日均值823M；3680 20日-6.5% 60日+22.5% 波動34% 日均值573M；7751 20日-8.5% 60日+9.7% 波動59% 日均值261M；4772 20日+4.7% 60日+11.4% 波動53% 日均值302M；2317 20日-3.2% 60日+2.9% 波動25% 日均值9,309M；2382 20日-5.8% 60日+2.7% 波動22% 日均值3,357M；6669 20日-13.0% 60日+3.3% 波動53% 日均值7,536M；2357 20日-0.7% 60日+28.7% 波動27% 日均值1,931M",
@@ -829,9 +959,9 @@
       }
     },
     {
-      "obs_id": "O30",
+      "obs_id": "O37",
       "source_ref": [
-        "S9"
+        "S16"
       ],
       "topic": "factor_momentum",
       "statement": "價量因子（截至結算日）：3231 20日+5.3% 60日+11.8% 波動41% 日均值7,122M；2356 20日-1.1% 60日+2.9% 波動21% 日均值750M；4938 20日+15.0% 60日+24.4% 波動44% 日均值1,686M；2376 20日-4.8% 60日+10.7% 波動32% 日均值1,863M；2324 20日+0.7% 60日+7.5% 波動30% 日均值1,189M；8210 20日-14.9% 60日-25.1% 波動37% 日均值1,362M；2451 20日-3.5% 60日+6.8% 波動31% 日均值532M；2377 20日+6.2% 60日+20.7% 波動19% 日均值890M；5289 20日-17.8% 60日-8.4% 波動38% 日均值1,262M；2308 20日-17.9% 60日-1.3% 波動54% 日均值16,997M",
@@ -879,9 +1009,9 @@
       }
     },
     {
-      "obs_id": "O31",
+      "obs_id": "O38",
       "source_ref": [
-        "S9"
+        "S16"
       ],
       "topic": "factor_momentum",
       "statement": "價量因子（截至結算日）：2327 20日-11.2% 60日-9.9% 波動71% 日均值27,024M；3017 20日-7.2% 60日+41.2% 波動54% 日均值9,582M；2059 20日-23.0% 60日+31.4% 波動68% 日均值5,885M；3533 20日+2.9% 60日-0.4% 波動43% 日均值2,983M；3653 20日+4.1% 60日+80.1% 波動67% 日均值8,024M；2301 20日-10.2% 60日+32.9% 波動39% 日均值3,723M；3665 20日-16.5% 60日-15.3% 波動58% 日均值6,913M；3324 20日-15.0% 60日+56.3% 波動49% 日均值5,076M；6121 20日-3.4% 60日+1.7% 波動16% 日均值169M；3211 20日-16.9% 60日-5.0% 波動33% 日均值1,175M",
@@ -929,9 +1059,9 @@
       }
     },
     {
-      "obs_id": "O32",
+      "obs_id": "O39",
       "source_ref": [
-        "S9"
+        "S16"
       ],
       "topic": "factor_momentum",
       "statement": "價量因子（截至結算日）：6290 20日-12.7% 60日+12.1% 波動55% 日均值988M；6584 20日-20.3% 60日-8.1% 波動35% 日均值170M；2383 20日+4.3% 60日+15.5% 波動67% 日均值12,739M；3037 20日-3.1% 60日+42.0% 波動61% 日均值17,293M；8046 20日+8.6% 60日+29.6% 波動54% 日均值13,341M；2313 20日+1.1% 60日+23.4% 波動67% 日均值7,521M；3044 20日+3.2% 60日+54.7% 波動39% 日均值1,502M；4958 20日+16.0% 60日+32.6% 波動68% 日均值17,455M；2368 20日+7.2% 60日+37.8% 波動78% 日均值13,464M；3189 20日+8.5% 60日+54.3% 波動56% 日均值16,900M",
@@ -979,9 +1109,9 @@
       }
     },
     {
-      "obs_id": "O33",
+      "obs_id": "O40",
       "source_ref": [
-        "S9"
+        "S16"
       ],
       "topic": "factor_momentum",
       "statement": "價量因子（截至結算日）：6274 20日-1.4% 60日+25.7% 波動63% 日均值15,720M；8358 20日-10.8% 60日+31.3% 波動68% 日均值6,365M；1815 20日+13.9% 60日+115.8% 波動70% 日均值11,291M；2345 20日-7.3% 60日-12.3% 波動58% 日均值8,354M；3081 20日-15.9% 60日+38.9% 波動87% 日均值8,057M；3491 20日-10.8% 60日+21.1% 波動87% 日均值2,004M；3363 20日-23.3% 60日-6.1% 波動71% 日均值1,414M；4979 20日-25.6% 60日+5.4% 波動77% 日均值2,568M；3163 20日-17.2% 60日-5.3% 波動60% 日均值1,366M；3008 20日-3.6% 60日+59.8% 波動63% 日均值16,014M",
@@ -1029,9 +1159,9 @@
       }
     },
     {
-      "obs_id": "O34",
+      "obs_id": "O41",
       "source_ref": [
-        "S9"
+        "S16"
       ],
       "topic": "factor_momentum",
       "statement": "價量因子（截至結算日）：2409 20日-3.4% 60日+50.7% 波動68% 日均值16,808M；3481 20日-7.4% 60日+3.9% 波動53% 日均值8,162M；8069 20日+5.9% 60日-11.3% 波動35% 日均值997M；2881 20日+2.6% 60日+26.3% 波動26% 日均值2,348M；2882 20日+1.3% 60日+19.0% 波動27% 日均值2,119M；2891 20日+7.6% 60日+20.0% 波動28% 日均值2,216M；2885 20日+2.5% 60日+18.6% 波動24% 日均值1,480M；2887 20日-1.9% 60日+24.0% 波動31% 日均值1,820M；2886 20日+9.3% 60日+15.8% 波動21% 日均值1,042M；2884 20日+8.0% 60日+37.2% 波動22% 日均值1,205M",
@@ -1079,9 +1209,9 @@
       }
     },
     {
-      "obs_id": "O35",
+      "obs_id": "O42",
       "source_ref": [
-        "S9"
+        "S16"
       ],
       "topic": "factor_momentum",
       "statement": "價量因子（截至結算日）：2880 20日+8.1% 60日+26.7% 波動31% 日均值589M；2890 20日+2.1% 60日+19.9% 波動30% 日均值999M；2892 20日+6.1% 60日+26.4% 波動22% 日均值738M；5871 20日-1.9% 60日-5.2% 波動15% 日均值639M；2834 20日-1.9% 60日+7.7% 波動16% 日均值361M；2883 20日-3.9% 60日+27.5% 波動31% 日均值1,610M；5880 20日+4.3% 60日+15.0% 波動20% 日均值462M；2801 20日+5.5% 60日+29.0% 波動17% 日均值515M；5876 20日+9.9% 60日+24.4% 波動20% 日均值346M；2812 20日-3.4% 60日-2.4% 波動11% 日均值220M",
@@ -1129,9 +1259,9 @@
       }
     },
     {
-      "obs_id": "O36",
+      "obs_id": "O43",
       "source_ref": [
-        "S9"
+        "S16"
       ],
       "topic": "factor_momentum",
       "statement": "價量因子（截至結算日）：6023 20日-6.6% 60日-5.0% 波動11% 日均值41M；2412 20日+9.0% 60日+12.1% 波動15% 日均值1,524M；3045 20日+8.1% 60日+16.7% 波動22% 日均值924M；4904 20日+9.0% 60日+8.5% 波動22% 日均值587M；2360 20日-18.9% 60日+2.1% 波動61% 日均值5,253M；2395 20日-4.7% 60日+20.5% 波動22% 日均值1,449M；1590 20日-12.7% 60日-19.4% 波動29% 日均值914M；1519 20日-13.6% 60日+3.0% 波動45% 日均值982M；1504 20日+1.6% 60日+10.6% 波動28% 日均值429M；7750 20日-6.9% 60日-5.5% 波動56% 日均值234M",
@@ -1179,9 +1309,9 @@
       }
     },
     {
-      "obs_id": "O37",
+      "obs_id": "O44",
       "source_ref": [
-        "S9"
+        "S16"
       ],
       "topic": "factor_momentum",
       "statement": "價量因子（截至結算日）：5536 20日-11.0% 60日-22.2% 波動53% 日均值1,258M；2609 20日+1.8% 60日+22.1% 波動33% 日均值1,633M；2603 20日+7.2% 60日+30.0% 波動43% 日均值3,179M；2615 20日+2.6% 60日+42.9% 波動48% 日均值1,583M；2618 20日-0.7% 60日-1.3% 波動23% 日均值706M；2610 20日+0.0% 60日-5.7% 波動18% 日均值325M；3702 20日+1.3% 60日+7.7% 波動27% 日均值990M；3036 20日+3.9% 60日+11.8% 波動26% 日均值1,263M；2347 20日+10.5% 60日+15.5% 波動26% 日均值366M；3293 20日+8.3% 60日+8.9% 波動29% 日均值1,619M",
@@ -1229,9 +1359,9 @@
       }
     },
     {
-      "obs_id": "O38",
+      "obs_id": "O45",
       "source_ref": [
-        "S9"
+        "S16"
       ],
       "topic": "factor_momentum",
       "statement": "價量因子（截至結算日）：7828 20日-28.1% 60日-3.5% 波動36% 日均值260M；8932 20日-4.8% 60日+9.3% 波動33% 日均值121M；1303 20日+30.0% 60日+91.7% 波動82% 日均值26,957M；6505 20日+22.1% 60日+42.8% 波動81% 日均值4,604M；1101 20日+13.8% 60日+12.7% 波動37% 日均值1,403M；1301 20日+14.2% 60日+28.3% 波動75% 日均值6,065M；1326 20日+9.8% 60日+19.9% 波動67% 日均值3,077M；2207 20日+1.7% 60日+6.0% 波動19% 日均值127M；2002 20日+4.8% 60日+2.9% 波動14% 日均值769M；1402 20日+3.8% 60日+5.5% 波動22% 日均值212M",
@@ -1279,9 +1409,9 @@
       }
     },
     {
-      "obs_id": "O39",
+      "obs_id": "O46",
       "source_ref": [
-        "S9"
+        "S16"
       ],
       "topic": "factor_momentum",
       "statement": "價量因子（截至結算日）：1605 20日+0.0% 60日+20.9% 波動48% 日均值1,064M；1802 20日+14.1% 60日+39.4% 波動62% 日均值5,816M；8415 20日+5.4% 60日-3.5% 波動14% 日均值12M；6446 20日+0.0% 60日+4.0% 波動38% 日均值1,916M；6919 20日-10.7% 60日-28.7% 波動24% 日均值229M；4123 20日-3.5% 60日-13.0% 波動17% 日均值31M；1216 20日+6.7% 60日+6.9% 波動18% 日均值931M；2912 20日+5.6% 60日-1.2% 波動15% 日均值528M；5903 20日+0.3% 60日+1.9% 波動5% 日均值3M",
@@ -1325,9 +1455,9 @@
       }
     },
     {
-      "obs_id": "O40",
+      "obs_id": "O47",
       "source_ref": [
-        "S10"
+        "S17"
       ],
       "topic": "macro_semi_revenue",
       "statement": "核心 AI/半導體主題 52 檔最新月營收年增：中位數 +45.8%、50/52 檔為正成長",
@@ -1338,9 +1468,9 @@
       }
     },
     {
-      "obs_id": "O41",
+      "obs_id": "O48",
       "source_ref": [
-        "S10"
+        "S17"
       ],
       "topic": "factor_fundamental",
       "statement": "財務與籌碼指標：1303 ROE 10.3% PE 48.5 PB 5.0 營收年增 55.3% 淨利率 27.7%；2360 ROE 50.3% PE 50.5 PB 25.4 營收年增 200.0% 淨利率 36.1%；2347 ROE 14.1% PE 13.6 PB 1.9 營收年增 158.7% 淨利率 2.2%；2615 ROE 14.1% PE 8.2 PB 1.2 營收年增 97.6% 淨利率 25.1%；6505 ROE 11.2% PE 18.5 PB 2.1 營收年增 65.6% 淨利率 11.9%；3702 ROE 20.9% PE 9.8 PB 2.0 營收年增 146.5% 淨利率 1.9%；2603 ROE 9.7% PE 10.3 PB 1.0 營收年增 63.7% 淨利率 13.1%；7750 ROE 31.0% PE 31.1 PB 9.7 營收年增 125.1% 淨利率 22.6%；2395 ROE 24.8% PE 42.4 PB 10.5 營收年增 73.1% 淨利率 16.8%；1802 ROE 4.8% PE 78.0 PB 3.8 營收…",
@@ -1398,9 +1528,9 @@
       }
     },
     {
-      "obs_id": "O42",
+      "obs_id": "O49",
       "source_ref": [
-        "S10"
+        "S17"
       ],
       "topic": "factor_fundamental",
       "statement": "財務與籌碼指標：6446 ROE 20.7% PE 56.8 PB 11.8 營收年增 100.0% 淨利率 39.1%；2885 ROE 14.9% PE 17.0 PB 2.5 營收年增 67.3%；3443 營收年增 97.8% 淨利率 12.6%；2059 ROE 51.2% PE 53.8 PB 27.5 營收年增 196.2% 淨利率 65.0%；3653 ROE 27.6% PE 137.0 PB 37.8 營收年增 80.0% 淨利率 29.7%；1815 ROE 14.7% PE 40.3 PB 5.9；2451 ROE 64.4% PE 4.8 PB 3.1 營收年增 200.0% 淨利率 61.7%；2383 ROE 39.3% PE 79.3 PB 31.1 營收年增 168.9% 淨利率 18.9%；3661 ROE 9.7% PE 51.3 PB 5.0 營收年增 200.0% 淨利率 25.9%；2344 ROE 24.7% PE 17.0 PB 4.2 營收年增 200.0% 淨利率 35.0%",
@@ -1452,9 +1582,9 @@
       }
     },
     {
-      "obs_id": "O43",
+      "obs_id": "O50",
       "source_ref": [
-        "S10"
+        "S17"
       ],
       "topic": "factor_fundamental",
       "statement": "財務與籌碼指標：2408 ROE 27.6% PE 16.1 PB 4.4 營收年增 200.0% 淨利率 57.9%；3044 ROE 22.0% PE 23.8 PB 5.2 營收年增 53.5% 淨利率 14.9%；2368 ROE 34.2% PE 40.0 PB 13.7 營收年增 55.5% 淨利率 19.0%；2376 ROE 26.9% PE 13.1 PB 3.5 營收年增 125.4% 淨利率 5.3%；3037 ROE 19.3% PE 72.2 PB 13.9 營收年增 64.7% 淨利率 23.3%；2337 ROE 13.5% PE 23.6 PB 3.2 營收年增 188.2% 淨利率 32.1%；3189 PB 11.7 營收年增 44.5% 淨利率 10.8%；3017 ROE 53.4% PE 41.9 PB 22.4 營收年增 44.9% 淨利率 19.3%；4938 ROE 7.7% PE 17.4 PB 1.3 營收年增 86.9% 淨利率 1.8%；8046 ROE 11.2% PE 148.7 PB 16.6 營收年增 57.8% 淨利率…",
@@ -1510,9 +1640,9 @@
       }
     },
     {
-      "obs_id": "O44",
+      "obs_id": "O51",
       "source_ref": [
-        "S10"
+        "S17"
       ],
       "topic": "factor_fundamental",
       "statement": "財務與籌碼指標：3231 ROE 20.6% PE 15.1 PB 3.1 營收年增 87.2% 淨利率 2.4%；6770 ROE 11.0% PE 22.1 PB 2.4 營收年增 94.0% 淨利率 56.8%；6669 ROE 42.4% PE 5.9 PB 2.5 營收年增 100.0% 淨利率 5.2%；3324 ROE 30.4% PE 31.4 PB 9.5；4958 ROE 6.1% PE 67.1 PB 4.1 營收年增 36.1% 淨利率 6.5%；3008 ROE 12.8% PE 32.8 PB 4.2 營收年增 -7.3% 淨利率 37.3%；2382 ROE 36.3% PE 14.0 PB 5.1 營收年增 76.7% 淨利率 2.7%；3374 ROE 17.5% PE 72.8 PB 12.8；3105 ROE 8.2% PE 57.1 PB 4.7；6415 ROE 9.5% PE 47.9 PB 4.5 營收年增 50.7% 淨利率 21.2%",
@@ -1564,9 +1694,9 @@
       }
     },
     {
-      "obs_id": "O45",
+      "obs_id": "O52",
       "source_ref": [
-        "S10"
+        "S17"
       ],
       "topic": "factor_fundamental",
       "statement": "財務與籌碼指標：7769 ROE 30.7% PE 54.5 PB 16.7 營收年增 100.2% 淨利率 41.2%；2301 ROE 20.2% PE 29.9 PB 6.0 營收年增 22.1% 淨利率 11.3%；2330 ROE 34.8% PE 27.6 PB 9.6 營收年增 54.6% 淨利率 53.2%；2409 ROE 1.2% PE 147.5 PB 1.7 營收年增 -4.3% 淨利率 0.8%；3034 ROE 25.3% PE 20.3 PB 5.1 營收年增 25.0% 淨利率 19.5%；3711 ROE 15.6% PE 47.3 PB 7.4 營收年增 45.5% 淨利率 9.9%；2357 ROE 16.9% PE 13.8 PB 2.3 營收年增 17.7% 淨利率 6.8%；6187 ROE 22.1% PE 65.3 PB 14.4；6147 ROE 5.3% PE 49.0 PB 2.6；2356 ROE 14.3% PE 19.5 PB 2.8 營收年增 62.9% 淨利率 1.4%",
@@ -1620,9 +1750,9 @@
       }
     },
     {
-      "obs_id": "O46",
+      "obs_id": "O53",
       "source_ref": [
-        "S10"
+        "S17"
       ],
       "topic": "factor_fundamental",
       "statement": "財務與籌碼指標：2313 ROE 15.2% PE 36.1 PB 5.5 營收年增 15.0% 淨利率 7.5%；6274 ROE 24.4% PE 72.1 PB 17.6；2345 ROE 51.5% PE 27.9 PB 14.4 營收年增 66.1% 淨利率 11.7%；3264 ROE 18.5% PE 32.2 PB 6.0；2379 ROE 28.2% PE 28.0 PB 7.9 營收年增 23.4% 淨利率 11.0%；8358 ROE 18.2% PE 65.3 PB 11.9；2377 ROE 16.8% PE 14.1 PB 2.4 營收年增 1.8% 淨利率 6.0%；2404 ROE 69.9% PE 16.4 PB 11.5 營收年增 12.6% 淨利率 14.8%；3081 PB 46.6；6515 ROE 25.8% PE 78.5 PB 20.3 營收年增 87.7% 淨利率 21.1%",
@@ -1670,9 +1800,9 @@
       }
     },
     {
-      "obs_id": "O47",
+      "obs_id": "O54",
       "source_ref": [
-        "S9"
+        "S16"
       ],
       "topic": "tech_breadth",
       "statement": "技術面廣度（149 檔）：30% 站上 MA20、46% 站上 MA60、5% RSI>70、5% RSI<30、MACD 柱狀為正 26%；創20日高 0 檔 vs 破20日低 0 檔；技術分數中位數 41",
@@ -1688,9 +1818,9 @@
       }
     },
     {
-      "obs_id": "O48",
+      "obs_id": "O55",
       "source_ref": [
-        "S11"
+        "S18"
       ],
       "topic": "macro_foreign_noi",
       "statement": "外資台股期貨(TX)淨未平倉 2026-10-22 為 -87,297 口（前一日 -86,072，變動 -1,225）",
@@ -1701,10 +1831,10 @@
       }
     },
     {
-      "obs_id": "O49",
+      "obs_id": "O56",
       "source_ref": [
-        "S9",
-        "S11"
+        "S16",
+        "S18"
       ],
       "topic": "tech_stock",
       "statement": "技術指標（截至結算日）：2330 分47 RSI38 MA20-4% MA60-1% ATR1.5 量0.8 融資+4% [below_ma60]；3231 分95 RSI54 MA20+2% MA60+3% ATR3.7 量1.2 融資-9% [macd_golden_cross]；3034 分87 RSI62 MA20+5% MA60+7% ATR2.9 量0.9 融資+4%；4938 分87 RSI67 MA20+8% MA60+13% ATR3.4 量0.9 融資-19%；2377 分87 RSI62 MA20+4% MA60+8% ATR2.8 量1.1 融資-6%；2885 分95 RSI60 MA20+3% MA60+7% ATR2.2 量0.9 融資-5%；2880 分95 RSI67 MA20+6% MA60+14% ATR2.5 量1.0 融資-12%；2834 分92 RSI56 MA20+1% MA60+4% ATR1.6 量0.6 融資-5% [macd_golden_cross]",
@@ -1768,10 +1898,10 @@
       }
     },
     {
-      "obs_id": "O50",
+      "obs_id": "O57",
       "source_ref": [
-        "S9",
-        "S11"
+        "S16",
+        "S18"
       ],
       "topic": "tech_stock",
       "statement": "技術指標（截至結算日）：2379 分82 RSI57 MA20+1% MA60+6% ATR3.1 量0.8 融資-6%；1815 分82 RSI57 MA20+6% MA60+24% ATR6.8 量1.6 融資+2% [high_atr]；2890 分89 RSI61 MA20+4% MA60+9% ATR2.5 量0.8 融資-18% [macd_golden_cross]；2002 分87 RSI62 MA20+2% MA60+2% ATR1.2 量0.9 融資-4%；6415 分77 RSI56 MA20+5% MA60+8% ATR5.7 量1.2 融資+7%；1101 分86 RSI67 MA20+6% MA60+12% ATR2.4 量0.7 融資-9%；2603 分84 RSI62 MA20+4% MA60+11% ATR2.8 量0.6 融資-6%；5880 分84 RSI66 MA20+5% MA60+8% ATR1.7 量0.7 融資-4%",
@@ -1835,10 +1965,10 @@
       }
     },
     {
-      "obs_id": "O51",
+      "obs_id": "O58",
       "source_ref": [
-        "S9",
-        "S11"
+        "S16",
+        "S18"
       ],
       "topic": "tech_stock",
       "statement": "技術指標（截至結算日）：1216 分84 RSI67 MA20+4% MA60+5% ATR1.6 量0.8 融資-7%；1402 分84 RSI55 MA20+1% MA60+2% ATR1.8 量0.6 融資-7%；1802 分82 RSI61 MA20+7% MA60+14% ATR5.5 量1.9 融資+4%；2891 分81 RSI67 MA20+6% MA60+11% ATR2.4 量0.9 融資-8%；2887 分80 RSI52 MA20+0% MA60+6% ATR2.6 量0.8 融資-2%；2356 分70 RSI51 MA20+2% MA60-4% ATR2.7 量1.2 融資-4% [below_ma60]；2324 分70 RSI52 MA20+2% MA60-2% ATR2.9 量1.1 融資-3% [below_ma60]；2412 分79 RSI87 MA20+6% MA60+11% ATR1.5 量1.0 融資+55% [overbought]",
@@ -1902,10 +2032,10 @@
       }
     },
     {
-      "obs_id": "O52",
+      "obs_id": "O59",
       "source_ref": [
-        "S9",
-        "S11"
+        "S16",
+        "S18"
       ],
       "topic": "tech_stock",
       "statement": "技術指標（截至結算日）：4904 分79 RSI74 MA20+6% MA60+10% ATR1.9 量1.0 融資-26%；2884 分77 RSI71 MA20+6% MA60+16% ATR2.2 量0.8 融資-5%；4958 分67 RSI57 MA20+4% MA60+14% ATR5.5 量0.8 融資+3%；5876 分77 RSI77 MA20+7% MA60+15% ATR2.2 量1.1 融資-29% [overbought]；2886 分76 RSI73 MA20+8% MA60+11% ATR2.2 量0.7 融資-21%；2892 分76 RSI72 MA20+6% MA60+14% ATR2.0 量0.8 融資-1%；2801 分76 RSI70 MA20+5% MA60+14% ATR2.0 量0.8 融資-15%；2882 分75 RSI54 MA20+1% MA60+6% ATR2.6 量1.0 融資+11%",
@@ -1969,10 +2099,10 @@
       }
     },
     {
-      "obs_id": "O53",
+      "obs_id": "O60",
       "source_ref": [
-        "S9",
-        "S11"
+        "S16",
+        "S18"
       ],
       "topic": "tech_stock",
       "statement": "技術指標（截至結算日）：2615 分75 RSI56 MA20+3% MA60+10% ATR4.2 量0.7 融資-11% [macd_dead_cross]；2347 分75 RSI60 MA20+1% MA60+8% ATR2.4 量0.8 融資-16% [macd_dead_cross]；3374 分63 RSI53 MA20-1% MA60+16% ATR6.7 量1.1 融資-2% [high_atr]；2881 分72 RSI59 MA20+2% MA60+10% ATR2.5 量0.8 融資+1%；2609 分72 RSI54 MA20+1% MA60+7% ATR3.0 量0.5 融資-13% [macd_dead_cross]；2912 分72 RSI66 MA20+4% MA60+3% ATR1.4 量0.9 融資-6%；3293 分72 RSI56 MA20+0% MA60+5% ATR2.4 量0.6 融資-9%；3045 分71 RSI76 MA20+6% MA60+12% ATR1.7 量1.1 融資-51% [overbought]",
@@ -2036,9 +2166,9 @@
       }
     },
     {
-      "obs_id": "O54",
+      "obs_id": "O61",
       "source_ref": [
-        "S12"
+        "S19"
       ],
       "topic": "agent_price",
       "statement": "2330.TW 2026-10-23 收 2385（1日+0.00%、5日-1.4%、20日-3.0%、60日+4.9%）",
@@ -2052,24 +2182,24 @@
       }
     },
     {
-      "obs_id": "O55",
+      "obs_id": "O62",
       "source_ref": [
-        "S13"
+        "S20"
       ],
       "topic": "agent_price",
-      "statement": "^SOX 2026-10-26 盤中(報價時間未知) 11085.5（1日+2.84%、5日-2.0%、20日-11.1%、60日-2.0%）",
+      "statement": "^SOX 2026-10-26 盤中(報價時間未知) 11079（1日+2.78%、5日-2.1%、20日-11.1%、60日-2.0%）",
       "values": {
-        "sox_close": 11085.5371,
-        "sox_chg_pct": 2.84,
-        "sox_ret5d_pct": -2.04,
-        "sox_ret20d_pct": -11.07,
-        "sox_ret60d_pct": -1.99
+        "sox_close": 11078.9951,
+        "sox_chg_pct": 2.78,
+        "sox_ret5d_pct": -2.1,
+        "sox_ret20d_pct": -11.12,
+        "sox_ret60d_pct": -2.05
       }
     },
     {
-      "obs_id": "O56",
+      "obs_id": "O63",
       "source_ref": [
-        "S14"
+        "S21"
       ],
       "topic": "agent_price",
       "statement": "3231.TW 2026-10-23 收 190（1日+0.00%、5日+4.1%、20日+5.3%、60日+11.8%）",
@@ -2083,55 +2213,58 @@
       }
     },
     {
-      "obs_id": "O57",
-      "source_ref": [
-        "S15"
-      ],
-      "topic": "agent_price",
-      "statement": "TSM 2026-10-26 盤中(報價時間未知) 425.6（1日+1.69%、5日+1.3%、20日-6.0%、60日+5.6%）",
-      "values": {
-        "tsm_close": 425.6,
-        "tsm_chg_pct": 1.69,
-        "tsm_ret5d_pct": 1.28,
-        "tsm_ret20d_pct": -6.02,
-        "tsm_ret60d_pct": 5.56
-      }
-    },
-    {
-      "obs_id": "O58",
-      "source_ref": [
-        "S16"
-      ],
-      "topic": "agent_price",
-      "statement": "^TWII 2026-10-22 收 46041.4（1日-1.81%、5日-2.0%、20日-3.5%、60日+5.5%）",
-      "values": {
-        "twii_close": 46041.4297,
-        "twii_chg_pct": -1.81,
-        "twii_ret5d_pct": -1.98,
-        "twii_ret20d_pct": -3.52,
-        "twii_ret60d_pct": 5.52
-      }
-    },
-    {
-      "obs_id": "O59",
+      "obs_id": "O64",
       "source_ref": [
         "S17"
       ],
-      "topic": "agent_price",
-      "statement": "2347.TW 2026-10-23 收 99.3（1日+0.00%、5日-3.6%、20日+10.5%、60日+15.5%）",
+      "topic": "factor_fundamental",
+      "statement": "財務與籌碼指標：3189 PB 11.7 營收年增 44.5% 淨利率 10.8%；4938 ROE 7.7% PE 17.4 PB 1.3 營收年增 86.9% 淨利率 1.8%；2347 ROE 14.1% PE 13.6 PB 1.9 營收年增 158.7% 淨利率 2.2%；3044 ROE 22.0% PE 23.8 PB 5.2 營收年增 53.5% 淨利率 14.9%；2615 ROE 14.1% PE 8.2 PB 1.2 營收年增 97.6% 淨利率 25.1%",
       "values": {
-        "2347_close": 99.3,
-        "2347_chg_pct": 0.0,
-        "2347_mom20_pct": 10.46,
-        "2347_mom60_pct": 15.47,
-        "2347_vol20_pct": 25.6,
-        "2347_adv20_twd_m": 366.0
+        "3189_pb": 11.68,
+        "3189_rev_growth_pct": 44.47,
+        "3189_net_margin_pct": 10.84,
+        "4938_roe_pct": 7.68,
+        "4938_pe": 17.45,
+        "4938_pb": 1.34,
+        "4938_rev_growth_pct": 86.88,
+        "4938_net_margin_pct": 1.77,
+        "2347_roe_pct": 14.06,
+        "2347_pe": 13.58,
+        "2347_pb": 1.91,
+        "2347_rev_growth_pct": 158.67,
+        "2347_net_margin_pct": 2.18,
+        "3044_roe_pct": 22.04,
+        "3044_pe": 23.82,
+        "3044_pb": 5.25,
+        "3044_rev_growth_pct": 53.5,
+        "3044_net_margin_pct": 14.93,
+        "2615_roe_pct": 14.13,
+        "2615_pe": 8.21,
+        "2615_pb": 1.16,
+        "2615_rev_growth_pct": 97.63,
+        "2615_net_margin_pct": 25.11
       }
     },
     {
-      "obs_id": "O60",
+      "obs_id": "O65",
       "source_ref": [
-        "S18"
+        "S22"
+      ],
+      "topic": "agent_price",
+      "statement": "3189.TW 2026-10-23 收 986（1日+0.00%、5日-1.4%、20日+8.5%、60日+54.3%）",
+      "values": {
+        "3189_close": 986.0,
+        "3189_chg_pct": 0.0,
+        "3189_mom20_pct": 8.47,
+        "3189_mom60_pct": 54.3,
+        "3189_vol20_pct": 55.6,
+        "3189_adv20_twd_m": 16900.0
+      }
+    },
+    {
+      "obs_id": "O66",
+      "source_ref": [
+        "S23"
       ],
       "topic": "agent_price",
       "statement": "4938.TW 2026-10-23 收 103.5（1日+0.00%、5日+1.5%、20日+15.0%、60日+24.4%）",
@@ -2145,81 +2278,55 @@
       }
     },
     {
-      "obs_id": "O61",
+      "obs_id": "O67",
       "source_ref": [
-        "S10"
-      ],
-      "topic": "factor_fundamental",
-      "statement": "財務與籌碼指標：2347 ROE 14.1% PE 13.6 PB 1.9 營收年增 158.7% 淨利率 2.2%；4938 ROE 7.7% PE 17.4 PB 1.3 營收年增 86.9% 淨利率 1.8%；2615 ROE 14.1% PE 8.2 PB 1.2 營收年增 97.6% 淨利率 25.1%；2603 ROE 9.7% PE 10.3 PB 1.0 營收年增 63.7% 淨利率 13.1%；2412 ROE 10.8% PE 31.0 PB 3.3 營收年增 20.9% 淨利率 18.0%；2884 ROE 13.9% PE 20.6 PB 2.9 營收年增 7.2%；5876 ROE 8.0% PE 15.4 PB 1.2 營收年增 10.7%；3045 ROE 19.2% PE 25.1 PB 4.8 營收年增 10.3% 淨利率 9.5%；2801 ROE 8.7% PE 17.6 PB 1.5 營收年增 12.8%；2886 ROE 9.4% PE 21.5 PB 2.0 營收年增 16.5%",
-      "values": {
-        "2347_roe_pct": 14.06,
-        "2347_pe": 13.58,
-        "2347_pb": 1.91,
-        "2347_rev_growth_pct": 158.67,
-        "2347_net_margin_pct": 2.18,
-        "4938_roe_pct": 7.68,
-        "4938_pe": 17.45,
-        "4938_pb": 1.34,
-        "4938_rev_growth_pct": 86.88,
-        "4938_net_margin_pct": 1.77,
-        "2615_roe_pct": 14.13,
-        "2615_pe": 8.21,
-        "2615_pb": 1.16,
-        "2615_rev_growth_pct": 97.63,
-        "2615_net_margin_pct": 25.11,
-        "2603_roe_pct": 9.7,
-        "2603_pe": 10.31,
-        "2603_pb": 1.0,
-        "2603_rev_growth_pct": 63.75,
-        "2603_net_margin_pct": 13.06,
-        "2412_roe_pct": 10.76,
-        "2412_pe": 31.04,
-        "2412_pb": 3.34,
-        "2412_rev_growth_pct": 20.85,
-        "2412_net_margin_pct": 18.03,
-        "2884_roe_pct": 13.86,
-        "2884_pe": 20.64,
-        "2884_pb": 2.86,
-        "2884_rev_growth_pct": 7.18,
-        "5876_roe_pct": 8.04,
-        "5876_pe": 15.42,
-        "5876_pb": 1.24,
-        "5876_rev_growth_pct": 10.7,
-        "3045_roe_pct": 19.17,
-        "3045_pe": 25.14,
-        "3045_pb": 4.82,
-        "3045_rev_growth_pct": 10.35,
-        "3045_net_margin_pct": 9.51,
-        "2801_roe_pct": 8.7,
-        "2801_pe": 17.59,
-        "2801_pb": 1.53,
-        "2801_rev_growth_pct": 12.75,
-        "2886_roe_pct": 9.45,
-        "2886_pe": 21.48,
-        "2886_pb": 2.03,
-        "2886_rev_growth_pct": 16.45
-      }
-    },
-    {
-      "obs_id": "O62",
-      "source_ref": [
-        "S19"
+        "S24"
       ],
       "topic": "agent_price",
-      "statement": "2615.TW 2026-10-23 收 119.5（1日+0.00%、5日-2.5%、20日+2.6%、60日+42.9%）",
+      "statement": "3044.TW 2026-10-23 收 556（1日+0.00%、5日-4.8%、20日+3.1%、60日+54.7%）",
       "values": {
-        "2615_close": 119.5,
-        "2615_chg_pct": 0.0,
-        "2615_mom20_pct": 2.58,
-        "2615_mom60_pct": 42.94,
-        "2615_vol20_pct": 47.6,
-        "2615_adv20_twd_m": 1583.0
+        "3044_close": 556.0,
+        "3044_chg_pct": 0.0,
+        "3044_mom20_pct": 3.15,
+        "3044_mom60_pct": 54.66,
+        "3044_vol20_pct": 39.0,
+        "3044_adv20_twd_m": 1502.0
       }
     },
     {
-      "obs_id": "O63",
+      "obs_id": "O68",
       "source_ref": [
-        "S20"
+        "S25"
+      ],
+      "topic": "agent_price",
+      "statement": "TSM 2026-10-26 盤中(報價時間未知) 425.575（1日+1.69%、5日+1.3%、20日-6.0%、60日+5.6%）",
+      "values": {
+        "tsm_close": 425.575,
+        "tsm_chg_pct": 1.69,
+        "tsm_ret5d_pct": 1.27,
+        "tsm_ret20d_pct": -6.03,
+        "tsm_ret60d_pct": 5.56
+      }
+    },
+    {
+      "obs_id": "O69",
+      "source_ref": [
+        "S26"
+      ],
+      "topic": "agent_price",
+      "statement": "TWD=X 2026-10-26 盤中(報價時間未知) 32.561（1日-0.11%、5日+0.5%、20日+2.5%、60日+0.8%）",
+      "values": {
+        "twdx_close": 32.561,
+        "twdx_chg_pct": -0.11,
+        "twdx_ret5d_pct": 0.54,
+        "twdx_ret20d_pct": 2.46,
+        "twdx_ret60d_pct": 0.83
+      }
+    },
+    {
+      "obs_id": "O70",
+      "source_ref": [
+        "S27"
       ],
       "topic": "risk_disposition",
       "statement": "TPEx 公布處置有價證券名單包含標的池個股：4979",
@@ -2228,9 +2335,9 @@
       }
     },
     {
-      "obs_id": "O64",
+      "obs_id": "O71",
       "source_ref": [
-        "S21"
+        "S28"
       ],
       "topic": "risk_attention",
       "statement": "TPEx 公布注意交易資訊注意股名單包含標的池個股：1815, 3374, 6274, 6510, 8358",
@@ -2243,9 +2350,9 @@
       }
     },
     {
-      "obs_id": "O65",
+      "obs_id": "O72",
       "source_ref": [
-        "S22"
+        "S29"
       ],
       "topic": "risk_ex_dividend",
       "statement": "TPEx 除權除息預告表近期即將除權息標的：6548",
@@ -2254,28 +2361,28 @@
       }
     },
     {
-      "obs_id": "O66",
+      "obs_id": "O73",
       "source_ref": [
-        "S23"
+        "S30"
       ],
       "topic": "risk_stress",
-      "statement": "總經壓力指標：WTI 原油 102.85（5日 -0.8%、較20日均線 +8.0%）；美元指數 DXY 101.997（5日 +0.0%、較20日均線 +0.0%）；美國10年期殖利率(%) 4.982（5日 -3.0%、較20日均線 -3.8%）",
+      "statement": "總經壓力指標：WTI 原油 102.89（5日 -0.7%、較20日均線 +8.0%）；美元指數 DXY 101.959（5日 -0.0%、較20日均線 -0.0%）；美國10年期殖利率(%) 4.976（5日 -3.1%、較20日均線 -3.9%）",
       "values": {
-        "wti": 102.85,
-        "wti_chg5d_pct": -0.78,
-        "wti_vs_ma20_pct": 7.99,
-        "dxy": 101.997,
-        "dxy_chg5d_pct": 0.02,
-        "dxy_vs_ma20_pct": 0.02,
-        "tnx": 4.982,
-        "tnx_chg5d_pct": -3.0,
-        "tnx_vs_ma20_pct": -3.78
+        "wti": 102.89,
+        "wti_chg5d_pct": -0.74,
+        "wti_vs_ma20_pct": 8.03,
+        "dxy": 101.959,
+        "dxy_chg5d_pct": -0.02,
+        "dxy_vs_ma20_pct": -0.01,
+        "tnx": 4.976,
+        "tnx_chg5d_pct": -3.12,
+        "tnx_vs_ma20_pct": -3.89
       }
     },
     {
-      "obs_id": "O67",
+      "obs_id": "O74",
       "source_ref": [
-        "S24"
+        "S31"
       ],
       "topic": "risk_credit",
       "statement": "信用與利率結構：美國高收益債信用利差 OAS(%) 2026-10-23 為 3.38（前值 3.4，變動 -2bp）；美國 10Y-2Y 殖利率差(%) 2026-10-23 為 0.31（前值 0.31，變動 +0bp）",
@@ -2289,166 +2396,167 @@
       }
     },
     {
-      "obs_id": "O68",
+      "obs_id": "O75",
       "source_ref": [
-        "S25"
+        "S32"
       ],
       "topic": "agent_price",
-      "statement": "^SOX 2026-10-26 盤中(報價時間未知) 11095.2（1日+2.93%、5日-1.9%、20日-11.0%、60日-1.9%）",
+      "statement": "^SOX 2026-10-26 盤中(報價時間未知) 11080.4（1日+2.79%、5日-2.1%、20日-11.1%、60日-2.0%）",
       "values": {
-        "sox_close": 11095.2051,
-        "sox_chg_pct": 2.93,
-        "sox_ret5d_pct": -1.95,
-        "sox_ret20d_pct": -10.99,
-        "sox_ret60d_pct": -1.91
+        "sox_close": 11080.4336,
+        "sox_chg_pct": 2.79,
+        "sox_ret5d_pct": -2.08,
+        "sox_ret20d_pct": -11.11,
+        "sox_ret60d_pct": -2.04
       }
     },
     {
-      "obs_id": "O69",
+      "obs_id": "O76",
       "source_ref": [
-        "S26"
+        "S19"
       ],
       "topic": "agent_price",
-      "statement": "^VIX 2026-10-26 盤中(報價時間未知) 18.14（1日-6.74%、5日-1.6%、20日+12.9%、60日+14.4%）",
+      "statement": "2330.TW 2026-10-23 收 2385（1日+0.00%、5日-1.4%、20日-3.0%、60日+4.9%）",
       "values": {
-        "vix_close": 18.14,
-        "vix_chg_pct": -6.74,
-        "vix_ret5d_pct": -1.63,
-        "vix_ret20d_pct": 12.88,
-        "vix_ret60d_pct": 14.38
-      }
-    },
-    {
-      "obs_id": "O70",
-      "source_ref": [
-        "S27"
-      ],
-      "topic": "agent_price",
-      "statement": "2412.TW 2026-10-23 收 158（1日+0.00%、5日+3.3%、20日+9.0%、60日+12.1%）",
-      "values": {
-        "2412_close": 158.0,
-        "2412_chg_pct": 0.0,
-        "2412_mom20_pct": 8.97,
-        "2412_mom60_pct": 12.06,
-        "2412_vol20_pct": 14.6,
-        "2412_adv20_twd_m": 1524.0
-      }
-    },
-    {
-      "obs_id": "O71",
-      "source_ref": [
-        "S28"
-      ],
-      "topic": "agent_price",
-      "statement": "2884.TW 2026-10-23 收 49.75（1日+0.00%、5日+1.2%、20日+8.0%、60日+37.2%）",
-      "values": {
-        "2884_close": 49.75,
-        "2884_chg_pct": 0.0,
-        "2884_mom20_pct": 8.03,
-        "2884_mom60_pct": 37.24,
-        "2884_vol20_pct": 22.0,
-        "2884_adv20_twd_m": 1205.0
+        "2330_close": 2385.0,
+        "2330_chg_pct": 0.0,
+        "2330_mom20_pct": -3.05,
+        "2330_mom60_pct": 4.91,
+        "2330_vol20_pct": 19.1,
+        "2330_adv20_twd_m": 55119.0
       }
     }
   ],
   "market_view": {
     "basis_refs": [
-      "O1",
-      "O2",
+      "O23",
+      "O24",
+      "O27",
+      "O28",
       "O47",
-      "O48",
-      "O66",
-      "O68"
+      "O54",
+      "O55",
+      "O73"
     ],
-    "logic": "依據量化模型判定之風險規避（risk_off）機制，台股整體廣度顯著偏弱，僅 30% 個股站上 20 日均線（O47），全市場下跌家數達 115 檔（O1），半導體族群平均下跌 -3.84%（O2）。總經面上，費城半導體指數近 20 日累計跌幅達 -11.0%（O68），WTI 原油維持在每桶 102.85 美元高位（O66），外資台指期淨空單達 -87,297 口（O48）。因此遵循預設量化規則採取防禦性配置，提高現金水位至 16.0% 附近，並以權值龍頭 2330 作為核心錨點，搭配低波動電信與金融股分散風險。",
-    "regime": "risk_off",
-    "stance": "defensive",
+    "logic": "依據系統預設之量化規則與確定性市場機制模型（deterministic regime model），綜合評估總經與量化指標後判定市場處於中性環境（neutral）。費城半導體指數單日反彈2.77%且台積電ADR上漲1.72%，且核心半導體營收年增中位數達45.8%，展現基本面動能。然而台股加權指數低於20日均線4.2%，市場廣度顯示僅30%標的站上20日均線，且外資台股期貨淨空單達87,297口，加上美國10年期公債殖利率處於4.976%高檔，總經估值壓力仍存。因此採取中性穩健建倉立場，維持適度現金水位防範波動。",
+    "regime": "neutral",
+    "stance": "neutral",
     "posture": {
       "net_exposure_intent": "increase",
       "target_cash_pct_range": [
-        0.12,
-        0.2
+        0.07,
+        0.13
       ]
     },
-    "counter_evidence": "費半指數單日盤中反彈 +2.93%（O68），且核心 AI 與半導體最新月營收中位數維持 +45.8% 強勁年增（O40）。",
-    "confidence": 0.75
+    "counter_evidence": "費城半導體指數近20日跌幅達11.1%且外資期貨空單處於高檔，限制大盤反彈空間。",
+    "confidence": 0.72
   },
   "inferences": [
     {
       "inf_id": "I1",
       "premise_refs": [
-        "O45",
-        "O54"
+        "O24",
+        "O52",
+        "O61",
+        "O76"
       ],
-      "logic": "2330 具備 ROE 34.8% 與營業淨利率 53.2% 之優質基本面（O45），且 20 日年化波動率僅 19.0%，作為半導體核心權值錨點，有助於平抑投組合併波動並滿足核心主題最低曝險要求。",
-      "conclusion": "將 2330 作為半導體核心重倉錨點，配置適度核心權重以穩定投組。",
-      "counter_evidence": "技術面跌破 60 日均線（O54），短期均線架構偏弱。",
+      "logic": "2330具備高ROE（34.8%）與穩健營收年增率（54.6%），20日年化波動度僅19.0%，且ADR單日反彈1.72%。以2330作為投資組合核心錨定標的，能有效吸收系統性波動並提供流動性支撐。",
+      "conclusion": "納入2330並給予核心權重配置，作為整體半導體策略之基本核心支柱。",
+      "counter_evidence": "2330跌破60日均線1.48%，短期技術指標偏弱。",
       "confidence": 0.85
     },
     {
       "inf_id": "I2",
       "premise_refs": [
-        "O9",
-        "O10",
-        "O61",
-        "O70",
-        "O71"
+        "O4",
+        "O50",
+        "O51",
+        "O52",
+        "O53",
+        "O63",
+        "O66"
       ],
-      "logic": "通信網路與金融族群於盤勢下挫時逆勢上漲，平均漲跌幅分別為 +2.40% 與 +0.63%（O9、O10）。2412 年化波動僅 15.0%、ROE 10.8%（O61、O70），2884 年化波動 22.0%、ROE 13.9%（O61、O71），適度納入有助於控制投組下行回檔。",
-      "conclusion": "納入 2412 與 2884 等防禦標的，強化抗跌體質。",
-      "counter_evidence": "2412 之 RSI 達 87.41 出現超買訊號（O70）。",
+      "logic": "伺服器族群具備強勁營收成長動能，其中4938營收年增86.9%、3231營收年增87.2%、2376營收年增125.4%、2382營收年增76.7%。3231維持多頭排列且動能穩健，2377具備低本益比（14.1倍）與合理評價。",
+      "conclusion": "超配4938與3231，並配置2377、2357、2382以建立伺服器核心配置群組。",
+      "counter_evidence": "2376與2382短期均線位於60日線之下，動能存在分歧。",
       "confidence": 0.8
     },
     {
       "inf_id": "I3",
       "premise_refs": [
-        "O41",
-        "O44",
-        "O45",
-        "O46",
-        "O49",
-        "O60"
+        "O6",
+        "O40",
+        "O50",
+        "O51",
+        "O64",
+        "O65",
+        "O67",
+        "O71"
       ],
-      "logic": "伺服器與組裝族群中，4938 營收年增 86.9%（O61）、3231 營收年增 87.2% 且技術評分達 95 分（O44）、2377 ROE 16.8% 且本益比僅 14.1 倍（O46），基本面成長扎實且估值合理。",
-      "conclusion": "超配 4938、3231、2377，並維持 2376、2357、2317、2382 適度部位以涵蓋 AI 伺服器供應鏈。",
-      "counter_evidence": "伺服器組裝籃子平均下跌 -2.09%（O4）。",
-      "confidence": 0.8
+      "logic": "PCB族群中3044具備ROE 22.0%及營收年增53.5%，3189營收年增44.5%且60日動能強勁。1815與2368受風控規範需控管部位，4958與3037提供產業多樣化配置。",
+      "conclusion": "超配3044與3189，適度配置4958與3037，並在風控限額內配置1815與2368。",
+      "counter_evidence": "1815波動度達70%且列入注意股，2368年化波動達78%，存在回檔風險。",
+      "confidence": 0.75
     },
     {
       "inf_id": "I4",
       "premise_refs": [
-        "O45",
-        "O46"
+        "O2",
+        "O32",
+        "O33",
+        "O49",
+        "O51",
+        "O52",
+        "O53"
       ],
-      "logic": "IC 設計與晶圓族群具高成長與高獲利能力，3034 ROE 25.3%、PE 20.3 倍（O45），2379 ROE 28.2%、營收年增 23.4%（O46），在半導體修正期具備評價支撐。",
-      "conclusion": "配置 3034 與 2379 等優質 IC 設計標的，並搭配 3443、6770、2344 維持半導體核心覆蓋。",
-      "counter_evidence": "半導體族群整體跌幅達 -3.84%（O2）。",
-      "confidence": 0.75
+      "logic": "半導體次族群中3034具備ROE 25.3%與合理本益比20.3倍，2379維持多頭排列且營收年增23.4%。3443營收年增97.8%，6770與3661亦具高營收增速支持。",
+      "conclusion": "配置3034、2379、3443、6770與3661，完善半導體產業鏈覆蓋。",
+      "counter_evidence": "3443近20日跌幅達9.4%且ATR達6.44%，短期波動較高。",
+      "confidence": 0.74
     },
     {
       "inf_id": "I5",
       "premise_refs": [
-        "O42",
-        "O43",
-        "O44",
-        "O64"
+        "O5",
+        "O36",
+        "O38",
+        "O49",
+        "O50"
       ],
-      "logic": "PCB 與散熱族群成長強勁但波動偏高，3044 ROE 22.0%、營收年增 53.5%（O43）。1815 列入注意股票且波動率達 70%（O42、O64），2368 波動率達 78%（O43），風控要求限制其上限。",
-      "conclusion": "配置 3044、3189、4958、8046，並嚴格降權 1815 與 2368 至風控規定範圍內，散熱部位配置 3653 與 3017。",
-      "counter_evidence": "PCB 族群單日跌幅達 -4.31%（O6）。",
-      "confidence": 0.75
+      "logic": "散熱與零組件指標3653營收年增80.0%、ROE 27.6%；3017具備ROE 53.4%與營收年增44.9%。設備材料股3680維持穩健趨勢，具備產業鏈協同性。",
+      "conclusion": "配置3653、3017與3680，分散半導體及AI伺服器周邊價值鏈。",
+      "counter_evidence": "3653本益比偏高（137倍），3017低於60日均線，短期面臨技術修正。",
+      "confidence": 0.72
     },
     {
       "inf_id": "I6",
       "premise_refs": [
+        "O9",
+        "O10",
+        "O12",
         "O41",
+        "O43",
+        "O44",
+        "O48",
+        "O58",
         "O59",
-        "O62"
+        "O64"
       ],
-      "logic": "非核心成長標的中，2347 營收年增 158.7%、PE 13.6 倍（O41），2615 營收年增 97.6%、PE 8.2 倍（O41），基本面動能充沛且具備流動性。",
-      "conclusion": "適量配置 2347 與 2615 作為獲利與營收動能衛星持股。",
-      "counter_evidence": "2347 與 2615 技術面均出現 MACD 死亡交叉信號。",
-      "confidence": 0.7
+      "logic": "航運2615本益比僅8.2倍且營收年增97.6%；金融股2884（ROE 13.9%）、2885（營收年增67.3%）與電信股2412（年化波動15.0%）在盤勢震盪時表現相對平穩。",
+      "conclusion": "納入2615、2884、2885與2412作為非核心輔助部位，平衡組合整體波動。",
+      "counter_evidence": "2412與2884之RSI偏高，短期有技術性過熱跡象。",
+      "confidence": 0.76
+    },
+    {
+      "inf_id": "I7",
+      "premise_refs": [
+        "O70",
+        "O71"
+      ],
+      "logic": "風控名單中4979被列入交易所處置股，流動性受撮合限制，系統設定為VETO禁止建倉；1815與2368因高波動度觸發REDUCE限制，權重不得超過規定上限。",
+      "conclusion": "嚴格排除4979不予買進；對1815與2368實施權重上限約束以控管下行風險。",
+      "counter_evidence": null,
+      "confidence": 0.95
     }
   ],
   "decisions": [
@@ -2456,251 +2564,243 @@
       "decision_id": "D1",
       "ticker": "2330",
       "action": "BUY",
-      "target_weight": 0.1384,
+      "target_weight": 0.15,
       "inference_refs": [
         "I1"
       ],
-      "risk_check": "目標權重 13.84% ≤ 內部上限 22.0%（官方 25%）"
+      "risk_check": "目標權重 15.00% ≤ 內部上限 22.0%（官方 25%）"
     },
     {
       "decision_id": "D2",
       "ticker": "4938",
       "action": "BUY",
-      "target_weight": 0.0445,
+      "target_weight": 0.055,
       "inference_refs": [
-        "I3"
+        "I2"
       ],
-      "risk_check": "目標權重 4.45% ≤ 內部上限 8.5%（官方 10%）"
+      "risk_check": "目標權重 5.50% ≤ 內部上限 8.5%（官方 10%）"
     },
     {
       "decision_id": "D3",
-      "ticker": "3044",
+      "ticker": "3231",
       "action": "BUY",
-      "target_weight": 0.0395,
+      "target_weight": 0.05,
       "inference_refs": [
-        "I5"
+        "I2"
       ],
-      "risk_check": "目標權重 3.95% ≤ 內部上限 8.5%（官方 10%）"
+      "risk_check": "目標權重 5.00% ≤ 內部上限 8.5%（官方 10%）"
     },
     {
       "decision_id": "D4",
-      "ticker": "3034",
+      "ticker": "2377",
       "action": "BUY",
-      "target_weight": 0.0395,
+      "target_weight": 0.04,
       "inference_refs": [
-        "I4"
+        "I2"
       ],
-      "risk_check": "目標權重 3.95% ≤ 內部上限 8.5%（官方 10%）"
+      "risk_check": "目標權重 4.00% ≤ 內部上限 8.5%（官方 10%）"
     },
     {
       "decision_id": "D5",
-      "ticker": "3231",
+      "ticker": "2357",
       "action": "BUY",
-      "target_weight": 0.0395,
+      "target_weight": 0.03,
       "inference_refs": [
-        "I3"
+        "I2"
       ],
-      "risk_check": "目標權重 3.95% ≤ 內部上限 8.5%（官方 10%）"
+      "risk_check": "目標權重 3.00% ≤ 內部上限 8.5%（官方 10%）"
     },
     {
       "decision_id": "D6",
-      "ticker": "2412",
+      "ticker": "2382",
       "action": "BUY",
-      "target_weight": 0.0346,
+      "target_weight": 0.025,
       "inference_refs": [
         "I2"
       ],
-      "risk_check": "目標權重 3.46% ≤ 內部上限 8.5%（官方 10%）"
+      "risk_check": "目標權重 2.50% ≤ 內部上限 8.5%（官方 10%）"
     },
     {
       "decision_id": "D7",
-      "ticker": "2377",
+      "ticker": "3044",
       "action": "BUY",
-      "target_weight": 0.0346,
+      "target_weight": 0.045,
       "inference_refs": [
         "I3"
       ],
-      "risk_check": "目標權重 3.46% ≤ 內部上限 8.5%（官方 10%）"
+      "risk_check": "目標權重 4.50% ≤ 內部上限 8.5%（官方 10%）"
     },
     {
       "decision_id": "D8",
-      "ticker": "2379",
+      "ticker": "3189",
       "action": "BUY",
-      "target_weight": 0.0346,
+      "target_weight": 0.045,
       "inference_refs": [
-        "I4"
+        "I3"
       ],
-      "risk_check": "目標權重 3.46% ≤ 內部上限 8.5%（官方 10%）"
+      "risk_check": "目標權重 4.50% ≤ 內部上限 6.9%（官方 10%）"
     },
     {
       "decision_id": "D9",
-      "ticker": "3189",
+      "ticker": "1815",
       "action": "BUY",
-      "target_weight": 0.0346,
+      "target_weight": 0.035,
       "inference_refs": [
-        "I5"
+        "I3",
+        "I7"
       ],
-      "risk_check": "目標權重 3.46% ≤ 內部上限 6.9%（官方 10%）"
+      "risk_check": "目標權重 3.50% ≤ 內部上限 4.0%（官方 10%）"
     },
     {
       "decision_id": "D10",
-      "ticker": "2884",
+      "ticker": "4958",
       "action": "BUY",
-      "target_weight": 0.0297,
+      "target_weight": 0.03,
       "inference_refs": [
-        "I2"
+        "I3"
       ],
-      "risk_check": "目標權重 2.97% ≤ 內部上限 8.5%（官方 10%）"
+      "risk_check": "目標權重 3.00% ≤ 內部上限 5.7%（官方 10%）"
     },
     {
       "decision_id": "D11",
-      "ticker": "2347",
+      "ticker": "3037",
       "action": "BUY",
-      "target_weight": 0.0297,
+      "target_weight": 0.025,
       "inference_refs": [
-        "I6"
+        "I3"
       ],
-      "risk_check": "目標權重 2.97% ≤ 內部上限 8.5%（官方 10%）"
+      "risk_check": "目標權重 2.50% ≤ 內部上限 6.2%（官方 10%）"
     },
     {
       "decision_id": "D12",
-      "ticker": "2376",
+      "ticker": "2368",
       "action": "BUY",
-      "target_weight": 0.0297,
+      "target_weight": 0.025,
       "inference_refs": [
-        "I3"
+        "I3",
+        "I7"
       ],
-      "risk_check": "目標權重 2.97% ≤ 內部上限 8.5%（官方 10%）"
+      "risk_check": "目標權重 2.50% ≤ 內部上限 4.0%（官方 10%）"
     },
     {
       "decision_id": "D13",
-      "ticker": "3443",
+      "ticker": "3034",
       "action": "BUY",
-      "target_weight": 0.0297,
+      "target_weight": 0.045,
       "inference_refs": [
         "I4"
       ],
-      "risk_check": "目標權重 2.97% ≤ 內部上限 6.4%（官方 10%）"
+      "risk_check": "目標權重 4.50% ≤ 內部上限 8.5%（官方 10%）"
     },
     {
       "decision_id": "D14",
-      "ticker": "8046",
+      "ticker": "2379",
       "action": "BUY",
-      "target_weight": 0.0297,
+      "target_weight": 0.035,
       "inference_refs": [
-        "I5"
+        "I4"
       ],
-      "risk_check": "目標權重 2.97% ≤ 內部上限 7.1%（官方 10%）"
+      "risk_check": "目標權重 3.50% ≤ 內部上限 8.5%（官方 10%）"
     },
     {
       "decision_id": "D15",
-      "ticker": "2357",
+      "ticker": "3443",
       "action": "BUY",
-      "target_weight": 0.0297,
+      "target_weight": 0.035,
       "inference_refs": [
-        "I3"
+        "I4"
       ],
-      "risk_check": "目標權重 2.97% ≤ 內部上限 8.5%（官方 10%）"
+      "risk_check": "目標權重 3.50% ≤ 內部上限 6.4%（官方 10%）"
     },
     {
       "decision_id": "D16",
-      "ticker": "4958",
+      "ticker": "6770",
       "action": "BUY",
-      "target_weight": 0.0277,
+      "target_weight": 0.025,
       "inference_refs": [
-        "I5"
+        "I4"
       ],
-      "risk_check": "目標權重 2.77% ≤ 內部上限 5.7%（官方 10%）"
+      "risk_check": "目標權重 2.50% ≤ 內部上限 8.1%（官方 10%）"
     },
     {
       "decision_id": "D17",
-      "ticker": "3680",
+      "ticker": "3661",
       "action": "BUY",
-      "target_weight": 0.0267,
+      "target_weight": 0.025,
       "inference_refs": [
         "I4"
       ],
-      "risk_check": "目標權重 2.67% ≤ 內部上限 8.5%（官方 10%）"
+      "risk_check": "目標權重 2.50% ≤ 內部上限 7.1%（官方 10%）"
     },
     {
       "decision_id": "D18",
-      "ticker": "2615",
+      "ticker": "3653",
       "action": "BUY",
-      "target_weight": 0.0247,
+      "target_weight": 0.035,
       "inference_refs": [
-        "I6"
+        "I5"
       ],
-      "risk_check": "目標權重 2.47% ≤ 內部上限 8.0%（官方 10%）"
+      "risk_check": "目標權重 3.50% ≤ 內部上限 5.7%（官方 10%）"
     },
     {
       "decision_id": "D19",
-      "ticker": "3653",
+      "ticker": "3017",
       "action": "BUY",
-      "target_weight": 0.0247,
+      "target_weight": 0.03,
       "inference_refs": [
         "I5"
       ],
-      "risk_check": "目標權重 2.47% ≤ 內部上限 5.7%（官方 10%）"
+      "risk_check": "目標權重 3.00% ≤ 內部上限 7.1%（官方 10%）"
     },
     {
       "decision_id": "D20",
-      "ticker": "3017",
+      "ticker": "3680",
       "action": "BUY",
-      "target_weight": 0.0247,
+      "target_weight": 0.03,
       "inference_refs": [
         "I5"
       ],
-      "risk_check": "目標權重 2.47% ≤ 內部上限 7.1%（官方 10%）"
+      "risk_check": "目標權重 3.00% ≤ 內部上限 8.5%（官方 10%）"
     },
     {
       "decision_id": "D21",
-      "ticker": "6770",
+      "ticker": "2615",
       "action": "BUY",
-      "target_weight": 0.0247,
+      "target_weight": 0.025,
       "inference_refs": [
-        "I4"
+        "I6"
       ],
-      "risk_check": "目標權重 2.47% ≤ 內部上限 8.1%（官方 10%）"
+      "risk_check": "目標權重 2.50% ≤ 內部上限 8.0%（官方 10%）"
     },
     {
       "decision_id": "D22",
-      "ticker": "2317",
+      "ticker": "2884",
       "action": "BUY",
-      "target_weight": 0.0247,
+      "target_weight": 0.02,
       "inference_refs": [
-        "I3"
+        "I6"
       ],
-      "risk_check": "目標權重 2.47% ≤ 內部上限 8.5%（官方 10%）"
+      "risk_check": "目標權重 2.00% ≤ 內部上限 8.5%（官方 10%）"
     },
     {
       "decision_id": "D23",
-      "ticker": "2382",
+      "ticker": "2885",
       "action": "BUY",
-      "target_weight": 0.0247,
+      "target_weight": 0.02,
       "inference_refs": [
-        "I3"
+        "I6"
       ],
-      "risk_check": "目標權重 2.47% ≤ 內部上限 8.5%（官方 10%）"
+      "risk_check": "目標權重 2.00% ≤ 內部上限 8.5%（官方 10%）"
     },
     {
       "decision_id": "D24",
-      "ticker": "1815",
+      "ticker": "2412",
       "action": "BUY",
-      "target_weight": 0.0247,
+      "target_weight": 0.02,
       "inference_refs": [
-        "I5"
+        "I6"
       ],
-      "risk_check": "目標權重 2.47% ≤ 內部上限 4.0%（官方 10%）"
-    },
-    {
-      "decision_id": "D25",
-      "ticker": "2368",
-      "action": "BUY",
-      "target_weight": 0.0227,
-      "inference_refs": [
-        "I5"
-      ],
-      "risk_check": "目標權重 2.27% ≤ 內部上限 4.0%（官方 10%）"
+      "risk_check": "目標權重 2.00% ≤ 內部上限 8.5%（官方 10%）"
     }
   ],
   "no_trade_decisions": [],
@@ -2708,187 +2808,180 @@
     {
       "ticker": "2330",
       "side": "BUY",
-      "shares": 58000,
+      "shares": 62000,
       "decision_ref": "D1",
-      "derivation_detail": "target_shares = floor(0.1384×1,000,000,000 / 2385.0 / 1000)×1000 = 58,000；現持 0 → BUY 58,000"
+      "derivation_detail": "target_shares = floor(0.15×1,000,000,000 / 2385.0 / 1000)×1000 = 62,000；現持 0 → BUY 62,000"
     },
     {
       "ticker": "4938",
       "side": "BUY",
-      "shares": 429000,
+      "shares": 531000,
       "decision_ref": "D2",
-      "derivation_detail": "target_shares = floor(0.0445×1,000,000,000 / 103.5 / 1000)×1000 = 429,000；現持 0 → BUY 429,000"
-    },
-    {
-      "ticker": "3044",
-      "side": "BUY",
-      "shares": 71000,
-      "decision_ref": "D3",
-      "derivation_detail": "target_shares = floor(0.0395×1,000,000,000 / 556.0 / 1000)×1000 = 71,000；現持 0 → BUY 71,000"
-    },
-    {
-      "ticker": "3034",
-      "side": "BUY",
-      "shares": 67000,
-      "decision_ref": "D4",
-      "derivation_detail": "target_shares = floor(0.0395×1,000,000,000 / 583.0 / 1000)×1000 = 67,000；現持 0 → BUY 67,000"
+      "derivation_detail": "target_shares = floor(0.055×1,000,000,000 / 103.5 / 1000)×1000 = 531,000；現持 0 → BUY 531,000"
     },
     {
       "ticker": "3231",
       "side": "BUY",
-      "shares": 207000,
-      "decision_ref": "D5",
-      "derivation_detail": "target_shares = floor(0.0395×1,000,000,000 / 190.0 / 1000)×1000 = 207,000；現持 0 → BUY 207,000"
-    },
-    {
-      "ticker": "2412",
-      "side": "BUY",
-      "shares": 218000,
-      "decision_ref": "D6",
-      "derivation_detail": "target_shares = floor(0.0346×1,000,000,000 / 158.0 / 1000)×1000 = 218,000；現持 0 → BUY 218,000"
+      "shares": 263000,
+      "decision_ref": "D3",
+      "derivation_detail": "target_shares = floor(0.05×1,000,000,000 / 190.0 / 1000)×1000 = 263,000；現持 0 → BUY 263,000"
     },
     {
       "ticker": "2377",
       "side": "BUY",
-      "shares": 212000,
-      "decision_ref": "D7",
-      "derivation_detail": "target_shares = floor(0.0346×1,000,000,000 / 163.0 / 1000)×1000 = 212,000；現持 0 → BUY 212,000"
-    },
-    {
-      "ticker": "2379",
-      "side": "BUY",
-      "shares": 44000,
-      "decision_ref": "D8",
-      "derivation_detail": "target_shares = floor(0.0346×1,000,000,000 / 772.0 / 1000)×1000 = 44,000；現持 0 → BUY 44,000"
-    },
-    {
-      "ticker": "3189",
-      "side": "BUY",
-      "shares": 35000,
-      "decision_ref": "D9",
-      "derivation_detail": "target_shares = floor(0.0346×1,000,000,000 / 986.0 / 1000)×1000 = 35,000；現持 0 → BUY 35,000"
-    },
-    {
-      "ticker": "2884",
-      "side": "BUY",
-      "shares": 596000,
-      "decision_ref": "D10",
-      "derivation_detail": "target_shares = floor(0.0297×1,000,000,000 / 49.75 / 1000)×1000 = 596,000；現持 0 → BUY 596,000"
-    },
-    {
-      "ticker": "2347",
-      "side": "BUY",
-      "shares": 299000,
-      "decision_ref": "D11",
-      "derivation_detail": "target_shares = floor(0.0297×1,000,000,000 / 99.3 / 1000)×1000 = 299,000；現持 0 → BUY 299,000"
-    },
-    {
-      "ticker": "2376",
-      "side": "BUY",
-      "shares": 85000,
-      "decision_ref": "D12",
-      "derivation_detail": "target_shares = floor(0.0297×1,000,000,000 / 349.0 / 1000)×1000 = 85,000；現持 0 → BUY 85,000"
-    },
-    {
-      "ticker": "3443",
-      "side": "BUY",
-      "shares": 3000,
-      "decision_ref": "D13",
-      "derivation_detail": "target_shares = floor(0.0297×1,000,000,000 / 7585.0 / 1000)×1000 = 3,000；現持 0 → BUY 3,000"
-    },
-    {
-      "ticker": "8046",
-      "side": "BUY",
-      "shares": 23000,
-      "decision_ref": "D14",
-      "derivation_detail": "target_shares = floor(0.0297×1,000,000,000 / 1265.0 / 1000)×1000 = 23,000；現持 0 → BUY 23,000"
+      "shares": 245000,
+      "decision_ref": "D4",
+      "derivation_detail": "target_shares = floor(0.04×1,000,000,000 / 163.0 / 1000)×1000 = 245,000；現持 0 → BUY 245,000"
     },
     {
       "ticker": "2357",
       "side": "BUY",
       "shares": 31000,
-      "decision_ref": "D15",
-      "derivation_detail": "target_shares = floor(0.0297×1,000,000,000 / 946.0 / 1000)×1000 = 31,000；現持 0 → BUY 31,000"
-    },
-    {
-      "ticker": "4958",
-      "side": "BUY",
-      "shares": 48000,
-      "decision_ref": "D16",
-      "derivation_detail": "target_shares = floor(0.0277×1,000,000,000 / 567.0 / 1000)×1000 = 48,000；現持 0 → BUY 48,000"
-    },
-    {
-      "ticker": "3680",
-      "side": "BUY",
-      "shares": 53000,
-      "decision_ref": "D17",
-      "derivation_detail": "target_shares = floor(0.0267×1,000,000,000 / 503.0 / 1000)×1000 = 53,000；現持 0 → BUY 53,000"
-    },
-    {
-      "ticker": "2615",
-      "side": "BUY",
-      "shares": 206000,
-      "decision_ref": "D18",
-      "derivation_detail": "target_shares = floor(0.0247×1,000,000,000 / 119.5 / 1000)×1000 = 206,000；現持 0 → BUY 206,000"
-    },
-    {
-      "ticker": "3653",
-      "side": "BUY",
-      "shares": 4000,
-      "decision_ref": "D19",
-      "derivation_detail": "target_shares = floor(0.0247×1,000,000,000 / 6070.0 / 1000)×1000 = 4,000；現持 0 → BUY 4,000"
-    },
-    {
-      "ticker": "3017",
-      "side": "BUY",
-      "shares": 7000,
-      "decision_ref": "D20",
-      "derivation_detail": "target_shares = floor(0.0247×1,000,000,000 / 3145.0 / 1000)×1000 = 7,000；現持 0 → BUY 7,000"
-    },
-    {
-      "ticker": "6770",
-      "side": "BUY",
-      "shares": 371000,
-      "decision_ref": "D21",
-      "derivation_detail": "target_shares = floor(0.0247×1,000,000,000 / 66.4 / 1000)×1000 = 371,000；現持 0 → BUY 371,000"
-    },
-    {
-      "ticker": "2317",
-      "side": "BUY",
-      "shares": 100000,
-      "decision_ref": "D22",
-      "derivation_detail": "target_shares = floor(0.0247×1,000,000,000 / 245.0 / 1000)×1000 = 100,000；現持 0 → BUY 100,000"
+      "decision_ref": "D5",
+      "derivation_detail": "target_shares = floor(0.03×1,000,000,000 / 946.0 / 1000)×1000 = 31,000；現持 0 → BUY 31,000"
     },
     {
       "ticker": "2382",
       "side": "BUY",
-      "shares": 76000,
-      "decision_ref": "D23",
-      "derivation_detail": "target_shares = floor(0.0247×1,000,000,000 / 322.0 / 1000)×1000 = 76,000；現持 0 → BUY 76,000"
+      "shares": 77000,
+      "decision_ref": "D6",
+      "derivation_detail": "target_shares = floor(0.025×1,000,000,000 / 322.0 / 1000)×1000 = 77,000；現持 0 → BUY 77,000"
+    },
+    {
+      "ticker": "3044",
+      "side": "BUY",
+      "shares": 80000,
+      "decision_ref": "D7",
+      "derivation_detail": "target_shares = floor(0.045×1,000,000,000 / 556.0 / 1000)×1000 = 80,000；現持 0 → BUY 80,000"
+    },
+    {
+      "ticker": "3189",
+      "side": "BUY",
+      "shares": 45000,
+      "decision_ref": "D8",
+      "derivation_detail": "target_shares = floor(0.045×1,000,000,000 / 986.0 / 1000)×1000 = 45,000；現持 0 → BUY 45,000"
     },
     {
       "ticker": "1815",
       "side": "BUY",
-      "shares": 177000,
-      "decision_ref": "D24",
-      "derivation_detail": "target_shares = floor(0.0247×1,000,000,000 / 139.0 / 1000)×1000 = 177,000；現持 0 → BUY 177,000"
+      "shares": 251000,
+      "decision_ref": "D9",
+      "derivation_detail": "target_shares = floor(0.035×1,000,000,000 / 139.0 / 1000)×1000 = 251,000；現持 0 → BUY 251,000"
+    },
+    {
+      "ticker": "4958",
+      "side": "BUY",
+      "shares": 52000,
+      "decision_ref": "D10",
+      "derivation_detail": "target_shares = floor(0.03×1,000,000,000 / 567.0 / 1000)×1000 = 52,000；現持 0 → BUY 52,000"
+    },
+    {
+      "ticker": "3037",
+      "side": "BUY",
+      "shares": 23000,
+      "decision_ref": "D11",
+      "derivation_detail": "target_shares = floor(0.025×1,000,000,000 / 1085.0 / 1000)×1000 = 23,000；現持 0 → BUY 23,000"
     },
     {
       "ticker": "2368",
       "side": "BUY",
-      "shares": 20000,
-      "decision_ref": "D25",
-      "derivation_detail": "target_shares = floor(0.0227×1,000,000,000 / 1115.0 / 1000)×1000 = 20,000；現持 0 → BUY 20,000"
+      "shares": 22000,
+      "decision_ref": "D12",
+      "derivation_detail": "target_shares = floor(0.025×1,000,000,000 / 1115.0 / 1000)×1000 = 22,000；現持 0 → BUY 22,000"
+    },
+    {
+      "ticker": "3034",
+      "side": "BUY",
+      "shares": 77000,
+      "decision_ref": "D13",
+      "derivation_detail": "target_shares = floor(0.045×1,000,000,000 / 583.0 / 1000)×1000 = 77,000；現持 0 → BUY 77,000"
+    },
+    {
+      "ticker": "2379",
+      "side": "BUY",
+      "shares": 45000,
+      "decision_ref": "D14",
+      "derivation_detail": "target_shares = floor(0.035×1,000,000,000 / 772.0 / 1000)×1000 = 45,000；現持 0 → BUY 45,000"
+    },
+    {
+      "ticker": "3443",
+      "side": "BUY",
+      "shares": 4000,
+      "decision_ref": "D15",
+      "derivation_detail": "target_shares = floor(0.035×1,000,000,000 / 7585.0 / 1000)×1000 = 4,000；現持 0 → BUY 4,000"
+    },
+    {
+      "ticker": "6770",
+      "side": "BUY",
+      "shares": 376000,
+      "decision_ref": "D16",
+      "derivation_detail": "target_shares = floor(0.025×1,000,000,000 / 66.4 / 1000)×1000 = 376,000；現持 0 → BUY 376,000"
+    },
+    {
+      "ticker": "3661",
+      "side": "BUY",
+      "shares": 7000,
+      "decision_ref": "D17",
+      "derivation_detail": "target_shares = floor(0.025×1,000,000,000 / 3495.0 / 1000)×1000 = 7,000；現持 0 → BUY 7,000"
+    },
+    {
+      "ticker": "3653",
+      "side": "BUY",
+      "shares": 5000,
+      "decision_ref": "D18",
+      "derivation_detail": "target_shares = floor(0.035×1,000,000,000 / 6070.0 / 1000)×1000 = 5,000；現持 0 → BUY 5,000"
+    },
+    {
+      "ticker": "3017",
+      "side": "BUY",
+      "shares": 9000,
+      "decision_ref": "D19",
+      "derivation_detail": "target_shares = floor(0.03×1,000,000,000 / 3145.0 / 1000)×1000 = 9,000；現持 0 → BUY 9,000"
+    },
+    {
+      "ticker": "3680",
+      "side": "BUY",
+      "shares": 59000,
+      "decision_ref": "D20",
+      "derivation_detail": "target_shares = floor(0.03×1,000,000,000 / 503.0 / 1000)×1000 = 59,000；現持 0 → BUY 59,000"
+    },
+    {
+      "ticker": "2615",
+      "side": "BUY",
+      "shares": 209000,
+      "decision_ref": "D21",
+      "derivation_detail": "target_shares = floor(0.025×1,000,000,000 / 119.5 / 1000)×1000 = 209,000；現持 0 → BUY 209,000"
+    },
+    {
+      "ticker": "2884",
+      "side": "BUY",
+      "shares": 402000,
+      "decision_ref": "D22",
+      "derivation_detail": "target_shares = floor(0.02×1,000,000,000 / 49.75 / 1000)×1000 = 402,000；現持 0 → BUY 402,000"
+    },
+    {
+      "ticker": "2885",
+      "side": "BUY",
+      "shares": 276000,
+      "decision_ref": "D23",
+      "derivation_detail": "target_shares = floor(0.02×1,000,000,000 / 72.4 / 1000)×1000 = 276,000；現持 0 → BUY 276,000"
+    },
+    {
+      "ticker": "2412",
+      "side": "BUY",
+      "shares": 126000,
+      "decision_ref": "D24",
+      "derivation_detail": "target_shares = floor(0.02×1,000,000,000 / 158.0 / 1000)×1000 = 126,000；現持 0 → BUY 126,000"
     }
   ],
   "agent_metadata": {
     "model_provider": "google",
     "model_version": "gemini-3.8-flash",
-    "run_started_at": "2026-10-27T00:05:36+08:00",
-    "run_completed_at": "2026-10-27T00:09:34+08:00",
-    "input_tokens": 206939,
-    "output_tokens": 15418,
-    "tool_use_count": 98,
-    "code_version": "git:c7ab889f"
+    "run_started_at": "2026-10-27T00:52:31+08:00",
+    "run_completed_at": "2026-10-27T00:57:01+08:00",
+    "input_tokens": 204058,
+    "output_tokens": 27575,
+    "tool_use_count": 95,
+    "code_version": "git:66c0213c"
   }
 }

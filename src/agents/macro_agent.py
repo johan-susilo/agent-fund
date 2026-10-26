@@ -71,11 +71,14 @@ def _yf_macro(trade_date: str, counter: Counter):
             ma20 = float(closes.iloc[-20:].mean()) if len(closes) >= 20 else v0
             vs_ma20_pct = (v0 / ma20 - 1.0) * 100.0 if ma20 else 0.0
             expected_as_of = _us_close_to_tw(d0) if sym in us_syms else f"{d0}T13:30:00+08:00"
+            is_intraday = expected_as_of > now
+            
             actual_as_of = now if is_intraday else expected_as_of
             disclaimer = " (未定時盤中快照)" if is_intraday else ""
+
             src = {
                 "authority": "vendor",
-                "name": f"Yahoo Finance ({sym}): {label}",
+                "name": f"Yahoo Finance ({sym}): {label}{disclaimer}",
                 "url": f"https://finance.yahoo.com/quote/{sym.replace('^', '%5E')}/",
                 "content_as_of": actual_as_of,
                 "fetched_at": now,
