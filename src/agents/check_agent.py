@@ -279,3 +279,25 @@ def final_gate(d: dict, state: dict, closes: dict, universe, limits: Limits, fil
     if any(not math.isfinite(v) for v in rep["weights"].values()):
         errs.append("non-finite weight in projection")
     return errs, warns
+
+def check_narrative_consistency(inferences: list, weights: dict) -> list:
+    """Ensure tickers specifically targeted for exclusion/inclusion match the math array."""
+    errs = []
+    decision_tickers = set(weights.keys())
+    
+    for inf in inferences:
+        text = str(inf.get("logic", "")) + " " + str(inf.get("conclusion", ""))
+        
+        # Look for an EXCLUSION verb followed within 15 characters by a 4-digit ticker
+        exclusions = re.findall(r"(?:exclude|drop|remove|avoid|skip|eliminate|排除|不納入|剔除|刪除|未納入|出清|減碼)[^0-9]{0,15}?([0-9]{4})", text, re.IGNORECASE)
+        for t in exclusions:
+            if t in decision_tickers:
+                errs.append(f"Narrative contradiction: You explicitly stated you would exclude/drop {t} in inference '{inf.get('inf_id')}', but assigned it a weight. Remove {t}.")
+        
+        # Look for an INCLUSION verb followed within 15 characters by a 4-digit ticker
+        inclusions = re.findall(r"(?:include|add|buy|select|allocate|納入|建立|新增|買進|加碼|佈局|配置)[^0-9]{0,15}?([0-9]{4})", text, re.IGNORECASE)
+        for t in inclusions:
+            if t not in decision_tickers:
+                errs.append(f"Narrative contradiction: You explicitly stated you would include/buy {t} in inference '{inf.get('inf_id')}', but it is missing from your decisions. Add {t}.")
+                
+    return errs

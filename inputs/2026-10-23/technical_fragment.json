@@ -3,35 +3,35 @@
   {
    "authority": "vendor",
    "url": "https://finance.yahoo.com/",
-   "fetched_at": "2026-10-26T02:19:16+08:00",
+   "fetched_at": "2026-10-26T14:58:08+08:00",
    "name": "Yahoo Finance 日線歷史價量（技術指標）",
    "content_as_of": "2026-10-22T13:30:00+08:00"
   },
   {
    "authority": "vendor",
    "url": "https://finmindtrade.com/",
-   "fetched_at": "2026-10-26T02:19:16+08:00",
+   "fetched_at": "2026-10-26T14:58:08+08:00",
    "name": "FinMind 開放資料：台指期外資未平倉、個股融資餘額",
    "content_as_of": "2026-10-22T18:30:00+08:00"
   },
   {
    "authority": "vendor",
-   "name": "Yahoo Finance (^SOX) 日線",
-   "fetched_at": "2026-10-26T02:20:10+08:00",
-   "url": "https://finance.yahoo.com/quote/^SOX/",
-   "content_as_of": "2026-10-24T04:00:00+08:00"
-  },
-  {
-   "authority": "vendor",
    "name": "Yahoo Finance (2330.TW) 日線",
-   "fetched_at": "2026-10-26T02:20:11+08:00",
+   "fetched_at": "2026-10-26T14:58:38+08:00",
    "url": "https://finance.yahoo.com/quote/2330.TW/",
    "content_as_of": "2026-10-22T13:30:00+08:00"
   },
   {
    "authority": "vendor",
+   "name": "Yahoo Finance (^SOX) 日線",
+   "fetched_at": "2026-10-26T14:58:38+08:00",
+   "url": "https://finance.yahoo.com/quote/^SOX/",
+   "content_as_of": "2026-10-24T04:00:00+08:00"
+  },
+  {
+   "authority": "vendor",
    "name": "Yahoo Finance (2454.TW) 日線",
-   "fetched_at": "2026-10-26T02:20:11+08:00",
+   "fetched_at": "2026-10-26T14:58:40+08:00",
    "url": "https://finance.yahoo.com/quote/2454.TW/",
    "content_as_of": "2026-10-22T13:30:00+08:00"
   }
@@ -459,22 +459,6 @@
    "src": [
     2
    ],
-   "statement": "^SOX 2026-10-23 收 10779.5（1日+0.44%、5日-3.2%、20日-14.9%、60日-4.6%）",
-   "values": {
-    "sox_close": 10779.46,
-    "sox_chg_pct": 0.44,
-    "sox_ret5d_pct": -3.21,
-    "sox_ret20d_pct": -14.91,
-    "sox_ret60d_pct": -4.63
-   },
-   "topic": "agent_price",
-   "level": "market",
-   "tickers": []
-  },
-  {
-   "src": [
-    3
-   ],
    "statement": "2330.TW 2026-10-22 收 2385（1日-1.45%、5日-2.2%、20日-3.8%、60日+1.8%）",
    "values": {
     "2330_close": 2385.0,
@@ -489,6 +473,22 @@
    "tickers": [
     "2330"
    ]
+  },
+  {
+   "src": [
+    3
+   ],
+   "statement": "^SOX 2026-10-23 收 10779.5（1日+0.44%、5日-3.2%、20日-14.9%、60日-4.6%）",
+   "values": {
+    "sox_close": 10779.46,
+    "sox_chg_pct": 0.44,
+    "sox_ret5d_pct": -3.21,
+    "sox_ret20d_pct": -14.91,
+    "sox_ret60d_pct": -4.63
+   },
+   "topic": "agent_price",
+   "level": "market",
+   "tickers": []
   },
   {
    "src": [
@@ -510,7 +510,7 @@
    ]
   }
  ],
- "tool_calls": 50,
+ "tool_calls": 48,
  "warnings": [],
  "breadth": {
   "n": 149,
@@ -13416,12 +13416,12 @@
   "3374": -0.0184,
   "2609": -0.126
  },
- "agent_notes": "Market breadth warns of a broad semiconductor correction: only 30.9% of tracked stocks trade above MA20, 46.3% above MA60, and 20-day breakdowns (32) heavily outnumber breakouts (5), alongside a -14.91% 20-day drop in ^SOX and net foreign TX futures short of -87,297 contracts. Caution is warranted on core heavyweights: 2330 (below MA60 by 1%, 20d return -3.83% with rising margin +4%), 2454 (severe breakdown, -19.96% over 20d with 47.6% annualized volatility), 2308 and 2303 (both in breakdown below MA60), and high-ATR AI/semi names 3661 and 2345 (below MA60 with bearish momentum). Clean uptrends worth considering: 6415 (tech score 77, RSI 56, above MA20/MA60 with 1.8x volume, though high ATR 6.1 requires sizing discipline) and defensive/financial leaders 2891 and 2890 (scores 89 and 77, above MA20/MA60 with declining margin). Unknowns: specific news catalysts or ex-dividend adjustments behind individual breakdowns due to search rate limits.",
+ "agent_notes": "市場廣度顯著惡化：僅 30.9% 站上 MA20、破 20 日低多達 32 檔（創高僅 5 檔），外資期貨空單維持 -8.7 萬口高檔，^SOX 20 日跌 14.9%，半導體面臨系統性修正，不宜躁進加倉。\n\n警惕標的：\n1. 2330 台積電：跌破 MA60 與 20 日支撐，短線動能潰散。\n2. 2454 聯發科：20 日重挫近 20% 且破季線，賣壓沉重。\n3. 3661 世芯-KY / 2308 台達電：高 ATR 且同步出現 breakdown 與破季線。\n\n相對強勢可留意：\n1. 6415 矽力*-KY：站穩 MA20(+6%)/MA60(+8%)，多頭排列相對抗跌。\n2. 2412 中華電：防禦資金流入創高，惟 RSI>80 偏熱宜待拉回。\n\n未知：台積電、聯發科集體破線是否由地緣政策或終端砍單引發，缺乏即時新聞佐證。",
  "llm_usage": {
-  "input_tokens": 5306,
-  "output_tokens": 538,
+  "input_tokens": 8342,
+  "output_tokens": 2009,
   "models": [
-   "gemini-4-argon"
+   "gemini-3.8-flash"
   ]
  }
 }

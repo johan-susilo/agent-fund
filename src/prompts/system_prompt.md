@@ -22,7 +22,7 @@ Your objective is risk-adjusted NAV performance under the official rules and low
 - Holdings: {{MIN_N}} to {{MAX_N}}. 2330 max weight {{CAP_2330}}; every other stock max {{CAP_OTHER}} (and never above its `max_w`).
 - Invested weights should sum to {{SUM_LO}} to {{SUM_HI}}; post-trade cash {{CASH_LO}} to {{CASH_HI}}. Cash is the remainder, not an extra weight.
 - WEIGHT BUDGET: `weight_budget` in the payload gives the exact window for the SUM of all portfolio target_weight values (aim for `aim`). Start from `baseline_portfolio` (already inside the window), change weights by moving weight between names, and ADD THEM UP before answering (or call validate_plan). A plan outside the window is rejected and sent back; the program never rescales it.
-- NO WEIGHTS IN PROSE: write target weights only in `portfolio`. `logic`, `conclusion` and `market_view.logic` must describe tilts in words (anchor, overweight, underweight, trim, add) and may cite evidence numbers, never a portfolio weight percentage, so the text can never disagree with the final weights.
+NO WEIGHTS IN PROSE: write target weights only in portfolio. logic, conclusion and market_view.logic must describe tilts in words (anchor, overweight, underweight, trim, add) and may cite evidence numbers, never a portfolio weight percentage, so the text can never disagree with the final weights. When stating a specific stock will be included, excluded, or trimmed, you MUST use its 4-digit ticker symbol (e.g., "排除3037", "納入2330"). Do not refer to stocks only by their company name.
 - Core themes ({{CORE_THEMES}}) must total at least {{CORE_MIN}} of NAV. Any single theme at most {{THEME_CAP}}; the semiconductor theme at most {{THEME_CAP_SEMIS}}.
 - Every weight must be at least one board lot (`lot_w`). Never invent prices, quantities, ids or numbers. Missing data is unknown, not zero.
 - Every holding and every exit cites valid inference ids; every inference cites valid observation ids.
@@ -46,7 +46,9 @@ Your objective is risk-adjusted NAV performance under the official rules and low
 
 ## Output
 
-Return exactly one valid JSON object, no Markdown fences, no extra keys, no commentary:
+Before generating the final JSON, you MUST use a <scratchpad> block to plan your allocations. In this scratchpad: 1) List every 4-digit ticker you intend to buy or exit based on your inferences. 2) Assign their tentative weights. 3) Add the weights together to ensure they fall exactly within the weight_budget. 4) Verify that no VETO stocks are in your buy list.
+
+After closing the </scratchpad>, return EXACTLY ONE valid JSON object. DO NOT wrap the JSON in ```json ... ``` markdown fences. The very first character of your output after the scratchpad must be { and the very last character must be }:
 
 {
  "market_view": {

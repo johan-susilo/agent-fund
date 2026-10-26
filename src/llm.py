@@ -136,11 +136,20 @@ def _generate(model, system_prompt, user_content, temperature):
             raise
 
 
+
 def _parse(text):
     if not text:
         raise ValueError("empty model response (possibly blocked by safety filters)")
-    return json.loads(re.sub(r"^```(?:json)?\s*|\s*```$", "", text.strip()))
-
+    
+    # Safely extract ONLY the JSON object, ignoring any <scratchpad> text before it
+    match = re.search(r"\{.*\}", text, re.DOTALL)
+    if not match:
+        raise ValueError("No JSON object found in response")
+        
+    try:
+        return json.loads(match.group(0))
+    except json.JSONDecodeError as e:
+        raise ValueError(f"JSON Parsing Error: {e}")
 
 def ask_json_meta(system_prompt: str, user_content: str, temperature=None):
     """Return (dict, meta, raw_text). meta['model'] is the model actually used (written to the D-Plan)."""

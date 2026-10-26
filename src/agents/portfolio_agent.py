@@ -569,6 +569,10 @@ def run_agent(
 
         mv, infs, portfolio, exits = _split_llm(out)
         errs = check_structure(mv, infs, portfolio, exits, ctx)
+        weights_map = {p.get("ticker"): p.get("target_weight") for p in portfolio if p.get("ticker")}
+        errs += check_agent.check_narrative_consistency(infs, weights_map)
+      
+        
         attempt_notes = []
         if not errs:
             portfolio, note = normalize_weights(portfolio, limits, caps)
