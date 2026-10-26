@@ -70,14 +70,18 @@ def _yf_macro(trade_date: str, counter: Counter):
             chg = (v0 / v1 - 1.0) * 100.0 if v1 else 0.0
             ma20 = float(closes.iloc[-20:].mean()) if len(closes) >= 20 else v0
             vs_ma20_pct = (v0 / ma20 - 1.0) * 100.0 if ma20 else 0.0
+            expected_as_of = _us_close_to_tw(d0) if sym in us_syms else f"{d0}T13:30:00+08:00"
+            actual_as_of = now if is_intraday else expected_as_of
+            disclaimer = " (未定時盤中快照)" if is_intraday else ""
             src = {
                 "authority": "vendor",
                 "name": f"Yahoo Finance ({sym}): {label}",
                 "url": f"https://finance.yahoo.com/quote/{sym.replace('^', '%5E')}/",
-                "content_as_of": _us_close_to_tw(d0) if sym in us_syms else f"{d0}T13:30:00+08:00",
+                "content_as_of": actual_as_of,
                 "fetched_at": now,
             }
-            stmt = f"{label} {d0} 收 {v0:g}（前值 {v1:g}，單日 {chg:+.2f}%，較20日均線 {vs_ma20_pct:+.1f}%）"
+            status_label = "盤中(報價時間未知)" if is_intraday else "收"
+            stmt = f"{label} {d0} {status_label} {v0:g}（前值 {v1:g}，單日 {chg:+.2f}%，較20日均線 {vs_ma20_pct:+.1f}%）"
             vals = {k: round(v0, 2), f"{k}_prev": round(v1, 2),
                     f"{k}_chg_pct": round(chg, 2), f"{k}_vs_ma20_pct": round(vs_ma20_pct, 2)}
             out.append((src, stmt, vals, f"macro_{k}"))

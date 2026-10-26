@@ -3,37 +3,37 @@
   {
    "authority": "vendor",
    "url": "https://finance.yahoo.com/",
-   "fetched_at": "2026-10-26T21:25:31+08:00",
+   "fetched_at": "2026-10-27T00:05:36+08:00",
    "name": "Yahoo Finance 日線歷史價量（技術指標）",
    "content_as_of": "2026-10-23T13:30:00+08:00"
   },
   {
    "authority": "vendor",
    "url": "https://finmindtrade.com/",
-   "fetched_at": "2026-10-26T21:25:31+08:00",
+   "fetched_at": "2026-10-27T00:05:36+08:00",
    "name": "FinMind 開放資料：台指期外資未平倉、個股融資餘額",
    "content_as_of": "2026-10-22T18:30:00+08:00"
   },
   {
    "authority": "vendor",
-   "name": "Yahoo Finance (^TWII) 日線",
-   "fetched_at": "2026-10-26T21:26:04+08:00",
-   "url": "https://finance.yahoo.com/quote/%5ETWII/",
-   "content_as_of": "2026-10-22T13:30:00+08:00"
-  },
-  {
-   "authority": "vendor",
    "name": "Yahoo Finance (2330.TW) 日線",
-   "fetched_at": "2026-10-26T21:26:04+08:00",
+   "fetched_at": "2026-10-27T00:06:09+08:00",
    "url": "https://finance.yahoo.com/quote/2330.TW/",
    "content_as_of": "2026-10-23T13:30:00+08:00"
   },
   {
    "authority": "vendor",
-   "name": "Yahoo Finance (^SOX) 日線",
-   "fetched_at": "2026-10-26T21:26:04+08:00",
-   "url": "https://finance.yahoo.com/quote/%5ESOX/",
-   "content_as_of": "2026-10-24T04:00:00+08:00"
+   "name": "Yahoo Finance (^SOX) 日線 (未定時盤中快照)",
+   "fetched_at": "2026-10-27T00:06:09+08:00",
+   "url": "https://finance.yahoo.com/quote/^SOX/",
+   "content_as_of": "2026-10-27T00:06:09+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "Yahoo Finance (3231.TW) 日線",
+   "fetched_at": "2026-10-27T00:06:15+08:00",
+   "url": "https://finance.yahoo.com/quote/3231.TW/",
+   "content_as_of": "2026-10-23T13:30:00+08:00"
   }
  ],
  "observations": [
@@ -459,22 +459,6 @@
    "src": [
     2
    ],
-   "statement": "^TWII 2026-10-22 收 46041.4（1日-1.81%、5日-2.0%、20日-3.5%、60日+5.5%）",
-   "values": {
-    "twii_close": 46041.4297,
-    "twii_chg_pct": -1.81,
-    "twii_ret5d_pct": -1.98,
-    "twii_ret20d_pct": -3.52,
-    "twii_ret60d_pct": 5.52
-   },
-   "topic": "agent_price",
-   "level": "market",
-   "tickers": []
-  },
-  {
-   "src": [
-    3
-   ],
    "statement": "2330.TW 2026-10-23 收 2385（1日+0.00%、5日-1.4%、20日-3.0%、60日+4.9%）",
    "values": {
     "2330_close": 2385.0,
@@ -492,19 +476,38 @@
   },
   {
    "src": [
-    4
+    3
    ],
-   "statement": "^SOX 2026-10-23 收 10779.5（1日+0.44%、5日-3.2%、20日-14.9%、60日-4.6%）",
+   "statement": "^SOX 2026-10-26 盤中(報價時間未知) 11085.5（1日+2.84%、5日-2.0%、20日-11.1%、60日-2.0%）",
    "values": {
-    "sox_close": 10779.46,
-    "sox_chg_pct": 0.44,
-    "sox_ret5d_pct": -3.21,
-    "sox_ret20d_pct": -14.91,
-    "sox_ret60d_pct": -4.63
+    "sox_close": 11085.5371,
+    "sox_chg_pct": 2.84,
+    "sox_ret5d_pct": -2.04,
+    "sox_ret20d_pct": -11.07,
+    "sox_ret60d_pct": -1.99
    },
    "topic": "agent_price",
    "level": "market",
    "tickers": []
+  },
+  {
+   "src": [
+    4
+   ],
+   "statement": "3231.TW 2026-10-23 收 190（1日+0.00%、5日+4.1%、20日+5.3%、60日+11.8%）",
+   "values": {
+    "3231_close": 190.0,
+    "3231_chg_pct": 0.0,
+    "3231_mom20_pct": 5.26,
+    "3231_mom60_pct": 11.76,
+    "3231_vol20_pct": 40.9,
+    "3231_adv20_twd_m": 7122.0
+   },
+   "topic": "agent_price",
+   "level": "stock",
+   "tickers": [
+    "3231"
+   ]
   }
  ],
  "tool_calls": 48,
@@ -3976,10 +3979,10 @@
   "3293": -0.0853,
   "3045": -0.5086
  },
- "agent_notes": "**Breadth Read**: Market breadth is weak and defensive (only 30.2% > MA20, 46.3% > MA60, 25.5% MACD positive, median tech score 41). With ^SOX down 14.9% over 20 days and foreign TX net short at -87k contracts, technicals advise against expanding aggressive beta.\n\n**Caution Names**:\n1. **2345 (Accton)**: Slipped below MA60 with high ATR and MACD dead cross.\n2. **2330 (TSMC)**: Weak tech score (47), RSI 38, hovering below MA60 (-1%) and MA20 (-4%).\n3. **2313 (Compeq)**: High ATR coupled with MACD dead cross signaling distribution.\n4. **2618 (EVA Air)**: Broken below MA60 with MACD dead cross.\n\n**Consider on Pullbacks**:\n1. **3231 (Wistron)**: Exceptional tech score (95), neutral RSI 54, resilient AI momentum.\n2. **2379 (Realtek)**: Solid score 82, RSI 57, maintaining structure above MA20 (+1%) and MA60 (+6%).\n\n**Unknown**: Specific company-level news drivers behind high-ATR pullbacks and the exact catalyst schedule for foreign futures short-covering.",
+ "agent_notes": "市場廣度偏弱（僅 30.2% 站上 MA20、46.3% 站上 MA60，MACD 正向僅 25.5%），外資期貨淨空單偏高（-8.7 萬口），整體動能疲弱不支持大舉加倉。\n\n警戒標的：\n1. 2330：跌破 MA60 與 MA20，RSI 38 弱勢，壓抑大盤。\n2. 2345：失守 MA60 且伴隨高 ATR 與 MACD 死叉。\n3. 2313、6505：高波動兼現 MACD 死叉，拉回風險高。\n\n健康趨勢關注標的：\n1. 3231：技術分 95、RSI 54，均線多頭且 20 日/60 日漲幅穩健。\n2. 2379：技術分 82，站穩雙均線，籌碼與指標整理良好。\n\n未明事項：個別死叉個股是否受法說或基本面利空衝擊，以及費半單日反彈能否帶動權值股重回 MA20。",
  "llm_usage": {
-  "input_tokens": 4056,
-  "output_tokens": 3111,
+  "input_tokens": 5678,
+  "output_tokens": 1671,
   "models": [
    "gemini-3.8-flash"
   ]

@@ -38,11 +38,18 @@ NO WEIGHTS IN PROSE: write target weights only in portfolio. logic, conclusion a
 6. net_exposure_intent: increase if planned net buys exceed net sells by more than {{HOLD_TOL_PCT}} of NAV; reduce if net sells exceed net buys by more than that; otherwise hold.
 
 ## Writing the output
-
 - Use 6 to 12 inferences, each covering a group of stocks (a theme, a risk, a rotation, an exit reason) rather than one inference per stock. Each: `logic` (why the cited facts support the conclusion, max about 400 characters), `conclusion` (actionable, max 300 characters), `counter_evidence` (strongest opposing fact, or null only if none exists), `confidence` 0 to 1.
 - market_view.logic states the main evidence, the regime/stance reasoning and the main limitation; counter_evidence states the strongest opposing signal.
 - All explanatory text in Traditional Chinese. JSON keys and enum values exactly as below.
 - Every currently held stock must appear in `portfolio` or in `exits`. VETO stocks must not appear in `portfolio`.
+
+### STRICT REASONING GUARDRAILS (CRITICAL)
+When writing your `logic` and `conclusion` fields, you MUST adhere to the following rules to pass the audit:
+1. **Rule-Based Regime:** When justifying the `regime` and `stance`, you must explicitly state that the decision is driven by the system's "deterministic regime model" or "predefined quantitative rule." Do not claim you are making discretionary market timing calls based on short-term rebounds.
+2. **Zero Hallucination of Metrics:** DO NOT claim a stock has "high dividend yield", "low beta", "low correlation", or "drawdown protection" unless those exact metrics are explicitly provided in the observations. You only have volatility, P/E, ROE, revenue growth, and momentum.
+3. **No Narrative Fluff:** DO NOT claim a stock "absorbs systemic risk" or makes the portfolio "immune." Stick strictly to the provided numbers (e.g., "TSMC provides stability due to high ROE and large market cap").
+4. **Strict Technical Accuracy:** DO NOT assign a technical flag (e.g., MACD golden cross, breakout) to a stock unless the observation explicitly lists that exact flag for that exact ticker.
+5. **No Business Model Speculation:** Focus on the financial metrics and the assigned theme (e.g., IC Design, Servers). Do not speculate on specific business operations (e.g., "mature-process foundry").
 
 ## Output
 

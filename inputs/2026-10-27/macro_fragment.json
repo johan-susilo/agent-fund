@@ -5,77 +5,28 @@
    "name": "FRED DGS10: 美國 10 年期公債殖利率(%)",
    "url": "https://fred.stlouisfed.org/series/DGS10",
    "content_as_of": "2026-10-23T04:00:00+08:00",
-   "fetched_at": "2026-10-26T21:25:33+08:00"
+   "fetched_at": "2026-10-27T00:05:37+08:00"
   },
   {
    "authority": "vendor",
    "name": "FRED VIXCLS: VIX 恐慌指數",
    "url": "https://fred.stlouisfed.org/series/VIXCLS",
-   "content_as_of": "2026-10-23T04:00:00+08:00",
-   "fetched_at": "2026-10-26T21:25:33+08:00"
+   "content_as_of": "2026-10-24T04:00:00+08:00",
+   "fetched_at": "2026-10-27T00:05:37+08:00"
   },
   {
    "authority": "vendor",
    "name": "FRED DEXTAUS: 美元兌新台幣(TWD/USD)",
    "url": "https://fred.stlouisfed.org/series/DEXTAUS",
    "content_as_of": "2026-10-17T04:00:00+08:00",
-   "fetched_at": "2026-10-26T21:25:33+08:00"
+   "fetched_at": "2026-10-27T00:05:37+08:00"
   },
   {
    "authority": "vendor",
    "name": "FRED NASDAQCOM: 那斯達克綜合指數",
    "url": "https://fred.stlouisfed.org/series/NASDAQCOM",
    "content_as_of": "2026-10-24T04:00:00+08:00",
-   "fetched_at": "2026-10-26T21:25:33+08:00"
-  },
-  {
-   "authority": "vendor",
-   "name": "Yahoo Finance (^SOX): 費城半導體指數 (SOX)",
-   "url": "https://finance.yahoo.com/quote/%5ESOX/",
-   "content_as_of": "2026-10-24T04:00:00+08:00",
-   "fetched_at": "2026-10-26T21:25:34+08:00"
-  },
-  {
-   "authority": "vendor",
-   "name": "Yahoo Finance (TSM): 台積電 ADR (TSM)",
-   "url": "https://finance.yahoo.com/quote/TSM/",
-   "content_as_of": "2026-10-24T04:00:00+08:00",
-   "fetched_at": "2026-10-26T21:25:34+08:00"
-  },
-  {
-   "authority": "vendor",
-   "name": "Yahoo Finance (NVDA): NVIDIA (NVDA) AI伺服器指標",
-   "url": "https://finance.yahoo.com/quote/NVDA/",
-   "content_as_of": "2026-10-24T04:00:00+08:00",
-   "fetched_at": "2026-10-26T21:25:34+08:00"
-  },
-  {
-   "authority": "vendor",
-   "name": "Yahoo Finance (MU): Micron (MU) HBM與記憶體指標",
-   "url": "https://finance.yahoo.com/quote/MU/",
-   "content_as_of": "2026-10-24T04:00:00+08:00",
-   "fetched_at": "2026-10-26T21:25:34+08:00"
-  },
-  {
-   "authority": "vendor",
-   "name": "Yahoo Finance (^VIX): VIX 波動率指數 (含20日均線比)",
-   "url": "https://finance.yahoo.com/quote/%5EVIX/",
-   "content_as_of": "2026-10-27T04:00:00+08:00",
-   "fetched_at": "2026-10-26T21:25:34+08:00"
-  },
-  {
-   "authority": "vendor",
-   "name": "Yahoo Finance (^TWII): 台灣加權指數 (TAIEX)",
-   "url": "https://finance.yahoo.com/quote/%5ETWII/",
-   "content_as_of": "2026-10-22T13:30:00+08:00",
-   "fetched_at": "2026-10-26T21:25:34+08:00"
-  },
-  {
-   "authority": "vendor",
-   "name": "Yahoo Finance (TWD=X): 美元兌台幣即期匯率 (USD/TWD)",
-   "url": "https://finance.yahoo.com/quote/TWD=X/",
-   "content_as_of": "2026-10-23T13:30:00+08:00",
-   "fetched_at": "2026-10-26T21:25:34+08:00"
+   "fetched_at": "2026-10-27T00:05:37+08:00"
   },
   {
    "authority": "media",
@@ -84,7 +35,7 @@
    "archive_url": null,
    "published_at": "2026-10-25T17:43:17+08:00",
    "content_as_of": "2026-10-25T17:43:17+08:00",
-   "fetched_at": "2026-10-26T21:25:31+08:00"
+   "fetched_at": "2026-10-27T00:05:36+08:00"
   },
   {
    "authority": "media",
@@ -93,16 +44,7 @@
    "archive_url": null,
    "published_at": "2026-10-25T15:00:00+08:00",
    "content_as_of": "2026-10-25T15:00:00+08:00",
-   "fetched_at": "2026-10-26T21:25:31+08:00"
-  },
-  {
-   "authority": "media",
-   "name": "The Times of India: Nifty bears tighten grip as crude, geopolitical risks, FII outflows mount: 5 factors to decide D-Street’s fate next week",
-   "url": "https://economictimes.indiatimes.com/markets/stocks/news/nifty-bears-tighten-grip-as-crude-geopolitical-risks-fii-outflows-mount-5-factors-to-decide-d-streets-fate-next-week/articleshow/135182716.cms",
-   "archive_url": null,
-   "published_at": "2026-10-25T11:48:39+08:00",
-   "content_as_of": "2026-10-25T11:48:39+08:00",
-   "fetched_at": "2026-10-26T21:25:31+08:00"
+   "fetched_at": "2026-10-27T00:05:36+08:00"
   }
  ],
  "observations": [
@@ -124,11 +66,11 @@
    "src": [
     1
    ],
-   "statement": "VIX 恐慌指數 2026-10-22 收 19.03（前一筆 16.68，變動 +14.09%）",
+   "statement": "VIX 恐慌指數 2026-10-23 收 19.45（前一筆 19.03，變動 +2.21%）",
    "values": {
-    "vix": 19.03,
-    "vix_prev": 16.68,
-    "vix_chg_pct": 14.09
+    "vix": 19.45,
+    "vix_prev": 19.03,
+    "vix_chg_pct": 2.21
    },
    "topic": "macro_vix",
    "level": "market",
@@ -166,114 +108,9 @@
    "src": [
     4
    ],
-   "statement": "費城半導體指數 (SOX) 2026-10-23 收 10779.5（前值 10732，單日 +0.44%，較20日均線 -11.2%）",
-   "values": {
-    "sox": 10779.46,
-    "sox_prev": 10731.98,
-    "sox_chg_pct": 0.44,
-    "sox_vs_ma20_pct": -11.21
-   },
-   "topic": "macro_sox",
-   "level": "market",
-   "tickers": []
-  },
-  {
-   "src": [
-    5
-   ],
-   "statement": "台積電 ADR (TSM) 2026-10-23 收 418.51（前值 412.35，單日 +1.49%，較20日均線 -6.1%）",
-   "values": {
-    "tsm_adr": 418.51,
-    "tsm_adr_prev": 412.35,
-    "tsm_adr_chg_pct": 1.49,
-    "tsm_adr_vs_ma20_pct": -6.08
-   },
-   "topic": "macro_tsm_adr",
-   "level": "market",
-   "tickers": []
-  },
-  {
-   "src": [
-    6
-   ],
-   "statement": "NVIDIA (NVDA) AI伺服器指標 2026-10-23 收 210.96（前值 212.21，單日 -0.59%，較20日均線 -6.5%）",
-   "values": {
-    "nvda": 210.96,
-    "nvda_prev": 212.21,
-    "nvda_chg_pct": -0.59,
-    "nvda_vs_ma20_pct": -6.47
-   },
-   "topic": "macro_nvda",
-   "level": "market",
-   "tickers": []
-  },
-  {
-   "src": [
-    7
-   ],
-   "statement": "Micron (MU) HBM與記憶體指標 2026-10-23 收 877.55（前值 856.49，單日 +2.46%，較20日均線 -11.1%）",
-   "values": {
-    "mu": 877.55,
-    "mu_prev": 856.49,
-    "mu_chg_pct": 2.46,
-    "mu_vs_ma20_pct": -11.05
-   },
-   "topic": "macro_mu",
-   "level": "market",
-   "tickers": []
-  },
-  {
-   "src": [
-    8
-   ],
-   "statement": "VIX 波動率指數 (含20日均線比) 2026-10-26 收 19.12（前值 19.45，單日 -1.70%，較20日均線 +14.6%）",
-   "values": {
-    "vix_yf": 19.12,
-    "vix_yf_prev": 19.45,
-    "vix_yf_chg_pct": -1.7,
-    "vix_yf_vs_ma20_pct": 14.57
-   },
-   "topic": "macro_vix_yf",
-   "level": "market",
-   "tickers": []
-  },
-  {
-   "src": [
-    9
-   ],
-   "statement": "台灣加權指數 (TAIEX) 2026-10-22 收 46041.4（前值 46887.8，單日 -1.81%，較20日均線 -4.2%）",
-   "values": {
-    "taiex": 46041.43,
-    "taiex_prev": 46887.77,
-    "taiex_chg_pct": -1.81,
-    "taiex_vs_ma20_pct": -4.22
-   },
-   "topic": "macro_taiex",
-   "level": "market",
-   "tickers": []
-  },
-  {
-   "src": [
-    10
-   ],
-   "statement": "美元兌台幣即期匯率 (USD/TWD) 2026-10-23 收 32.597（前值 32.3659，單日 +0.71%，較20日均線 +1.7%）",
-   "values": {
-    "usdtwd_spot": 32.6,
-    "usdtwd_spot_prev": 32.37,
-    "usdtwd_spot_chg_pct": 0.71,
-    "usdtwd_spot_vs_ma20_pct": 1.68
-   },
-   "topic": "macro_usdtwd_spot",
-   "level": "market",
-   "tickers": []
-  },
-  {
-   "src": [
-    11
-   ],
    "statement": "Freerepublic.com 報導：Did the United States and Russia Just Agree to Collaborate on Data Centers?",
    "values": {
-    "published_hours_ago": 27.7
+    "published_hours_ago": 30.4
    },
    "topic": "news_semis",
    "level": "market",
@@ -281,23 +118,11 @@
   },
   {
    "src": [
-    12
+    5
    ],
    "statement": "newsBTC 報導：Bitcoin’s Fed Week Starts With A Fresh Rise In US Inflation Expectations",
    "values": {
-    "published_hours_ago": 30.4
-   },
-   "topic": "news_macro",
-   "level": "market",
-   "tickers": []
-  },
-  {
-   "src": [
-    13
-   ],
-   "statement": "The Times of India 報導：Nifty bears tighten grip as crude, geopolitical risks, FII outflows mount: 5 factors to decide D-Street’s fate next week",
-   "values": {
-    "published_hours_ago": 33.6
+    "published_hours_ago": 33.1
    },
    "topic": "news_macro",
    "level": "market",
@@ -306,6 +131,13 @@
  ],
  "tool_calls": 7,
  "warnings": [
+  "yfinance ^SOX failed: name 'is_intraday' is not defined",
+  "yfinance TSM failed: name 'is_intraday' is not defined",
+  "yfinance NVDA failed: name 'is_intraday' is not defined",
+  "yfinance MU failed: name 'is_intraday' is not defined",
+  "yfinance ^VIX failed: name 'is_intraday' is not defined",
+  "yfinance ^TWII failed: name 'is_intraday' is not defined",
+  "yfinance TWD=X failed: name 'is_intraday' is not defined",
   "FINNHUB_API_KEY missing: economic calendar skipped"
  ]
 }
