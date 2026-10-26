@@ -138,6 +138,70 @@ def _merge_overrides(*lists) -> list:
                 best[t] = {"ticker": t, "action": a, "reason": str(o.get("reason", ""))[:200], "obs_ref": o.get("obs_ref")}
     return sorted(best.values(), key=lambda x: (-SEV[x["action"]], x["ticker"]))
 
+def _clean_considerations(raw, valid_obs_ids: set[str]) -> list[dict]:
+    """Validate advisory risk findings without turning them into hard constraints."""
+    if not isinstance(raw, list):
+        return []
+
+    allowed_severity = {"LOW", "MEDIUM", "HIGH", "CRITICAL"}
+    allowed_scope = {"PORTFOLIO", "MARKET", "THEME", "STOCK"}
+    out = []
+
+    for item in raw[:12]:
+        if not isinstance(item, dict):
+            continue
+
+        risk = str(item.get("risk", "")).strip()[:180]
+        recommendation = str(item.get("recommendation", "")).strip()[:240]
+        if not risk or not recommendation:
+            continue
+
+        severity = str(item.get("severity", "MEDIUM")).upper()
+        if severity not in allowed_severity:
+            severity = "MEDIUM"
+
+        scope = str(item.get("scope", "PORTFOLIO")).upper()
+        if scope not in allowed_scope:
+            scope = "PORTFOLIO"
+
+        ticker = str(item.get("ticker", "")).strip()
+        if not re.fullmatch(r"\d{4}", ticker):
+            ticker = None
+
+        evidence_ids = item.get("evidence_ids", [])
+        if not isinstance(evidence_ids, list):
+            evidence_ids = []
+
+        # Never allow the LLM to invent observation IDs.
+        evidence_ids = [
+            str(obs_id)
+            for obs_id in evidence_ids
+            if isinstance(obs_id, str) and obs_id in valid_obs_ids
+        ][:5]
+
+        try:
+            confidence = float(item.get("confidence", 0.5))
+        except (TypeError, ValueError):
+            confidence = 0.5
+        if not math.isfinite(confidence):
+            confidence = 0.5
+        confidence = max(0.0, min(1.0, confidence))
+
+        out.append({
+            "risk": risk,
+            "severity": severity,
+            "scope": scope,
+            "ticker": ticker,
+            "evidence_ids": evidence_ids,
+            "recommendation": recommendation,
+            "confidence": round(confidence, 2),
+        })
+
+    priority = {"CRITICAL": 0, "HIGH": 1, "MEDIUM": 2, "LOW": 3}
+    return sorted(
+        out,
+        key=lambda x: (priority[x["severity"]], -x["confidence"]),
+    )
 
 # ------------------------------------------------------------------ 3. portfolio risk facts
 def _portfolio_stats(weights: dict, tech: dict | None) -> dict | None:
@@ -291,8 +355,20 @@ def review(trade_date, as_of, state, universe, book, factor_df, regime, tech=Non
                              "flags": d.get("flags"), **stock_risk.get(t, {})})
             f = factor_df.set_index("ticker") if factor_df is not None and not factor_df.empty else None
             theme_w: dict = {}
+            total_equity = 0.0
             for h in held:
                 theme_w[h["theme"]] = round(theme_w.get(h["theme"], 0.0) + h["w"], 4)
+                total_equity += h["w"]
+            
+            # HARD RISK CONTROL: Portfolio-level stress test
+            tech_exposure = theme_w.get("semiconductor", 0) + theme_w.get("ai_server", 0) + theme_w.get("pcb", 0)
+            simulated_15pct_drawdown = tech_exposure * 0.15
+            
+            if simulated_15pct_drawdown > 0.10:
+                warns.append(f"CRITICAL RISK: Tech exposure {tech_exposure:.1%} risks a {simulated_15pct_drawdown:.1%} portfolio loss under stress. Exceeds 10% mandate.")
+            if total_equity > 0.60 and regime == "Neutral":
+                warns.append(f"CRITICAL RISK: Total equity {total_equity:.1%} violates 60% cap for Neutral regimes.")
+
             top_c = ([] if f is None else
                      f[f["core"] == True].sort_values("score", ascending=False).head(15)  # noqa: E712
                      [["theme", "score", "mom20", "mom60", "vol20", "adv20"]].round(2).reset_index().to_dict("records"))

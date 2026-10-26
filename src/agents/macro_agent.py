@@ -215,7 +215,18 @@ def research(trade_date: str, frag: dict, counter: Counter) -> None:
                       ensure_ascii=False)
     text, usage, _, models = run_agent_loop((PROMPT_DIR / "macro_agent.md").read_text(encoding="utf-8"),
                                             user, tools, max_steps=8, max_calls=10)
-    frag["agent_notes"] = text[:1500]
+    
+    # Extract structured constraints instead of raw narrative
+    import re
+    try:
+        clean_json = re.sub(r"```(?:json)?\s*|\s*```", "", text).strip()
+        parsed_macro = json.loads(clean_json)
+        frag["agent_notes"] = parsed_macro.get("market_narrative", text[:1500])
+        frag["max_equity_exposure"] = parsed_macro.get("max_equity_exposure", 1.0)
+    except json.JSONDecodeError:
+        frag["agent_notes"] = text[:1500]
+        frag["max_equity_exposure"] = 1.0 # Default to fully invested if parsing fails
+        
     frag["llm_usage"] = {**usage, "models": models}
 
 

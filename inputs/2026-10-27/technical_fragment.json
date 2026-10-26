@@ -3,35 +3,35 @@
   {
    "authority": "vendor",
    "url": "https://finance.yahoo.com/",
-   "fetched_at": "2026-10-27T00:52:31+08:00",
+   "fetched_at": "2026-10-27T01:30:42+08:00",
    "name": "Yahoo Finance 日線歷史價量（技術指標）",
    "content_as_of": "2026-10-23T13:30:00+08:00"
   },
   {
    "authority": "vendor",
    "url": "https://finmindtrade.com/",
-   "fetched_at": "2026-10-27T00:52:31+08:00",
+   "fetched_at": "2026-10-27T01:30:42+08:00",
    "name": "FinMind 開放資料：台指期外資未平倉、個股融資餘額",
    "content_as_of": "2026-10-22T18:30:00+08:00"
   },
   {
    "authority": "vendor",
    "name": "Yahoo Finance (2330.TW) 日線",
-   "fetched_at": "2026-10-27T00:53:02+08:00",
+   "fetched_at": "2026-10-27T01:31:12+08:00",
    "url": "https://finance.yahoo.com/quote/2330.TW/",
    "content_as_of": "2026-10-23T13:30:00+08:00"
   },
   {
    "authority": "vendor",
    "name": "Yahoo Finance (^SOX) 日線 (未定時盤中快照)",
-   "fetched_at": "2026-10-27T00:53:02+08:00",
+   "fetched_at": "2026-10-27T01:31:12+08:00",
    "url": "https://finance.yahoo.com/quote/^SOX/",
-   "content_as_of": "2026-10-27T00:53:02+08:00"
+   "content_as_of": "2026-10-27T01:31:12+08:00"
   },
   {
    "authority": "vendor",
    "name": "Yahoo Finance (3231.TW) 日線",
-   "fetched_at": "2026-10-27T00:53:02+08:00",
+   "fetched_at": "2026-10-27T01:31:12+08:00",
    "url": "https://finance.yahoo.com/quote/3231.TW/",
    "content_as_of": "2026-10-23T13:30:00+08:00"
   }
@@ -478,13 +478,13 @@
    "src": [
     3
    ],
-   "statement": "^SOX 2026-10-26 盤中(報價時間未知) 11079（1日+2.78%、5日-2.1%、20日-11.1%、60日-2.0%）",
+   "statement": "^SOX 2026-10-26 盤中(報價時間未知) 11143（1日+3.37%、5日-1.5%、20日-10.6%、60日-1.5%）",
    "values": {
-    "sox_close": 11078.9951,
-    "sox_chg_pct": 2.78,
-    "sox_ret5d_pct": -2.1,
-    "sox_ret20d_pct": -11.12,
-    "sox_ret60d_pct": -2.05
+    "sox_close": 11142.9795,
+    "sox_chg_pct": 3.37,
+    "sox_ret5d_pct": -1.53,
+    "sox_ret20d_pct": -10.61,
+    "sox_ret60d_pct": -1.49
    },
    "topic": "agent_price",
    "level": "market",
@@ -510,7 +510,7 @@
    ]
   }
  ],
- "tool_calls": 47,
+ "tool_calls": 46,
  "warnings": [],
  "breadth": {
   "n": 149,
@@ -3979,10 +3979,10 @@
   "3293": -0.0853,
   "3045": -0.5086
  },
- "agent_notes": "**市場廣度**：僅 30.2% 站上 MA20、46.3% 站上 MA60，MACD 翻正僅 25.5%，中位數技術分 41，外資期貨淨空單達 8.7 萬口，盤勢處於弱勢整理，嚴禁盲目追價放大 Beta。\n\n**需謹慎個股**：\n1. **2330 台積電**：技術分 47，跌破 MA60 (-1%) 與 MA20 (-4%)，RSI 降至 38，權值走弱壓抑大盤。\n2. **2345 智邦**：觸發跌破 MA60、高 ATR 及 MACD 死亡交叉，技術面出現結構性鬆動。\n3. **2313 華通**：呈現高 ATR 與 MACD 死亡交叉，動能轉弱且波動放大。\n\n**可考慮標的**：\n1. **3231 緯創**：技術分 95、RSI 54，近 20 日漲 5.3%、60 日漲 11.8%，為少數維持多頭排列之伺服器指標。\n2. **2379 瑞昱**：技術分 82，站穩 MA20 (+1%) 與 MA60 (+6%)，融資減 6%，籌碼沉澱健康。\n\n**未知事項**：費半最新反彈（10/26 +2.8%）能否帶動台股 10/27 實質止跌，以及外資巨額空單結算壓力仍待確認。",
+ "agent_notes": "市場廣度偏弱（僅30.2%站上MA20、25.5% MACD為正），警示大盤屬弱勢整理，不宜貿然拉高曝險。\n\n謹慎標的：\n1. 2330（台積電）：跌破MA20/MA60，技術分僅47，短線權值承壓。\n2. 2345（智邦）：破季線且高ATR、MACD死叉。\n3. 2313（華通）：高波動且MACD死叉，面臨整理。\n4. 2618（長榮航）：跌破MA60並現死叉。\n\n可關注標的：\n1. 3231（緯創）：技術分95，站穩均線且中長期動能強韌。\n2. 2379（瑞昱）：技術分82，雙均線維持正斜率，屬強勢整理。\n\n未知事項：外資台指期逾8.7萬口淨空單對現貨之壓抑力道，以及費半（^SOX）反彈能否有效帶動台股AI鏈修復。",
  "llm_usage": {
-  "input_tokens": 3811,
-  "output_tokens": 1876,
+  "input_tokens": 3424,
+  "output_tokens": 1607,
   "models": [
    "gemini-3.8-flash"
   ]
