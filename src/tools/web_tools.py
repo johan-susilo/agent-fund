@@ -161,7 +161,7 @@ def build_tools(emit, *, trade_date: str, as_of: str, universe=None, counter=Non
                 if f"ret_{n}d_pct" in out:
                     vals[f"{k}_ret{n}d_pct"] = out[f"ret_{n}d_pct"]
         src = {"authority": "vendor", "name": f"Yahoo Finance ({sym}) 日線", "fetched_at": iso(now_tw()),
-               "url": f"https://finance.yahoo.com/quote/{sym}/",
+               "url": f"https://finance.yahoo.com/quote/{sym.replace('^', '%5E')}/",
                "content_as_of": f"{d0}T13:30:00+08:00" if tw else _us_close_to_tw(d0)}
         stmt = (f"{sym} {d0} 收 {out['close']:g}（1日{out['chg_1d_pct']:+.2f}%"
                 + "".join(f"、{n}日{out[f'ret_{n}d_pct']:+.1f}%" for n in (5, 20, 60) if f"ret_{n}d_pct" in out) + "）")

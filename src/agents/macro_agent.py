@@ -73,7 +73,7 @@ def _yf_macro(trade_date: str, counter: Counter):
             src = {
                 "authority": "vendor",
                 "name": f"Yahoo Finance ({sym}): {label}",
-                "url": f"https://finance.yahoo.com/quote/{sym}/",
+                "url": f"https://finance.yahoo.com/quote/{sym.replace('^', '%5E')}/",
                 "content_as_of": _us_close_to_tw(d0) if sym in us_syms else f"{d0}T13:30:00+08:00",
                 "fetched_at": now,
             }
