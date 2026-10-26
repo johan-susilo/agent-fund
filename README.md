@@ -10,8 +10,6 @@ semiconductor supply chain as the core (at least 62% of NAV) and adds lower-corr
 agent chooses the final weights. Code derives every share count and enforces every rule.
 The text fed to the LLM is in `config/strategy.json` (it must match the strategy document submitted to the portal).
 
-> The program never submits anything. Uploading the file and pressing **Submit** in the portal stays manual.
-
 ---
 
 ## How it works

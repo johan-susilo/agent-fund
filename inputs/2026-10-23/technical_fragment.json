@@ -3,36 +3,36 @@
   {
    "authority": "vendor",
    "url": "https://finance.yahoo.com/",
-   "fetched_at": "2026-10-26T01:56:29+08:00",
+   "fetched_at": "2026-10-26T02:19:16+08:00",
    "name": "Yahoo Finance 日線歷史價量（技術指標）",
    "content_as_of": "2026-10-22T13:30:00+08:00"
   },
   {
    "authority": "vendor",
    "url": "https://finmindtrade.com/",
-   "fetched_at": "2026-10-26T01:56:29+08:00",
+   "fetched_at": "2026-10-26T02:19:16+08:00",
    "name": "FinMind 開放資料：台指期外資未平倉、個股融資餘額",
    "content_as_of": "2026-10-22T18:30:00+08:00"
   },
   {
    "authority": "vendor",
-   "name": "Yahoo Finance (^TWII) 日線",
-   "fetched_at": "2026-10-26T01:57:02+08:00",
-   "url": "https://finance.yahoo.com/quote/^TWII/",
-   "content_as_of": "2026-10-22T13:30:00+08:00"
-  },
-  {
-   "authority": "vendor",
    "name": "Yahoo Finance (^SOX) 日線",
-   "fetched_at": "2026-10-26T01:57:03+08:00",
+   "fetched_at": "2026-10-26T02:20:10+08:00",
    "url": "https://finance.yahoo.com/quote/^SOX/",
    "content_as_of": "2026-10-24T04:00:00+08:00"
   },
   {
    "authority": "vendor",
    "name": "Yahoo Finance (2330.TW) 日線",
-   "fetched_at": "2026-10-26T01:57:03+08:00",
+   "fetched_at": "2026-10-26T02:20:11+08:00",
    "url": "https://finance.yahoo.com/quote/2330.TW/",
+   "content_as_of": "2026-10-22T13:30:00+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "Yahoo Finance (2454.TW) 日線",
+   "fetched_at": "2026-10-26T02:20:11+08:00",
+   "url": "https://finance.yahoo.com/quote/2454.TW/",
    "content_as_of": "2026-10-22T13:30:00+08:00"
   }
  ],
@@ -459,22 +459,6 @@
    "src": [
     2
    ],
-   "statement": "^TWII 2026-10-22 收 46041.4（1日-1.81%、5日-2.0%、20日-3.5%、60日+5.5%）",
-   "values": {
-    "twii_close": 46041.4297,
-    "twii_chg_pct": -1.81,
-    "twii_ret5d_pct": -1.98,
-    "twii_ret20d_pct": -3.52,
-    "twii_ret60d_pct": 5.52
-   },
-   "topic": "agent_price",
-   "level": "market",
-   "tickers": []
-  },
-  {
-   "src": [
-    3
-   ],
    "statement": "^SOX 2026-10-23 收 10779.5（1日+0.44%、5日-3.2%、20日-14.9%、60日-4.6%）",
    "values": {
     "sox_close": 10779.46,
@@ -489,7 +473,7 @@
   },
   {
    "src": [
-    4
+    3
    ],
    "statement": "2330.TW 2026-10-22 收 2385（1日-1.45%、5日-2.2%、20日-3.8%、60日+1.8%）",
    "values": {
@@ -504,6 +488,25 @@
    "level": "stock",
    "tickers": [
     "2330"
+   ]
+  },
+  {
+   "src": [
+    4
+   ],
+   "statement": "2454.TW 2026-10-22 收 4010（1日-3.14%、5日-3.7%、20日-20.0%、60日+9.0%）",
+   "values": {
+    "2454_close": 4010.0,
+    "2454_chg_pct": -3.14,
+    "2454_mom20_pct": -19.96,
+    "2454_mom60_pct": 8.97,
+    "2454_vol20_pct": 47.6,
+    "2454_adv20_twd_m": 33571.0
+   },
+   "topic": "agent_price",
+   "level": "stock",
+   "tickers": [
+    "2454"
    ]
   }
  ],
@@ -13413,12 +13416,12 @@
   "3374": -0.0184,
   "2609": -0.126
  },
- "agent_notes": "**Breadth Read:**\nMarket breadth is weak and deteriorating. Only 31% of tracked stocks are above MA20, with 32 breakdowns dwarfing 5 breakouts. The median tech score sits at a bearish 40.0. Foreign futures net short positioning is at an extreme -87,297 contracts. The local market is heavily weighed down by global semiconductor weakness, mirroring the SOX index's steep 14.9% drop over the past 20 days. Broad participation is lacking, signaling a risk-off environment.\n\n**Caution:**\n- **2330 (TSMC), 2454 (MediaTek), 3661 (Alchip):** All are flagging breakdowns and have fallen below their MA60. This aligns with the broader SOX selloff rather than isolated noise. Avoid catching falling knives until a base forms.\n\n**Clean Uptrends:**\n- **2412 (Chunghwa Telecom):** Breaking out and overbought; acting as a classic defensive safe haven.\n- **2891 (CTBC Financial) & 2880 (Hua Nan):** Both boast high tech scores (89) and are trading comfortably above their MA20/MA60, showing strong relative strength.\n\n**Unknowns:**\nThe specific fundamental catalysts driving the severe SOX and Taiwan semi selloff (e.g., new export controls, customer order cuts, or macro fears) remain unclear without deeper news analysis.",
+ "agent_notes": "Market breadth warns of a broad semiconductor correction: only 30.9% of tracked stocks trade above MA20, 46.3% above MA60, and 20-day breakdowns (32) heavily outnumber breakouts (5), alongside a -14.91% 20-day drop in ^SOX and net foreign TX futures short of -87,297 contracts. Caution is warranted on core heavyweights: 2330 (below MA60 by 1%, 20d return -3.83% with rising margin +4%), 2454 (severe breakdown, -19.96% over 20d with 47.6% annualized volatility), 2308 and 2303 (both in breakdown below MA60), and high-ATR AI/semi names 3661 and 2345 (below MA60 with bearish momentum). Clean uptrends worth considering: 6415 (tech score 77, RSI 56, above MA20/MA60 with 1.8x volume, though high ATR 6.1 requires sizing discipline) and defensive/financial leaders 2891 and 2890 (scores 89 and 77, above MA20/MA60 with declining margin). Unknowns: specific news catalysts or ex-dividend adjustments behind individual breakdowns due to search rate limits.",
  "llm_usage": {
-  "input_tokens": 5265,
-  "output_tokens": 1573,
+  "input_tokens": 5306,
+  "output_tokens": 538,
   "models": [
-   "gemini-3.1-pro-preview"
+   "gemini-4-argon"
   ]
  }
 }
