@@ -167,11 +167,9 @@ def build_tools(emit, *, trade_date: str, as_of: str, universe=None, counter=Non
         actual_as_of = now_str if is_intraday else expected_as_of
         disclaimer = " (未定時盤中快照)" if is_intraday else ""
 
-        src = {"authority": "vendor", 
-               "name": f"Yahoo Finance ({sym}) 日線{disclaimer}", 
-               "fetched_at": now_str,
-               "url": f"https://finance.yahoo.com/quote/{sym}/",
-               "content_as_of": actual_as_of}
+        src = {"authority": "vendor", "name": f"Yahoo Finance ({sym}) 日線", "fetched_at": iso(now_tw()),
+       "url": f"https://finance.yahoo.com/quote/{sym.replace('^', '%5E')}/",
+       "content_as_of": f"{d0}T13:30:00+08:00" if tw else _us_close_to_tw(d0)}
                
         status_label = "盤中(報價時間未知)" if is_intraday else "收"
         stmt = (f"{sym} {d0} {status_label} {out['close']:g}（1日{out['chg_1d_pct']:+.2f}%"
