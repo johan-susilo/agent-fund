@@ -203,6 +203,42 @@ def _clean_considerations(raw, valid_obs_ids: set[str]) -> list[dict]:
         key=lambda x: (priority[x["severity"]], -x["confidence"]),
     )
 
+CORE_SHOCK = 0.15
+SEV_RANK = {"CRITICAL": 0, "HIGH": 1, "MEDIUM": 2, "LOW": 3}
+
+def _rule_considerations(stats, core_w, port_oid, theme_oid) -> list:
+    """Deterministic advisory findings; always available even when the LLM fails."""
+    out = []
+    def add(risk, sev, scope, rec, ev, conf=0.7):
+        out.append({"risk": risk[:180], "severity": sev, "scope": scope, "ticker": None,
+                    "evidence_ids": [e for e in ev if e], "recommendation": rec[:240], "confidence": conf})
+    if stats:
+        ev = [port_oid]
+        if stats["avg_corr"] > 0.65:
+            add(f"持股平均相關係數 {stats['avg_corr']:.2f} 偏高", "HIGH", "PORTFOLIO",
+                "分散至低相關持股（金融、電信），避免單一 AI 因子押注", ev)
+        if stats["eff_n"] < 12:
+            add(f"有效持股數僅 {stats['eff_n']:.1f}", "HIGH", "PORTFOLIO", "降低前幾大部位集中度", ev)
+        if stats["var95_pct_nav"] > 2.5:
+            add(f"60日歷史 VaR95 達 {stats['var95_pct_nav']:.2f}% NAV", "MEDIUM", "PORTFOLIO",
+                "留意高風險貢獻個股 " + str(stats["top_risk"]), ev)
+        if stats.get("beta") and stats["beta"] > 1.3:
+            add(f"對加權指數 Beta {stats['beta']}", "MEDIUM", "MARKET", "大盤轉弱時回檔放大，考慮提高低 Beta 持股", ev)
+    if core_w > 0:
+        loss = core_w * CORE_SHOCK
+        add(f"核心科技曝險 {core_w:.0%}，若核心下跌 {CORE_SHOCK:.0%} 約損失 {loss:.1%} NAV（假設情境）",
+            "HIGH" if loss > 0.12 else "MEDIUM", "THEME",
+            "此為情境試算而非預測；核心比例已接近下限時不宜再加碼同質部位", [theme_oid], 0.6)
+    return out
+
+def _merge_considerations(*lists) -> list:
+    seen, out = set(), []
+    for c in [c for lst in lists for c in lst]:
+        k = (c["scope"], c.get("ticker"), c["risk"][:20])
+        if k not in seen:
+            seen.add(k); out.append(c)
+    return sorted(out, key=lambda x: (SEV_RANK[x["severity"]], -x["confidence"]))[:10]
+
 # ------------------------------------------------------------------ 3. portfolio risk facts
 def _portfolio_stats(weights: dict, tech: dict | None) -> dict | None:
     import numpy as np
@@ -327,6 +363,7 @@ def review(trade_date, as_of, state, universe, book, factor_df, regime, tech=Non
     # 3. portfolio risk facts (current book, or a hypothetical equal-weight book on day 1)
     new_ids = list(event_flags.get("obs_ids", []))
     stats, label = None, "目前投組"
+    port_oid = None
     try:
         weights = dict(held_w)
         if not weights and factor_df is not None and not factor_df.empty:
@@ -335,9 +372,25 @@ def review(trade_date, as_of, state, universe, book, factor_df, regime, tech=Non
         stats = _portfolio_stats(weights, tech)
         if stats:
             oid = _register_portfolio_obs(book, stats, label, as_of)
+            port_oid = oid
             new_ids += [oid] if oid else []
     except Exception as e:
         warns.append(f"portfolio risk stats failed: {type(e).__name__}: {str(e)[:100]}")
+
+    theme_w, core_w, theme_oid = {}, 0.0, None
+    for t, w in held_w.items():
+        th = universe.theme_of(t)
+        theme_w[th] = round(theme_w.get(th, 0.0) + w, 4)
+        core_w += w if universe.is_core(t) else 0.0
+    if held_w:
+        sid = book.add_source({"authority": "other", "name": "內部試算：目前持股主題曝險",
+                               "url": "internal://risk", "content_as_of": f"{as_of}T18:30:00+08:00"})
+        top = sorted(theme_w.items(), key=lambda x: -x[1])[:4]
+        theme_oid = book.add_obs(
+            f"目前持股主題曝險：核心 AI/半導體合計 {core_w:.1%}；" + "、".join(f"{k} {v:.1%}" for k, v in top),
+            {"core_weight": core_w, "equity_weight": sum(held_w.values()),
+             **{f"theme_{k}_weight": v for k, v in top}}, [sid], "risk_theme_exposure", level="market")
+        new_ids += [theme_oid] if theme_oid else []
 
     # 4. stress facts
     new_ids += _stress(book, as_of, trade_date, counter, warns)
@@ -354,21 +407,6 @@ def review(trade_date, as_of, state, universe, book, factor_df, regime, tech=Non
                              "rsi": d.get("rsi14"), "d20": d.get("dist_ma20_pct"), "atr": d.get("atr14_pct"),
                              "flags": d.get("flags"), **stock_risk.get(t, {})})
             f = factor_df.set_index("ticker") if factor_df is not None and not factor_df.empty else None
-            theme_w: dict = {}
-            total_equity = 0.0
-            for h in held:
-                theme_w[h["theme"]] = round(theme_w.get(h["theme"], 0.0) + h["w"], 4)
-                total_equity += h["w"]
-            
-            # HARD RISK CONTROL: Portfolio-level stress test
-            tech_exposure = theme_w.get("semiconductor", 0) + theme_w.get("ai_server", 0) + theme_w.get("pcb", 0)
-            simulated_15pct_drawdown = tech_exposure * 0.15
-            
-            if simulated_15pct_drawdown > 0.10:
-                warns.append(f"CRITICAL RISK: Tech exposure {tech_exposure:.1%} risks a {simulated_15pct_drawdown:.1%} portfolio loss under stress. Exceeds 10% mandate.")
-            if total_equity > 0.60 and regime == "Neutral":
-                warns.append(f"CRITICAL RISK: Total equity {total_equity:.1%} violates 60% cap for Neutral regimes.")
-
             top_c = ([] if f is None else
                      f[f["core"] == True].sort_values("score", ascending=False).head(15)  # noqa: E712
                      [["theme", "score", "mom20", "mom60", "vol20", "adv20"]].round(2).reset_index().to_dict("records"))
@@ -407,10 +445,16 @@ def review(trade_date, as_of, state, universe, book, factor_df, regime, tech=Non
     for w in warns:
         print("  !! risk:", w)
 
+    valid_ids = {o["obs_id"] for o in book.observations}
+    considerations = _merge_considerations(
+        _rule_considerations(stats, core_w, port_oid, theme_oid),
+        _clean_considerations(parsed.get("considerations"), valid_ids))
+
     return {
         "structured_risk": {"portfolio_risk_summary": summary, "overrides": merged},
         "event_flags": event_flags, "notes": str(summary)[:1800], "usage": usage,
         "tool_calls": counter.n, "models": models,
         "portfolio_risk": ({"label": label, **stats} if stats else None),
         "stock_risk": stock_risk, "new_obs_ids": new_ids, "warnings": warns,
+        "considerations": considerations,
     }

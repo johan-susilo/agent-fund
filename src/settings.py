@@ -56,6 +56,9 @@ class Limits:
     max_turnover: float = MAX_DAILY_TURNOVER
     theme_cap: float = 0.30       # max NAV share of any single theme (strategy: 主題集中度上限)
     theme_cap_semis: float = 0.50 # the broad semiconductor theme gets a wider cap
+    min_trade_w: float = 0.004    # skip discretionary trades smaller than 0.4% NAV
+    cost_mult: float = 1.5        # expected edge must be >= 1.5x the trading cost
+    alpha_scale: float = 0.04 
 
     def theme_limit(self, theme_id: str) -> float:
         return self.theme_cap_semis if theme_id == "semis" else self.theme_cap
@@ -70,6 +73,14 @@ class Limits:
     @property
     def sum_hi(self) -> float:
         return round(1 - self.cash_lo - 0.01, 4)
+    
+    @property
+    def hurdle_buy(self) -> float:    # score a BUY/ADD must reach to pay for its fee
+        return round(0.5 + self.cost_mult * FEE_RATE / self.alpha_scale, 3)
+
+    @property
+    def hurdle_sell(self) -> float:   # score a SELL/TRIM must be at or below (sell costs fee + tax)
+        return round(0.5 - self.cost_mult * (FEE_RATE + TAX_RATE) / self.alpha_scale, 3)
 
 
 NORMAL = Limits()

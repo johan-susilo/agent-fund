@@ -22,9 +22,10 @@ import os
 import traceback
 
 from agents import check_agent
-from derive_orders import derive_orders, lot_weight, project_portfolio, target_shares
+from derive_orders import derive_orders, lot_weight, project_portfolio, target_shares, cost_gate  
 from settings import PROMPT_DIR, ROOT, Limits
 from util import iso, now_tw
+
 
 MAX_ATTEMPTS = int(os.environ.get("MAX_ATTEMPTS", 3))
 SHORTLIST_N = int(os.environ.get("SHORTLIST_N", 45))            # non-held names shown to the LLM
@@ -115,6 +116,7 @@ def build_system_prompt(limits: Limits, universe) -> str:
         "HOLD_TOL_PCT": f"{limits.hold_tol:.1%}", "CORE_MIN": f"{limits.core_min:.0%}",
         "BAND_PCT": f"{limits.no_trade_band:.1%}", "CORE_THEMES": core,
         "THEME_CAP": f"{limits.theme_cap:.0%}", "THEME_CAP_SEMIS": f"{limits.theme_cap_semis:.0%}",
+        "MIN_TRADE_PCT": f"{limits.min_trade_w:.1%}", "HURDLE_BUY": limits.hurdle_buy, "HURDLE_SELL": limits.hurdle_sell,
     }
     for k, v in rep.items():
         text = text.replace("{{" + k + "}}", str(v))
@@ -192,11 +194,17 @@ def build_user_prompt(
             "theme_weights": theme_now,
             "core_weight": round(sum(w for t, w in cur_w_map.items() if universe.is_core(t)), 4),
         },
+        "trading_costs": None if not limits else {
+            "buy_cost_pct": 0.1425, "sell_cost_pct": 0.4425, "round_trip_pct": 0.585,
+            "min_trade_w": limits.min_trade_w, "score_hurdle_buy": limits.hurdle_buy,
+            "score_hurdle_sell": limits.hurdle_sell,
+            "rule": "discretionary trades failing the hurdle are cancelled in code and the stock keeps its current weight"},
         "baseline_portfolio": base_w,
         "risk_manager": {
             "summary": risk_ctx["notes"] if risk_ctx else None,
             "overrides": (risk_ctx.get("structured_risk", {}).get("overrides", []) if risk_ctx else []),
             "exchange_flags": (risk_ctx.get("event_flags", {}) if risk_ctx else {}),
+            "considerations": (risk_ctx or {}).get("considerations", []),
         },
         "non_citable_journal_context": journal_ctx,   # informational only; do NOT cite as O#
         "research_notes": research_notes,
@@ -427,6 +435,8 @@ def check_structure(mv, infs, portfolio, exits, ctx) -> list:
                         "(describe tilts with words such as overweight / underweight / anchor)")
     if not lim.min_n <= len(portfolio) <= lim.max_n:
         errs.append(f"portfolio has {len(portfolio)} stocks, must be {lim.min_n}-{lim.max_n}")
+    
+    errs += check_agent.check_risk_citations(infs, ctx.get("risk_considerations", []))
     return errs
 
 
@@ -456,12 +466,47 @@ def normalize_weights(portfolio: list, limits: Limits, caps: dict | None = None)
     note = f"weights normalised: sum {before:.3f} -> {after:.3f}" if abs(after - before) > 0.002 else None
     return out, note
 
-
-def derive_decisions(portfolio, exits, state, closes, limits: Limits, caps: dict | None = None):
-    """Classify every stock as BUY / ADD / TRIM / SELL_ALL or no-trade (all derived in code)."""
-    caps = caps or {}
-    decisions, no_trade, n = [], [], 0
+def enforce_turnover_limit(decisions, state, closes, rm, max_turnover=0.08):
+    """Req 3: Limits daily one-way turnover to max_turnover by scaling down discretionary trades."""
     nav = state["nav"]
+    turnover = 0.0
+    discretionary_diffs = {}
+    
+    for d in decisions:
+        t = d["ticker"]
+        cur_w = (state["holdings"].get(t, 0) * closes[t]) / nav
+        diff = abs(d["target_weight"] - cur_w)
+        turnover += diff / 2.0
+        
+        if t not in rm.get("VETO", set()):
+            discretionary_diffs[t] = diff
+            
+    if turnover <= max_turnover:
+        return decisions, None
+        
+    excess = turnover - max_turnover
+    discretionary_pool = sum(discretionary_diffs.values()) / 2.0
+    
+    if discretionary_pool <= 0:
+        return decisions, "turnover limit exceeded but all trades are mandatory VETO exits"
+        
+    scale = max(0.0, 1.0 - (excess / discretionary_pool))
+    for d in decisions:
+        t = d["ticker"]
+        if t in discretionary_diffs:
+            cur_w = (state["holdings"].get(t, 0) * closes[t]) / nav
+            new_diff = (d["target_weight"] - cur_w) * scale
+            d["target_weight"] = round(cur_w + new_diff, 4)
+            
+    return decisions, f"discretionary trades scaled by {scale:.1%} to meet {max_turnover:.1%} turnover limit"
+
+def derive_decisions(portfolio, exits, state, closes, limits: Limits, caps=None,
+                     scores=None, rm=None, skipped=None):
+    caps, rm = caps or {}, rm or {"VETO": set()}
+    skipped = skipped if skipped is not None else []
+    decisions, no_trade, n = [], [], 0
+    nav, n_held = state["nav"], len(state["holdings"])
+    gate_on = scores is not None and n_held > 0          # day 1 builds freely
     for p in portfolio:
         t, w, cur = p["ticker"], p["target_weight"], state["holdings"].get(p["ticker"], 0)
         cap_t = min(limits.cap(t), caps.get(t, 1.0))
@@ -472,6 +517,23 @@ def derive_decisions(portfolio, exits, state, closes, limits: Limits, caps: dict
             no_trade.append({"ticker": t, "reason_refs": p["inference_refs"][:5],
                              "reason": f"目標權重 {w:.2%} 與現權重 {cur_w:.2%} 差距在 {limits.no_trade_band:.1%} 無交易帶內，維持不動"})
             continue
+        if gate_on:
+            # --- Req 1 & 5: Minimum holding period ---
+            days_held = state.get("days_held", {}).get(t, 0)
+            if tgt < cur and days_held < 5 and t not in rm["VETO"]:
+                skipped.append(f"{t}: Minimum 5-day holding period not met (held {days_held} days)")
+                no_trade.append({"ticker": t, "reason_refs": p["inference_refs"][:5],
+                                 "reason": f"未滿5日最低持有期限制 (已持有 {days_held} 日)"})
+                continue
+
+            forced = cur_w > cap_t + 1e-9 or (cur == 0 and n_held < limits.min_n)
+            ok, why = cost_gate("BUY" if tgt > cur else "SELL", abs(tgt - cur), closes[t], nav,
+                                scores.get(t), limits, forced)
+            if not ok:
+                skipped.append(f"{t}: {why}")
+                no_trade.append({"ticker": t, "reason_refs": p["inference_refs"][:5],
+                                 "reason": f"交易成本檢核：{why}，維持現有部位"[:300]})
+                continue
         n += 1
         action = "BUY" if cur == 0 else ("ADD" if tgt > cur else "TRIM")
         official = "25%" if t == "2330" else "10%"
@@ -479,8 +541,24 @@ def derive_decisions(portfolio, exits, state, closes, limits: Limits, caps: dict
                           "inference_refs": p["inference_refs"][:8],
                           "risk_check": f"目標權重 {w:.2%} ≤ 內部上限 {cap_t:.1%}（官方 {official}）"})
     for e in exits:
+        t, cur = e["ticker"], state["holdings"].get(e["ticker"], 0)
+        if gate_on and t not in rm["VETO"]:
+            # --- Req 1 & 5: Minimum holding period ---
+            days_held = state.get("days_held", {}).get(t, 0)
+            if days_held < 5:
+                skipped.append(f"{t}: Minimum 5-day holding period not met (held {days_held} days)")
+                no_trade.append({"ticker": t, "reason_refs": e["inference_refs"][:5],
+                                 "reason": f"未滿5日最低持有期限制 (已持有 {days_held} 日)"})
+                continue
+
+            ok, why = cost_gate("SELL", cur, closes[t], nav, scores.get(t), limits, check_size=False)
+            if not ok:
+                skipped.append(f"{t}: {why}")
+                no_trade.append({"ticker": t, "reason_refs": e["inference_refs"][:5],
+                                 "reason": f"出清未通過交易成本檢核：{why}，續抱"[:300]})
+                continue
         n += 1
-        decisions.append({"decision_id": f"D{n}", "ticker": e["ticker"], "action": "SELL_ALL",
+        decisions.append({"decision_id": f"D{n}", "ticker": t, "action": "SELL_ALL",
                           "target_weight": 0.0, "inference_refs": e["inference_refs"][:8],
                           "risk_check": "出清持股，釋出資金"})
     return decisions, no_trade
@@ -521,6 +599,21 @@ def run_agent(
     if missing_held:
         raise RuntimeError(f"no previous close for held stocks {missing_held}; cannot size orders")
 
+    # --- Req 4: Smooth market regime changes (max 3% cash drift per day) ---
+    import dataclasses
+    
+    prev_cash_ratio = state["cash"] / state["nav"]
+    max_cash_shift = 0.03
+    
+    new_cash_lo = max(limits.cash_lo, prev_cash_ratio - max_cash_shift)
+    new_cash_hi = min(limits.cash_hi, prev_cash_ratio + max_cash_shift)
+    
+    # Ensure window is valid if limits inverted
+    if new_cash_lo > new_cash_hi:
+        new_cash_lo = min(new_cash_lo, new_cash_hi)
+        
+    limits = dataclasses.replace(limits, cash_lo=new_cash_lo, cash_hi=new_cash_hi)
+
     rm = check_agent.risk_maps(risk_ctx)
     caps = weight_caps(limits, rm)
     candidates = build_shortlist(all_candidates, state["holdings"], factor_df, universe, rm)
@@ -550,7 +643,11 @@ def run_agent(
     ctx = {"limits": limits, "obs_ids": {o["obs_id"] for o in book.observations},
            "market_ids": set(book.market_level_ids()), "candidates": set(candidates),
            "holdings": state["holdings"], "rm": rm, "caps": caps,
-           "lot_w": {t: lot_weight(state["nav"], closes[t]) for t in candidates}}
+           "lot_w": {t: lot_weight(state["nav"], closes[t]) for t in candidates},
+           "risk_considerations": (risk_ctx or {}).get("considerations", [])}
+           
+    score_map = (factor_df.set_index("ticker")["score"].to_dict() 
+                 if factor_df is not None and not factor_df.empty else None)
     if ask is None:
         from llm import ask_json_meta as ask
     (ROOT / "logs").mkdir(exist_ok=True)
@@ -580,9 +677,16 @@ def run_agent(
             errs += [f"{p['ticker']} weight {p['target_weight']} buys zero shares after normalisation"
                      for p in portfolio if target_shares(p["target_weight"], state["nav"], closes[p["ticker"]]) == 0]
         if not errs:
-            decisions, no_trade = derive_decisions(portfolio, exits, state, closes, limits, caps)
+            skipped = []
+            decisions, no_trade = derive_decisions(portfolio, exits, state, closes, limits, caps,
+                                                   scores=score_map, rm=rm, skipped=skipped)
+            # --- Req 3: Stricter turnover limit ---
+            decisions, turn_note = enforce_turnover_limit(decisions, state, closes, rm, limits.max_turnover)
+            if turn_note: attempt_notes.append(turn_note)
+
             try:
-                orders = derive_orders(decisions, state, closes)
+                decisions, orders, _, fix = repair_post_band_cash(decisions, no_trade, state, closes, limits)
+                attempt_notes += ([fix] if fix else []) + [f"cost gate kept: {s}" for s in skipped]
             except ValueError as e:
                 errs.append(str(e))
         if not errs:
@@ -591,7 +695,8 @@ def run_agent(
                 attempt_notes += [fix] if fix else []
             errs = (check_agent.check_portfolio(report, limits, state) + check_agent.check_posture(mv, report, limits)
                     + check_agent.check_theme(report, universe, limits)
-                    + check_agent.check_theme_caps(report, universe, limits))
+                    + check_agent.check_theme_caps(report, universe, limits)
+                    + check_agent.check_projected_risk(report["weights"], tech_ctx))
         if errs:
             feedback = errs
             print(f"[attempt {attempt}] {len(errs)} check(s) failed:")
@@ -634,6 +739,11 @@ def run_agent(
     mv, infs, portfolio, exits = _split_llm(fb_out)
     portfolio, _ = normalize_weights(portfolio, limits, caps)
     decisions, no_trade = derive_decisions(portfolio, exits, state, closes, limits, caps)
+    
+    # --- Req 3: Stricter turnover limit ---
+    decisions, turn_note = enforce_turnover_limit(decisions, state, closes, rm, limits.max_turnover)
+    if turn_note: notes.append(turn_note)
+    
     decisions, orders, report, _ = repair_post_band_cash(decisions, no_trade, state, closes, limits)
     widen_cash_range(mv, report, limits)
     # Sync net_exposure_intent with actual net_flow_pct_nav

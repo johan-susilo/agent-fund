@@ -1,7 +1,7 @@
 {
  "trade_date": "2026-10-27",
  "as_of_date": "2026-10-23",
- "fetched_at": "2026-10-27T01:38:03+08:00",
+ "fetched_at": "2026-10-27T20:56:54+08:00",
  "tool_calls": 2,
  "sources": [
   {
@@ -9,14 +9,14 @@
    "name": "TWSE 上市個股日收盤價 (OpenAPI STOCK_DAY_ALL)",
    "url": "https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL",
    "content_as_of": "2026-10-23T18:30:00+08:00",
-   "fetched_at": "2026-10-27T01:38:03+08:00"
+   "fetched_at": "2026-10-27T20:56:54+08:00"
   },
   {
    "authority": "tpex",
    "name": "TPEx 上櫃個股日收盤價 (OpenAPI)",
    "url": "https://www.tpex.org.tw/openapi/v1/tpex_mainboard_daily_close_quotes",
    "content_as_of": "2026-10-23T18:30:00+08:00",
-   "fetched_at": "2026-10-27T01:38:03+08:00"
+   "fetched_at": "2026-10-27T20:56:54+08:00"
   }
  ],
  "prices": {
@@ -623,302 +623,302 @@
   "5274": {
    "name": "信驊",
    "market": "tpex",
-   "close": 16010.0,
-   "change_pct": -3.06
+   "close": 16015.0,
+   "change_pct": 0.03
   },
   "6223": {
    "name": "旺矽",
    "market": "tpex",
-   "close": 4890.0,
-   "change_pct": -2.3
+   "close": 4790.0,
+   "change_pct": -2.04
   },
   "6488": {
    "name": "環球晶",
    "market": "tpex",
-   "close": 826.0,
-   "change_pct": -6.14
+   "close": 814.0,
+   "change_pct": -1.45
   },
   "8299": {
    "name": "群聯",
    "market": "tpex",
-   "close": 1880.0,
-   "change_pct": -2.59
+   "close": 1910.0,
+   "change_pct": 1.6
   },
   "6274": {
    "name": "台燿",
    "market": "tpex",
-   "close": 1420.0,
-   "change_pct": -5.33
+   "close": 1280.0,
+   "change_pct": -9.86
   },
   "5347": {
    "name": "世界",
    "market": "tpex",
-   "close": 161.0,
-   "change_pct": -3.3
+   "close": 161.5,
+   "change_pct": 0.31
   },
   "3293": {
    "name": "鈊象",
    "market": "tpex",
-   "close": 787.0,
-   "change_pct": 0.64
+   "close": 796.0,
+   "change_pct": 1.14
   },
   "8069": {
    "name": "元太",
    "market": "tpex",
-   "close": 153.5,
-   "change_pct": -1.29
+   "close": 157.0,
+   "change_pct": 2.28
   },
   "3529": {
    "name": "力旺",
    "market": "tpex",
-   "close": 2485.0,
-   "change_pct": -4.05
+   "close": 2515.0,
+   "change_pct": 1.21
   },
   "3081": {
    "name": "聯亞",
    "market": "tpex",
-   "close": 2375.0,
-   "change_pct": -9.52
+   "close": 2500.0,
+   "change_pct": 5.26
   },
   "3260": {
    "name": "威剛",
    "market": "tpex",
-   "close": 328.0,
-   "change_pct": -1.35
+   "close": 330.5,
+   "change_pct": 0.76
   },
   "3105": {
    "name": "穩懋",
    "market": "tpex",
-   "close": 486.0,
-   "change_pct": -5.08
+   "close": 491.0,
+   "change_pct": 1.03
   },
   "5289": {
    "name": "宜鼎",
    "market": "tpex",
-   "close": 1065.0,
-   "change_pct": -2.74
+   "close": 1095.0,
+   "change_pct": 2.82
   },
   "5536": {
    "name": "聖暉",
    "market": "tpex",
-   "close": 790.0,
-   "change_pct": -1.86
+   "close": 753.0,
+   "change_pct": -4.68
   },
   "5483": {
    "name": "中美晶",
    "market": "tpex",
-   "close": 186.0,
-   "change_pct": -6.53
+   "close": 184.5,
+   "change_pct": -0.81
   },
   "6147": {
    "name": "頎邦",
    "market": "tpex",
-   "close": 203.0,
-   "change_pct": -4.92
+   "close": 207.0,
+   "change_pct": 1.97
   },
   "7734": {
    "name": "印能科技",
    "market": "tpex",
-   "close": 2215.0,
-   "change_pct": -6.14
+   "close": 2235.0,
+   "change_pct": 0.9
   },
   "6187": {
    "name": "萬潤",
    "market": "tpex",
-   "close": 1260.0,
-   "change_pct": -5.26
+   "close": 1285.0,
+   "change_pct": 1.98
   },
   "3264": {
    "name": "欣銓",
    "market": "tpex",
-   "close": 246.5,
-   "change_pct": -6.98
+   "close": 248.0,
+   "change_pct": 0.61
   },
   "3324": {
    "name": "雙鴻",
    "market": "tpex",
-   "close": 1360.0,
-   "change_pct": -1.09
+   "close": 1335.0,
+   "change_pct": -1.84
   },
   "6510": {
    "name": "精測",
    "market": "tpex",
-   "close": 3065.0,
-   "change_pct": -5.11
+   "close": 2910.0,
+   "change_pct": -5.06
   },
   "8358": {
    "name": "金居",
    "market": "tpex",
-   "close": 438.5,
-   "change_pct": -9.02
+   "close": 420.5,
+   "change_pct": -4.1
   },
   "3374": {
    "name": "精材",
    "market": "tpex",
    "close": 463.5,
-   "change_pct": -1.49
+   "change_pct": 0.0
   },
   "3131": {
    "name": "弘塑",
    "market": "tpex",
-   "close": 1985.0,
-   "change_pct": -5.48
+   "close": 2015.0,
+   "change_pct": 1.51
   },
   "4749": {
    "name": "新應材",
    "market": "tpex",
-   "close": 707.0,
-   "change_pct": -3.28
+   "close": 697.0,
+   "change_pct": -1.41
   },
   "3491": {
    "name": "昇達科",
    "market": "tpex",
-   "close": 1320.0,
-   "change_pct": -7.69
+   "close": 1275.0,
+   "change_pct": -3.41
   },
   "6121": {
    "name": "新普",
    "market": "tpex",
-   "close": 364.0,
-   "change_pct": -1.49
+   "close": 375.0,
+   "change_pct": 3.02
   },
   "6548": {
    "name": "長科",
    "market": "tpex",
-   "close": 73.5,
-   "change_pct": -6.49
+   "close": 72.8,
+   "change_pct": -0.95
   },
   "1785": {
    "name": "光洋科",
    "market": "tpex",
-   "close": 91.2,
-   "change_pct": -5.0
+   "close": 91.7,
+   "change_pct": 0.55
   },
   "3363": {
    "name": "上詮",
    "market": "tpex",
-   "close": 506.0,
-   "change_pct": -7.83
+   "close": 499.5,
+   "change_pct": -1.28
   },
   "7828": {
    "name": "創新服務",
    "market": "tpex",
-   "close": 1380.0,
-   "change_pct": -5.15
+   "close": 1370.0,
+   "change_pct": -0.72
   },
   "4979": {
    "name": "華星光",
    "market": "tpex",
-   "close": 450.0,
-   "change_pct": -7.79
+   "close": 467.5,
+   "change_pct": 3.89
   },
   "6182": {
    "name": "合晶",
    "market": "tpex",
-   "close": 104.5,
-   "change_pct": -5.86
+   "close": 102.0,
+   "change_pct": -2.39
   },
   "3163": {
    "name": "波若威",
    "market": "tpex",
-   "close": 552.0,
-   "change_pct": -5.32
+   "close": 538.0,
+   "change_pct": -2.54
   },
   "3211": {
    "name": "順達",
    "market": "tpex",
-   "close": 320.0,
-   "change_pct": -5.33
+   "close": 327.0,
+   "change_pct": 2.19
   },
   "4966": {
    "name": "譜瑞-KY",
    "market": "tpex",
-   "close": 512.0,
-   "change_pct": -2.85
+   "close": 522.0,
+   "change_pct": 1.95
   },
   "4991": {
    "name": "環宇-KY",
    "market": "tpex",
-   "close": 415.0,
-   "change_pct": -8.19
+   "close": 416.5,
+   "change_pct": 0.36
   },
   "5903": {
    "name": "全家",
    "market": "tpex",
-   "close": 185.5,
-   "change_pct": -0.27
+   "close": 186.0,
+   "change_pct": 0.27
   },
   "1815": {
    "name": "富喬",
    "market": "tpex",
-   "close": 139.0,
-   "change_pct": -5.44
+   "close": 131.0,
+   "change_pct": -5.76
   },
   "3680": {
    "name": "家登",
    "market": "tpex",
-   "close": 503.0,
-   "change_pct": -3.45
+   "close": 505.0,
+   "change_pct": 0.4
   },
   "8415": {
    "name": "大國鋼",
    "market": "tpex",
-   "close": 36.85,
-   "change_pct": 0.41
+   "close": 36.6,
+   "change_pct": -0.68
   },
   "6290": {
    "name": "良維",
    "market": "tpex",
-   "close": 241.0,
-   "change_pct": -4.93
+   "close": 238.5,
+   "change_pct": -1.04
   },
   "7751": {
    "name": "竑騰",
    "market": "tpex",
-   "close": 1300.0,
-   "change_pct": -9.72
+   "close": 1335.0,
+   "change_pct": 2.69
   },
   "6023": {
    "name": "元大期",
    "market": "tpex",
-   "close": 82.1,
-   "change_pct": -0.48
+   "close": 82.5,
+   "change_pct": 0.49
   },
   "4772": {
    "name": "台特化",
    "market": "tpex",
-   "close": 255.0,
-   "change_pct": -4.67
+   "close": 247.0,
+   "change_pct": -3.14
   },
   "8932": {
    "name": "智通",
    "market": "tpex",
-   "close": 89.2,
-   "change_pct": -3.04
+   "close": 87.6,
+   "change_pct": -1.79
   },
   "6584": {
    "name": "南俊國際",
    "market": "tpex",
-   "close": 441.0,
-   "change_pct": -4.55
+   "close": 429.0,
+   "change_pct": -2.72
   },
   "3227": {
    "name": "原相",
    "market": "tpex",
-   "close": 183.0,
-   "change_pct": -1.08
+   "close": 185.0,
+   "change_pct": 1.09
   },
   "4123": {
    "name": "晟德",
    "market": "tpex",
-   "close": 29.9,
-   "change_pct": 0.0
+   "close": 29.8,
+   "change_pct": -0.33
   },
   "3718": {
    "name": "中光電投控",
    "market": "tpex",
-   "close": 57.5,
-   "change_pct": -2.71
+   "close": 56.4,
+   "change_pct": -1.91
   }
  },
  "missing": []

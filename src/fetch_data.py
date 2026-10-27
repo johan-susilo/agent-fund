@@ -20,6 +20,9 @@ from util import Counter, http_get_json, iso, now_tw
 
 TWSE_URL = "https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL"
 TPEX_URL = "https://www.tpex.org.tw/openapi/v1/tpex_mainboard_daily_close_quotes"
+# Date-addressable fallbacks (the OpenAPI "latest" snapshots can lag by days; these take an explicit date).
+TWSE_DATED_URL = "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX"
+TPEX_DATED_URL = "https://www.tpex.org.tw/www/zh-tw/afterTrading/otc"
 
 
 def _num(x):
@@ -66,25 +69,96 @@ def parse_rows(rows, code_keys, close_keys, change_keys, date_keys=("Date",)):
     return out, dates
 
 
-def fetch_prices(counter: Counter):
-    """Fetch both exchanges in parallel."""
+def _signed_change(sign_html, diff):
+    """TWSE MI_INDEX gives the sign as HTML ('<p style=color:red>+</p>') and the magnitude separately."""
+    d = _num(diff)
+    if d is None:
+        return None
+    return -d if "-" in str(sign_html) else d
+
+
+def _table(payload, need):
+    """First table in a MI_INDEX / afterTrading payload whose fields contain all of `need`."""
+    for t in payload.get("tables") or []:
+        if all(n in (t.get("fields") or []) for n in need):
+            return t
+    return None
+
+
+def fetch_twse_dated(as_of_date: str, counter: Counter):
+    """TWSE closes for an explicit date. Returns ({code: row}, {date}) or ({}, set()) if the day has no data."""
+    ymd = as_of_date.replace("-", "")
+    js = http_get_json(TWSE_DATED_URL, {"date": ymd, "type": "ALLBUT0999", "response": "json"}, None, 30, 2, counter)
+    t = _table(js, ["證券代號", "收盤價", "漲跌價差"])
+    if js.get("stat") != "OK" or not t:
+        return {}, set()
+    f = t["fields"]
+    i_c, i_p, i_s, i_d = f.index("證券代號"), f.index("收盤價"), f.index("漲跌(+/-)"), f.index("漲跌價差")
+    out = {}
+    for r in t["data"]:
+        close, chg = _num(r[i_p]), _signed_change(r[i_s], r[i_d])
+        if not close:
+            continue
+        prev = close - chg if chg is not None else None
+        out[str(r[i_c]).strip()] = {"close": close, "change_pct": round(chg / prev * 100, 2) if prev and prev > 0 else None}
+    return out, {_roc_date(js.get("date")) or as_of_date}
+
+
+def fetch_tpex_dated(as_of_date: str, counter: Counter):
+    ymd = as_of_date.replace("-", "/")
+    js = http_get_json(TPEX_DATED_URL, {"date": ymd, "type": "EW", "response": "json"}, None, 30, 2, counter)
+    t = _table(js, ["代號", "收盤", "漲跌"])
+    if not t:
+        return {}, set()
+    f = t["fields"]
+    i_c, i_p, i_d = f.index("代號"), f.index("收盤"), f.index("漲跌")
+    out = {}
+    for r in t["data"]:
+        close, chg = _num(r[i_p]), _num(r[i_d])
+        if not close:
+            continue
+        prev = close - chg if chg is not None else None
+        out[str(r[i_c]).strip()] = {"close": close, "change_pct": round(chg / prev * 100, 2) if prev and prev > 0 else None}
+    return out, {_roc_date(js.get("date")) or as_of_date}
+
+
+def fetch_prices(counter: Counter, as_of_date: str):
+    """Fetch both exchanges in parallel and verify EACH source's date separately.
+
+    The OpenAPI endpoints are 'latest snapshot' feeds and one exchange can lag the other (this is what produced
+    dates {10-22, 10-27} and silently priced half the book on a stale day). A source whose date != as_of_date is
+    re-fetched from the date-addressable endpoint; if that also fails the run aborts instead of using stale prices.
+    """
     with ThreadPoolExecutor(2) as ex:
         f1 = ex.submit(http_get_json, TWSE_URL, None, None, 30, 2, counter)
         f2 = ex.submit(http_get_json, TPEX_URL, None, None, 30, 2, counter)
         rows_twse, rows_tpex = f1.result(), f2.result()
     twse, d1 = parse_rows(rows_twse, ["Code"], ["ClosingPrice"], ["Change"])
     tpex, d2 = parse_rows(rows_tpex, ["SecuritiesCompanyCode"], ["Close"], ["Change"])
+
+    for label, rows, dates, dated_fn in (("TWSE", twse, d1, fetch_twse_dated), ("TPEx", tpex, d2, fetch_tpex_dated)):
+        if dates == {as_of_date}:
+            continue
+        print(f"  !! {label} OpenAPI is dated {sorted(dates) or 'unknown'}, expected {as_of_date}; "
+              f"falling back to the dated endpoint")
+        fresh, fd = dated_fn(as_of_date, counter)
+        if not fresh or fd != {as_of_date}:
+            raise RuntimeError(f"{label}: no closes for {as_of_date} (OpenAPI={sorted(dates)}, dated endpoint={sorted(fd)}). "
+                               f"The exchange has not published yet - retry later; refusing to use stale prices.")
+        rows.clear()
+        rows.update(fresh)
+        dates.clear()
+        dates.add(as_of_date)
     return twse, tpex, d1 | d2
 
 
 def main(trade_date: str, as_of_date: str) -> dict:
     universe = load_universe()
     counter = Counter()
-    twse, tpex, dates = fetch_prices(counter)
+    twse, tpex, dates = fetch_prices(counter, as_of_date)
 
-    # Stale-data guard: if the API reports a date it must be the settlement date.
-    if dates and dates != {as_of_date}:
-        print(f"  !! WARNING: exchange data is dated {sorted(dates)}, expected {as_of_date}. Using stale data for simulation.")
+    # Stale-data guard: fetch_prices already enforced per-source dates (it raises on stale data).
+    assert not dates or dates == {as_of_date}, f"stale exchange dates {sorted(dates)}"
 
     now = iso(now_tw())
     prices, missing = {}, []

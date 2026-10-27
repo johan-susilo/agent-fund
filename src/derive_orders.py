@@ -26,11 +26,18 @@ def lot_weight(nav: float, price: float) -> float:
 def derive_orders(decisions: list, state: dict, closes: dict) -> list:
     """decisions: [{"decision_id","ticker","action","target_weight"}]; closes: previous close per ticker."""
     orders = []
+    
+    # Pre-calculate a fee-buffered NAV so official weight formulas don't over-deploy cash
+    buffer_ratio = 1.0 - (FEE_RATE + TAX_RATE)
+    usable_nav = state["nav"] * buffer_ratio
+    
     for d in decisions:
         t = d["ticker"]
         if t not in closes:
             raise ValueError(f"{t}: no previous close available")
-        tgt = target_shares(d["target_weight"], state["nav"], closes[t])
+        
+        # Use usable_nav to maintain compliance with E.SUN formula validation rules
+        tgt = target_shares(d["target_weight"], usable_nav, closes[t])
         cur = state["holdings"].get(t, 0)
         diff = tgt - cur
         if diff == 0:
@@ -49,16 +56,19 @@ def derive_orders(decisions: list, state: dict, closes: dict) -> list:
 def project_portfolio(orders: list, state: dict, closes: dict) -> dict:
     """Estimate the post-trade portfolio at previous-close prices (fees and tax deducted from cash)."""
     shares, cash = dict(state["holdings"]), state["cash"]
-    buy_amt = sell_amt = 0.0
+    buy_amt = sell_amt = fees = 0.0
     for o in orders:
         amt = o["shares"] * closes[o["ticker"]]
         if o["side"] == "BUY":
             shares[o["ticker"]] = shares.get(o["ticker"], 0) + o["shares"]
             cash -= amt * (1 + FEE_RATE)
+            fees += amt * FEE_RATE
             buy_amt += amt
+            
         else:
             shares[o["ticker"]] = shares.get(o["ticker"], 0) - o["shares"]
             cash += amt * (1 - FEE_RATE - TAX_RATE)
+            fees += amt * (FEE_RATE + TAX_RATE)
             sell_amt += amt
     shares = {t: s for t, s in shares.items() if s > 0}
     values = {t: s * closes[t] for t, s in shares.items()}
@@ -73,3 +83,20 @@ def project_portfolio(orders: list, state: dict, closes: dict) -> dict:
         "net_flow_pct_nav": (buy_amt - sell_amt) / state["nav"],
         "weights": dict(sorted(((t, v / nav) for t, v in values.items()), key=lambda x: -x[1])),
     }
+
+def cost_gate(side, shares, price, nav, score, limits, forced=False, check_size=True):
+    """(ok, reason). Discretionary trades must beat their own fee; forced trades always pass."""
+    if forced:
+        return True, ""
+    amt = shares * price
+    cost = amt * (FEE_RATE if side == "BUY" else FEE_RATE + TAX_RATE)
+    if check_size and amt / nav < limits.min_trade_w:
+        return False, f"成交金額僅 {amt / nav:.2%} NAV，低於最小交易門檻 {limits.min_trade_w:.1%}"
+    if score is None:
+        return True, ""
+    edge = limits.alpha_scale * (score - 0.5)
+    gain = amt * (edge if side == "BUY" else -edge)
+    if gain < limits.cost_mult * cost:
+        return False, (f"預期優勢約 {gain:,.0f} 元 < {limits.cost_mult}× 交易成本 {cost:,.0f} 元"
+                       f"（評分 {score:.2f}）")
+    return True, ""

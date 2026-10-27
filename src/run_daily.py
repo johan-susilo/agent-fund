@@ -87,6 +87,29 @@ def main():
         strategy = json.loads((CONFIG_DIR / "strategy.json").read_text(encoding="utf-8"))
         as_of = state["as_of_date"] or prev_weekday(d)
 
+        # --- REQ 1 & 5: Minimum Holding Period Tracker ---
+        tracker_file = ROOT / "logs" / "days_held.json"
+        prev_days_held = {}
+        if tracker_file.exists():
+            try:
+                prev_days_held = json.loads(tracker_file.read_text(encoding="utf-8"))
+            except Exception:
+                pass
+        
+        current_days_held = {}
+        # Calculate days held strictly based on actual confirmed holdings from the portal
+        for t in state["holdings"]:
+            current_days_held[t] = prev_days_held.get(t, 0) + 1
+            
+        # Inject into state so portfolio_agent.py can read it
+        state["days_held"] = current_days_held
+        
+        # Save the tracker for tomorrow (skip saving if this is a dry-run replay)
+        if not a.replay:
+            (ROOT / "logs").mkdir(exist_ok=True)
+            tracker_file.write_text(json.dumps(current_days_held, indent=2), encoding="utf-8")
+        # -------------------------------------------------
+
         print(f"=== [1/5] DataPack === team {state['team_id']} | NAV {state['nav']:,.0f} | "
               f"holdings {len(state['holdings'])} | violations {state['violations']} "
               f"| limits: {'STRICT' if limits.cap_other < 0.085 else 'normal'}")

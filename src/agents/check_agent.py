@@ -11,12 +11,14 @@ from __future__ import annotations
 import json
 import math
 import re
+import os
 from datetime import datetime, timedelta
 
 from derive_orders import derive_orders, project_portfolio
 from settings import CONFIG_DIR, OFFICIAL, SUBMIT_CLOSE, SUBMIT_OPEN, TW, Limits
 from util import parse_ts
 
+PROJ_VAR95_LIMIT = float(os.environ.get("PROJ_VAR95_LIMIT", 3.5))   # % of NAV, tune after day 1
 REDUCE_CAP = 0.04   # weight cap for tickers the risk manager marks REDUCE (2330 is exempt: it is the anchor)
 
 
@@ -301,3 +303,23 @@ def check_narrative_consistency(inferences: list, weights: dict) -> list:
                 errs.append(f"Narrative contradiction: You explicitly stated you would include/buy {t} in inference '{inf.get('inf_id')}', but it is missing from your decisions. Add {t}.")
                 
     return errs
+
+
+def check_risk_citations(infs: list, considerations: list) -> list:
+    cited = set()
+    for i in infs:
+        cited |= set(i["premise_refs"])
+    return [f"risk consideration '{c['risk'][:40]}' ({c['severity']}) is unanswered: cite one of "
+            f"{c['evidence_ids']} in an inference's premise_refs and state how the plan responds"
+            for c in considerations
+            if c.get("severity") in ("HIGH", "CRITICAL") and c.get("evidence_ids")
+            and not set(c["evidence_ids"]) & cited]
+
+def check_projected_risk(weights: dict, tech) -> list:
+    """Post-trade 60d historical VaR95 of the proposed book (skipped when returns are unavailable)."""
+    from agents import risk_agent
+    st = risk_agent._portfolio_stats(weights, tech)
+    if st and st["var95_pct_nav"] > PROJ_VAR95_LIMIT:
+        return [f"projected VaR95 {st['var95_pct_nav']:.2f}% NAV exceeds {PROJ_VAR95_LIMIT}%: "
+                "lower weights in the highest risk contributors " + str(st["top_risk"])]
+    return []
