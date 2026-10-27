@@ -512,10 +512,15 @@ def derive_decisions(portfolio, exits, state, closes, limits: Limits, caps=None,
         cap_t = min(limits.cap(t), caps.get(t, 1.0))
         tgt = target_shares(w, nav, closes[t])
         cur_w = cur * closes[t] / nav
-        in_band = cur > 0 and cur_w <= cap_t and abs(w - cur_w) <= limits.no_trade_band
+        
+        # Dynamic band: 20% relative drift, floored at 0.3% (to cover fees), capped by the global absolute limit
+        allowed_drift = max(0.003, min(w * 0.20, limits.no_trade_band))
+        in_band = cur > 0 and cur_w <= cap_t and abs(w - cur_w) <= allowed_drift
+        
         if tgt == cur or in_band:
+            rel_dev = abs(w - cur_w) / max(w, 0.0001)
             no_trade.append({"ticker": t, "reason_refs": p["inference_refs"][:5],
-                             "reason": f"目標權重 {w:.2%} 與現權重 {cur_w:.2%} 差距在 {limits.no_trade_band:.1%} 無交易帶內，維持不動"})
+                             "reason": f"目標權重 {w:.2%} 與現權重 {cur_w:.2%} 差距在動態無交易帶內 (允許偏差 {allowed_drift:.2%} / 相對 {rel_dev:.1%})，維持不動"})
             continue
         if gate_on:
             # --- Req 1 & 5: Minimum holding period ---
