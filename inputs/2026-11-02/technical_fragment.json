@@ -3,35 +3,35 @@
   {
    "authority": "vendor",
    "url": "https://finance.yahoo.com/",
-   "fetched_at": "2026-10-31T10:07:33+08:00",
+   "fetched_at": "2026-10-31T11:28:00+08:00",
    "name": "Yahoo Finance 日線歷史價量（技術指標）",
    "content_as_of": "2026-10-30T13:30:00+08:00"
   },
   {
    "authority": "vendor",
    "url": "https://finmindtrade.com/",
-   "fetched_at": "2026-10-31T10:07:33+08:00",
+   "fetched_at": "2026-10-31T11:28:00+08:00",
    "name": "FinMind 開放資料：台指期外資未平倉、個股融資餘額",
    "content_as_of": "2026-10-30T18:30:00+08:00"
   },
   {
    "authority": "vendor",
-   "name": "Yahoo Finance (^TWII) 日線",
-   "fetched_at": "2026-10-31T10:08:07+08:00",
-   "url": "https://finance.yahoo.com/quote/%5ETWII/",
-   "content_as_of": "2026-10-30T13:30:00+08:00"
-  },
-  {
-   "authority": "vendor",
    "name": "Yahoo Finance (^SOX) 日線",
-   "fetched_at": "2026-10-31T10:08:07+08:00",
+   "fetched_at": "2026-10-31T11:28:37+08:00",
    "url": "https://finance.yahoo.com/quote/%5ESOX/",
    "content_as_of": "2026-10-31T04:00:00+08:00"
   },
   {
    "authority": "vendor",
+   "name": "Yahoo Finance (^TWII) 日線",
+   "fetched_at": "2026-10-31T11:28:37+08:00",
+   "url": "https://finance.yahoo.com/quote/%5ETWII/",
+   "content_as_of": "2026-10-30T13:30:00+08:00"
+  },
+  {
+   "authority": "vendor",
    "name": "Yahoo Finance (2330.TW) 日線",
-   "fetched_at": "2026-10-31T10:08:07+08:00",
+   "fetched_at": "2026-10-31T11:28:37+08:00",
    "url": "https://finance.yahoo.com/quote/2330.TW/",
    "content_as_of": "2026-10-30T13:30:00+08:00"
   }
@@ -459,13 +459,13 @@
    "src": [
     2
    ],
-   "statement": "^TWII 2026-10-30 收 45211.8（1日-2.49%、5日-3.6%、20日-5.1%、60日+4.8%）",
+   "statement": "^SOX 2026-10-30 收 10688.8（1日-7.20%、5日-0.8%、20日-18.6%、60日-11.3%）",
    "values": {
-    "twii_close": 45211.8281,
-    "twii_chg_pct": -2.49,
-    "twii_ret5d_pct": -3.57,
-    "twii_ret20d_pct": -5.08,
-    "twii_ret60d_pct": 4.85
+    "sox_close": 10688.7998,
+    "sox_chg_pct": -7.2,
+    "sox_ret5d_pct": -0.84,
+    "sox_ret20d_pct": -18.63,
+    "sox_ret60d_pct": -11.29
    },
    "topic": "agent_price",
    "level": "market",
@@ -475,13 +475,13 @@
    "src": [
     3
    ],
-   "statement": "^SOX 2026-10-30 收 10688.8（1日-7.20%、5日-0.8%、20日-18.6%、60日-11.3%）",
+   "statement": "^TWII 2026-10-30 收 45211.8（1日-2.49%、5日-3.6%、20日-5.1%、60日+4.8%）",
    "values": {
-    "sox_close": 10688.7998,
-    "sox_chg_pct": -7.2,
-    "sox_ret5d_pct": -0.84,
-    "sox_ret20d_pct": -18.63,
-    "sox_ret60d_pct": -11.29
+    "twii_close": 45211.8281,
+    "twii_chg_pct": -2.49,
+    "twii_ret5d_pct": -3.57,
+    "twii_ret20d_pct": -5.08,
+    "twii_ret60d_pct": 4.85
    },
    "topic": "agent_price",
    "level": "market",
@@ -507,7 +507,7 @@
    ]
   }
  ],
- "tool_calls": 47,
+ "tool_calls": 50,
  "warnings": [],
  "breadth": {
   "n": 149,
@@ -13545,12 +13545,12 @@
   "6415": 0.2101,
   "2886": 0.093
  },
- "agent_notes": "市場廣度全面轉弱（僅24.8%站上MA20、58檔創20日新低vs 3檔創高，^SOX單日重挫7.2%、外資台指期淨空單達9.2萬口），屬系統性破位修正，強烈警告勿逢低盲目加碼半導體。\n\n警戒標的：\n1. 8046南電、4958臻鼎-KY：波動放大（ATR>7%），跳空破底且距MA20逾-12%。\n2. 2330台積電：指標權值跌破MA60與20日支撐，技術分降至42。\n3. 2357華碩、2376技嘉：同步跳空破底失守MA60。\n\n強勢多頭/防禦觀察：\n1. 2603長榮：技術分92，逆勢放量創20日高。\n2. 2412中華電、3045台灣大：電信防禦資金進駐，均線完整多頭排列。\n\n未知事項：個別重挫股跳空主因為全球科技股系統性拋售或特定財報事件驅動尚待確認。",
+ "agent_notes": "Market breadth warns of a broad semiconductor breakdown: only 24.8% of stocks hold above MA20, 34.2% above MA60, and 20-day breakdowns (58) overwhelm breakouts (3) with a 36.0 median tech score. This aligns with ^SOX plunging 7.2% on 2026-10-30 (-18.63% over 20d), ^TWII falling 2.49%, and foreign TX futures net shorts expanding to -92,241 contracts. Avoid adding broad beta.\n\nCaution (holdings):\n- 2330: 20d breakdown and below MA60 (-1.86% 1d, -4.44% 20d; score 42).\n- 8046 & 4958: Severe breakdowns below MA60 with gap-downs, high ATR (>7%), and >12% below MA20 (scores 29, 33).\n- 2357 & 2376: Breakdowns below MA60 with gap-downs (scores 37).\n- 6770: Weakest score (21), below MA60, gap-down, and MACD dead cross.\n\nClean uptrends/pullbacks:\n- 2603: Clean breakout (score 92, RSI 68.6, +7% vs MA20).\n- 2885 & 5876: Unflagged uptrends (scores 84, 87; +2.3% to +4.3% above MA20).\n- 2379 & 3034: High scores (89, 87) holding above MA20 despite index-driven gap-downs.\n\nUnknowns: Specific company news or ex-dividend catalysts behind individual gap-downs remain unverified due to search/budget limits.",
  "llm_usage": {
-  "input_tokens": 17266,
-  "output_tokens": 2293,
+  "input_tokens": 11396,
+  "output_tokens": 661,
   "models": [
-   "gemini-3.8-flash"
+   "gemini-4-argon"
   ]
  }
 }
