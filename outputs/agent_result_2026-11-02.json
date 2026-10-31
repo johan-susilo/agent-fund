@@ -8,7 +8,7 @@
     "name": "TWSE 上市個股日收盤價 (OpenAPI STOCK_DAY_ALL)",
     "url": "https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL",
     "content_as_of": "2026-10-30T18:30:00+08:00",
-    "fetched_at": "2026-10-31T09:30:18+08:00"
+    "fetched_at": "2026-10-31T10:07:36+08:00"
    },
    {
     "source_id": "S2",
@@ -16,7 +16,7 @@
     "name": "TPEx 上櫃個股日收盤價 (OpenAPI)",
     "url": "https://www.tpex.org.tw/openapi/v1/tpex_mainboard_daily_close_quotes",
     "content_as_of": "2026-10-30T18:30:00+08:00",
-    "fetched_at": "2026-10-31T09:30:18+08:00"
+    "fetched_at": "2026-10-31T10:07:36+08:00"
    },
    {
     "source_id": "S3",
@@ -24,7 +24,7 @@
     "name": "FRED DGS10: 美國 10 年期公債殖利率(%)",
     "url": "https://fred.stlouisfed.org/series/DGS10",
     "content_as_of": "2026-10-30T04:00:00+08:00",
-    "fetched_at": "2026-10-31T09:30:17+08:00"
+    "fetched_at": "2026-10-31T10:07:35+08:00"
    },
    {
     "source_id": "S4",
@@ -32,7 +32,7 @@
     "name": "FRED VIXCLS: VIX 恐慌指數",
     "url": "https://fred.stlouisfed.org/series/VIXCLS",
     "content_as_of": "2026-10-30T04:00:00+08:00",
-    "fetched_at": "2026-10-31T09:30:17+08:00"
+    "fetched_at": "2026-10-31T10:07:35+08:00"
    },
    {
     "source_id": "S5",
@@ -40,7 +40,7 @@
     "name": "FRED DEXTAUS: 美元兌新台幣(TWD/USD)",
     "url": "https://fred.stlouisfed.org/series/DEXTAUS",
     "content_as_of": "2026-10-24T04:00:00+08:00",
-    "fetched_at": "2026-10-31T09:30:17+08:00"
+    "fetched_at": "2026-10-31T10:07:35+08:00"
    },
    {
     "source_id": "S6",
@@ -48,7 +48,7 @@
     "name": "FRED NASDAQCOM: 那斯達克綜合指數",
     "url": "https://fred.stlouisfed.org/series/NASDAQCOM",
     "content_as_of": "2026-10-30T04:00:00+08:00",
-    "fetched_at": "2026-10-31T09:30:17+08:00"
+    "fetched_at": "2026-10-31T10:07:35+08:00"
    },
    {
     "source_id": "S7",
@@ -56,7 +56,7 @@
     "name": "Yahoo Finance (^SOX): 費城半導體指數 (SOX)",
     "url": "https://finance.yahoo.com/quote/%5ESOX/",
     "content_as_of": "2026-10-31T04:00:00+08:00",
-    "fetched_at": "2026-10-31T09:30:19+08:00"
+    "fetched_at": "2026-10-31T10:07:38+08:00"
    },
    {
     "source_id": "S8",
@@ -64,7 +64,7 @@
     "name": "Yahoo Finance (TSM): 台積電 ADR (TSM)",
     "url": "https://finance.yahoo.com/quote/TSM/",
     "content_as_of": "2026-10-31T04:00:00+08:00",
-    "fetched_at": "2026-10-31T09:30:19+08:00"
+    "fetched_at": "2026-10-31T10:07:38+08:00"
    },
    {
     "source_id": "S9",
@@ -72,7 +72,7 @@
     "name": "Yahoo Finance (NVDA): NVIDIA (NVDA) AI伺服器指標",
     "url": "https://finance.yahoo.com/quote/NVDA/",
     "content_as_of": "2026-10-31T04:00:00+08:00",
-    "fetched_at": "2026-10-31T09:30:19+08:00"
+    "fetched_at": "2026-10-31T10:07:38+08:00"
    },
    {
     "source_id": "S10",
@@ -80,7 +80,7 @@
     "name": "Yahoo Finance (MU): Micron (MU) HBM與記憶體指標",
     "url": "https://finance.yahoo.com/quote/MU/",
     "content_as_of": "2026-10-31T04:00:00+08:00",
-    "fetched_at": "2026-10-31T09:30:19+08:00"
+    "fetched_at": "2026-10-31T10:07:38+08:00"
    },
    {
     "source_id": "S11",
@@ -88,7 +88,7 @@
     "name": "Yahoo Finance (^VIX): VIX 波動率指數 (含20日均線比)",
     "url": "https://finance.yahoo.com/quote/%5EVIX/",
     "content_as_of": "2026-10-31T04:00:00+08:00",
-    "fetched_at": "2026-10-31T09:30:19+08:00"
+    "fetched_at": "2026-10-31T10:07:38+08:00"
    },
    {
     "source_id": "S12",
@@ -96,7 +96,7 @@
     "name": "Yahoo Finance (^TWII): 台灣加權指數 (TAIEX)",
     "url": "https://finance.yahoo.com/quote/%5ETWII/",
     "content_as_of": "2026-10-30T13:30:00+08:00",
-    "fetched_at": "2026-10-31T09:30:19+08:00"
+    "fetched_at": "2026-10-31T10:07:38+08:00"
    },
    {
     "source_id": "S13",
@@ -104,7 +104,7 @@
     "name": "Yahoo Finance (TWD=X): 美元兌台幣即期匯率 (USD/TWD)",
     "url": "https://finance.yahoo.com/quote/TWD=X/",
     "content_as_of": "2026-10-30T13:30:00+08:00",
-    "fetched_at": "2026-10-31T09:30:19+08:00"
+    "fetched_at": "2026-10-31T10:07:38+08:00"
    },
    {
     "source_id": "S14",
@@ -113,7 +113,7 @@
     "url": "https://www.thehindubusinessline.com/markets/intel-shares-plunge-21-as-weak-pc-demand-and-supply-shortages-hit-revenue-outlook/article71643361.ece",
     "published_at": "2026-10-30T07:58:45+08:00",
     "content_as_of": "2026-10-30T07:58:45+08:00",
-    "fetched_at": "2026-10-31T09:30:15+08:00"
+    "fetched_at": "2026-10-31T10:07:33+08:00"
    },
    {
     "source_id": "S15",
@@ -122,7 +122,7 @@
     "url": "https://www.cnbc.com/2026/10/29/intel-intc-q3-earnings-report-2026-.html",
     "published_at": "2026-10-30T04:06:00+08:00",
     "content_as_of": "2026-10-30T04:06:00+08:00",
-    "fetched_at": "2026-10-31T09:30:15+08:00"
+    "fetched_at": "2026-10-31T10:07:33+08:00"
    },
    {
     "source_id": "S16",
@@ -131,34 +131,34 @@
     "url": "https://nypost.com/2026/10/29/business/alleged-chinese-spy-had-close-relationship-with-nvidia-boss-jensen-huang-report/",
     "published_at": "2026-10-30T00:42:44+08:00",
     "content_as_of": "2026-10-30T00:42:44+08:00",
-    "fetched_at": "2026-10-31T09:30:15+08:00"
+    "fetched_at": "2026-10-31T10:07:33+08:00"
    },
    {
     "source_id": "S17",
+    "authority": "media",
+    "name": "The Times of India: Yen steady before BOJ, AI jitters drive Treasury rally, weigh on dollar",
+    "url": "https://economictimes.indiatimes.com/markets/forex/forex-news/yen-steady-before-boj-ai-jitters-drive-treasury-rally-weigh-on-dollar/articleshow/135338954.cms",
+    "published_at": "2026-10-30T10:01:19+08:00",
+    "content_as_of": "2026-10-30T10:01:19+08:00",
+    "fetched_at": "2026-10-31T10:07:33+08:00"
+   },
+   {
+    "source_id": "S18",
+    "authority": "media",
+    "name": "CNA: Yen gains after BOJ, AI jitters drive Treasury rally, weigh on dollar",
+    "url": "https://www.channelnewsasia.com/business/yen-gains-after-boj-ai-jitters-drive-treasury-rally-weigh-dollar-6505611",
+    "published_at": "2026-10-30T09:52:22+08:00",
+    "content_as_of": "2026-10-30T09:52:22+08:00",
+    "fetched_at": "2026-10-31T10:07:33+08:00"
+   },
+   {
+    "source_id": "S19",
     "authority": "media",
     "name": "The Times of India: Global Market Today: Asian stocks slide as tech earnings disappoint, AI fears mount",
     "url": "https://economictimes.indiatimes.com/markets/us-stocks/news/global-market-today/articleshow/135337523.cms",
     "published_at": "2026-10-30T08:52:15+08:00",
     "content_as_of": "2026-10-30T08:52:15+08:00",
-    "fetched_at": "2026-10-31T09:30:15+08:00"
-   },
-   {
-    "source_id": "S18",
-    "authority": "media",
-    "name": "Newsonjapan.com: Japan Stocks Rise for Third Day as Nikkei Reclaims 64,000",
-    "url": "https://newsonjapan.com/article/151176.php",
-    "published_at": "2026-10-30T01:52:38+08:00",
-    "content_as_of": "2026-10-30T01:52:38+08:00",
-    "fetched_at": "2026-10-31T09:30:15+08:00"
-   },
-   {
-    "source_id": "S19",
-    "authority": "media",
-    "name": "CNA: Euro steady against dollar after ECB leaves rates unchanged",
-    "url": "https://www.channelnewsasia.com/business/euro-steady-against-dollar-after-ecb-leaves-rates-unchanged-6501936",
-    "published_at": "2026-10-29T23:23:50+08:00",
-    "content_as_of": "2026-10-29T23:23:50+08:00",
-    "fetched_at": "2026-10-31T09:30:15+08:00"
+    "fetched_at": "2026-10-31T10:07:33+08:00"
    },
    {
     "source_id": "S20",
@@ -166,7 +166,7 @@
     "name": "Yahoo Finance 日線歷史價量（20/60日動能、波動、成交值）",
     "url": "https://finance.yahoo.com/",
     "content_as_of": "2026-10-30T13:30:00+08:00",
-    "fetched_at": "2026-10-31T09:30:15+08:00"
+    "fetched_at": "2026-10-31T10:07:33+08:00"
    },
    {
     "source_id": "S21",
@@ -174,7 +174,7 @@
     "name": "TWSE/TPEx/MOPS 公開資料：本益比、月營收年增、淨利率",
     "url": "https://openapi.twse.com.tw/v1/exchangeReport/BWIBBU_ALL",
     "content_as_of": "2026-10-30T18:30:00+08:00",
-    "fetched_at": "2026-10-31T09:30:37+08:00"
+    "fetched_at": "2026-10-31T10:07:57+08:00"
    },
    {
     "source_id": "S22",
@@ -182,7 +182,7 @@
     "name": "FinMind 開放資料：台指期外資未平倉、個股融資餘額",
     "url": "https://finmindtrade.com/",
     "content_as_of": "2026-10-30T18:30:00+08:00",
-    "fetched_at": "2026-10-31T09:30:15+08:00"
+    "fetched_at": "2026-10-31T10:07:33+08:00"
    },
    {
     "source_id": "S23",
@@ -190,31 +190,31 @@
     "name": "Yahoo Finance (2330.TW) 日線",
     "url": "https://finance.yahoo.com/quote/2330.TW/",
     "content_as_of": "2026-10-30T13:30:00+08:00",
-    "fetched_at": "2026-10-31T09:30:43+08:00"
+    "fetched_at": "2026-10-31T10:08:07+08:00"
    },
    {
     "source_id": "S24",
     "authority": "vendor",
-    "name": "Yahoo Finance (TWD=X) 日線",
-    "url": "https://finance.yahoo.com/quote/TWD=X/",
-    "content_as_of": "2026-10-31T04:00:00+08:00",
-    "fetched_at": "2026-10-31T09:31:12+08:00"
+    "name": "Yahoo Finance (2451.TW) 日線",
+    "url": "https://finance.yahoo.com/quote/2451.TW/",
+    "content_as_of": "2026-10-30T13:30:00+08:00",
+    "fetched_at": "2026-10-31T10:09:14+08:00"
    },
    {
     "source_id": "S25",
     "authority": "vendor",
-    "name": "Yahoo Finance (^TNX) 日線",
-    "url": "https://finance.yahoo.com/quote/%5ETNX/",
+    "name": "Yahoo Finance (TWD=X) 日線",
+    "url": "https://finance.yahoo.com/quote/TWD=X/",
     "content_as_of": "2026-10-31T04:00:00+08:00",
-    "fetched_at": "2026-10-31T09:32:07+08:00"
+    "fetched_at": "2026-10-31T10:09:23+08:00"
    },
    {
     "source_id": "S26",
     "authority": "vendor",
-    "name": "Yahoo Finance (DX-Y.NYB) 日線",
-    "url": "https://finance.yahoo.com/quote/DX-Y.NYB/",
-    "content_as_of": "2026-10-31T04:00:00+08:00",
-    "fetched_at": "2026-10-31T09:32:07+08:00"
+    "name": "Yahoo Finance (3443.TW) 日線",
+    "url": "https://finance.yahoo.com/quote/3443.TW/",
+    "content_as_of": "2026-10-30T13:30:00+08:00",
+    "fetched_at": "2026-10-31T10:10:23+08:00"
    },
    {
     "source_id": "S27",
@@ -222,7 +222,7 @@
     "name": "TPEx 公布處置有價證券",
     "url": "https://www.tpex.org.tw/openapi/v1/tpex_disposal_information",
     "content_as_of": "2026-10-30T18:30:00+08:00",
-    "fetched_at": "2026-10-31T09:32:23+08:00"
+    "fetched_at": "2026-10-31T10:10:46+08:00"
    },
    {
     "source_id": "S28",
@@ -230,7 +230,7 @@
     "name": "TPEx 公布注意交易資訊",
     "url": "https://www.tpex.org.tw/openapi/v1/tpex_trading_warning_information",
     "content_as_of": "2026-10-30T18:30:00+08:00",
-    "fetched_at": "2026-10-31T09:32:23+08:00"
+    "fetched_at": "2026-10-31T10:10:46+08:00"
    },
    {
     "source_id": "S29",
@@ -238,7 +238,7 @@
     "name": "TPEx 除權除息預告表",
     "url": "https://www.tpex.org.tw/openapi/v1/tpex_exright_prepost",
     "content_as_of": "2026-10-30T18:30:00+08:00",
-    "fetched_at": "2026-10-31T09:32:23+08:00"
+    "fetched_at": "2026-10-31T10:10:46+08:00"
    },
    {
     "source_id": "S30",
@@ -253,7 +253,7 @@
     "name": "Yahoo Finance：原油、美元指數、美債殖利率",
     "url": "https://finance.yahoo.com/",
     "content_as_of": "2026-10-31T04:00:00+08:00",
-    "fetched_at": "2026-10-31T09:32:24+08:00"
+    "fetched_at": "2026-10-31T10:10:47+08:00"
    },
    {
     "source_id": "S32",
@@ -261,7 +261,15 @@
     "name": "FRED：高收益債利差與殖利率曲線",
     "url": "https://fred.stlouisfed.org/series/BAMLH0A0HYM2",
     "content_as_of": "2026-10-31T04:00:00+08:00",
-    "fetched_at": "2026-10-31T09:32:24+08:00"
+    "fetched_at": "2026-10-31T10:10:47+08:00"
+   },
+   {
+    "source_id": "S33",
+    "authority": "vendor",
+    "name": "Yahoo Finance (3680.TWO) 日線",
+    "url": "https://finance.yahoo.com/quote/3680.TWO/",
+    "content_as_of": "2026-10-30T13:30:00+08:00",
+    "fetched_at": "2026-10-31T10:10:54+08:00"
    }
   ],
   "observations": [
@@ -771,7 +779,7 @@
     "topic": "news_semis",
     "statement": "BusinessLine 報導：Intel shares plunge 21% as weak PC demand and supply shortages hit revenue outlook",
     "values": {
-     "published_hours_ago": 25.5
+     "published_hours_ago": 26.1
     }
    },
    {
@@ -782,7 +790,7 @@
     "topic": "news_semis",
     "statement": "CNBC 報導：Intel stock plunges 20% as chipmaker blames PC slowdown for weak guidance",
     "values": {
-     "published_hours_ago": 29.4
+     "published_hours_ago": 30.0
     }
    },
    {
@@ -793,7 +801,7 @@
     "topic": "news_semis",
     "statement": "New York Post 報導：Alleged Chinese spy had ‘close relationship’ with Nvidia boss Jensen Huang: report",
     "values": {
-     "published_hours_ago": 32.8
+     "published_hours_ago": 33.4
     }
    },
    {
@@ -802,9 +810,9 @@
      "S17"
     ],
     "topic": "news_macro",
-    "statement": "The Times of India 報導：Global Market Today: Asian stocks slide as tech earnings disappoint, AI fears mount",
+    "statement": "The Times of India 報導：Yen steady before BOJ, AI jitters drive Treasury rally, weigh on dollar",
     "values": {
-     "published_hours_ago": 24.6
+     "published_hours_ago": 24.1
     }
    },
    {
@@ -813,9 +821,9 @@
      "S18"
     ],
     "topic": "news_macro",
-    "statement": "Newsonjapan.com 報導：Japan Stocks Rise for Third Day as Nikkei Reclaims 64,000",
+    "statement": "CNA 報導：Yen gains after BOJ, AI jitters drive Treasury rally, weigh on dollar",
     "values": {
-     "published_hours_ago": 31.6
+     "published_hours_ago": 24.3
     }
    },
    {
@@ -824,9 +832,9 @@
      "S19"
     ],
     "topic": "news_macro",
-    "statement": "CNA 報導：Euro steady against dollar after ECB leaves rates unchanged",
+    "statement": "The Times of India 報導：Global Market Today: Asian stocks slide as tech earnings disappoint, AI fears mount",
     "values": {
-     "published_hours_ago": 34.1
+     "published_hours_ago": 25.3
     }
    },
    {
@@ -2363,6 +2371,22 @@
    {
     "obs_id": "O71",
     "source_ref": [
+     "S24"
+    ],
+    "topic": "agent_price",
+    "statement": "2451.TW 2026-10-30 收 284（1日-3.40%、5日+3.3%、20日-1.7%、60日+1.1%）",
+    "values": {
+     "2451_close": 284.0,
+     "2451_chg_pct": -3.4,
+     "2451_mom20_pct": -1.73,
+     "2451_mom60_pct": 1.07,
+     "2451_vol20_pct": 37.3,
+     "2451_adv20_twd_m": 623.0
+    }
+   },
+   {
+    "obs_id": "O72",
+    "source_ref": [
      "S8"
     ],
     "topic": "agent_price",
@@ -2376,9 +2400,9 @@
     }
    },
    {
-    "obs_id": "O72",
+    "obs_id": "O73",
     "source_ref": [
-     "S24"
+     "S25"
     ],
     "topic": "agent_price",
     "statement": "TWD=X 2026-10-30 收 32.5669（1日+0.57%、5日-0.1%、20日+2.1%、60日+1.1%）",
@@ -2391,7 +2415,7 @@
     }
    },
    {
-    "obs_id": "O73",
+    "obs_id": "O74",
     "source_ref": [
      "S11"
     ],
@@ -2406,33 +2430,19 @@
     }
    },
    {
-    "obs_id": "O74",
-    "source_ref": [
-     "S25"
-    ],
-    "topic": "agent_price",
-    "statement": "^TNX 2026-10-30 收 4.929（1日-1.20%、5日-1.2%、20日-6.6%、60日+5.5%）",
-    "values": {
-     "tnx_close": 4.929,
-     "tnx_chg_pct": -1.2,
-     "tnx_ret5d_pct": -1.18,
-     "tnx_ret20d_pct": -6.59,
-     "tnx_ret60d_pct": 5.55
-    }
-   },
-   {
     "obs_id": "O75",
     "source_ref": [
      "S26"
     ],
     "topic": "agent_price",
-    "statement": "DX-Y.NYB 2026-10-30 收 101.964（1日-0.07%、5日+0.1%、20日+0.0%、60日+2.0%）",
+    "statement": "3443.TW 2026-10-30 收 7635（1日-0.07%、5日+0.7%、20日-5.0%、60日+82.4%）",
     "values": {
-     "dxynyb_close": 101.964,
-     "dxynyb_chg_pct": -0.07,
-     "dxynyb_ret5d_pct": 0.15,
-     "dxynyb_ret20d_pct": 0.03,
-     "dxynyb_ret60d_pct": 1.99
+     "3443_close": 7635.0,
+     "3443_chg_pct": -0.07,
+     "3443_mom20_pct": -5.04,
+     "3443_mom60_pct": 82.44,
+     "3443_vol20_pct": 69.5,
+     "3443_adv20_twd_m": 11238.0
     }
    },
    {
@@ -2542,31 +2552,17 @@
    {
     "obs_id": "O83",
     "source_ref": [
-     "S11"
+     "S33"
     ],
     "topic": "agent_price",
-    "statement": "^VIX 2026-10-30 收 19.42（1日+12.91%、5日-0.1%、20日+26.9%、60日+30.3%）",
+    "statement": "3680.TWO 2026-10-30 收 492.5（1日-5.47%、5日-2.1%、20日-11.3%、60日+17.4%）",
     "values": {
-     "vix_close": 19.42,
-     "vix_chg_pct": 12.91,
-     "vix_ret5d_pct": -0.15,
-     "vix_ret20d_pct": 26.85,
-     "vix_ret60d_pct": 30.34
-    }
-   },
-   {
-    "obs_id": "O84",
-    "source_ref": [
-     "S7"
-    ],
-    "topic": "agent_price",
-    "statement": "^SOX 2026-10-30 收 10688.8（1日-7.20%、5日-0.8%、20日-18.6%、60日-11.3%）",
-    "values": {
-     "sox_close": 10688.7998,
-     "sox_chg_pct": -7.2,
-     "sox_ret5d_pct": -0.84,
-     "sox_ret20d_pct": -18.63,
-     "sox_ret60d_pct": -11.29
+     "3680_close": 492.5,
+     "3680_chg_pct": -5.47,
+     "3680_mom20_pct": -11.26,
+     "3680_mom60_pct": 17.4,
+     "3680_vol20_pct": 42.1,
+     "3680_adv20_twd_m": 521.0
     }
    }
   ]
@@ -2574,168 +2570,180 @@
  "market_view": {
   "basis_refs": [
    "O1",
+   "O2",
+   "O6",
    "O25",
    "O29",
    "O30",
    "O61",
-   "O81",
-   "O82",
-   "O83",
-   "O84"
+   "O67",
+   "O68",
+   "O74"
   ],
-  "logic": "依據系統確定性體系模型（deterministic regime model）判定，費城半導體指數單日重挫7.20%（O25、O84），VIX恐慌指數飆升12.91%（O29、O83），加權指數跌破20日線（O30），且外資台指期淨空單逾9.2萬口（O61），市場廣度逾八成個股下跌（O1），加上WTI原油維持百元上方且高收益債利差擴大（O81、O82），總經與科技面風險指標全面轉向防禦。定量規則驅動投組進入risk_off機制，採取防禦姿態，調升現金水位以符合目標區間。",
+  "logic": "依據系統預設之量化體系模型，市場判定進入 risk_off 狀態。主要數據顯示：費城半導體指數單日重挫 7.20%、較20日均線折價 9.3%，VIX 恐慌指數單日飆升 12.91% 至 19.42，台灣加權指數單日下跌 2.49% 且失守 20 日線，市場廣度顯示 123 檔下跌僅 23 檔上漲，PCB 籃子跌幅更高達 6.22%，外資期貨淨空單擴大至 9.2 萬口。體系規則要求將姿態轉為防禦型，提高現金部位以符合現金窗口規範，暫緩科技高 Beta 部位之激進追價。",
   "regime": "risk_off",
   "stance": "defensive",
   "posture": {
    "net_exposure_intent": "reduce",
    "target_cash_pct_range": [
     0.12,
-    0.1484776013508345
+    0.15
    ]
   },
-  "counter_evidence": "航運與通信網路等防禦型類股逆勢收紅，部分抵銷大盤跌勢。",
+  "counter_evidence": "航運籃子單日逆勢上漲 2.04%，通信網路微漲 0.47%，核心半導體最新月營收中位數仍維持 45.8% 正成長。",
   "confidence": 0.85
  },
  "inferences": [
   {
    "inf_id": "I1",
    "premise_refs": [
-    "O83",
-    "O84"
+    "O25",
+    "O29",
+    "O30",
+    "O68",
+    "O74"
    ],
-   "logic": "費城半導體單日重挫7.20%（O84）且VIX單日飆升12.91%至19.42（O83），顯示全球科技與半導體供應鏈短期面臨劇烈估值調整壓力。投組依量化風控指引暫緩擴大半導體主題新部位，提高流動性與防禦緩衝。 【執行調整】2330 依原推論意圖減碼，並因現金比 11.85% 低於現金窗下限 12% 而確實執行（不受無交易帶／成本檢核攔阻）。",
-   "conclusion": "全面暫緩半導體族群新增部位，落實風險控管以應對系統性波動。｜執行調整：2330 依原推論意圖減碼，並因現金比 11.85% 低於現金窗下限 12% 而確實執行（不受無交易帶／成本檢核攔阻）。",
-   "counter_evidence": "核心半導體最新月營收中位數仍維持年增正成長。",
-   "confidence": 0.85
+   "logic": "費城半導體指數單日重挫 7.20% 且 20 日跌幅達 18.6%，VIX 指數飆升至 19.42，台股加權指數重挫 2.49%，依據量化規則應防範系統性修正，降低總曝險並提升現金部位。",
+   "conclusion": "遵循量化體系模型指示，維持防禦姿態，執行淨賣出以滿足現金窗口底線要求。",
+   "counter_evidence": "加權指數近 60 日仍維持 4.8% 漲幅。",
+   "confidence": 0.88
   },
   {
    "inf_id": "I2",
    "premise_refs": [
-    "O81",
-    "O82"
+    "O54",
+    "O69"
    ],
-   "logic": "WTI原油價格來到102.95美元（O81），且美國高收益債信用利差單日擴大12bp至3.26%（O82），高通膨與信用風險壓力推升科技股折現負擔。投組以維持低Beta與抗循環標的為主軸，堅守防禦配置以減緩整體資產回檔。",
-   "conclusion": "因應高通膨與利差擴大壓力，嚴控高估值科技股曝險，維持金融、電信等防禦持股配置。",
-   "counter_evidence": "美債10年期殖利率短線自高檔小幅拉回。",
-   "confidence": 0.85
+   "logic": "2330 雖然單日下跌 1.86% 且跌破 MA60，但最新 ROE 達 34.8%、營收年增 54.6%、淨利率 53.2%，基本面極為扎實。作為核心定海神針，不宜在市場大跌時盲目砍倉擴大換手成本，應維持現有核心權重。",
+   "conclusion": "維持 2330 核心核心持股部位不變，暫不追價加碼以觀望季線支撐。",
+   "counter_evidence": "2330 出現跌破 MA60 與破線警訊，且 ADR 單日重挫 5.95%。",
+   "confidence": 0.82
   },
   {
    "inf_id": "I3",
    "premise_refs": [
-    "O69",
-    "O84"
+    "O4",
+    "O56"
    ],
-   "logic": "2330單日下跌1.86%（O69）且費半重挫（O84），雖ROE具備34.8%之長期優質基本面，但單一持股權重偏高且貢獻投組主要風險。依風控建議適度調節以提升現金水位至合規區間，並降低單一權值股下檔衝擊。 【執行調整】2330 依原推論意圖減碼，並因現金比 11.85% 低於現金窗下限 12% 而確實執行（不受無交易帶／成本檢核攔阻）。",
-   "conclusion": "適度減碼2330，釋出資金回補現金部位以達法規下限，同時控制單一標的風險集中度。｜執行調整：2330 依原推論意圖減碼，並因現金比 11.85% 低於現金窗下限 12% 而確實執行（不受無交易帶／成本檢核攔阻）。",
-   "counter_evidence": "2330長期營收年增54.6%且流動性極佳。",
+   "logic": "4938 綜合評分居前（0.663），營收年增 86.9%，具備買進閘門許可（buy_ok），且伺服器組裝族群平均跌幅（-2.97%）相對半導體與零組件抗跌，適度增持可優化投組結構。 【執行調整】4938 原擬加碼，實際未執行（未通過無交易帶／成本／持有期／現金窗檢核），維持現有部位。",
+   "conclusion": "增持 4938，由高風險標的轉換資金，維持伺服器核心配置。｜執行調整：4938 原擬加碼，實際未執行（未通過無交易帶／成本／持有期／現金窗檢核），維持現有部位。",
+   "counter_evidence": "電腦伺服器族群單日等權平均跌幅 2.97%，無個股上漲。",
    "confidence": 0.8
   },
   {
    "inf_id": "I4",
    "premise_refs": [
-    "O78",
-    "O56"
+    "O6",
+    "O56",
+    "O70"
    ],
-   "logic": "3680即將除權息（O78），且面臨近20日跌幅加劇與除息貼息風險。考量其本益比33.1倍（O56），適度調節倉位有助於鎖定流動性並避免除息後流動性折價風險。",
-   "conclusion": "針對即將除息且技術轉弱之3680進行適度減碼，強化現金流動性防護。",
-   "counter_evidence": "3680為半導體設備重要供應鏈，具產業代表性。",
-   "confidence": 0.8
+   "logic": "PCB 族群單日重挫 6.22%，其中 4958 綜合評分偏低（0.436），ROE 僅 6.1%、本益比 57.5 倍偏高，且 20 日年化波動達 81%、ATR 達 7.16%，出現破線與缺口等警訊。依據風控指示應排除弱勢高波動標的以釋出流動性。",
+   "conclusion": "全數排除 4958，釋出現金以滿足現金比率要求；其餘 PCB 標的 8046、3189、3044 嚴格遵守減權上限限制。",
+   "counter_evidence": "4958 最新月營收年增仍有 36.1%。",
+   "confidence": 0.85
   },
   {
    "inf_id": "I5",
    "premise_refs": [
-    "O6",
-    "O55",
-    "O56",
-    "O70"
-   ],
-   "logic": "PCB與載板指數單日重挫6.22%（O6），3189、4958、8046、3044波動與Beta偏高。但考量各檔股票營收年增維持44.5%至57.8%（O55、O56、O70），且既有持股處於交易成本保護期，不宜在恐慌時殺跌，維持現有部位不加碼以恪守限額限制。",
-   "conclusion": "對3189、4958、8046、3044維持現有配置不予追加，恪守波動上限並監控破線風險。",
-   "counter_evidence": "載板族群短期技術面呈現跳空弱勢格局。",
-   "confidence": 0.75
-  },
-  {
-   "inf_id": "I6",
-   "premise_refs": [
-    "O4",
+    "O9",
+    "O10",
     "O54",
     "O55",
     "O56"
    ],
-   "logic": "電腦與伺服器周邊族群跌幅2.97%相對抗跌（O4），2376、2377、2451、3231、4938營收年增顯著（O54、O55、O56）。在整體risk_off環境下，維持核心伺服器組裝與記憶體配置不盲目換股，節省雙邊換手摩擦成本。",
-   "conclusion": "維持2376、2377、2451、3231、4938之現有持股部位，避免過度交易。",
-   "counter_evidence": "美股AI硬體龍頭短線面臨估值回吐壓力。",
-   "confidence": 0.8
+   "logic": "金融與電信類股在科技股拋售潮中表現出抗跌特性，金融籃子平均僅微跌 0.14%，電信籃子平均上漲 0.47%。持有 2412、3045、2801、2884、2885、5876 等標的有助於平抑投組淨值波動。",
+   "conclusion": "續抱 2412、3045 等電信標的及 2801、2884、2885、5876 等金融標的，不進行非必要換手。",
+   "counter_evidence": "2412 RSI 達 82.68 處於過熱區間，不可追加。",
+   "confidence": 0.85
+  },
+  {
+   "inf_id": "I6",
+   "premise_refs": [
+    "O2",
+    "O3",
+    "O70",
+    "O75",
+    "O83"
+   ],
+   "logic": "半導體與設備族群面臨估值回調壓力，3680 面臨除息且單日重挫 5.47% 跌破 MA60，2451、3443、2379、3034 各有營收高速成長之基本面支撐（營收年增 23% 至 200%），目前均受限於賣出閘門或持有天數限制，不宜躁動砍倉。",
+   "conclusion": "維持 3680、2451、3443、2379、3034 原有權重，暫停加碼科技股以控管下行風險。",
+   "counter_evidence": "3443 之 20 日波動度達 70%、ATR 達 7.05%，受 REDUCE 限制。",
+   "confidence": 0.78
   },
   {
    "inf_id": "I7",
    "premise_refs": [
-    "O9",
-    "O10",
-    "O12",
-    "O54",
-    "O55"
+    "O61",
+    "O79",
+    "O80",
+    "O81",
+    "O82"
    ],
-   "logic": "通信網路（O10）與航運物流（O12）逆勢收紅，金融保險（O9）跌幅僅0.14%，2412、3045、2603、2615、2801、2884、2885、5876展現優異抗震特性。在科技循環重挫期間維持非科技防禦部位，以發揮平衡整體投組波動功能。",
-   "conclusion": "維持2412、3045、2603、2615、2801、2884、2885、5876既有持股，維持防禦屏障。",
-   "counter_evidence": "2412技術指標高檔超買，不宜盲目追加。",
-   "confidence": 0.85
+   "logic": "投組歷史模擬 VaR95 為 1.35%，美債 10 年期殖利率處於 4.929% 高檔，美高收信用利差走擴 12bp 至 3.26%，核心科技曝險達 68.7%，需嚴控下行風險並將現金提升至規定範圍內。",
+   "conclusion": "整體權重預算控制在目標區間內，維持持股檔數 26 檔，兼顧流動性與防禦需求。",
+   "counter_evidence": "投組持股平均相關係數僅 0.09，具備分散效果。",
+   "confidence": 0.83
   }
  ],
  "decisions": [
   {
    "decision_id": "D1",
-   "ticker": "2330",
-   "action": "TRIM",
-   "target_weight": 0.1709,
+   "ticker": "4958",
+   "action": "SELL_ALL",
+   "target_weight": 0.0,
    "inference_refs": [
-    "I1",
-    "I3"
+    "I4"
    ],
-   "risk_check": "TRIM：實際執行後權重 16.89% ≤ 內部上限 22.0%（官方 25%）"
+   "risk_check": "出清持股，釋出資金"
   }
  ],
  "no_trade_decisions": [
   {
-   "ticker": "2347",
+   "ticker": "2330",
    "reason_refs": [
     "I2"
+   ],
+   "reason": "目標權重 18.09% 與現權重 18.09% 差距在動態無交易帶內 (允許偏差 1.00% / 相對 0.0%)，維持不動"
+  },
+  {
+   "ticker": "2347",
+   "reason_refs": [
+    "I7"
    ],
    "reason": "目標權重 2.04% 與現權重 2.04% 差距在動態無交易帶內 (允許偏差 0.41% / 相對 0.2%)，維持不動"
   },
   {
    "ticker": "2357",
    "reason_refs": [
-    "I6"
+    "I3"
    ],
    "reason": "目標權重 2.86% 與現權重 2.86% 差距在動態無交易帶內 (允許偏差 0.57% / 相對 0.0%)，維持不動"
   },
   {
    "ticker": "2376",
    "reason_refs": [
-    "I6"
+    "I3"
    ],
    "reason": "目標權重 2.91% 與現權重 2.91% 差距在動態無交易帶內 (允許偏差 0.58% / 相對 0.1%)，維持不動"
   },
   {
    "ticker": "2377",
    "reason_refs": [
-    "I6"
+    "I3"
    ],
    "reason": "目標權重 2.95% 與現權重 2.95% 差距在動態無交易帶內 (允許偏差 0.59% / 相對 0.0%)，維持不動"
   },
   {
    "ticker": "2379",
    "reason_refs": [
-    "I1"
+    "I6"
    ],
    "reason": "目標權重 3.11% 與現權重 3.11% 差距在動態無交易帶內 (允許偏差 0.62% / 相對 0.1%)，維持不動"
   },
   {
    "ticker": "2412",
    "reason_refs": [
-    "I2",
-    "I7"
+    "I5"
    ],
    "reason": "目標權重 2.05% 與現權重 2.05% 差距在動態無交易帶內 (允許偏差 0.41% / 相對 0.1%)，維持不動"
   },
@@ -2749,7 +2757,6 @@
   {
    "ticker": "2603",
    "reason_refs": [
-    "I2",
     "I7"
    ],
    "reason": "目標權重 2.10% 與現權重 2.10% 差距在動態無交易帶內 (允許偏差 0.42% / 相對 0.0%)，維持不動"
@@ -2757,7 +2764,6 @@
   {
    "ticker": "2615",
    "reason_refs": [
-    "I2",
     "I7"
    ],
    "reason": "目標權重 2.04% 與現權重 2.04% 差距在動態無交易帶內 (允許偏差 0.41% / 相對 0.0%)，維持不動"
@@ -2765,191 +2771,175 @@
   {
    "ticker": "2801",
    "reason_refs": [
-    "I2",
-    "I7"
+    "I5"
    ],
    "reason": "目標權重 2.09% 與現權重 2.09% 差距在動態無交易帶內 (允許偏差 0.42% / 相對 0.1%)，維持不動"
   },
   {
    "ticker": "2884",
    "reason_refs": [
-    "I2",
-    "I7"
+    "I5"
    ],
    "reason": "目標權重 3.01% 與現權重 3.01% 差距在動態無交易帶內 (允許偏差 0.60% / 相對 0.0%)，維持不動"
   },
   {
    "ticker": "2885",
    "reason_refs": [
-    "I2",
-    "I7"
+    "I5"
    ],
    "reason": "目標權重 2.04% 與現權重 2.04% 差距在動態無交易帶內 (允許偏差 0.41% / 相對 0.0%)，維持不動"
   },
   {
    "ticker": "3017",
    "reason_refs": [
-    "I1"
+    "I7"
    ],
    "reason": "目標權重 2.84% 與現權重 2.84% 差距在動態無交易帶內 (允許偏差 0.57% / 相對 0.2%)，維持不動"
   },
   {
    "ticker": "3034",
    "reason_refs": [
-    "I1"
+    "I6"
    ],
    "reason": "目標權重 2.98% 與現權重 2.98% 差距在動態無交易帶內 (允許偏差 0.60% / 相對 0.2%)，維持不動"
   },
   {
    "ticker": "3044",
    "reason_refs": [
-    "I5"
+    "I4"
    ],
    "reason": "目標權重 2.76% 與現權重 2.76% 差距在動態無交易帶內 (允許偏差 0.55% / 相對 0.1%)，維持不動"
   },
   {
    "ticker": "3045",
    "reason_refs": [
-    "I2",
-    "I7"
+    "I5"
    ],
    "reason": "目標權重 2.04% 與現權重 2.04% 差距在動態無交易帶內 (允許偏差 0.41% / 相對 0.1%)，維持不動"
   },
   {
    "ticker": "3189",
    "reason_refs": [
-    "I5"
+    "I4"
    ],
    "reason": "目標權重 2.85% 與現權重 2.85% 差距在動態無交易帶內 (允許偏差 0.57% / 相對 0.1%)，維持不動"
   },
   {
    "ticker": "3231",
    "reason_refs": [
-    "I6"
+    "I3"
    ],
    "reason": "目標權重 3.92% 與現權重 3.92% 差距在動態無交易帶內 (允許偏差 0.78% / 相對 0.1%)，維持不動"
   },
   {
    "ticker": "3443",
    "reason_refs": [
-    "I1"
+    "I6"
    ],
    "reason": "目標權重 2.33% 與現權重 2.33% 差距在動態無交易帶內 (允許偏差 0.47% / 相對 0.1%)，維持不動"
   },
   {
    "ticker": "3653",
    "reason_refs": [
-    "I1"
+    "I7"
    ],
    "reason": "目標權重 2.57% 與現權重 2.57% 差距在動態無交易帶內 (允許偏差 0.51% / 相對 0.0%)，維持不動"
   },
   {
    "ticker": "3680",
    "reason_refs": [
-    "I1",
-    "I4"
+    "I6"
    ],
-   "reason": "目標權重 2.48% 與現權重 2.96% 差距在動態無交易帶內 (允許偏差 0.50% / 相對 19.3%)，維持不動"
+   "reason": "目標權重 2.96% 與現權重 2.96% 差距在動態無交易帶內 (允許偏差 0.59% / 相對 0.1%)，維持不動"
   },
   {
    "ticker": "4938",
    "reason_refs": [
-    "I6"
+    "I3"
    ],
-   "reason": "目標權重 4.03% 與現權重 4.03% 差距在動態無交易帶內 (允許偏差 0.81% / 相對 0.1%)，維持不動"
-  },
-  {
-   "ticker": "4958",
-   "reason_refs": [
-    "I5"
-   ],
-   "reason": "目標權重 2.57% 與現權重 2.57% 差距在動態無交易帶內 (允許偏差 0.51% / 相對 0.1%)，維持不動"
+   "reason": "目標權重 4.93% 與現權重 4.03% 差距在動態無交易帶內 (允許偏差 0.99% / 相對 18.3%)，維持不動"
   },
   {
    "ticker": "5876",
    "reason_refs": [
-    "I2",
-    "I7"
+    "I5"
    ],
    "reason": "目標權重 2.03% 與現權重 2.03% 差距在動態無交易帶內 (允許偏差 0.41% / 相對 0.0%)，維持不動"
   },
   {
    "ticker": "6770",
    "reason_refs": [
-    "I1"
+    "I6"
    ],
    "reason": "目標權重 3.06% 與現權重 3.06% 差距在動態無交易帶內 (允許偏差 0.61% / 相對 0.1%)，維持不動"
   },
   {
    "ticker": "8046",
    "reason_refs": [
-    "I5"
+    "I4"
    ],
    "reason": "目標權重 2.79% 與現權重 2.79% 差距在動態無交易帶內 (允許偏差 0.56% / 相對 0.1%)，維持不動"
   }
  ],
  "orders": [
   {
-   "ticker": "2330",
+   "ticker": "4958",
    "side": "SELL",
-   "shares": 5000,
+   "shares": 52000,
    "decision_ref": "D1",
-   "derivation_detail": "target_shares = floor(0.1709×982,449,171 / 2370.0 / 1000)×1000 = 70,000；現持 75,000 → SELL 5,000"
+   "derivation_detail": "target_shares = floor(0.0×982,449,171 / 486.0 / 1000)×1000 = 0；現持 52,000 → SELL 52,000"
   }
  ],
  "preview": {
-  "holdings_count": 27,
-  "cash": 128195785.01,
-  "cash_ratio": 0.13049288585908733,
-  "nav_after": 982396735.01,
+  "holdings_count": 26,
+  "cash": 141558392.66,
+  "cash_ratio": 0.1441036459803964,
+  "nav_after": 982337342.66,
   "buy_amt": 0.0,
-  "sell_amt": 11850000.0,
-  "net_flow_pct_nav": -0.012061692702943876,
+  "sell_amt": 25272000.0,
+  "net_flow_pct_nav": -0.02572346818470866,
   "weights": {
-   "2330": 0.16887271108276972,
-   "4938": 0.04027395306805174,
-   "3231": 0.039225496814795244,
-   "2451": 0.0315106910444739,
-   "2379": 0.031060770982396835,
-   "6770": 0.030574816598605906,
-   "2884": 0.03010713385534504,
-   "3034": 0.029850465657035693,
-   "3680": 0.02957817240679675,
-   "2377": 0.029499283708129393,
-   "2376": 0.029071757857286936,
-   "2357": 0.02858926439705045,
-   "3189": 0.028461006641797716,
-   "3017": 0.0283541251790871,
-   "8046": 0.027860434613233315,
-   "3044": 0.027622241639192517,
-   "4958": 0.025724841196406004,
-   "3653": 0.025712626172096218,
-   "3443": 0.023315427651301027,
-   "2603": 0.021003734300674322,
-   "2801": 0.020875069377944592,
-   "2412": 0.020521240840437837,
-   "2615": 0.020399090597339995,
-   "2885": 0.020396647592478036,
-   "3045": 0.020383821816952762,
-   "2347": 0.02035786489029447,
-   "5876": 0.020304424158939165
+   "2330": 0.18094598696480751,
+   "4938": 0.04027638804085856,
+   "3231": 0.03922786839768696,
+   "2451": 0.03151259618836895,
+   "2379": 0.031062648924017645,
+   "6770": 0.030576665159308784,
+   "2884": 0.03010895413983773,
+   "3034": 0.029852270423307906,
+   "3680": 0.029579960710154115,
+   "2377": 0.029501067241857224,
+   "2376": 0.029073515542699872,
+   "2357": 0.02859099291079372,
+   "3189": 0.028462727401046516,
+   "3017": 0.028355839476257177,
+   "8046": 0.027862119061754044,
+   "3044": 0.027623911686509236,
+   "3653": 0.0257141807636064,
+   "3443": 0.023316837307616967,
+   "2603": 0.021005004191459006,
+   "2801": 0.020876331489617365,
+   "2412": 0.02052248155955285,
+   "2615": 0.02040032393122218,
+   "2885": 0.020397880778655567,
+   "3045": 0.020385054227680846,
+   "2347": 0.020359095731660577,
+   "5876": 0.02030565176926591
   }
  },
  "notes": [
-  "reconciled cash ratio 11.85% -> 13.05% (window [12%, 15%])",
-  "narrative aligned: 2330 依原推論意圖減碼，並因現金比 11.85% 低於現金窗下限 12% 而確實執行（不受無交易帶／成本檢核攔阻）。",
-  "cost gate kept: 2330: Minimum 5-day holding period not met (held 1 days)"
+  "narrative aligned: 4938 原擬加碼，實際未執行（未通過無交易帶／成本／持有期／現金窗檢核），維持現有部位。"
  ],
  "llm_meta": {
   "models": [
    "gemini-3.8-flash"
   ],
   "model": "gemini-3.8-flash",
-  "input_tokens": 272900,
-  "output_tokens": 33582,
-  "attempts": 3,
+  "input_tokens": 202138,
+  "output_tokens": 16461,
+  "attempts": 1,
   "tool_calls": 0
  },
- "run_started_at": "2026-10-31T09:30:15+08:00",
- "generated_at": "2026-10-31T09:37:39+08:00"
+ "run_started_at": "2026-10-31T10:07:33+08:00",
+ "generated_at": "2026-10-31T10:13:28+08:00"
 }

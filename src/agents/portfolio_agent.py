@@ -156,7 +156,8 @@ def build_user_prompt(
         if limits is not None:
             row["gate"] = {"buy_ok": sc_ is not None and sc_ >= limits.hurdle_buy,
                            "sell_ok": sc_ is not None and sc_ <= limits.hurdle_sell,
-                           "days_held": state.get("days_held", {}).get(t, 0)}
+                           "days_held": state.get("days_held", {}).get(t, 0),
+                           "risk_exempt": t in state.get("risk_exempt", ())}
         tk = tech_map.get(t)
         if tk:
             row["tech"] = {k: tk[s] for k, s in (("score", "tech_score"), ("rsi", "rsi14"), ("d20", "dist_ma20_pct"),
@@ -513,8 +514,21 @@ def enforce_turnover_limit(decisions, state, closes, rm, max_turnover=0.08):
             
     return decisions, f"discretionary trades scaled by {scale:.1%} to meet {max_turnover:.1%} turnover limit"
 
+def _risk_exempt(state, tech_ctx, rm, regime) -> set:
+    """Held names whose exit/trim is a RISK action, not an alpha trade: they bypass the 5-day hold rule and the
+    alpha cost-gate (a sell must otherwise have score <= ~0.33, which almost never holds in a sell-off)."""
+    techs = (tech_ctx or {}).get("technicals") or {}
+    out = {t for t in state["holdings"] if t in rm["VETO"] or t in rm["REDUCE"]}
+    if regime == "risk_off":
+        for t in state["holdings"]:
+            if {"breakdown", "below_ma60"} & set((techs.get(t) or {}).get("flags") or []):
+                out.add(t)
+    return out
+
+
 def derive_decisions(portfolio, exits, state, closes, limits: Limits, caps=None,
-                     scores=None, rm=None, skipped=None):
+                     scores=None, rm=None, skipped=None, risk_exempt=None):
+    rx = set(risk_exempt or ())
     caps, rm = caps or {}, rm or {"VETO": set()}
     skipped = skipped if skipped is not None else []
     decisions, no_trade, n = [], [], 0
@@ -538,13 +552,14 @@ def derive_decisions(portfolio, exits, state, closes, limits: Limits, caps=None,
         if gate_on:
             # --- Req 1 & 5: Minimum holding period ---
             days_held = state.get("days_held", {}).get(t, 0)
-            if tgt < cur and days_held < 5 and t not in rm["VETO"]:
+            if tgt < cur and days_held < 5 and t not in rm["VETO"] and t not in rx:
                 skipped.append(f"{t}: Minimum 5-day holding period not met (held {days_held} days)")
                 no_trade.append({"ticker": t, "reason_refs": p["inference_refs"][:5],
                                  "reason": f"未滿5日最低持有期限制 (已持有 {days_held} 日)"})
                 continue
 
-            forced = cur_w > cap_t + 1e-9 or (cur == 0 and n_held < limits.min_n)
+            forced = (cur_w > cap_t + 1e-9 or (cur == 0 and n_held < limits.min_n)
+                      or (tgt < cur and t in rx))
             ok, why = cost_gate("BUY" if tgt > cur else "SELL", abs(tgt - cur), closes[t], nav,
                                 scores.get(t), limits, forced)
             if not ok:
@@ -560,7 +575,7 @@ def derive_decisions(portfolio, exits, state, closes, limits: Limits, caps=None,
                           "risk_check": f"目標權重 {w:.2%} ≤ 內部上限 {cap_t:.1%}（官方 {official}）"})
     for e in exits:
         t, cur = e["ticker"], state["holdings"].get(e["ticker"], 0)
-        if gate_on and t not in rm["VETO"]:
+        if gate_on and t not in rm["VETO"] and t not in rx:
             # --- Req 1 & 5: Minimum holding period ---
             days_held = state.get("days_held", {}).get(t, 0)
             if days_held < 5:
@@ -604,6 +619,19 @@ def sync_intent(mv: dict, report: dict, limits: Limits):
 
 
 # ===================================================================== main loop
+def smooth_cash_window(lo, hi, prev, shift=0.03, min_width=0.03):
+    """Regime cash window narrowed to prev +/- shift. Never returns an empty / inverted window: if the regime window
+    is unreachable in one day the (feasible) regime window is kept; windows narrower than min_width are widened
+    inside the regime window so the weight budget (sum_lo..sum_hi) is not squeezed to a sliver."""
+    nlo, nhi = max(lo, prev - shift), min(hi, prev + shift)
+    if nlo > nhi:
+        return round(lo, 4), round(hi, 4)
+    if nhi - nlo < min_width:
+        nhi = min(hi, nlo + min_width)
+        nlo = max(lo, nhi - min_width)
+    return round(nlo, 4), round(nhi, 4)
+
+
 def run_agent(
     trade_date, state, market, universe, book, strategy, limits, started_at,
     ask=None, factor_df=None, regime="neutral", journal_ctx=None, as_of=None, risk_ctx=None,
@@ -623,17 +651,15 @@ def run_agent(
     prev_cash_ratio = state["cash"] / state["nav"]
     max_cash_shift = 0.03
     
-    new_cash_lo = max(limits.cash_lo, prev_cash_ratio - max_cash_shift)
-    new_cash_hi = min(limits.cash_hi, prev_cash_ratio + max_cash_shift)
-    
-    # Ensure window is valid if limits inverted
-    if new_cash_lo > new_cash_hi:
-        new_cash_lo = min(new_cash_lo, new_cash_hi)
-        
+    new_cash_lo, new_cash_hi = smooth_cash_window(limits.cash_lo, limits.cash_hi, prev_cash_ratio, max_cash_shift)
     limits = dataclasses.replace(limits, cash_lo=new_cash_lo, cash_hi=new_cash_hi)
 
     rm = check_agent.risk_maps(risk_ctx)
     caps = weight_caps(limits, rm)
+    risk_exempt = _risk_exempt(state, tech_ctx, rm, regime)
+    state["risk_exempt"] = sorted(risk_exempt)
+    if risk_exempt:
+        print(f"  risk-exempt (hold-period and cost-gate waived for de-risking): {sorted(risk_exempt)}")
     candidates = build_shortlist(all_candidates, state["holdings"], factor_df, universe, rm)
     baseline = baseline_weights(candidates, factor_df, universe, limits, state, closes, caps)
     print(f"  shortlist: {len(candidates)} of {len(all_candidates)} stocks | baseline: {len(baseline)} names"
@@ -686,6 +712,8 @@ def run_agent(
         errs = check_structure(mv, infs, portfolio, exits, ctx)
         weights_map = {p.get("ticker"): p.get("target_weight") for p in portfolio if p.get("ticker")}
         errs += check_agent.check_narrative_consistency(infs, weights_map)
+        if attempt < MAX_ATTEMPTS:      # never let the lint alone force the deterministic fallback
+            errs += check_agent.check_unsupported_claims(infs)
         if not errs:
             errs += reconcile.precheck_plan(portfolio, exits, state, closes, limits)
       
@@ -699,7 +727,7 @@ def run_agent(
         if not errs:
             skipped = []
             decisions, no_trade = derive_decisions(portfolio, exits, state, closes, limits, caps,
-                                                   scores=score_map, rm=rm, skipped=skipped)
+                                                   scores=score_map, rm=rm, skipped=skipped, risk_exempt=risk_exempt)
             # --- Req 3: Stricter turnover limit ---
             decisions, turn_note = enforce_turnover_limit(decisions, state, closes, rm, limits.max_turnover)
             if turn_note: attempt_notes.append(turn_note)

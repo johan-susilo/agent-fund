@@ -64,6 +64,32 @@ def check_price_freshness(state: dict, market: dict, tol: float) -> list:
     return bad
 
 
+def _days_held_from_datapacks(trade_date: str, holdings: dict):
+    """Consecutive DataPacks (ending at trade_date) in which each ticker was held, read from the server's own
+    inputs/<date>/datapack.json files. Stateless: re-runs and a lost/changed log file cannot reset the count."""
+    snaps = {}
+    for p in (ROOT / "inputs").glob("*/datapack.json"):
+        try:
+            dp = json.loads(p.read_text(encoding="utf-8"))
+            td = str(dp.get("trade_date") or "")
+            if dp.get("doc_type") != "DataPack" or dp.get("account") is None or not td or td > trade_date:
+                continue
+            snaps[td] = {h["code"] for h in (dp.get("holdings") or []) if (h.get("shares") or 0) > 0}
+        except Exception:
+            continue
+    snaps[trade_date] = set(holdings)
+    dates = sorted(snaps)
+    out = {}
+    for t in holdings:
+        n = 0
+        for td in reversed(dates):
+            if t not in snaps[td]:
+                break
+            n += 1
+        out[t] = n
+    return out, dates
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("trade_date")
@@ -87,22 +113,11 @@ def main():
         strategy = json.loads((CONFIG_DIR / "strategy.json").read_text(encoding="utf-8"))
         as_of = state["as_of_date"] or prev_weekday(d)
 
-        # --- REQ 1 & 5: Minimum Holding Period Tracker ---
-        tracker_file = ROOT / "logs" / "days_held.json"
-        trk = {}
-        if tracker_file.exists():
-            try:
-                trk = json.loads(tracker_file.read_text(encoding="utf-8"))
-            except Exception:
-                trk = {}
-        # count each trade date once: re-running the same date must not add another day
-        base = trk.get("prev_days_held", {}) if trk.get("last_trade_date") == d else trk.get("days_held", {})
-        current_days_held = {t: base.get(t, 0) + 1 for t in state["holdings"]}
-        state["days_held"] = current_days_held
-        if not a.replay:
-            (ROOT / "logs").mkdir(exist_ok=True)
-            tracker_file.write_text(json.dumps({"last_trade_date": d, "days_held": current_days_held,
-                                                "prev_days_held": base}, indent=2), encoding="utf-8")
+        # --- Minimum holding period: derived from the server DataPacks (stateless; re-runs cannot reset it) ---
+        state["days_held"], _dh_dates = _days_held_from_datapacks(d, state["holdings"])
+        print(f"  days_held from {len(_dh_dates)} DataPack(s), latest {_dh_dates[-5:]}")
+        if state["holdings"] and len(_dh_dates) < 5:
+            print("  !! fewer than 5 DataPacks under inputs/: days_held may be under-counted for older holdings")
         # -------------------------------------------------
 
         print(f"=== [1/5] DataPack === team {state['team_id']} | NAV {state['nav']:,.0f} | "

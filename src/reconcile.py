@@ -249,7 +249,7 @@ def apply(decisions, no_trade, infs, mv, portfolio_raw, exits, state, closes, li
         t, w = p["ticker"], p["target_weight"]
         cur = held.get(t, 0)
         want = _sign(target_shares(w, nav, closes[t]) - cur)
-        material = cur == 0 or abs(w - cw(t)) > max(0.003, min(w * 0.20, limits.no_trade_band))
+        material = cur == 0 or abs(w - cw(t)) > 0.002   # 0.2% NAV: a stated trim/add must show up in the narrative
         got = _sign(delta.get(t, 0))
         if want and material and got != want and t not in evented:
             reason = why.get(t) or "未通過無交易帶／成本／持有期／現金窗檢核"

@@ -326,3 +326,17 @@ def check_projected_risk(weights: dict, tech) -> list:
         return [f"projected VaR95 {st['var95_pct_nav']:.2f}% NAV exceeds {PROJ_VAR95_LIMIT}%: "
                 "lower weights in the highest risk contributors " + str(st["top_risk"])]
     return []
+
+
+UNSUPPORTED_CLAIMS = re.compile(r"低\s*[Bb]eta|抗循環|抗震|免疫|高股息|高殖利率|吸收系統性風險")
+
+
+def check_unsupported_claims(infs: list) -> list:
+    """The prompt forbids claims no observation supports (beta, dividend yield, 'immune', ...). Send them back."""
+    errs = []
+    for i in infs:
+        m = UNSUPPORTED_CLAIMS.search(f"{i.get('logic', '')} {i.get('conclusion', '')}")
+        if m:
+            errs.append(f"{i.get('inf_id')} uses the unsupported claim '{m.group(0)}': no observation supplies that metric. "
+                        "Describe only what the cited numbers show (momentum, volatility, P/E, ROE, revenue growth, theme move).")
+    return errs

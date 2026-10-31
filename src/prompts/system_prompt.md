@@ -30,7 +30,7 @@ NO WEIGHTS IN PROSE: write target weights only in portfolio. logic, conclusion a
   (`must_net_sell_pct_nav`). In risk_off, or when net_exposure_intent is "reduce", never ADD/BUY unless the same plan
   funds it with explicit trims. An ADD that pushes cash below the window is cancelled by code.
 - GATES: per candidate, `gate.buy_ok=false` means an ADD/BUY will be cancelled by the cost gate; `gate.sell_ok=false`
-  or `days_held<5` means an exit/trim of a held stock will be cancelled (unless VETO). Do not write inferences that
+  or `days_held<5` means an exit/trim of a held stock will be cancelled (unless VETO or `gate.risk_exempt=true`: a held name with a REDUCE cap, or a breakdown / below_ma60 name in risk_off, may be trimmed or exited freely). In risk_off raise cash by trimming the highest-risk names first (breakdown / below_ma60 flags, high `atr` / `vol20`, weak `comp`) rather than the low-volatility 2330 anchor, consistent with the declared strategy of cutting high-volatility positions when the trend weakens. Do not write inferences that
   promise a trade the gate will cancel; keep the stock in `portfolio` instead.
 
 ## How to decide

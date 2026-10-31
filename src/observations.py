@@ -67,6 +67,7 @@ class EvidenceBook:
         self.observations: list = []
         self.meta: dict = {}                 # obs_id -> {"level", "tickers"}
         self._src_key: dict = {}
+        self._obs_key: dict = {}             # (statement, sources) -> obs_id
         self.dropped: int = 0                # observations refused because the budget was full
 
     # ---- registration -------------------------------------------------
@@ -88,6 +89,9 @@ class EvidenceBook:
         values = _clean_values(values)
         if not values:                       # schema requires at least one numeric value
             return None
+        dkey = (statement, tuple(source_ids))
+        if dkey in self._obs_key:            # same fact from the same source: reuse, keep the 100-obs budget
+            return self._obs_key[dkey]
         if len(self.observations) >= MAX_OBS:
             self.dropped += 1                # never abort the run for a full budget
             return None
@@ -98,6 +102,7 @@ class EvidenceBook:
         self.observations.append({"obs_id": oid, "source_ref": source_ids, "topic": topic,
                                   "statement": cut(statement, 500), "values": values})
         self.meta[oid] = {"level": level, "tickers": list(tickers)}
+        self._obs_key[dkey] = oid
         return oid
 
     def absorb(self, frag: dict) -> int:
