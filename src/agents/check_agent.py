@@ -15,6 +15,7 @@ import os
 from datetime import datetime, timedelta
 
 from derive_orders import derive_orders, project_portfolio
+from direction_checks import check_direction, check_narrative_vs_orders
 from settings import CONFIG_DIR, OFFICIAL, SUBMIT_CLOSE, SUBMIT_OPEN, TW, Limits
 from util import parse_ts
 
@@ -241,6 +242,8 @@ def final_gate(d: dict, state: dict, closes: dict, universe, limits: Limits, fil
     schema_errs, schema_warns = _schema(d)
     errs, warns = list(schema_errs), list(schema_warns)
     errs += _chain(d) + _coverage(d, state, universe) + _times(d)
+    errs += check_direction(d)
+    warns += check_narrative_vs_orders(d, state)
 
     if d["team_id"] != state["team_id"] or d["trade_date"] != state["trade_date"]:
         errs.append("team_id / trade_date do not match the DataPack")
@@ -291,7 +294,7 @@ def check_narrative_consistency(inferences: list, weights: dict) -> list:
         text = str(inf.get("logic", "")) + " " + str(inf.get("conclusion", ""))
         
         # Look for an EXCLUSION verb followed within 15 characters by a 4-digit ticker
-        exclusions = re.findall(r"(?:exclude|drop|remove|avoid|skip|eliminate|排除|不納入|剔除|刪除|未納入|出清|減碼)[^0-9]{0,15}?([0-9]{4})", text, re.IGNORECASE)
+        exclusions = re.findall(r"(?:exclude|drop|remove|avoid|skip|eliminate|排除|不納入|剔除|刪除|未納入|出清)[^0-9]{0,15}?([0-9]{4})", text, re.IGNORECASE)
         for t in exclusions:
             if t in decision_tickers:
                 errs.append(f"Narrative contradiction: You explicitly stated you would exclude/drop {t} in inference '{inf.get('inf_id')}', but assigned it a weight. Remove {t}.")

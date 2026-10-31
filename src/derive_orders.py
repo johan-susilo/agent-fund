@@ -2,6 +2,12 @@
 
 The LLM only supplies target weights; share counts always come from this module and are
 never hand-adjusted. Rule checks live in risk_agent.py.
+
+CHANGE vs previous version: target shares are computed from the OFFICIAL previous-day NAV
+(`state["nav"]` = DataPack nav_tradable). The old code multiplied NAV by (1 - fee - tax), which
+made submitted share counts differ from the server's official derivation (e.g. 2615 on 2026-11-02:
+submitted SELL 128,000, official SELL 127,000). Fee safety is already provided by the cash window
+and the sum_lo/sum_hi margins in settings.Limits.
 """
 from __future__ import annotations
 
@@ -11,10 +17,7 @@ from settings import FEE_RATE, LOT, TAX_RATE
 
 
 def target_shares(weight: float, nav: float, price: float) -> int:
-    """Official formula: floor(weight x prev NAV / prev close / 1000) x 1000.
-
-    The expression order is kept exactly as published so float rounding matches the server.
-    """
+    """Official formula: floor(weight x prev NAV / prev close / 1000) x 1000."""
     return math.floor(weight * nav / price / LOT) * LOT
 
 
@@ -26,18 +29,11 @@ def lot_weight(nav: float, price: float) -> float:
 def derive_orders(decisions: list, state: dict, closes: dict) -> list:
     """decisions: [{"decision_id","ticker","action","target_weight"}]; closes: previous close per ticker."""
     orders = []
-    
-    # Pre-calculate a fee-buffered NAV so official weight formulas don't over-deploy cash
-    buffer_ratio = 1.0 - (FEE_RATE + TAX_RATE)
-    usable_nav = state["nav"] * buffer_ratio
-    
     for d in decisions:
         t = d["ticker"]
         if t not in closes:
             raise ValueError(f"{t}: no previous close available")
-        
-        # Use usable_nav to maintain compliance with E.SUN formula validation rules
-        tgt = target_shares(d["target_weight"], usable_nav, closes[t])
+        tgt = target_shares(d["target_weight"], state["nav"], closes[t])   # official NAV, no buffer
         cur = state["holdings"].get(t, 0)
         diff = tgt - cur
         if diff == 0:
@@ -64,7 +60,6 @@ def project_portfolio(orders: list, state: dict, closes: dict) -> dict:
             cash -= amt * (1 + FEE_RATE)
             fees += amt * FEE_RATE
             buy_amt += amt
-            
         else:
             shares[o["ticker"]] = shares.get(o["ticker"], 0) - o["shares"]
             cash += amt * (1 - FEE_RATE - TAX_RATE)
@@ -83,6 +78,7 @@ def project_portfolio(orders: list, state: dict, closes: dict) -> dict:
         "net_flow_pct_nav": (buy_amt - sell_amt) / state["nav"],
         "weights": dict(sorted(((t, v / nav) for t, v in values.items()), key=lambda x: -x[1])),
     }
+
 
 def cost_gate(side, shares, price, nav, score, limits, forced=False, check_size=True):
     """(ok, reason). Discretionary trades must beat their own fee; forced trades always pass."""

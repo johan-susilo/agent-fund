@@ -5,77 +5,77 @@
    "name": "FRED DGS10: 美國 10 年期公債殖利率(%)",
    "url": "https://fred.stlouisfed.org/series/DGS10",
    "content_as_of": "2026-10-24T04:00:00+08:00",
-   "fetched_at": "2026-10-28T00:27:27+08:00"
+   "fetched_at": "2026-10-28T00:41:08+08:00"
   },
   {
    "authority": "vendor",
    "name": "FRED VIXCLS: VIX 恐慌指數",
    "url": "https://fred.stlouisfed.org/series/VIXCLS",
    "content_as_of": "2026-10-27T04:00:00+08:00",
-   "fetched_at": "2026-10-28T00:27:27+08:00"
+   "fetched_at": "2026-10-28T00:41:08+08:00"
   },
   {
    "authority": "vendor",
    "name": "FRED DEXTAUS: 美元兌新台幣(TWD/USD)",
    "url": "https://fred.stlouisfed.org/series/DEXTAUS",
    "content_as_of": "2026-10-24T04:00:00+08:00",
-   "fetched_at": "2026-10-28T00:27:27+08:00"
+   "fetched_at": "2026-10-28T00:41:08+08:00"
   },
   {
    "authority": "vendor",
    "name": "FRED NASDAQCOM: 那斯達克綜合指數",
    "url": "https://fred.stlouisfed.org/series/NASDAQCOM",
    "content_as_of": "2026-10-27T04:00:00+08:00",
-   "fetched_at": "2026-10-28T00:27:27+08:00"
+   "fetched_at": "2026-10-28T00:41:08+08:00"
   },
   {
    "authority": "vendor",
    "name": "Yahoo Finance (^SOX): 費城半導體指數 (SOX) (未定時盤中快照)",
    "url": "https://finance.yahoo.com/quote/%5ESOX/",
-   "content_as_of": "2026-10-28T00:27:29+08:00",
-   "fetched_at": "2026-10-28T00:27:29+08:00"
+   "content_as_of": "2026-10-28T00:41:11+08:00",
+   "fetched_at": "2026-10-28T00:41:11+08:00"
   },
   {
    "authority": "vendor",
    "name": "Yahoo Finance (TSM): 台積電 ADR (TSM) (未定時盤中快照)",
    "url": "https://finance.yahoo.com/quote/TSM/",
-   "content_as_of": "2026-10-28T00:27:29+08:00",
-   "fetched_at": "2026-10-28T00:27:29+08:00"
+   "content_as_of": "2026-10-28T00:41:11+08:00",
+   "fetched_at": "2026-10-28T00:41:11+08:00"
   },
   {
    "authority": "vendor",
    "name": "Yahoo Finance (NVDA): NVIDIA (NVDA) AI伺服器指標 (未定時盤中快照)",
    "url": "https://finance.yahoo.com/quote/NVDA/",
-   "content_as_of": "2026-10-28T00:27:29+08:00",
-   "fetched_at": "2026-10-28T00:27:29+08:00"
+   "content_as_of": "2026-10-28T00:41:11+08:00",
+   "fetched_at": "2026-10-28T00:41:11+08:00"
   },
   {
    "authority": "vendor",
    "name": "Yahoo Finance (MU): Micron (MU) HBM與記憶體指標 (未定時盤中快照)",
    "url": "https://finance.yahoo.com/quote/MU/",
-   "content_as_of": "2026-10-28T00:27:29+08:00",
-   "fetched_at": "2026-10-28T00:27:29+08:00"
+   "content_as_of": "2026-10-28T00:41:11+08:00",
+   "fetched_at": "2026-10-28T00:41:11+08:00"
   },
   {
    "authority": "vendor",
    "name": "Yahoo Finance (^VIX): VIX 波動率指數 (含20日均線比) (未定時盤中快照)",
    "url": "https://finance.yahoo.com/quote/%5EVIX/",
-   "content_as_of": "2026-10-28T00:27:29+08:00",
-   "fetched_at": "2026-10-28T00:27:29+08:00"
+   "content_as_of": "2026-10-28T00:41:11+08:00",
+   "fetched_at": "2026-10-28T00:41:11+08:00"
   },
   {
    "authority": "vendor",
    "name": "Yahoo Finance (^TWII): 台灣加權指數 (TAIEX)",
    "url": "https://finance.yahoo.com/quote/%5ETWII/",
    "content_as_of": "2026-10-22T13:30:00+08:00",
-   "fetched_at": "2026-10-28T00:27:29+08:00"
+   "fetched_at": "2026-10-28T00:41:11+08:00"
   },
   {
    "authority": "vendor",
    "name": "Yahoo Finance (TWD=X): 美元兌台幣即期匯率 (USD/TWD)",
    "url": "https://finance.yahoo.com/quote/TWD=X/",
    "content_as_of": "2026-10-27T13:30:00+08:00",
-   "fetched_at": "2026-10-28T00:27:29+08:00"
+   "fetched_at": "2026-10-28T00:41:11+08:00"
   },
   {
    "authority": "media",
@@ -84,7 +84,7 @@
    "archive_url": null,
    "published_at": "2026-10-26T21:14:00+08:00",
    "content_as_of": "2026-10-26T21:14:00+08:00",
-   "fetched_at": "2026-10-28T00:27:26+08:00"
+   "fetched_at": "2026-10-28T00:41:08+08:00"
   },
   {
    "authority": "media",
@@ -93,7 +93,7 @@
    "archive_url": null,
    "published_at": "2026-10-26T18:10:39+08:00",
    "content_as_of": "2026-10-26T18:10:39+08:00",
-   "fetched_at": "2026-10-28T00:27:26+08:00"
+   "fetched_at": "2026-10-28T00:41:08+08:00"
   },
   {
    "authority": "media",
@@ -102,7 +102,7 @@
    "archive_url": null,
    "published_at": "2026-10-26T17:58:31+08:00",
    "content_as_of": "2026-10-26T17:58:31+08:00",
-   "fetched_at": "2026-10-28T00:27:26+08:00"
+   "fetched_at": "2026-10-28T00:41:08+08:00"
   },
   {
    "authority": "media",
@@ -111,7 +111,7 @@
    "archive_url": null,
    "published_at": "2026-10-27T00:00:30+08:00",
    "content_as_of": "2026-10-27T00:00:30+08:00",
-   "fetched_at": "2026-10-28T00:27:26+08:00"
+   "fetched_at": "2026-10-28T00:41:08+08:00"
   },
   {
    "authority": "media",
@@ -120,7 +120,7 @@
    "archive_url": null,
    "published_at": "2026-10-26T19:28:29+08:00",
    "content_as_of": "2026-10-26T19:28:29+08:00",
-   "fetched_at": "2026-10-28T00:27:26+08:00"
+   "fetched_at": "2026-10-28T00:41:08+08:00"
   }
  ],
  "observations": [
@@ -184,12 +184,12 @@
    "src": [
     4
    ],
-   "statement": "費城半導體指數 (SOX) 2026-10-27 盤中(報價時間未知) 11467.2（前值 11083.5，單日 +3.46%，較20日均線 -4.5%）",
+   "statement": "費城半導體指數 (SOX) 2026-10-27 盤中(報價時間未知) 11434（前值 11083.5，單日 +3.16%，較20日均線 -4.8%）",
    "values": {
-    "sox": 11467.19,
+    "sox": 11433.96,
     "sox_prev": 11083.47,
-    "sox_chg_pct": 3.46,
-    "sox_vs_ma20_pct": -4.54
+    "sox_chg_pct": 3.16,
+    "sox_vs_ma20_pct": -4.81
    },
    "topic": "macro_sox",
    "level": "market",
@@ -199,12 +199,12 @@
    "src": [
     5
    ],
-   "statement": "台積電 ADR (TSM) 2026-10-27 盤中(報價時間未知) 437.3（前值 424.37，單日 +3.05%，較20日均線 -1.3%）",
+   "statement": "台積電 ADR (TSM) 2026-10-27 盤中(報價時間未知) 436.445（前值 424.37，單日 +2.85%，較20日均線 -1.5%）",
    "values": {
-    "tsm_adr": 437.3,
+    "tsm_adr": 436.45,
     "tsm_adr_prev": 424.37,
-    "tsm_adr_chg_pct": 3.05,
-    "tsm_adr_vs_ma20_pct": -1.33
+    "tsm_adr_chg_pct": 2.85,
+    "tsm_adr_vs_ma20_pct": -1.51
    },
    "topic": "macro_tsm_adr",
    "level": "market",
@@ -214,12 +214,12 @@
    "src": [
     6
    ],
-   "statement": "NVIDIA (NVDA) AI伺服器指標 2026-10-27 盤中(報價時間未知) 218.893（前值 216，單日 +1.34%，較20日均線 -2.5%）",
+   "statement": "NVIDIA (NVDA) AI伺服器指標 2026-10-27 盤中(報價時間未知) 217.97（前值 216，單日 +0.91%，較20日均線 -2.9%）",
    "values": {
-    "nvda": 218.89,
+    "nvda": 217.97,
     "nvda_prev": 216.0,
-    "nvda_chg_pct": 1.34,
-    "nvda_vs_ma20_pct": -2.49
+    "nvda_chg_pct": 0.91,
+    "nvda_vs_ma20_pct": -2.88
    },
    "topic": "macro_nvda",
    "level": "market",
@@ -229,12 +229,12 @@
    "src": [
     7
    ],
-   "statement": "Micron (MU) HBM與記憶體指標 2026-10-27 盤中(報價時間未知) 933.225（前值 903.7，單日 +3.27%，較20日均線 -4.0%）",
+   "statement": "Micron (MU) HBM與記憶體指標 2026-10-27 盤中(報價時間未知) 929.255（前值 903.7，單日 +2.83%，較20日均線 -4.4%）",
    "values": {
-    "mu": 933.22,
+    "mu": 929.26,
     "mu_prev": 903.7,
-    "mu_chg_pct": 3.27,
-    "mu_vs_ma20_pct": -4.04
+    "mu_chg_pct": 2.83,
+    "mu_vs_ma20_pct": -4.43
    },
    "topic": "macro_mu",
    "level": "market",
@@ -244,12 +244,12 @@
    "src": [
     8
    ],
-   "statement": "VIX 波動率指數 (含20日均線比) 2026-10-27 盤中(報價時間未知) 17.56（前值 18.39，單日 -4.51%，較20日均線 +5.0%）",
+   "statement": "VIX 波動率指數 (含20日均線比) 2026-10-27 盤中(報價時間未知) 17.55（前值 18.39，單日 -4.57%，較20日均線 +4.9%）",
    "values": {
-    "vix_yf": 17.56,
+    "vix_yf": 17.55,
     "vix_yf_prev": 18.39,
-    "vix_yf_chg_pct": -4.51,
-    "vix_yf_vs_ma20_pct": 4.97
+    "vix_yf_chg_pct": -4.57,
+    "vix_yf_vs_ma20_pct": 4.92
    },
    "topic": "macro_vix_yf",
    "level": "market",
@@ -274,11 +274,11 @@
    "src": [
     10
    ],
-   "statement": "美元兌台幣即期匯率 (USD/TWD) 2026-10-27 收 32.394（前值 32.5708，單日 -0.54%，較20日均線 +0.8%）",
+   "statement": "美元兌台幣即期匯率 (USD/TWD) 2026-10-27 收 32.392（前值 32.5708，單日 -0.55%，較20日均線 +0.8%）",
    "values": {
     "usdtwd_spot": 32.39,
     "usdtwd_spot_prev": 32.57,
-    "usdtwd_spot_chg_pct": -0.54,
+    "usdtwd_spot_chg_pct": -0.55,
     "usdtwd_spot_vs_ma20_pct": 0.82
    },
    "topic": "macro_usdtwd_spot",
@@ -291,7 +291,7 @@
    ],
    "statement": "Theregister.com 報導：We shouldn't be surprised about the PHPocalypse, as the internet is built on sticks and glue",
    "values": {
-    "published_hours_ago": 27.2
+    "published_hours_ago": 27.5
    },
    "topic": "news_semis",
    "level": "market",
@@ -303,7 +303,7 @@
    ],
    "statement": "Crypto Briefing 報導：Foxconn launches AI factory powered by Nvidia supercomputing cluster",
    "values": {
-    "published_hours_ago": 30.3
+    "published_hours_ago": 30.5
    },
    "topic": "news_semis",
    "level": "market",
@@ -315,7 +315,7 @@
    ],
    "statement": "Securityaffairs.com 報導：PHP2Shell: Suspected North Korean campaign targets 216 vulnerable PHP hosts",
    "values": {
-    "published_hours_ago": 30.5
+    "published_hours_ago": 30.7
    },
    "topic": "news_semis",
    "level": "market",
@@ -327,7 +327,7 @@
    ],
    "statement": "CryptoSlate 報導：Treasury dealers’ net bill holdings hit a two-year high as October 30 funding pressure nears",
    "values": {
-    "published_hours_ago": 24.4
+    "published_hours_ago": 24.7
    },
    "topic": "news_macro",
    "level": "market",
@@ -339,7 +339,7 @@
    ],
    "statement": "The Times of India 報導：Bitcoin hovers near $80,000 and Ethereum tests $2,300 as macro and geopolitical risks weigh on crypto markets",
    "values": {
-    "published_hours_ago": 29.0
+    "published_hours_ago": 29.2
    },
    "topic": "news_macro",
    "level": "market",

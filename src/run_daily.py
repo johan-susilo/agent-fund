@@ -89,25 +89,20 @@ def main():
 
         # --- REQ 1 & 5: Minimum Holding Period Tracker ---
         tracker_file = ROOT / "logs" / "days_held.json"
-        prev_days_held = {}
+        trk = {}
         if tracker_file.exists():
             try:
-                prev_days_held = json.loads(tracker_file.read_text(encoding="utf-8"))
+                trk = json.loads(tracker_file.read_text(encoding="utf-8"))
             except Exception:
-                pass
-        
-        current_days_held = {}
-        # Calculate days held strictly based on actual confirmed holdings from the portal
-        for t in state["holdings"]:
-            current_days_held[t] = prev_days_held.get(t, 0) + 1
-            
-        # Inject into state so portfolio_agent.py can read it
+                trk = {}
+        # count each trade date once: re-running the same date must not add another day
+        base = trk.get("prev_days_held", {}) if trk.get("last_trade_date") == d else trk.get("days_held", {})
+        current_days_held = {t: base.get(t, 0) + 1 for t in state["holdings"]}
         state["days_held"] = current_days_held
-        
-        # Save the tracker for tomorrow (skip saving if this is a dry-run replay)
         if not a.replay:
             (ROOT / "logs").mkdir(exist_ok=True)
-            tracker_file.write_text(json.dumps(current_days_held, indent=2), encoding="utf-8")
+            tracker_file.write_text(json.dumps({"last_trade_date": d, "days_held": current_days_held,
+                                                "prev_days_held": base}, indent=2), encoding="utf-8")
         # -------------------------------------------------
 
         print(f"=== [1/5] DataPack === team {state['team_id']} | NAV {state['nav']:,.0f} | "

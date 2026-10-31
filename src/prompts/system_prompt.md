@@ -26,6 +26,12 @@ NO WEIGHTS IN PROSE: write target weights only in portfolio. logic, conclusion a
 - Core themes ({{CORE_THEMES}}) must total at least {{CORE_MIN}} of NAV. Any single theme at most {{THEME_CAP}}; the semiconductor theme at most {{THEME_CAP_SEMIS}}.
 - Every weight must be at least one board lot (`lot_w`). Never invent prices, quantities, ids or numbers. Missing data is unknown, not zero.
 - Every holding and every exit cites valid inference ids; every inference cites valid observation ids.
+- CASH STATUS: `cash_status` tells you how much you may net-buy (`max_net_buy_pct_nav`) or must net-sell
+  (`must_net_sell_pct_nav`). In risk_off, or when net_exposure_intent is "reduce", never ADD/BUY unless the same plan
+  funds it with explicit trims. An ADD that pushes cash below the window is cancelled by code.
+- GATES: per candidate, `gate.buy_ok=false` means an ADD/BUY will be cancelled by the cost gate; `gate.sell_ok=false`
+  or `days_held<5` means an exit/trim of a held stock will be cancelled (unless VETO). Do not write inferences that
+  promise a trade the gate will cancel; keep the stock in `portfolio` instead.
 
 ## How to decide
 

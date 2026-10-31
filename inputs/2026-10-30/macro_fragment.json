@@ -1,0 +1,332 @@
+{
+ "sources": [
+  {
+   "authority": "vendor",
+   "name": "FRED DGS10: 美國 10 年期公債殖利率(%)",
+   "url": "https://fred.stlouisfed.org/series/DGS10",
+   "content_as_of": "2026-10-28T04:00:00+08:00",
+   "fetched_at": "2026-10-29T19:39:09+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "FRED VIXCLS: VIX 恐慌指數",
+   "url": "https://fred.stlouisfed.org/series/VIXCLS",
+   "content_as_of": "2026-10-28T04:00:00+08:00",
+   "fetched_at": "2026-10-29T19:39:09+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "FRED DEXTAUS: 美元兌新台幣(TWD/USD)",
+   "url": "https://fred.stlouisfed.org/series/DEXTAUS",
+   "content_as_of": "2026-10-24T04:00:00+08:00",
+   "fetched_at": "2026-10-29T19:39:10+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "FRED NASDAQCOM: 那斯達克綜合指數",
+   "url": "https://fred.stlouisfed.org/series/NASDAQCOM",
+   "content_as_of": "2026-10-29T04:00:00+08:00",
+   "fetched_at": "2026-10-29T19:39:09+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "Yahoo Finance (^SOX): 費城半導體指數 (SOX)",
+   "url": "https://finance.yahoo.com/quote/%5ESOX/",
+   "content_as_of": "2026-10-29T04:00:00+08:00",
+   "fetched_at": "2026-10-29T19:39:12+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "Yahoo Finance (TSM): 台積電 ADR (TSM)",
+   "url": "https://finance.yahoo.com/quote/TSM/",
+   "content_as_of": "2026-10-29T04:00:00+08:00",
+   "fetched_at": "2026-10-29T19:39:12+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "Yahoo Finance (NVDA): NVIDIA (NVDA) AI伺服器指標",
+   "url": "https://finance.yahoo.com/quote/NVDA/",
+   "content_as_of": "2026-10-29T04:00:00+08:00",
+   "fetched_at": "2026-10-29T19:39:12+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "Yahoo Finance (MU): Micron (MU) HBM與記憶體指標",
+   "url": "https://finance.yahoo.com/quote/MU/",
+   "content_as_of": "2026-10-29T04:00:00+08:00",
+   "fetched_at": "2026-10-29T19:39:12+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "Yahoo Finance (^VIX): VIX 波動率指數 (含20日均線比) (未定時盤中快照)",
+   "url": "https://finance.yahoo.com/quote/%5EVIX/",
+   "content_as_of": "2026-10-29T19:39:12+08:00",
+   "fetched_at": "2026-10-29T19:39:12+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "Yahoo Finance (^TWII): 台灣加權指數 (TAIEX)",
+   "url": "https://finance.yahoo.com/quote/%5ETWII/",
+   "content_as_of": "2026-10-29T13:30:00+08:00",
+   "fetched_at": "2026-10-29T19:39:12+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "Yahoo Finance (TWD=X): 美元兌台幣即期匯率 (USD/TWD)",
+   "url": "https://finance.yahoo.com/quote/TWD=X/",
+   "content_as_of": "2026-10-29T13:30:00+08:00",
+   "fetched_at": "2026-10-29T19:39:12+08:00"
+  },
+  {
+   "authority": "media",
+   "name": "Business Standard: After memory, AI drives up chip costs: Will phones and laptops get pricier?",
+   "url": "https://www.business-standard.com/technology/tech-news/ai-chip-costs-tsmc-cowos-price-hike-smartphone-laptop-prices-126102801174_1.html",
+   "archive_url": null,
+   "published_at": "2026-10-28T18:37:48+08:00",
+   "content_as_of": "2026-10-28T18:37:48+08:00",
+   "fetched_at": "2026-10-29T19:39:08+08:00"
+  },
+  {
+   "authority": "media",
+   "name": "Rigzone: Energy on Edge Ahead of USA Midterms",
+   "url": "https://www.rigzone.com/news/energy_on_edge_ahead_of_usa_midterms-28-oct-2026-184950-article/",
+   "archive_url": null,
+   "published_at": "2026-10-28T19:02:58+08:00",
+   "content_as_of": "2026-10-28T19:02:58+08:00",
+   "fetched_at": "2026-10-29T19:39:08+08:00"
+  },
+  {
+   "authority": "media",
+   "name": "CNA: Dollar steady ahead of Fed decision; focus on UK budget",
+   "url": "https://www.channelnewsasia.com/business/dollar-steady-ahead-fed-decision-focus-uk-budget-6498961",
+   "archive_url": null,
+   "published_at": "2026-10-28T18:35:01+08:00",
+   "content_as_of": "2026-10-28T18:35:01+08:00",
+   "fetched_at": "2026-10-29T19:39:08+08:00"
+  },
+  {
+   "authority": "media",
+   "name": "Ibtimes.com.au: ASX 200 Surrenders Big Gains as Inflation Jumps to 4.3% and Markets Bet Heavily on a November RBA Rate Hike",
+   "url": "https://www.ibtimes.com.au/australian-shares-fall-rba-rate-hike-bets-1877490",
+   "archive_url": null,
+   "published_at": "2026-10-28T16:18:46+08:00",
+   "content_as_of": "2026-10-28T16:18:46+08:00",
+   "fetched_at": "2026-10-29T19:39:08+08:00"
+  }
+ ],
+ "observations": [
+  {
+   "src": [
+    0
+   ],
+   "statement": "美國 10 年期公債殖利率(%) 2026-10-27 收 4.99（前一筆 5，變動 -1.00bp）",
+   "values": {
+    "us10y": 4.99,
+    "us10y_prev": 5.0,
+    "us10y_chg_bp": -1.0
+   },
+   "topic": "macro_us10y",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    1
+   ],
+   "statement": "VIX 恐慌指數 2026-10-27 收 17.52（前一筆 18.39，變動 -4.73%）",
+   "values": {
+    "vix": 17.52,
+    "vix_prev": 18.39,
+    "vix_chg_pct": -4.73
+   },
+   "topic": "macro_vix",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    2
+   ],
+   "statement": "美元兌新台幣(TWD/USD) 2026-10-23 收 32.54（前一筆 32.54，變動 +0.00%）",
+   "values": {
+    "usdtwd": 32.54,
+    "usdtwd_prev": 32.54,
+    "usdtwd_chg_pct": 0.0
+   },
+   "topic": "macro_usdtwd",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    3
+   ],
+   "statement": "那斯達克綜合指數 2026-10-28 收 26549.8（前一筆 26477.8，變動 +0.27%）",
+   "values": {
+    "nasdaq": 26549.85,
+    "nasdaq_prev": 26477.81,
+    "nasdaq_chg_pct": 0.27
+   },
+   "topic": "macro_nasdaq",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    4
+   ],
+   "statement": "費城半導體指數 (SOX) 2026-10-28 收 11684（前值 11482.5，單日 +1.75%，較20日均線 -2.4%）",
+   "values": {
+    "sox": 11684.0,
+    "sox_prev": 11482.5,
+    "sox_chg_pct": 1.75,
+    "sox_vs_ma20_pct": -2.36
+   },
+   "topic": "macro_sox",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    5
+   ],
+   "statement": "台積電 ADR (TSM) 2026-10-28 收 439.51（前值 436.87，單日 +0.60%，較20日均線 -0.6%）",
+   "values": {
+    "tsm_adr": 439.51,
+    "tsm_adr_prev": 436.87,
+    "tsm_adr_chg_pct": 0.6,
+    "tsm_adr_vs_ma20_pct": -0.64
+   },
+   "topic": "macro_tsm_adr",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    6
+   ],
+   "statement": "NVIDIA (NVDA) AI伺服器指標 2026-10-28 收 215.38（前值 217.94，單日 -1.17%，較20日均線 -3.8%）",
+   "values": {
+    "nvda": 215.38,
+    "nvda_prev": 217.94,
+    "nvda_chg_pct": -1.17,
+    "nvda_vs_ma20_pct": -3.76
+   },
+   "topic": "macro_nvda",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    7
+   ],
+   "statement": "Micron (MU) HBM與記憶體指標 2026-10-28 收 983.23（前值 928.76，單日 +5.86%，較20日均線 +1.6%）",
+   "values": {
+    "mu": 983.23,
+    "mu_prev": 928.76,
+    "mu_chg_pct": 5.86,
+    "mu_vs_ma20_pct": 1.55
+   },
+   "topic": "macro_mu",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    8
+   ],
+   "statement": "VIX 波動率指數 (含20日均線比) 2026-10-29 盤中(報價時間未知) 16.97（前值 16.91，單日 +0.35%，較20日均線 +1.1%）",
+   "values": {
+    "vix_yf": 16.97,
+    "vix_yf_prev": 16.91,
+    "vix_yf_chg_pct": 0.35,
+    "vix_yf_vs_ma20_pct": 1.11
+   },
+   "topic": "macro_vix_yf",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    9
+   ],
+   "statement": "台灣加權指數 (TAIEX) 2026-10-29 收 46368.3（前值 47035.6，單日 -1.42%，較20日均線 -3.1%）",
+   "values": {
+    "taiex": 46368.33,
+    "taiex_prev": 47035.58,
+    "taiex_chg_pct": -1.42,
+    "taiex_vs_ma20_pct": -3.09
+   },
+   "topic": "macro_taiex",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    10
+   ],
+   "statement": "美元兌台幣即期匯率 (USD/TWD) 2026-10-29 收 32.551（前值 32.4255，單日 +0.39%，較20日均線 +1.1%）",
+   "values": {
+    "usdtwd_spot": 32.55,
+    "usdtwd_spot_prev": 32.43,
+    "usdtwd_spot_chg_pct": 0.39,
+    "usdtwd_spot_vs_ma20_pct": 1.09
+   },
+   "topic": "macro_usdtwd_spot",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    11
+   ],
+   "statement": "Business Standard 報導：After memory, AI drives up chip costs: Will phones and laptops get pricier?",
+   "values": {
+    "published_hours_ago": 25.0
+   },
+   "topic": "news_semis",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    12
+   ],
+   "statement": "Rigzone 報導：Energy on Edge Ahead of USA Midterms",
+   "values": {
+    "published_hours_ago": 24.6
+   },
+   "topic": "news_macro",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    13
+   ],
+   "statement": "CNA 報導：Dollar steady ahead of Fed decision; focus on UK budget",
+   "values": {
+    "published_hours_ago": 25.1
+   },
+   "topic": "news_macro",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    14
+   ],
+   "statement": "Ibtimes.com.au 報導：ASX 200 Surrenders Big Gains as Inflation Jumps to 4.3% and Markets Bet Heavily on a November RBA Rate Hike",
+   "values": {
+    "published_hours_ago": 27.3
+   },
+   "topic": "news_macro",
+   "level": "market",
+   "tickers": []
+  }
+ ],
+ "tool_calls": 7,
+ "warnings": [
+  "FINNHUB_API_KEY missing: economic calendar skipped"
+ ]
+}

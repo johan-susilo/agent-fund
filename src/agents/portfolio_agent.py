@@ -22,6 +22,7 @@ import os
 import traceback
 
 from agents import check_agent
+import reconcile
 from derive_orders import derive_orders, lot_weight, project_portfolio, target_shares, cost_gate  
 from settings import PROMPT_DIR, ROOT, Limits
 from util import iso, now_tw
@@ -151,6 +152,11 @@ def build_user_prompt(
             "max_w": round(caps.get(t, limits.cap(t)), 4) if limits else None,
             "lot_w": round(lot_weight(nav, closes[t]), 4), "obs": tobs.get(t, [])[:7],
         }
+        sc_ = _num(f.get("score"))
+        if limits is not None:
+            row["gate"] = {"buy_ok": sc_ is not None and sc_ >= limits.hurdle_buy,
+                           "sell_ok": sc_ is not None and sc_ <= limits.hurdle_sell,
+                           "days_held": state.get("days_held", {}).get(t, 0)}
         tk = tech_map.get(t)
         if tk:
             row["tech"] = {k: tk[s] for k, s in (("score", "tech_score"), ("rsi", "rsi14"), ("d20", "dist_ma20_pct"),
@@ -199,6 +205,11 @@ def build_user_prompt(
             "min_trade_w": limits.min_trade_w, "score_hurdle_buy": limits.hurdle_buy,
             "score_hurdle_sell": limits.hurdle_sell,
             "rule": "discretionary trades failing the hurdle are cancelled in code and the stock keeps its current weight"},
+        "cash_status": None if not limits else {
+            "current_cash_ratio": round(state["cash"] / nav, 4),
+            "window": [limits.cash_lo, limits.cash_hi],
+            "must_net_sell_pct_nav": round(max(0.0, limits.cash_lo + 0.003 - state["cash"] / nav), 4),
+            "max_net_buy_pct_nav": round(max(0.0, state["cash"] / nav - limits.cash_lo - 0.003), 4)},
         "baseline_portfolio": base_w,
         "risk_manager": {
             "summary": risk_ctx["notes"] if risk_ctx else None,
@@ -468,6 +479,8 @@ def normalize_weights(portfolio: list, limits: Limits, caps: dict | None = None)
 
 def enforce_turnover_limit(decisions, state, closes, rm, max_turnover=0.08):
     """Req 3: Limits daily one-way turnover to max_turnover by scaling down discretionary trades."""
+    if not state["holdings"]:      # day 1 build has no turnover limit (check_turnover also skips it)
+        return decisions, None
     nav = state["nav"]
     turnover = 0.0
     discretionary_diffs = {}
@@ -673,6 +686,8 @@ def run_agent(
         errs = check_structure(mv, infs, portfolio, exits, ctx)
         weights_map = {p.get("ticker"): p.get("target_weight") for p in portfolio if p.get("ticker")}
         errs += check_agent.check_narrative_consistency(infs, weights_map)
+        if not errs:
+            errs += reconcile.precheck_plan(portfolio, exits, state, closes, limits)
       
         
         attempt_notes = []
@@ -690,8 +705,10 @@ def run_agent(
             if turn_note: attempt_notes.append(turn_note)
 
             try:
-                decisions, orders, _, fix = repair_post_band_cash(decisions, no_trade, state, closes, limits)
-                attempt_notes += ([fix] if fix else []) + [f"cost gate kept: {s}" for s in skipped]
+                decisions, no_trade, orders, _, rec_notes = reconcile.apply(
+                    decisions, no_trade, infs, mv, portfolio, exits, state, closes, limits,
+                    score_map, rm, skipped)
+                attempt_notes += rec_notes + [f"cost gate kept: {s}" for s in skipped]
             except ValueError as e:
                 errs.append(str(e))
         if not errs:
@@ -749,7 +766,10 @@ def run_agent(
     decisions, turn_note = enforce_turnover_limit(decisions, state, closes, rm, limits.max_turnover)
     if turn_note: notes.append(turn_note)
     
-    decisions, orders, report, _ = repair_post_band_cash(decisions, no_trade, state, closes, limits)
+    decisions, no_trade, orders, report, rec_notes = reconcile.apply(
+        decisions, no_trade, infs, mv, portfolio, exits, state, closes, limits,
+        score_map, rm, None)
+    notes += rec_notes
     widen_cash_range(mv, report, limits)
     # Sync net_exposure_intent with actual net_flow_pct_nav
     flow = report["net_flow_pct_nav"]

@@ -1,0 +1,374 @@
+{
+ "sources": [
+  {
+   "authority": "vendor",
+   "name": "FRED DGS10: 美國 10 年期公債殖利率(%)",
+   "url": "https://fred.stlouisfed.org/series/DGS10",
+   "content_as_of": "2026-10-30T04:00:00+08:00",
+   "fetched_at": "2026-10-31T09:30:17+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "FRED VIXCLS: VIX 恐慌指數",
+   "url": "https://fred.stlouisfed.org/series/VIXCLS",
+   "content_as_of": "2026-10-30T04:00:00+08:00",
+   "fetched_at": "2026-10-31T09:30:17+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "FRED DEXTAUS: 美元兌新台幣(TWD/USD)",
+   "url": "https://fred.stlouisfed.org/series/DEXTAUS",
+   "content_as_of": "2026-10-24T04:00:00+08:00",
+   "fetched_at": "2026-10-31T09:30:17+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "FRED NASDAQCOM: 那斯達克綜合指數",
+   "url": "https://fred.stlouisfed.org/series/NASDAQCOM",
+   "content_as_of": "2026-10-30T04:00:00+08:00",
+   "fetched_at": "2026-10-31T09:30:17+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "Yahoo Finance (^SOX): 費城半導體指數 (SOX)",
+   "url": "https://finance.yahoo.com/quote/%5ESOX/",
+   "content_as_of": "2026-10-31T04:00:00+08:00",
+   "fetched_at": "2026-10-31T09:30:19+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "Yahoo Finance (TSM): 台積電 ADR (TSM)",
+   "url": "https://finance.yahoo.com/quote/TSM/",
+   "content_as_of": "2026-10-31T04:00:00+08:00",
+   "fetched_at": "2026-10-31T09:30:19+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "Yahoo Finance (NVDA): NVIDIA (NVDA) AI伺服器指標",
+   "url": "https://finance.yahoo.com/quote/NVDA/",
+   "content_as_of": "2026-10-31T04:00:00+08:00",
+   "fetched_at": "2026-10-31T09:30:19+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "Yahoo Finance (MU): Micron (MU) HBM與記憶體指標",
+   "url": "https://finance.yahoo.com/quote/MU/",
+   "content_as_of": "2026-10-31T04:00:00+08:00",
+   "fetched_at": "2026-10-31T09:30:19+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "Yahoo Finance (^VIX): VIX 波動率指數 (含20日均線比)",
+   "url": "https://finance.yahoo.com/quote/%5EVIX/",
+   "content_as_of": "2026-10-31T04:00:00+08:00",
+   "fetched_at": "2026-10-31T09:30:19+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "Yahoo Finance (^TWII): 台灣加權指數 (TAIEX)",
+   "url": "https://finance.yahoo.com/quote/%5ETWII/",
+   "content_as_of": "2026-10-30T13:30:00+08:00",
+   "fetched_at": "2026-10-31T09:30:19+08:00"
+  },
+  {
+   "authority": "vendor",
+   "name": "Yahoo Finance (TWD=X): 美元兌台幣即期匯率 (USD/TWD)",
+   "url": "https://finance.yahoo.com/quote/TWD=X/",
+   "content_as_of": "2026-10-30T13:30:00+08:00",
+   "fetched_at": "2026-10-31T09:30:19+08:00"
+  },
+  {
+   "authority": "media",
+   "name": "BusinessLine: Intel shares plunge 21% as weak PC demand and supply shortages hit revenue outlook",
+   "url": "https://www.thehindubusinessline.com/markets/intel-shares-plunge-21-as-weak-pc-demand-and-supply-shortages-hit-revenue-outlook/article71643361.ece",
+   "archive_url": null,
+   "published_at": "2026-10-30T07:58:45+08:00",
+   "content_as_of": "2026-10-30T07:58:45+08:00",
+   "fetched_at": "2026-10-31T09:30:15+08:00"
+  },
+  {
+   "authority": "media",
+   "name": "CNBC: Intel stock plunges 20% as chipmaker blames PC slowdown for weak guidance",
+   "url": "https://www.cnbc.com/2026/10/29/intel-intc-q3-earnings-report-2026-.html",
+   "archive_url": null,
+   "published_at": "2026-10-30T04:06:00+08:00",
+   "content_as_of": "2026-10-30T04:06:00+08:00",
+   "fetched_at": "2026-10-31T09:30:15+08:00"
+  },
+  {
+   "authority": "media",
+   "name": "New York Post: Alleged Chinese spy had ‘close relationship’ with Nvidia boss Jensen Huang: report",
+   "url": "https://nypost.com/2026/10/29/business/alleged-chinese-spy-had-close-relationship-with-nvidia-boss-jensen-huang-report/",
+   "archive_url": null,
+   "published_at": "2026-10-30T00:42:44+08:00",
+   "content_as_of": "2026-10-30T00:42:44+08:00",
+   "fetched_at": "2026-10-31T09:30:15+08:00"
+  },
+  {
+   "authority": "media",
+   "name": "The Times of India: Global Market Today: Asian stocks slide as tech earnings disappoint, AI fears mount",
+   "url": "https://economictimes.indiatimes.com/markets/us-stocks/news/global-market-today/articleshow/135337523.cms",
+   "archive_url": null,
+   "published_at": "2026-10-30T08:52:15+08:00",
+   "content_as_of": "2026-10-30T08:52:15+08:00",
+   "fetched_at": "2026-10-31T09:30:15+08:00"
+  },
+  {
+   "authority": "media",
+   "name": "Newsonjapan.com: Japan Stocks Rise for Third Day as Nikkei Reclaims 64,000",
+   "url": "https://newsonjapan.com/article/151176.php",
+   "archive_url": null,
+   "published_at": "2026-10-30T01:52:38+08:00",
+   "content_as_of": "2026-10-30T01:52:38+08:00",
+   "fetched_at": "2026-10-31T09:30:15+08:00"
+  },
+  {
+   "authority": "media",
+   "name": "CNA: Euro steady against dollar after ECB leaves rates unchanged",
+   "url": "https://www.channelnewsasia.com/business/euro-steady-against-dollar-after-ecb-leaves-rates-unchanged-6501936",
+   "archive_url": null,
+   "published_at": "2026-10-29T23:23:50+08:00",
+   "content_as_of": "2026-10-29T23:23:50+08:00",
+   "fetched_at": "2026-10-31T09:30:15+08:00"
+  }
+ ],
+ "observations": [
+  {
+   "src": [
+    0
+   ],
+   "statement": "美國 10 年期公債殖利率(%) 2026-10-29 收 4.98（前一筆 5.05，變動 -7.00bp）",
+   "values": {
+    "us10y": 4.98,
+    "us10y_prev": 5.05,
+    "us10y_chg_bp": -7.0
+   },
+   "topic": "macro_us10y",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    1
+   ],
+   "statement": "VIX 恐慌指數 2026-10-29 收 17.2（前一筆 16.91，變動 +1.71%）",
+   "values": {
+    "vix": 17.2,
+    "vix_prev": 16.91,
+    "vix_chg_pct": 1.71
+   },
+   "topic": "macro_vix",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    2
+   ],
+   "statement": "美元兌新台幣(TWD/USD) 2026-10-23 收 32.54（前一筆 32.54，變動 +0.00%）",
+   "values": {
+    "usdtwd": 32.54,
+    "usdtwd_prev": 32.54,
+    "usdtwd_chg_pct": 0.0
+   },
+   "topic": "macro_usdtwd",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    3
+   ],
+   "statement": "那斯達克綜合指數 2026-10-29 收 26184.7（前一筆 26549.8，變動 -1.38%）",
+   "values": {
+    "nasdaq": 26184.72,
+    "nasdaq_prev": 26549.85,
+    "nasdaq_chg_pct": -1.38
+   },
+   "topic": "macro_nasdaq",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    4
+   ],
+   "statement": "費城半導體指數 (SOX) 2026-10-30 收 10688.8（前值 11518.2，單日 -7.20%，較20日均線 -9.3%）",
+   "values": {
+    "sox": 10688.8,
+    "sox_prev": 11518.2,
+    "sox_chg_pct": -7.2,
+    "sox_vs_ma20_pct": -9.25
+   },
+   "topic": "macro_sox",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    5
+   ],
+   "statement": "台積電 ADR (TSM) 2026-10-30 收 406.13（前值 431.81，單日 -5.95%，較20日均線 -7.2%）",
+   "values": {
+    "tsm_adr": 406.13,
+    "tsm_adr_prev": 431.81,
+    "tsm_adr_chg_pct": -5.95,
+    "tsm_adr_vs_ma20_pct": -7.2
+   },
+   "topic": "macro_tsm_adr",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    6
+   ],
+   "statement": "NVIDIA (NVDA) AI伺服器指標 2026-10-30 收 204.64（前值 213.66，單日 -4.22%，較20日均線 -7.6%）",
+   "values": {
+    "nvda": 204.64,
+    "nvda_prev": 213.66,
+    "nvda_chg_pct": -4.22,
+    "nvda_vs_ma20_pct": -7.59
+   },
+   "topic": "macro_nvda",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    7
+   ],
+   "statement": "Micron (MU) HBM與記憶體指標 2026-10-30 收 884.74（前值 934.27，單日 -5.30%，較20日均線 -6.9%）",
+   "values": {
+    "mu": 884.74,
+    "mu_prev": 934.27,
+    "mu_chg_pct": -5.3,
+    "mu_vs_ma20_pct": -6.92
+   },
+   "topic": "macro_mu",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    8
+   ],
+   "statement": "VIX 波動率指數 (含20日均線比) 2026-10-30 收 19.42（前值 17.2，單日 +12.91%，較20日均線 +14.2%）",
+   "values": {
+    "vix_yf": 19.42,
+    "vix_yf_prev": 17.2,
+    "vix_yf_chg_pct": 12.91,
+    "vix_yf_vs_ma20_pct": 14.23
+   },
+   "topic": "macro_vix_yf",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    9
+   ],
+   "statement": "台灣加權指數 (TAIEX) 2026-10-30 收 45211.8（前值 46368.3，單日 -2.49%，較20日均線 -5.3%）",
+   "values": {
+    "taiex": 45211.83,
+    "taiex_prev": 46368.33,
+    "taiex_chg_pct": -2.49,
+    "taiex_vs_ma20_pct": -5.27
+   },
+   "topic": "macro_taiex",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    10
+   ],
+   "statement": "美元兌台幣即期匯率 (USD/TWD) 2026-10-30 收 32.5669（前值 32.3828，單日 +0.57%，較20日均線 +1.1%）",
+   "values": {
+    "usdtwd_spot": 32.57,
+    "usdtwd_spot_prev": 32.38,
+    "usdtwd_spot_chg_pct": 0.57,
+    "usdtwd_spot_vs_ma20_pct": 1.06
+   },
+   "topic": "macro_usdtwd_spot",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    11
+   ],
+   "statement": "BusinessLine 報導：Intel shares plunge 21% as weak PC demand and supply shortages hit revenue outlook",
+   "values": {
+    "published_hours_ago": 25.5
+   },
+   "topic": "news_semis",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    12
+   ],
+   "statement": "CNBC 報導：Intel stock plunges 20% as chipmaker blames PC slowdown for weak guidance",
+   "values": {
+    "published_hours_ago": 29.4
+   },
+   "topic": "news_semis",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    13
+   ],
+   "statement": "New York Post 報導：Alleged Chinese spy had ‘close relationship’ with Nvidia boss Jensen Huang: report",
+   "values": {
+    "published_hours_ago": 32.8
+   },
+   "topic": "news_semis",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    14
+   ],
+   "statement": "The Times of India 報導：Global Market Today: Asian stocks slide as tech earnings disappoint, AI fears mount",
+   "values": {
+    "published_hours_ago": 24.6
+   },
+   "topic": "news_macro",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    15
+   ],
+   "statement": "Newsonjapan.com 報導：Japan Stocks Rise for Third Day as Nikkei Reclaims 64,000",
+   "values": {
+    "published_hours_ago": 31.6
+   },
+   "topic": "news_macro",
+   "level": "market",
+   "tickers": []
+  },
+  {
+   "src": [
+    16
+   ],
+   "statement": "CNA 報導：Euro steady against dollar after ECB leaves rates unchanged",
+   "values": {
+    "published_hours_ago": 34.1
+   },
+   "topic": "news_macro",
+   "level": "market",
+   "tickers": []
+  }
+ ],
+ "tool_calls": 7,
+ "warnings": [
+  "FINNHUB_API_KEY missing: economic calendar skipped"
+ ]
+}

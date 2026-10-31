@@ -3,35 +3,35 @@
   {
    "authority": "vendor",
    "url": "https://finance.yahoo.com/",
-   "fetched_at": "2026-10-28T00:27:26+08:00",
+   "fetched_at": "2026-10-28T00:41:08+08:00",
    "name": "Yahoo Finance 日線歷史價量（技術指標）",
    "content_as_of": "2026-10-27T13:30:00+08:00"
   },
   {
    "authority": "vendor",
    "url": "https://finmindtrade.com/",
-   "fetched_at": "2026-10-28T00:27:26+08:00",
+   "fetched_at": "2026-10-28T00:41:08+08:00",
    "name": "FinMind 開放資料：台指期外資未平倉、個股融資餘額",
    "content_as_of": "2026-10-27T18:30:00+08:00"
   },
   {
    "authority": "vendor",
-   "name": "Yahoo Finance (^SOX) 日線",
-   "fetched_at": "2026-10-28T00:28:04+08:00",
-   "url": "https://finance.yahoo.com/quote/%5ESOX/",
-   "content_as_of": "2026-10-28T04:00:00+08:00"
-  },
-  {
-   "authority": "vendor",
    "name": "Yahoo Finance (2330.TW) 日線",
-   "fetched_at": "2026-10-28T00:28:04+08:00",
+   "fetched_at": "2026-10-28T00:41:40+08:00",
    "url": "https://finance.yahoo.com/quote/2330.TW/",
    "content_as_of": "2026-10-27T13:30:00+08:00"
   },
   {
    "authority": "vendor",
+   "name": "Yahoo Finance (^SOX) 日線",
+   "fetched_at": "2026-10-28T00:41:40+08:00",
+   "url": "https://finance.yahoo.com/quote/%5ESOX/",
+   "content_as_of": "2026-10-28T04:00:00+08:00"
+  },
+  {
+   "authority": "vendor",
    "name": "Yahoo Finance (2454.TW) 日線",
-   "fetched_at": "2026-10-28T00:28:04+08:00",
+   "fetched_at": "2026-10-28T00:41:40+08:00",
    "url": "https://finance.yahoo.com/quote/2454.TW/",
    "content_as_of": "2026-10-27T13:30:00+08:00"
   }
@@ -459,22 +459,6 @@
    "src": [
     2
    ],
-   "statement": "^SOX 2026-10-27 盤中(報價時間未知) 11464.3（1日+3.44%、5日+1.6%、20日-9.2%、60日+0.3%）",
-   "values": {
-    "sox_close": 11464.3232,
-    "sox_chg_pct": 3.44,
-    "sox_ret5d_pct": 1.6,
-    "sox_ret20d_pct": -9.22,
-    "sox_ret60d_pct": 0.3
-   },
-   "topic": "agent_price",
-   "level": "market",
-   "tickers": []
-  },
-  {
-   "src": [
-    3
-   ],
    "statement": "2330.TW 2026-10-27 收 2400（1日+0.63%、5日-0.8%、20日-4.0%、60日+9.4%）",
    "values": {
     "2330_close": 2400.0,
@@ -489,6 +473,22 @@
    "tickers": [
     "2330"
    ]
+  },
+  {
+   "src": [
+    3
+   ],
+   "statement": "^SOX 2026-10-27 盤中(報價時間未知) 11429.2（1日+3.12%、5日+1.3%、20日-9.5%、60日-0.0%）",
+   "values": {
+    "sox_close": 11429.1963,
+    "sox_chg_pct": 3.12,
+    "sox_ret5d_pct": 1.29,
+    "sox_ret20d_pct": -9.5,
+    "sox_ret60d_pct": -0.01
+   },
+   "topic": "agent_price",
+   "level": "market",
+   "tickers": []
   },
   {
    "src": [
@@ -4058,10 +4058,10 @@
   "2881": -0.0602,
   "2882": -0.0147
  },
- "agent_notes": "**市場廣度評估**  \n廣度明顯轉弱（僅36.2%站上MA20、26.2% MACD翻正，20日破線26檔遠多於突破8檔，外資期貨淨空單達8.6萬口），警示大盤處於結構性修正與防守格局，切忌盲目追高或擴大整體曝險。\n\n**需警惕標的（3-5檔）**  \n1. **3653 健策**：評分僅32、破線且偏離MA20達-13.2%、ATR達6.1%，動能嚴重破壞。  \n2. **2330 台積電**：跌破MA60支撐，RSI跌至41.2，權值弱勢壓制指數動能。  \n3. **2454 聯發科**：20日跌幅達23.6%，跌破MA60與20日低，權值賣壓沉重。  \n4. **8046／3189**：高ATR（近7%）且深跌於MA20之下（-7%~-9%），彈升屬弱勢乖離反彈。\n\n**趨勢良好／回檔可關注（2-3檔）**  \n1. **3231 緯創**：評分95，站穩MA20（+1.86%）且RSI位處54.4健康區間，呈健康整理。  \n2. **3034 聯詠**：評分89，維持20日突破型態，相對強勢。\n\n**未知事項**  \n健策(3653)及聯發科(2454)急跌是否源於客戶砍單或財報利空仍未確認。",
+ "agent_notes": "**Breadth Read:**\nMarket breadth is deteriorated (36.2% >MA20, 26 breakdowns vs. 8 breakouts, median score 41), signaling broad market correction rather than healthy participation. Do not aggressively add net risk.\n\n**Caution:**\n1. **3653 (Jentech):** Severe breakdown (-13.2% vs. MA20, tech score 32, high ATR 6.12%).\n2. **2454 (MediaTek):** Broke down below MA60 (-23.6% 20d return, 44.6% annualized volatility).\n3. **2330 (TSMC):** Slipped below MA60 (-3.09% vs. MA20, score 54), dampening broader semiconductor momentum.\n4. **8046 / 3189:** Deep pullbacks (>7–8% below MA20, high ATR >6.7%) where technical gap-up flags appear to be oversold noise rather than trend reversals.\n\n**Clean Uptrends / Pullbacks:**\n1. **3034 (Novatek):** Solid breakout (tech score 89, RSI 66.4, +7.56% above MA20).\n2. **2377 / 2885:** Healthy upward trends (scores 89–95, RSI 63–66, holding 4–5% above MA20).\n\n**Still Unknown:**\nSpecific fundamental catalysts triggering heavy liquidations in 2454 and server/packaging names, and whether TSMC’s MA60 break is macro-driven or structural.",
  "llm_usage": {
-  "input_tokens": 8423,
-  "output_tokens": 1980,
+  "input_tokens": 8290,
+  "output_tokens": 3290,
   "models": [
    "gemini-3.8-flash"
   ]
