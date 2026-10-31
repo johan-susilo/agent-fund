@@ -34,7 +34,7 @@
   },
   "earnings": {
     "rev_yoy": 0.30, "rev_mom": 0.15, "roe": 0.15, "margin": 0.10,
-    "earnings_revision": 0.15, "supply_chain": 0.15
+    "earnings_revision": 0.00, "supply_chain": 0.15
   },
   "valuation": {
     "pe_percentile": 0.35, "rel_pe": 0.35, "downside_potential": 0.30,

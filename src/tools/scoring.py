@@ -127,6 +127,7 @@ def _obs_values(macro_frag, trade_date, max_age_h, warnings):
         return {}
     cutoff = _parse_ts(f"{trade_date}T08:55:00+08:00") if trade_date else None
     sources = {}
+    src_list = list(macro_frag.get("sources", []) or [])      # fragments reference sources by LIST INDEX
     for s in macro_frag.get("sources", []) or []:
         for k in ("src_id", "id", "source_id"):
             if s.get(k) is not None:
@@ -137,6 +138,8 @@ def _obs_values(macro_frag, trade_date, max_age_h, warnings):
         if ts is None:
             for sid in (o.get("src") or o.get("source_ids") or o.get("sources") or []):
                 src = sources.get(str(sid))
+                if src is None and isinstance(sid, int) and not isinstance(sid, bool) and 0 <= sid < len(src_list):
+                    src = src_list[sid]
                 ts = _parse_ts(src.get("content_as_of")) if src else None
                 if ts:
                     break

@@ -173,11 +173,18 @@ def main():
         print(f"  evidence book: {len(book.sources)} sources, {len(book.observations)} observations")
 
         from tools import journal, factors
-        j_data = journal.review(as_of, state, market)
+        j_data = journal.review(as_of, state, market)   # journal: datapack history
         if j_data:
-            print(f"  journal: Realised return {j_data['port_ret_pct']:+.2f}% vs bench {j_data['bench_ret_pct']:+.2f}% (non-citable context)")
+            pv = j_data["plan_vs_actual"]
+            print(f"  journal: {j_data['datapacks_used']} DataPacks | day {j_data['port_ret_pct']:+.2f}% vs bench "
+                  f"{j_data['bench_ret_pct']:+.2f}% | cum {j_data['cum_ret_pct']:+.2f}% | MDD {j_data['mdd_pct']:.2f}% "
+                  f"(non-citable context)")
+            print(f"  journal: plan file {j_data['plan_file']} | order outcome {j_data['order_outcome']['outcome']} | "
+                  + ("plan matches DataPack holdings" if pv["matched"] else
+                     ("NO plan file found in outputs/agent_past or outputs" if pv["mismatches"] is None
+                      else f"MISMATCH vs DataPack: {pv['mismatches']}")))
         else:
-            print("  journal: No previous day record found (Day 1).")
+            print("  journal: fewer than 2 DataPacks under inputs/ (first trading day).")
 
         # --- DETERMINISTIC FACTOR SCORING & REGIME DETECTION ---
         tech_frag = frags.get("tech")
@@ -248,7 +255,8 @@ def main():
                         if old_ref in obs_mapping:
                             override["obs_ref"] = obs_mapping[old_ref]
 
-                    print(f"  risk agent: {n_risk} observations added to EvidenceBook")
+                    print(f"  risk agent: {len(risk_ctx.get('new_obs_ids', []))} observations registered in EvidenceBook "
+                          "(exchange flags, portfolio risk, theme exposure, stress)")
 
             except Exception as e:
                 print(f"  !! risk agent failed: {type(e).__name__}: {e}")

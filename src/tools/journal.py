@@ -1,50 +1,126 @@
-"""Compare yesterday's agent result with today's DataPack and summarise realised performance."""
+"""Journal built from the SERVER's own record: inputs/<date>/datapack.json for every trading day.
+
+What it reports (all non-citable context for the portfolio manager):
+  * performance from the DataPack NAV series (daily, cumulative, max drawdown) vs an equal-weight benchmark
+  * plan vs reality: previous DataPack holdings + the orders of the archived agent result (outputs/agent_past/ and
+    outputs/) are compared with today's DataPack holdings -> voided / excluded / unfilled orders show up
+  * per-stock contribution from DataPack close prices
+"""
 from __future__ import annotations
 
 import json
+
 from settings import ROOT
 
+AGENT_DIRS = (ROOT / "outputs" / "agent_past", ROOT / "outputs")
 
-def _latest_agent_result(prev_date: str):
-    out_dir = ROOT / "outputs"
-    stamped = sorted(out_dir.glob(f"agent_result_{prev_date}_*.json"))
-    if stamped:
-        return stamped[-1]
-    p = out_dir / f"agent_result_{prev_date}.json"
-    return p if p.exists() else None
+
+def _load_datapacks(upto: str) -> list:
+    """[(trade_date, datapack)] with a usable account, ascending, trade_date <= upto."""
+    out = []
+    for p in (ROOT / "inputs").glob("*/datapack.json"):
+        try:
+            dp = json.loads(p.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        td = str(dp.get("trade_date") or "")
+        if dp.get("doc_type") == "DataPack" and dp.get("account") and td and td <= upto:
+            out.append((td, dp))
+    return sorted(out, key=lambda x: x[0])
+
+
+def _nav(dp: dict) -> float:
+    a = dp["account"]
+    return float(a.get("aum") or a.get("nav_tradable"))      # aum includes receivable dividends / stock dividends
+
+
+def _holdings(dp: dict) -> dict:
+    return {h["code"]: {"shares": int(h["shares"]), "close": h.get("close_price")}
+            for h in (dp.get("holdings") or []) if (h.get("shares") or 0) > 0}
+
+
+def _plan_candidates(date: str) -> list:
+    """[(path, parsed)] for every archived plan (agent_result_* or D-Plan_*) whose trade_date is `date`.
+    Matched by file CONTENT, not by name. D-Plan files (what was actually submitted) sort last = win ties."""
+    out, seen = [], set()
+    for d in AGENT_DIRS:
+        if not d.is_dir():
+            continue
+        for f in sorted(d.rglob("*.json")):
+            key = f.resolve()
+            if key in seen or "REJECTED" in f.name or "REPLAY" in f.name:
+                continue
+            seen.add(key)
+            try:
+                res = json.loads(f.read_text(encoding="utf-8"))
+            except (OSError, ValueError):
+                continue
+            if isinstance(res, dict) and isinstance(res.get("orders"), list) and str(res.get("trade_date")) == date:
+                out.append((f, res))
+    out.sort(key=lambda x: (x[1].get("doc_type") == "D-Plan", x[0].name))
+    return out
+
+
+def _expected(prev_hold: dict, orders: list) -> dict:
+    exp = {t: h["shares"] for t, h in prev_hold.items()}
+    for o in orders:
+        exp[o["ticker"]] = exp.get(o["ticker"], 0) + (o["shares"] if o["side"] == "BUY" else -o["shares"])
+    return {t: s for t, s in exp.items() if s > 0}
+
+
+def _diff(expected: dict, actual: dict) -> dict:
+    return {t: {"expected": expected.get(t, 0), "actual": actual.get(t, 0)}
+            for t in sorted(set(expected) | set(actual)) if expected.get(t, 0) != actual.get(t, 0)}
 
 
 def review(prev_date: str, state: dict, market: dict) -> dict | None:
-    p = _latest_agent_result(prev_date)
-    if not p:
+    """prev_date is unused (kept for the old call signature); history comes from the DataPacks."""
+    series = _load_datapacks(state["trade_date"])
+    if not series or series[-1][0] != state["trade_date"]:
         return None
-    prev = json.loads(p.read_text(encoding="utf-8"))
+    if len(series) < 2:
+        return None                                           # first trading day: no history yet
+    (p_date, p_dp), (t_date, t_dp) = series[-2], series[-1]
+    navs = [(d, _nav(dp)) for d, dp in series]
+    nav_prev, nav_now = navs[-2][1], navs[-1][1]
 
-    # 1) Reconcile expected vs actual (only flag BUY orders or positive preview weights missing from actual)
-    actual = state["holdings"]
-    expected_positive = set(prev.get("preview", {}).get("weights", {}).keys())
-    if not expected_positive:
-        expected_positive = {o["ticker"] for o in prev.get("orders", []) if o.get("side") == "BUY"}
-    drift = {t: actual.get(t, 0) for t in expected_positive if t not in actual}
+    # ---- performance from the server's NAV series
+    peak, mdd = navs[0][1], 0.0
+    for _, v in navs:
+        peak = max(peak, v)
+        mdd = max(mdd, (peak - v) / peak)
 
-    # 2) Per-stock contribution using change_pct to recover prior close c0
+    # ---- plan vs reality
+    prev_hold, now_hold = _holdings(p_dp), _holdings(t_dp)
+    actual = {t: h["shares"] for t, h in now_hold.items()}
+    best = None
+    for f, res in _plan_candidates(p_date):
+        diff = _diff(_expected(prev_hold, res.get("orders", [])), actual)
+        if best is None or len(diff) <= len(best[1]):          # later files win ties
+            best = (f, diff)
+    outcome = (t_dp.get("prev_day_orders") or {})
+
+    # ---- per-stock contribution (shares held through the day x DataPack close change, % of previous NAV)
     contrib = {}
-    for t, sh in actual.items():
-        p_row = market["prices"].get(t, {})
-        c1 = state["last_close"].get(t) or p_row.get("close")
-        chg = p_row.get("change_pct")
-        if c1 and chg is not None and (1 + chg / 100.0) > 0:
-            c0 = c1 / (1.0 + chg / 100.0)
-            contrib[t] = sh * (c1 - c0) / state["nav"]
+    for t, h in now_hold.items():
+        p = prev_hold.get(t)
+        if p and p["close"] and h["close"]:
+            contrib[t] = min(p["shares"], h["shares"]) * (h["close"] - p["close"]) / nav_prev
 
-    # 3) Benchmark: equal-weight basket of the 150 universe
-    chg_all = [v["change_pct"] for v in market["prices"].values() if v.get("change_pct") is not None]
-    bench = sum(chg_all) / len(chg_all) if chg_all else 0.0
+    chg = [v["change_pct"] for v in market["prices"].values() if v.get("change_pct") is not None]
+    bench = sum(chg) / len(chg) if chg else 0.0
 
     return {
-        "source_file": p.name,
-        "unfilled_or_missing": drift,
-        "port_ret_pct": round(sum(contrib.values()) * 100, 2),
+        "source": "datapack_history",
+        "datapacks_used": len(series),
+        "plan_file": best[0].name if best else None,
+        "plan_vs_actual": {"matched": bool(best) and not best[1], "mismatches": best[1] if best else None},
+        "order_outcome": {"outcome": outcome.get("outcome"), "void_reasons": outcome.get("void_reasons", []),
+                          "excluded_codes": outcome.get("excluded_codes", [])},
+        "nav_prev": round(nav_prev), "nav_now": round(nav_now),
+        "port_ret_pct": round((nav_now / nav_prev - 1) * 100, 2),
+        "cum_ret_pct": round((nav_now / navs[0][1] - 1) * 100, 2),
+        "mdd_pct": round(mdd * 100, 2),
         "bench_ret_pct": round(bench, 2),
         "top_contrib": [(t, round(v * 100, 3)) for t, v in sorted(contrib.items(), key=lambda x: -x[1])[:3]],
         "bottom_contrib": [(t, round(v * 100, 3)) for t, v in sorted(contrib.items(), key=lambda x: x[1])[:3]],

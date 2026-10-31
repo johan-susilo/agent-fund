@@ -30,9 +30,29 @@ MOPS_REV_URLS = ("https://openapi.twse.com.tw/v1/opendata/t187ap05_L",
                  "https://openapi.twse.com.tw/v1/opendata/t187ap05_O")
 MOPS_PROF_URLS = ("https://openapi.twse.com.tw/v1/opendata/t187ap17_L",
                   "https://openapi.twse.com.tw/v1/opendata/t187ap17_O")
-TWSE_INST_URL = "https://openapi.twse.com.tw/v1/fund/T86_ALL"
+TWSE_INST_URL = "https://www.twse.com.tw/rwd/zh/fund/T86"      # not in the OpenAPI swagger; dated endpoint
 TPEX_INST_URL = "https://www.tpex.org.tw/openapi/v1/tpex_3insti_daily_trading"
 _OFFICIAL: dict = {}
+_AS_OF: dict = {}          # set by collect(); the dated TWSE T86 endpoint needs the settlement date
+TWSE_T86_URL = "https://www.twse.com.tw/rwd/zh/fund/T86"
+
+
+def _params_for(name):
+    if name == "twse_inst" and _AS_OF.get("d"):
+        return {"date": _AS_OF["d"].replace("-", ""), "selectType": "ALLBUT0999", "response": "json"}
+    return None
+
+
+def _normalize_rows(name, rows):
+    """TWSE T86 returns {fields:[...], data:[[...]]} (or tables[]); turn it into a list of dicts."""
+    if name != "twse_inst" or not isinstance(rows, dict):
+        return rows
+    tables = [rows] + list(rows.get("tables") or [])
+    for t in tables:
+        f, d = t.get("fields"), t.get("data")
+        if f and d:
+            return [dict(zip(f, r)) for r in d]
+    return []
 
 
 def _symbol(universe, t):
@@ -80,7 +100,7 @@ def _find(r, *subs):
 
 
 def _code(r):
-    for k in ("Code", "SecuritiesCompanyCode", "公司代號", "股票代號"):
+    for k in ("Code", "SecuritiesCompanyCode", "公司代號", "股票代號", "證券代號", "代號"):
         if r.get(k):
             return str(r[k]).strip()
     return ""
@@ -97,11 +117,12 @@ def _fetch_official_fundamentals(trade_date, universe, counter) -> dict:
         + [(f"mops_rev{i}", u) for i, u in enumerate(MOPS_REV_URLS)] \
         + [(f"mops_prof{i}", u) for i, u in enumerate(MOPS_PROF_URLS)]
     with ThreadPoolExecutor(8) as ex:
-        futs = [(n, ex.submit(http_get_json, u, None, None, 25, 2, counter)) for n, u in jobs]
+        futs = [(n, ex.submit(http_get_json, u, _params_for(n), None, 25, 2, counter)) for n, u in jobs]
         for name, fut in futs:
             try:
                 rows = fut.result()
                 save_raw_bytes(trade_date, name, json.dumps(rows, ensure_ascii=False).encode("utf-8"))
+                rows = _normalize_rows(name, rows)
             except Exception:
                 continue                      # one dataset failing must not stop the others
             for r in rows or []:
@@ -221,6 +242,7 @@ def collect(trade_date: str, as_of_date: str, universe, holdings, refresh: bool 
         frag["warnings"].append("yfinance not installed: momentum evidence skipped")
         return frag
 
+    _AS_OF["d"] = as_of_date
     now = iso(now_tw())
     factors, stale = {}, 0
     try:
@@ -233,6 +255,10 @@ def collect(trade_date: str, as_of_date: str, universe, holdings, refresh: bool 
         infos = {}
         frag["warnings"].append(f"official fundamentals failed: {type(e).__name__}: {str(e)[:120]}")
     frag["fundamentals"] = infos
+    n_inst = sum(1 for v in infos.values() if "inst_lots" in v)
+    if n_inst < 0.3 * len(universe.names):
+        frag["warnings"].append(f"institutional flow coverage {n_inst}/{len(universe.names)}: inst_flow will be dropped; "
+                                "inspect inputs/<date>/raw/twse_inst_*.json and tpex_inst_*.json for field names")
     frag["price_factors"] = factors   # [upgrade-2026-10] full feature stash for tools/scoring.py
 
     px_src = frag_add_source(frag, {"authority": "vendor", "url": YAHOO_URL, "fetched_at": now,

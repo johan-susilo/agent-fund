@@ -5,77 +5,86 @@
    "name": "FRED DGS10: 美國 10 年期公債殖利率(%)",
    "url": "https://fred.stlouisfed.org/series/DGS10",
    "content_as_of": "2026-10-30T04:00:00+08:00",
-   "fetched_at": "2026-10-31T11:28:01+08:00"
+   "fetched_at": "2026-10-31T14:15:18+08:00"
   },
   {
    "authority": "vendor",
    "name": "FRED VIXCLS: VIX 恐慌指數",
    "url": "https://fred.stlouisfed.org/series/VIXCLS",
    "content_as_of": "2026-10-30T04:00:00+08:00",
-   "fetched_at": "2026-10-31T11:28:01+08:00"
+   "fetched_at": "2026-10-31T14:15:18+08:00"
   },
   {
    "authority": "vendor",
    "name": "FRED DEXTAUS: 美元兌新台幣(TWD/USD)",
    "url": "https://fred.stlouisfed.org/series/DEXTAUS",
    "content_as_of": "2026-10-24T04:00:00+08:00",
-   "fetched_at": "2026-10-31T11:28:01+08:00"
+   "fetched_at": "2026-10-31T14:15:18+08:00"
   },
   {
    "authority": "vendor",
    "name": "FRED NASDAQCOM: 那斯達克綜合指數",
    "url": "https://fred.stlouisfed.org/series/NASDAQCOM",
    "content_as_of": "2026-10-30T04:00:00+08:00",
-   "fetched_at": "2026-10-31T11:28:01+08:00"
+   "fetched_at": "2026-10-31T14:15:19+08:00"
   },
   {
    "authority": "vendor",
    "name": "Yahoo Finance (^SOX): 費城半導體指數 (SOX)",
    "url": "https://finance.yahoo.com/quote/%5ESOX/",
    "content_as_of": "2026-10-31T04:00:00+08:00",
-   "fetched_at": "2026-10-31T11:28:05+08:00"
+   "fetched_at": "2026-10-31T14:15:21+08:00"
   },
   {
    "authority": "vendor",
    "name": "Yahoo Finance (TSM): 台積電 ADR (TSM)",
    "url": "https://finance.yahoo.com/quote/TSM/",
    "content_as_of": "2026-10-31T04:00:00+08:00",
-   "fetched_at": "2026-10-31T11:28:05+08:00"
+   "fetched_at": "2026-10-31T14:15:21+08:00"
   },
   {
    "authority": "vendor",
    "name": "Yahoo Finance (NVDA): NVIDIA (NVDA) AI伺服器指標",
    "url": "https://finance.yahoo.com/quote/NVDA/",
    "content_as_of": "2026-10-31T04:00:00+08:00",
-   "fetched_at": "2026-10-31T11:28:05+08:00"
+   "fetched_at": "2026-10-31T14:15:21+08:00"
   },
   {
    "authority": "vendor",
    "name": "Yahoo Finance (MU): Micron (MU) HBM與記憶體指標",
    "url": "https://finance.yahoo.com/quote/MU/",
    "content_as_of": "2026-10-31T04:00:00+08:00",
-   "fetched_at": "2026-10-31T11:28:05+08:00"
+   "fetched_at": "2026-10-31T14:15:21+08:00"
   },
   {
    "authority": "vendor",
    "name": "Yahoo Finance (^VIX): VIX 波動率指數 (含20日均線比)",
    "url": "https://finance.yahoo.com/quote/%5EVIX/",
    "content_as_of": "2026-10-31T04:00:00+08:00",
-   "fetched_at": "2026-10-31T11:28:05+08:00"
+   "fetched_at": "2026-10-31T14:15:21+08:00"
   },
   {
    "authority": "vendor",
    "name": "Yahoo Finance (^TWII): 台灣加權指數 (TAIEX)",
    "url": "https://finance.yahoo.com/quote/%5ETWII/",
    "content_as_of": "2026-10-30T13:30:00+08:00",
-   "fetched_at": "2026-10-31T11:28:05+08:00"
+   "fetched_at": "2026-10-31T14:15:21+08:00"
   },
   {
    "authority": "vendor",
    "name": "Yahoo Finance (TWD=X): 美元兌台幣即期匯率 (USD/TWD)",
    "url": "https://finance.yahoo.com/quote/TWD=X/",
    "content_as_of": "2026-10-30T13:30:00+08:00",
-   "fetched_at": "2026-10-31T11:28:05+08:00"
+   "fetched_at": "2026-10-31T14:15:21+08:00"
+  },
+  {
+   "authority": "media",
+   "name": "Naturalnews.com: Taiwan Plans $4 Billion Texas Industrial Park to Serve Nvidia, TSMC Suppliers",
+   "url": "https://www.naturalnews.com/2026-10-30-taiwan-plans-texas-industrial-park-serve-nvidia.html",
+   "archive_url": null,
+   "published_at": "2026-10-30T14:00:00+08:00",
+   "content_as_of": "2026-10-30T14:00:00+08:00",
+   "fetched_at": "2026-10-31T14:15:17+08:00"
   },
   {
    "authority": "media",
@@ -84,7 +93,7 @@
    "archive_url": null,
    "published_at": "2026-10-30T07:58:45+08:00",
    "content_as_of": "2026-10-30T07:58:45+08:00",
-   "fetched_at": "2026-10-31T11:28:00+08:00"
+   "fetched_at": "2026-10-31T14:15:17+08:00"
   },
   {
    "authority": "media",
@@ -93,16 +102,16 @@
    "archive_url": null,
    "published_at": "2026-10-30T04:06:00+08:00",
    "content_as_of": "2026-10-30T04:06:00+08:00",
-   "fetched_at": "2026-10-31T11:28:00+08:00"
+   "fetched_at": "2026-10-31T14:15:17+08:00"
   },
   {
    "authority": "media",
-   "name": "New York Post: Alleged Chinese spy had ‘close relationship’ with Nvidia boss Jensen Huang: report",
-   "url": "https://nypost.com/2026/10/29/business/alleged-chinese-spy-had-close-relationship-with-nvidia-boss-jensen-huang-report/",
+   "name": "The Times of India: Global Market: South Korean stocks tumble over 5% as AI spending concerns hit chipmakers",
+   "url": "https://economictimes.indiatimes.com/markets/us-stocks/news/global-market-south-korean-stocks-tumble-over-5-as-ai-spending-concerns-hit-chipmakers/articleshow/135341817.cms",
    "archive_url": null,
-   "published_at": "2026-10-30T00:42:44+08:00",
-   "content_as_of": "2026-10-30T00:42:44+08:00",
-   "fetched_at": "2026-10-31T11:28:00+08:00"
+   "published_at": "2026-10-30T12:15:12+08:00",
+   "content_as_of": "2026-10-30T12:15:12+08:00",
+   "fetched_at": "2026-10-31T14:15:17+08:00"
   },
   {
    "authority": "media",
@@ -111,7 +120,7 @@
    "archive_url": null,
    "published_at": "2026-10-30T10:01:19+08:00",
    "content_as_of": "2026-10-30T10:01:19+08:00",
-   "fetched_at": "2026-10-31T11:28:00+08:00"
+   "fetched_at": "2026-10-31T14:15:17+08:00"
   },
   {
    "authority": "media",
@@ -120,16 +129,7 @@
    "archive_url": null,
    "published_at": "2026-10-30T09:52:22+08:00",
    "content_as_of": "2026-10-30T09:52:22+08:00",
-   "fetched_at": "2026-10-31T11:28:00+08:00"
-  },
-  {
-   "authority": "media",
-   "name": "The Times of India: Global Market Today: Asian stocks slide as tech earnings disappoint, AI fears mount",
-   "url": "https://economictimes.indiatimes.com/markets/us-stocks/news/global-market-today/articleshow/135337523.cms",
-   "archive_url": null,
-   "published_at": "2026-10-30T08:52:15+08:00",
-   "content_as_of": "2026-10-30T08:52:15+08:00",
-   "fetched_at": "2026-10-31T11:28:00+08:00"
+   "fetched_at": "2026-10-31T14:15:17+08:00"
   }
  ],
  "observations": [
@@ -298,9 +298,9 @@
    "src": [
     11
    ],
-   "statement": "BusinessLine 報導：Intel shares plunge 21% as weak PC demand and supply shortages hit revenue outlook",
+   "statement": "Naturalnews.com 報導：Taiwan Plans $4 Billion Texas Industrial Park to Serve Nvidia, TSMC Suppliers",
    "values": {
-    "published_hours_ago": 27.5
+    "published_hours_ago": 24.3
    },
    "topic": "news_semis",
    "level": "market",
@@ -310,9 +310,9 @@
    "src": [
     12
    ],
-   "statement": "CNBC 報導：Intel stock plunges 20% as chipmaker blames PC slowdown for weak guidance",
+   "statement": "BusinessLine 報導：Intel shares plunge 21% as weak PC demand and supply shortages hit revenue outlook",
    "values": {
-    "published_hours_ago": 31.4
+    "published_hours_ago": 30.3
    },
    "topic": "news_semis",
    "level": "market",
@@ -322,9 +322,9 @@
    "src": [
     13
    ],
-   "statement": "New York Post 報導：Alleged Chinese spy had ‘close relationship’ with Nvidia boss Jensen Huang: report",
+   "statement": "CNBC 報導：Intel stock plunges 20% as chipmaker blames PC slowdown for weak guidance",
    "values": {
-    "published_hours_ago": 34.8
+    "published_hours_ago": 34.2
    },
    "topic": "news_semis",
    "level": "market",
@@ -334,9 +334,9 @@
    "src": [
     14
    ],
-   "statement": "The Times of India 報導：Yen steady before BOJ, AI jitters drive Treasury rally, weigh on dollar",
+   "statement": "The Times of India 報導：Global Market: South Korean stocks tumble over 5% as AI spending concerns hit chipmakers",
    "values": {
-    "published_hours_ago": 25.4
+    "published_hours_ago": 26.0
    },
    "topic": "news_macro",
    "level": "market",
@@ -346,9 +346,9 @@
    "src": [
     15
    ],
-   "statement": "CNA 報導：Yen gains after BOJ, AI jitters drive Treasury rally, weigh on dollar",
+   "statement": "The Times of India 報導：Yen steady before BOJ, AI jitters drive Treasury rally, weigh on dollar",
    "values": {
-    "published_hours_ago": 25.6
+    "published_hours_ago": 28.2
    },
    "topic": "news_macro",
    "level": "market",
@@ -358,9 +358,9 @@
    "src": [
     16
    ],
-   "statement": "The Times of India 報導：Global Market Today: Asian stocks slide as tech earnings disappoint, AI fears mount",
+   "statement": "CNA 報導：Yen gains after BOJ, AI jitters drive Treasury rally, weigh on dollar",
    "values": {
-    "published_hours_ago": 26.6
+    "published_hours_ago": 28.4
    },
    "topic": "news_macro",
    "level": "market",
